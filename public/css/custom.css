@@ -1,0 +1,10 @@
+.bgColor {
+    background: #943089 !important;
+}
+.text-white, .text-white strong{
+    color: #fff;
+}
+.text-white a { color: #fff !important;}
+.text-white a:hover { color: #ff9613 !important;}
+.mobileHeaderFA i{ font-size: 50px;}
+.mobileHeaderFA span{ position: relative; top: -10px;}
