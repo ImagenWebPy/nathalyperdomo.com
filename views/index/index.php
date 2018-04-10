@@ -36,10 +36,10 @@
             <div class="tabbable-line">
                 <ul class="nav nav-tabs">
                     <li class="active">
-                        <a data-toggle="tab" href="#book">Book a consultation</a>
+                        <a data-toggle="tab" href="#book">Reserva un turno</a>
                     </li>
                     <li class="">
-                        <a data-toggle="tab" href="#info">Call us today </a>
+                        <a data-toggle="tab" href="#info">Llamanos </a>
                     </li>
                 </ul>
                 <div class="tab-content">
@@ -48,13 +48,13 @@
                             <div class="row">
                                 <div class="col-sm-8">
                                     <div class="row">
-                                        <p class="col-md-6 col-sm-6"><input class="form-control" placeholder="First Name" type="text"></p>
-                                        <p class="col-md-6 col-sm-6"><input class="form-control" placeholder="Last Name" type="text"></p>
+                                        <p class="col-md-6 col-sm-6"><input class="form-control" placeholder="Nombres" type="text"></p>
+                                        <p class="col-md-6 col-sm-6"><input class="form-control" placeholder="Apellidos" type="text"></p>
                                     </div>
                                 </div>
                                 <!-- /.col 8 -->
                                 <div class="col-sm-4">
-                                    <input class="form-control sm-margin-bottom-10" placeholder="Enter your email id" required="" type="email" >
+                                    <input class="form-control sm-margin-bottom-10" placeholder="E-mail" required="" type="email" >
                                 </div>
                                 <!-- /.col 4 -->
                             </div>
@@ -73,35 +73,35 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <select class="form-control" id="departments" name="departments">
-                                            <option value="0"  selected="selected">Select department</option>
-                                            <option value="1">Primary care</option>
-                                            <option value="2">Cardio</option>
-                                            <option value="3">Rheumatologists</option>
-                                            <option value="4">None</option>
+                                            <option value="0"  selected="selected">Lorem Ipsum</option>
+                                            <option value="1">Lorem Ipsum</option>
+                                            <option value="2">Lorem Ipsum</option>
+                                            <option value="3">Lorem Ipsum</option>
+                                            <option value="4">Lorem Ipsum</option>
                                         </select>
                                     </div>
                                 </div>
                                 <!-- /. col 3 -->
                                 <div class="col-sm-3">
                                     <select class="form-control sm-margin-bottom-10">
-                                        <option value="0"  selected="selected">Select your location</option>
+                                        <option value="0"  selected="selected">Lorem Ipsum</option>
                                         <option value="1">
-                                            City
+                                            Lorem Ipsum
                                         </option>
                                         <option value="2">
-                                            Sarajevo
+                                            Lorem Ipsum
                                         </option>
                                         <option value="3">
-                                            Tuzla
+                                            Lorem Ipsum
                                         </option>
                                         <option value="4">
-                                            Gradacac
+                                           Lorem Ipsum
                                         </option>
                                     </select>
                                 </div>
                                 <!-- /.col 3 -->
                                 <div class="col-sm-2">
-                                    <a class="btn btn-default btn-block" href="#">Sumbit</a>
+                                    <a class="btn btn-default btn-block" href="#">Reservar</a>
                                 </div>
                                 <!-- /.col 1 -->
                             </div>
@@ -111,37 +111,6 @@
                     <!-- /.tab pane -->
                     <div class="tab-pane fade" id="info">
                         <div class="spacer40"></div>
-                        <div class="col-sm-4">
-                            <div class="med-iconBox med-iconBox--left">
-                                <div class="med-iconBox-icon icon-big color-blue">
-                                    <span class="icon-i-dental" aria-hidden="true"></span>
-                                </div>
-                                <div class="med-iconBox-content">
-                                    <h4 class="med-iconBox-title hr-after">
-                                        0080 123 456874
-                                    </h4>
-                                    <p>
-                                        For dental emergency please call
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.col 4 -->
-                        <div class="col-sm-4">
-                            <div class="med-iconBox med-iconBox--left">
-                                <div class="med-iconBox-icon icon-big color-red">
-                                    <span class="icon-i-emergency" aria-hidden="true"></span>
-                                </div>
-                                <div class="med-iconBox-content">
-                                    <h4 class="med-iconBox-title hr-after">
-                                        0080 123 456874
-                                    </h4>
-                                    <p>
-                                        For global case plase call
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
                         <!-- /.col 4 -->
                         <div class="col-sm-4">
                             <div class="med-iconBox med-iconBox--left">
@@ -150,10 +119,10 @@
                                 </div>
                                 <div class="med-iconBox-content">
                                     <h4 class="med-iconBox-title hr-after">
-                                        0080 123 4568724
+                                        +595 981 258 733
                                     </h4>
                                     <p>
-                                        For online assitance plase call
+                                        Para Consultas
                                     </p>
                                 </div>
                             </div>
@@ -175,8 +144,11 @@
         <div class="service-box">
             <div class="row">
                 <div class="col-md-3 col-sm-3 clearfix cr-nav">
-                    <h3 class="f-500">Our Full Service</h3>
-                    <p>You can find general information about making appointments, as well as other helpful tips.</p>
+                    <h3 class="f-500">Nuestros Servicios</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+
                     <div class="customNavigation">
                         <a class="btn btn-default carousel-prev fa fa-long-arrow-left"></a>
                         <a class="btn btn-default carousel-next fa fa-long-arrow-right"></a>
@@ -196,8 +168,11 @@
                                         <span class="icon-i-dental" aria-hidden="true"></span>
                                     </div>
                                     <div class="caption" onclick="location.href = 'service-details.html';">
-                                        <h4>Dental department</h4>
-                                        <p>You can find general information about making appointments, as well as other helpful tips..</p>
+                                        <h4>Lorem ipsum dolor sit amet</h4>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                        </p>
+
                                     </div>
                                     <ul class="spark-actions">
                                         <li>
@@ -224,8 +199,10 @@
                                         <span class="icon-i-genetics" aria-hidden="true"></span>
                                     </div>
                                     <div class="caption" onclick="location.href = 'service-details.html';">
-                                        <h4>Genetic Disorders</h4>
-                                        <p>You can find general information about making appointments, as well as other helpful tips..</p>
+                                        <h4>consectetur adipisicing elit</h4>
+                                       <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                        </p>
                                     </div>
                                     <ul class="spark-actions">
                                         <li>
@@ -252,8 +229,10 @@
                                         <span class="icon-i-pathology" aria-hidden="true"></span>
                                     </div>
                                     <div class="caption" onclick="location.href = 'service-details.html';">
-                                        <h4>Paediatric Care</h4>
-                                        <p>You can find general information about making appointments, as well as other helpful tips..</p>
+                                        <h4>sed do eiusmod tempor</h4>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                        </p>
                                     </div>
                                     <ul class="spark-actions">
                                         <li>
@@ -308,8 +287,10 @@
                                         <span class="icon-i-pathology" aria-hidden="true"></span>
                                     </div>
                                     <div class="caption" onclick="location.href = 'service-details.html';">
-                                        <h4>Paediatric Care</h4>
-                                        <p>You can find general information about making appointments, as well as other helpful tips..</p>
+                                        <h4>Ut enim ad minim veniam</h4>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                        </p>
                                     </div>
                                     <ul class="spark-actions">
                                         <li>
@@ -336,8 +317,10 @@
                                         <span class="icon-i-pathology" aria-hidden="true"></span>
                                     </div>
                                     <div class="caption" onclick="location.href = 'service-details.html';">
-                                        <h4>Paediatric Care</h4>
-                                        <p>You can find general information about making appointments, as well as other helpful tips..</p>
+                                        <h4>Lorem ipsum dolor sit amet</h4>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                        </p>
                                     </div>
                                     <ul class="spark-actions">
                                         <li>
@@ -362,34 +345,11 @@
     </div>
     <!-- /.container -->
 </section>
-<section class="padding-top-90">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-5">
-                <h5>Your single service section</h5>
-                <h1 class="uppercase hr-after styled">Be seen <br>Be Cered for <br>Be on your way</h1>
-                <p class="lead">Create a website that you are <span class="f-green">gonna be proud</span> of. <br>Be it Business &amp; much more.Nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                <p>
-                    <a href="#" class="btn btn-primary btn-lg">Learn more</a>
-                </p>
-                <!-- FEATURE LIST -->
-            </div>
-            <!-- .col 7 -->
-            <div class="col-sm-7 hidden-xs">
-                <figure>
-                    <img src="<?= URL; ?>public/images/browser-mockup.png" alt="" class="img-responsive">
-                </figure>
-            </div>
-            <!-- .col 3 -->
-        </div>
-    </div>
-</section>
-<hr/>
 <section class="space-md">
     <div class="container">
         <div class="row">
             <div class="col-sm-3">
-                <p class="lead hr-after">Perfect for your business</p>
+                <p class="lead hr-after">Lorem ipsum dolor sit amet</p>
                 <p>Phasellus enim libero,ut et lobortis aliquam aliquam in tortor et libero, blandit vel sapi condimentum ultricies magn</p>
             </div>
             <div class="col-sm-9">
@@ -401,7 +361,7 @@
                             </div>
                             <div class="med-iconBox-content">
                                 <h4 class="med-iconBox-title hr-after">
-                                    Genetic Disorders
+                                    Lorem ipsum dolor sit amet
                                 </h4>
                                 <p>
                                     Praesent faucibus nisl sit amet nulla sollicitudin pretium a sed purus. Nullam bibendum porta magna.
@@ -417,7 +377,7 @@
                             </div>
                             <div class="med-iconBox-content">
                                 <h4 class="med-iconBox-title hr-after">
-                                    Laboratory tests
+                                    Lorem ipsum dolor sit amet
                                 </h4>
                                 <p>
                                     Praesent faucibus nisl sit amet nulla sollicitudin pretium a sed purus. Nullam bibendum porta magna.
@@ -435,7 +395,7 @@
                             </div>
                             <div class="med-iconBox-content">
                                 <h4 class="med-iconBox-title hr-after">
-                                    Nutrition disorders
+                                    Lorem ipsum dolor sit amet
                                 </h4>
                                 <p>
                                     Praesent faucibus nisl sit amet nulla sollicitudin pretium a sed purus. Nullam bibendum porta magna.
@@ -451,7 +411,7 @@
                             </div>
                             <div class="med-iconBox-content">
                                 <h4 class="med-iconBox-title hr-after">
-                                    Genetics Disorders
+                                    Lorem ipsum dolor sit amet
                                 </h4>
                                 <p>
                                     Praesent faucibus nisl sit amet nulla sollicitudin pretium a sed purus. Nullam bibendum porta magna.
@@ -469,7 +429,7 @@
                             </div>
                             <div class="med-iconBox-content">
                                 <h4 class="med-iconBox-title hr-after">
-                                    Consultation
+                                    Lorem ipsum dolor sit amet
                                 </h4>
                                 <p>
                                     Praesent faucibus nisl sit amet nulla sollicitudin pretium a sed purus. Nullam bibendum porta magna.
@@ -485,7 +445,7 @@
                             </div>
                             <div class="med-iconBox-content">
                                 <h4 class="med-iconBox-title hr-after">
-                                    Intesive care
+                                    Lorem ipsum dolor sit amet
                                 </h4>
                                 <p>
                                     Praesent faucibus nisl sit amet nulla sollicitudin pretium a sed purus. Nullam bibendum porta magna.
@@ -506,11 +466,10 @@
             </div>
             <div class="col-sm-12 col-md-6">
                 <div class="quote">
-                    <p>After 8 Gold Medals</p>
-                    <blockquote>You can't put a limit on anything. The more you dream, the farther you get.</blockquote>
+                    <p>Lorem ipsum dolor sit amet</p>
+                    <blockquote>Praesent faucibus nisl sit amet nulla sollicitudin pretium a sed purus</blockquote>
                     <img src="<?= URL; ?>public/images/user-3.jpg" alt="" class="img-responsive img-circle" />
-                    <h2>Dummy Name</h2>
-                    <h6>CEO at Dummy</h6>
+                    <h2>Nombre</h2>
                 </div>
             </div>
         </div>
@@ -520,87 +479,32 @@
 <section class="tips space-md">
     <div class="container">
         <div class="row">
-            <div class="col-sm-4">
-                <h4 class="widget-title">Quick Faq section</h4>
-                <div class="panel-group" id="accordion">
-                    <div class="panel">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                                    Patient Online Services
-                                    <span class="glyphicon glyphicon-plus"></span>
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseTwo" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                            </div>
-                        </div>
-                    </div><!-- /.panel -->
-                    <div class="panel">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                                    Patient Care and Health Information
-                                    <span class="glyphicon glyphicon-plus"></span>
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseThree" class="panel-collapse collapse in">
-                            <div class="panel-body">
-                                <ul class="bullet-list list-unstyled">
-                                    <li>Contact Office-Based Physicians</li>
-                                    <li>Target Pharmacists and Pharmacies</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div><!-- /.panel -->
-                    <div class="panel">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse4">
-                                    Opening Hours
-                                    <span class="glyphicon glyphicon-minus"></span>
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapse4" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                            </div>
-                        </div>
-                    </div><!-- /.panel -->
-                </div>
-            </div>
-            <div class="col-sm-4 med-tab">
+            <div class="col-sm-6 med-tab">
                 <div class="tabbable-panel">
                     <div class="tabs-wrapper">
                         <ul class="nav nav-tabs no-border">
                             <li>
                                 <a href="#tab_default_1" data-toggle="tab" class="no-border">
-                                    Open hours </a>
+                                    Horas de Aperturas </a>
                             </li>
                             <li class="active">
                                 <a href="#tab_default_2" data-toggle="tab" class="no-border">
-                                    Video tab </a>
+                                    Videos </a>
                             </li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane" id="tab_default_1">
                                 <div class="open-hours">
-                                    <p>Monday - Friday <span>8.00 - 17.00</span>
+                                    <p>Lunes - Viernes <span>8:00 - 17:00</span>
                                     </p>
-                                    <p>Saturday <span>9.30 - 17.30</span>
-                                    </p>
-                                    <p>Sunday <span>9.30 - 15.00</span>
+                                    <p>Sabados <span>9:30 - 12:00</span>
                                     </p>
                                 </div>
                             </div>
                             <!-- /.tab pane -->
                             <div class="tab-pane active" id="tab_default_2">
                                 <div class="responsive-video space-xs">
-                                    <iframe src="<?= URL; ?>public/http://player.vimeo.com/video/77534721" width="500" height="281" style="border: none" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/Bm8rz-llMhE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                                 </div>
                                 <p>
                                     Duis autem vel eum iriure dolor in hendrerit in vulputate. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit.
@@ -617,14 +521,14 @@
             </div>
             <!-- /.col 5 -->
             <div class="col-sm-4">
-                <h4 class="widget-title">Latest updates</h4>
+                <h4 class="widget-title">últimas actualizaciones</h4>
                 <div class="sidebar card">
                     <ul class="list-unstyled info">
                         <li>
                             <figure>
                                 <img src="<?= URL; ?>public/images/6.png" alt="">
                                 <div class="description">
-                                    <p>Urna quam quisque suspendisse eros, mauris augue.</p>
+                                    <p>Loremp Ipsum</p>
                                     <a><span class="icon-heart"></span>3K Likes</a>
                                 </div>
                             </figure>
@@ -633,7 +537,7 @@
                             <figure>
                                 <img src="<?= URL; ?>public/images/7.png" alt="">
                                 <div class="description">
-                                    <p>Urna quam quisque suspendisse eros, mauris augue.</p>
+                                    <p>Loremp Ipsum</p>
                                     <a><span class="icon-heart"></span>25 Likes</a>
                                 </div>
                             </figure>
@@ -642,7 +546,7 @@
                             <figure>
                                 <img src="<?= URL; ?>public/images/5.png" alt="">
                                 <div class="description">
-                                    <p>Urna quam quisque suspendisse eros, mauris augue.</p>
+                                    <p>Loremp Ipsum</p>
                                     <a><span class="icon-heart"></span>134 Likes</a>
                                 </div>
                             </figure>

@@ -88,52 +88,27 @@
                                                     <ul class="row">
                                                         <li class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
                                                             <ul>
-                                                                <li class="dropdown-header">Service pages</li>
-                                                                <li><a href="service-details.html">Service details</a>
-                                                                </li>
-                                                                <li><a href="service.html">Service list</a>
-                                                                </li>
-                                                                <li class="divider"></li>
-                                                                <li class="dropdown-header">Extra pages</li>
-                                                                <li><a href="timetable.html">jQuery timetable page</a>
-                                                                </li>
-                                                                <li><a href="pricing.html">Pricing</a>
-                                                                </li>
-                                                                <li><a href="contact.html">Contact</a>
-                                                                </li>
-                                                                <li><a href="faq.html">FAQ page</a>
-                                                                </li>
+                                                                <li class="dropdown-header">Secciones</li>
+                                                                <li><a href="#">Acerca de mi</a></li>
                                                             </ul>
                                                         </li>
                                                         <li class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
                                                             <ul>
-                                                                <li class="dropdown-header">Template features</li>
-                                                                <li><a href="icons.html">Medical Icons</a>
-                                                                </li>
-                                                                <li><a href="features.html">Elements</a>
-                                                                </li>
-                                                                <li class="divider"></li>
-                                                                <li class="dropdown-header">Blog pages</li>
-                                                                <li><a href="blog-post.html">Blog post</a>
-                                                                </li>
-                                                                <li><a href="blog.html">Blog</a>
-                                                                </li>
+                                                                <li class="dropdown-header">Blog</li>
+                                                                <li><a href="#">Post Destacado 1</a></li>
+                                                                <li><a href="#">Post Destacado 2</a></li>
+                                                                <li><a href="#">Post Destacado 3</a></li>
+                                                                <li><a href="#">Post Destacado 4</a></li>
                                                             </ul>
                                                         </li>
                                                         <li class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
                                                             <ul>
-                                                                <li class="dropdown-header">Info pages</li>
-                                                                <li><a href="about_us.html">About us page</a>
-                                                                </li>
-                                                                <li><a href="about_2.html">Team page</a>
-                                                                </li>
-                                                                <li class="divider"></li>
-                                                                <li class="dropdown-header">Newsletter</li>
+                                                                <li class="dropdown-header">Boletín</li>
                                                                 <li>
                                                                     <form class="form" role="form">
                                                                         <div class="form-group">
-                                                                            <label class="sr-only" for="email">Email address</label>
-                                                                            <input type="email" class="form-control" id="e-mail" placeholder="Enter email">
+                                                                            <label class="sr-only" for="email">Correo Electrónico</label>
+                                                                            <input type="email" class="form-control" id="e-mail" placeholder="Correo Electrónico">
                                                                         </div>
                                                                         <button type="submit" class="btn btn-primary btn-block btn-fill">Sign in</button>
                                                                     </form>
@@ -191,13 +166,13 @@
                                                                 <div class="row">
                                                                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 divided">
                                                                         <ol class="carousel-indicators navbar-carousel-indicators h-divided">
-                                                                            <li data-target="#carousel-eg" data-slide-to="0" class="active"><a href="javascript:void(0);" class="">Vimeo<span class="hidden-sm hidden-xs desc">embed your vimeo videos</span></a>
+                                                                            <li data-target="#carousel-eg" data-slide-to="0" class="active"><a href="javascript:void(0);" class="">Video Blog 1<span class="hidden-sm hidden-xs desc">contenido del video 1</span></a>
                                                                             </li>
-                                                                            <li data-target="#carousel-eg" data-slide-to="1" class=""><a href="javascript:void(0);" class="">Youtube<span class="hidden-sm hidden-xs desc">any youtube video</span></a>
+                                                                            <li data-target="#carousel-eg" data-slide-to="1" class=""><a href="javascript:void(0);" class="">Video Blog 2<span class="hidden-sm hidden-xs desc">contenido del video 2</span></a>
                                                                             </li>
-                                                                            <li data-target="#carousel-eg" data-slide-to="2" class=""><a href="javascript:void(0);" class="">Image<span class="hidden-sm hidden-xs desc">image showcase</span></a>
+                                                                            <li data-target="#carousel-eg" data-slide-to="2" class=""><a href="javascript:void(0);" class="">Video Blog 3<span class="hidden-sm hidden-xs desc">contenido del video 3</span></a>
                                                                             </li>
-                                                                            <li data-target="#carousel-eg" data-slide-to="3" class=""><a href="javascript:void(0);" class="">Image<span class="hidden-sm hidden-xs desc">Short description</span></a>
+                                                                            <li data-target="#carousel-eg" data-slide-to="3" class=""><a href="javascript:void(0);" class="">Video Blog 4<span class="hidden-sm hidden-xs desc">contenido del video 4</span></a>
                                                                             </li>
                                                                         </ol>
                                                                     </div>
@@ -205,22 +180,22 @@
                                                                         <div class="carousel-inner">
                                                                             <div class="item active">
                                                                                 <div class="responsive-video">
-                                                                                    <iframe src="<?= URL; ?>public/http://player.vimeo.com/video/77534721" width="500" height="281" style="border: none" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                                                                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/YPl0naO6GR0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="item">
                                                                                 <div class="responsive-video">
-                                                                                    <iframe src="<?= URL; ?>public/http://player.vimeo.com/video/77534721" width="500" height="281" style="border: none" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                                                                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/v13o_AMW_wI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="item">
                                                                                 <div class="embed-responsive embed-responsive-16by9">
-                                                                                    <img class="embed-responsive-item" src="<?= URL; ?>public/images/service-13.jpg" alt="">
+                                                                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/6_tgyVM_eOY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="item">
                                                                                 <div class="embed-responsive embed-responsive-16by9">
-                                                                                    <img class="embed-responsive-item" src="<?= URL; ?>public/images/service-9.jpg" alt="">
+                                                                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/HUhNe1_CTVQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -239,49 +214,47 @@
                                                     <li class="col-sm-4">
                                                         <address>
                                                             <br>
-                                                            <strong>Brand, Inc.</strong><br>
-                                                            123 Folsom Ave, Suite 600<br>
-                                                            San Francisco, CA 94107<br>
-                                                            <abbr title="Phone">Phone:</abbr> (123) 456-7890<br>
-                                                            <abbr title="Mobile Phone">Mobile:</abbr> (098) 765-4321
+                                                            Dr. Alejandro Dávalos Nro. 437<br>
+                                                            Asunción - Paraguay<br>
+                                                            (595 981) 258-733<br>
+                                                            (595 985) 866-818
                                                         </address>
                                                         <address>
-                                                            <strong>Full Name</strong><br>
-                                                            <a href="mailto:#">first.last@example.com</a>
+                                                            <strong>Nathaly Perdomo Nutrición</strong><br>
+                                                            <a href="mailto:#">consulta@nathalyperdomo.com</a>
                                                         </address>
                                                         <div class="open-hours">
-                                                            <p>Monday - Friday <span>8.00 - 17.00</span>
+                                                            <p>Lunes - Viernes <span>8:00 - 17:00</span>
                                                             </p>
-                                                            <p>Saturday <span>9.30 - 17.30</span>
+                                                            <p>Sabados <span>9:30 - 12:00</span>
                                                             </p>
-                                                            <p>Sunday <span>9.30 - 15.00</span>
-                                                            </p>
+                                                            
                                                         </div>
                                                     </li>
                                                     <li class="col-sm-7 col-sm-offset-1">
                                                         <div id="message"></div>
                                                         <form method="post" action="http://codenpixel.com/demo/medicina/contact.php" name="contactform" id="contactform">
                                                             <fieldset>
-                                                                <input class="form-control" name="name" type="text" id="name" size="30" value="" placeholder="Name" />
+                                                                <input class="form-control" name="name" type="text" id="name" size="30" value="" placeholder="Nombre" />
                                                                 <br />
                                                                 <input class="form-control" name="email" type="text" id="email" size="30" value="" placeholder="E-mail" />
                                                                 <br />
-                                                                <input class="form-control" name="phone" type="text" id="phone" size="30" value="" placeholder="Phone" />
+                                                                <input class="form-control" name="phone" type="text" id="phone" size="30" value="" placeholder="Teléfono" />
                                                                 <br />
                                                                 <select class="form-control" name="subject" id="subject">
-                                                                    <option value="0" selected="selected">Select your reason</option>
-                                                                    <option value="1">Appointment</option>
-                                                                    <option value="2">Support</option>
-                                                                    <option value="3">Emergency</option>
+                                                                    <option value="0" selected="selected">Seleccione un motivo</option>
+                                                                    <option value="1">Reserva</option>
+                                                                    <option value="2">Consulta</option>
+                                                                    <option value="3">Emergencia</option>
                                                                 </select>
                                                                 <br />
-                                                                <textarea class="form-control" name="comments" cols="40" rows="3" id="comments" style="width: 100%;" placeholder="Your comments"></textarea>
-                                                                <p><span class="required">*</span> Are you human?</p>
+                                                                <textarea class="form-control" name="comments" cols="40" rows="3" id="comments" style="width: 100%;" placeholder="Tus Comentarios"></textarea>
+                                                                <p><span class="required">*</span> Eres Humano?</p>
                                                                 <label for="verify" accesskey="V">&nbsp;&nbsp;&nbsp;3 + 1 =</label>
                                                                 <input name="verify" type="text" id="verify" size="4" value="" style="width: 30px; border:1px solid #eee;" />
                                                                 <br />
                                                                 <br />
-                                                                <input type="submit" class="btn btn-primary btn-fill" id="submit" value="Submit" />
+                                                                <input type="submit" class="btn btn-primary btn-fill" id="submit" value="Envíar" />
                                                             </fieldset>
                                                         </form>
                                                     </li>

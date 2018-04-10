@@ -2,13 +2,13 @@
             <div class="container">
                <div class="row cta-1">
                   <div class="cta-features">
-                     <div class="col-sm-3 blue-1"><strong>100% Satisfaction<sub>Guaranteed</sub></strong>
+                     <div class="col-sm-3 blue-1"><strong>Loremp Ipsum<sub>dolor sit amet</sub></strong>
                      </div>
-                     <div class="col-sm-3 blue-2"><strong>Free Monitoring<sub>get your healt monitored</sub></strong>
+                     <div class="col-sm-3 blue-2"><strong>Curabitur sed nulla<sub>finibus neque porta pretium</sub></strong>
                      </div>
-                     <div class="col-sm-3 blue-3"><strong>Get 15% Off<sub>Make an appointment now</sub></strong>
+                     <div class="col-sm-3 blue-3"><strong>Sed purus orci<sub>lobortis tempor semper et</sub></strong>
                      </div>
-                     <div class="col-sm-3 blue-4"><strong>Call us anytime<sub>+000 123 456 7888</sub></strong>
+                     <div class="col-sm-3 blue-4"><strong>Aliquam ultricies<sub>urna at vestibulum dignissim</sub></strong>
                      </div>
                   </div>
                </div>
@@ -20,69 +20,30 @@
                   <div class="col-md-8">
                      <div class="row">
                         <div class="col-md-3 col-xs-6">
-                           <h6>Company</h6>
+                           <h6>Páginas</h6>
                            <ul class="list-unstyled">
-                              <li><a href="#">About</a>
-                              </li>
-                              <li><a href="#">Meet the team</a>
+                              <li><a href="#">Acerca de mi</a>
                               </li>
                               <li><a href="#">Blog</a>
                               </li>
-                              <li><a href="#">Contact Us</a>
+                              <li><a href="#">Consultorio</a>
                               </li>
-                           </ul>
-                        </div>
-                        <div class="col-md-3 col-xs-6">
-                           <h6>Account</h6>
-                           <ul class="list-unstyled">
-                              <li><a href="#">Payments</a>
-                              </li>
-                              <li><a href="#">Subscriptions</a>
-                              </li>
-                              <li><a href="#">Gift Card</a>
-                              </li>
-                              <li><a href="#">Support</a>
-                              </li>
-                           </ul>
-                        </div>
-                        <div class="col-md-3 col-xs-6">
-                           <h6>Help</h6>
-                           <ul class="list-unstyled">
-                              <li><a href="#">Payments</a>
-                              </li>
-                              <li><a href="#">Subscriptions</a>
-                              </li>
-                              <li><a href="#">Gift Card</a>
-                              </li>
-                              <li><a href="#">Support</a>
-                              </li>
-                           </ul>
-                        </div>
-                        <div class="col-md-3 col-xs-6">
-                           <h6>Legal</h6>
-                           <ul class="list-unstyled">
-                              <li><a href="#">Payments</a>
-                              </li>
-                              <li><a href="#">Subscriptions</a>
-                              </li>
-                              <li><a href="#">Gift Card</a>
-                              </li>
-                              <li><a href="#">Support</a>
+                              <li><a href="#">Contacto</a>
                               </li>
                            </ul>
                         </div>
                      </div>
                   </div>
                   <div class="col-md-4">
-                     <h6>Subscribe to our newsletter</h6>
+                     <h6>Suscribite a nuestro boletín</h6>
                      <form class="form-inline" role="form">
                         <div class="input-group">
                            <input type="email" class="form-control footernews" placeholder="Enter Email">
                            <span class="input-group-btn">
-                           <button class="btn btn-info" type="button">Subscribe</button>
+                           <button class="btn btn-info" type="button">Suscribite</button>
                            </span>
                         </div>
-                        <span class="help-block">We'll never share your address.</span>
+                        <span class="help-block">Nunca compartiremos tu dirección de correo electrónico.</span>
                      </form>
                      <div class="ourTeam-social">
                         <ul class="social">
@@ -100,9 +61,8 @@
                </div>
                <hr>
                <div class="footer-4cln-bar">
-                  <span class="phone"><i class="fa fa-phone"></i> 1 (800) 888-8888</span>
-                  <span class="email"><i class="fa fa-envelope"></i> <a href="mailto:info@email.com">info@email.com</a></span>
-                  <span class="address">Copyright &copy; Website, Inc. 2014<br/> 1234 1st Ave, NY 10007</span>
+                  <span class="phone"><i class="fa fa-phone"></i> +595 981 258 733 | +595 985 866 818</span>
+                  <span class="email"><i class="fa fa-envelope"></i> <a href="mailto:info@email.com">consulta@nathalyperdomo.com</a></span>
                </div>
             </div>
          </div>
