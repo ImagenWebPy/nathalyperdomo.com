@@ -1,13 +1,13 @@
 /*!
- *  Font Awesome 4.2.0 by @davegandy - http://fontawesome.io - @fontawesome
+ *  Font Awesome 4.3.0 by @davegandy - http://fontawesome.io - @fontawesome
  *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
  */
 /* FONT PATH
  * -------------------------- */
 @font-face {
   font-family: 'FontAwesome';
-  src: url('../fonts/fontawesome-webfont78ce.eot');
-  src: url('../fonts/fontawesome-webfontd41d.eot?#iefix&v=4.2.0') format('embedded-opentype'), url('../fonts/fontawesome-webfont78ce.woff') format('woff'), url('../fonts/fontawesome-webfont78ce.ttf') format('truetype'), url('../fonts/fontawesome-webfont78ce.svg#fontawesomeregular') format('svg');
+  src: url('fonts/fontawesome-webfont.eot?v=4.3.0');
+  src: url('fonts/fontawesome-webfont.eot?#iefix&v=4.3.0') format('embedded-opentype'), url('fonts/fontawesome-webfont.woff2?v=4.3.0') format('woff2'), url('fonts/fontawesome-webfont.woff?v=4.3.0') format('woff'), url('fonts/fontawesome-webfont.ttf?v=4.3.0') format('truetype'), url('fonts/fontawesome-webfont.svg?v=4.3.0#fontawesomeregular') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -18,6 +18,7 @@
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transform: translate(0, 0);
 }
 /* makes the font 33% larger relative to the icon container */
 .fa-lg {
@@ -79,6 +80,10 @@
 .fa-spin {
   -webkit-animation: fa-spin 2s infinite linear;
   animation: fa-spin 2s infinite linear;
+}
+.fa-pulse {
+  -webkit-animation: fa-spin 1s infinite steps(8);
+  animation: fa-spin 1s infinite steps(8);
 }
 @-webkit-keyframes fa-spin {
   0% {
@@ -610,6 +615,7 @@
 .fa-twitter:before {
   content: "\f099";
 }
+.fa-facebook-f:before,
 .fa-facebook:before {
   content: "\f09a";
 }
@@ -1259,7 +1265,8 @@
 .fa-male:before {
   content: "\f183";
 }
-.fa-gittip:before {
+.fa-gittip:before,
+.fa-gratipay:before {
   content: "\f184";
 }
 .fa-sun-o:before {
@@ -1526,6 +1533,7 @@
 .fa-history:before {
   content: "\f1da";
 }
+.fa-genderless:before,
 .fa-circle-thin:before {
   content: "\f1db";
 }
@@ -1670,464 +1678,124 @@
 .fa-meanpath:before {
   content: "\f20c";
 }
- 
- 
- 
- 
- @font-face {
-	font-family: 'webfont-medical-icons';
-	src:url('../fonts/webfont-medical-icons.eot');
-	src:url('../fonts/webfont-medical-iconsd41d.eot?#iefix') format('embedded-opentype'),
-		url('../fonts/webfont-medical-icons.ttf') format('truetype'),
-		url('../fonts/webfont-medical-icons.woff') format('woff'),
-		url('../fonts/webfont-medical-icons.svg#webfont-medical-icons') format('svg');
-	font-weight: normal;
-	font-style: normal;
+.fa-buysellads:before {
+  content: "\f20d";
 }
-
-[class^="icon-"], [class*=" icon-"] {
-	font-family: 'webfont-medical-icons';
-	speak: none;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
-
-	/* Better Font Rendering =========== */
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+.fa-connectdevelop:before {
+  content: "\f20e";
 }
-
-.icon-i-womens-health:before {
-	content: "\e600";
+.fa-dashcube:before {
+  content: "\f210";
 }
-.icon-i-waiting-area:before {
-	content: "\e601";
+.fa-forumbee:before {
+  content: "\f211";
 }
-.icon-i-volume-control:before {
-	content: "\e602";
+.fa-leanpub:before {
+  content: "\f212";
 }
-.icon-i-ultrasound:before {
-	content: "\e603";
+.fa-sellsy:before {
+  content: "\f213";
 }
-.icon-i-text-telephone:before {
-	content: "\e604";
+.fa-shirtsinbulk:before {
+  content: "\f214";
 }
-.icon-i-surgery:before {
-	content: "\e605";
+.fa-simplybuilt:before {
+  content: "\f215";
 }
-.icon-i-stairs:before {
-	content: "\e606";
+.fa-skyatlas:before {
+  content: "\f216";
 }
-.icon-i-radiology:before {
-	content: "\e607";
+.fa-cart-plus:before {
+  content: "\f217";
 }
-.icon-i-physical-therapy:before {
-	content: "\e608";
+.fa-cart-arrow-down:before {
+  content: "\f218";
 }
-.icon-i-pharmacy:before {
-	content: "\e609";
+.fa-diamond:before {
+  content: "\f219";
 }
-.icon-i-pediatrics:before {
-	content: "\e60a";
+.fa-ship:before {
+  content: "\f21a";
 }
-.icon-i-pathology:before {
-	content: "\e60b";
+.fa-user-secret:before {
+  content: "\f21b";
 }
-.icon-i-outpatient:before {
-	content: "\e60c";
+.fa-motorcycle:before {
+  content: "\f21c";
 }
-.icon-i-mental-health:before {
-	content: "\e60d";
+.fa-street-view:before {
+  content: "\f21d";
 }
-.icon-i-medical-records:before {
-	content: "\e60e";
+.fa-heartbeat:before {
+  content: "\f21e";
 }
-.icon-i-medical-library:before {
-	content: "\e60f";
+.fa-venus:before {
+  content: "\f221";
 }
-.icon-i-mammography:before {
-	content: "\e610";
+.fa-mars:before {
+  content: "\f222";
 }
-.icon-i-laboratory:before {
-	content: "\e611";
+.fa-mercury:before {
+  content: "\f223";
 }
-.icon-i-labor-delivery:before {
-	content: "\e612";
+.fa-transgender:before {
+  content: "\f224";
 }
-.icon-i-immunizations:before {
-	content: "\e613";
+.fa-transgender-alt:before {
+  content: "\f225";
 }
-.icon-i-imaging-root-category:before {
-	content: "\e614";
+.fa-venus-double:before {
+  content: "\f226";
 }
-.icon-i-imaging-alternative-pet:before {
-	content: "\e615";
+.fa-mars-double:before {
+  content: "\f227";
 }
-.icon-i-imaging-alternative-mri:before {
-	content: "\e616";
+.fa-venus-mars:before {
+  content: "\f228";
 }
-.icon-i-imaging-alternative-mri-two:before {
-	content: "\e617";
+.fa-mars-stroke:before {
+  content: "\f229";
 }
-.icon-i-imaging-alternative-ct:before {
-	content: "\e618";
+.fa-mars-stroke-v:before {
+  content: "\f22a";
 }
-.icon-i-fire-extinguisher:before {
-	content: "\e619";
+.fa-mars-stroke-h:before {
+  content: "\f22b";
 }
-.icon-i-family-practice:before {
-	content: "\e61a";
+.fa-neuter:before {
+  content: "\f22c";
 }
-.icon-i-emergency:before {
-	content: "\e61b";
+.fa-facebook-official:before {
+  content: "\f230";
 }
-.icon-i-elevators:before {
-	content: "\e61c";
+.fa-pinterest-p:before {
+  content: "\f231";
 }
-.icon-i-ear-nose-throat:before {
-	content: "\e61d";
+.fa-whatsapp:before {
+  content: "\f232";
 }
-.icon-i-drinking-fountain:before {
-	content: "\e61e";
+.fa-server:before {
+  content: "\f233";
 }
-.icon-i-cardiology:before {
-	content: "\e61f";
+.fa-user-plus:before {
+  content: "\f234";
 }
-.icon-i-billing:before {
-	content: "\e620";
+.fa-user-times:before {
+  content: "\f235";
 }
-.icon-i-anesthesia:before {
-	content: "\e621";
+.fa-hotel:before,
+.fa-bed:before {
+  content: "\f236";
 }
-.icon-i-ambulance:before {
-	content: "\e622";
+.fa-viacoin:before {
+  content: "\f237";
 }
-.icon-i-alternative-complementary:before {
-	content: "\e623";
+.fa-train:before {
+  content: "\f238";
 }
-.icon-i-administration:before {
-	content: "\e624";
+.fa-subway:before {
+  content: "\f239";
 }
-.icon-i-social-services:before {
-	content: "\e625";
-}
-.icon-i-smoking:before {
-	content: "\e626";
-}
-.icon-i-restrooms:before {
-	content: "\e627";
-}
-.icon-i-restaurant:before {
-	content: "\e628";
-}
-.icon-i-respiratory:before {
-	content: "\e629";
-}
-.icon-i-registration:before {
-	content: "\e62a";
-}
-.icon-i-oncology:before {
-	content: "\e62b";
-}
-.icon-i-nutrition:before {
-	content: "\e62c";
-}
-.icon-i-nursery:before {
-	content: "\e62d";
-}
-.icon-i-no-smoking:before {
-	content: "\e62e";
-}
-.icon-i-neurology:before {
-	content: "\e62f";
-}
-.icon-i-mri-pet:before {
-	content: "\e630";
-}
-.icon-i-interpreter-services:before {
-	content: "\e631";
-}
-.icon-i-internal-medicine:before {
-	content: "\e632";
-}
-.icon-i-intensive-care:before {
-	content: "\e633";
-}
-.icon-i-inpatient:before {
-	content: "\e634";
-}
-.icon-i-information-us:before {
-	content: "\e635";
-}
-.icon-i-infectious-diseases:before {
-	content: "\e636";
-}
-.icon-i-hearing-assistance:before {
-	content: "\e637";
-}
-.icon-i-health-services:before {
-	content: "\e638";
-}
-.icon-i-health-education:before {
-	content: "\e639";
-}
-.icon-i-gift-shop:before {
-	content: "\e63a";
-}
-.icon-i-genetics:before {
-	content: "\e63b";
-}
-.icon-i-first-aid:before {
-	content: "\e63c";
-}
-.icon-i-dermatology:before {
-	content: "\e63d";
-}
-.icon-i-dental:before {
-	content: "\e63e";
-}
-.icon-i-coffee-shop:before {
-	content: "\e63f";
-}
-.icon-i-chapel:before {
-	content: "\e640";
-}
-.icon-i-cath-lab:before {
-	content: "\e641";
-}
-.icon-i-care-staff-area:before {
-	content: "\e642";
-}
-.icon-i-accessibility:before {
-	content: "\e643";
-}
-.icon-i-diabetes-education:before {
-	content: "\e644";
-}
-.icon-i-hospital:before {
-	content: "\e645";
-}
-.icon-i-kidney:before {
-	content: "\e646";
-}
-.icon-i-ophthalmology:before {
-	content: "\e647";
-}
-.icon-womens-health:before {
-	content: "\e648";
-}
-.icon-waiting-area:before {
-	content: "\e649";
-}
-.icon-volume-control:before {
-	content: "\e64a";
-}
-.icon-ultrasound:before {
-	content: "\e64b";
-}
-.icon-text-telephone:before {
-	content: "\e64c";
-}
-.icon-surgery:before {
-	content: "\e64d";
-}
-.icon-stairs:before {
-	content: "\e64e";
-}
-.icon-radiology:before {
-	content: "\e64f";
-}
-.icon-physical-therapy:before {
-	content: "\e650";
-}
-.icon-pharmacy:before {
-	content: "\e651";
-}
-.icon-pediatrics:before {
-	content: "\e652";
-}
-.icon-pathology:before {
-	content: "\e653";
-}
-.icon-outpatient:before {
-	content: "\e654";
-}
-.icon-ophthalmology:before {
-	content: "\e655";
-}
-.icon-mental-health:before {
-	content: "\e656";
-}
-.icon-medical-records:before {
-	content: "\e657";
-}
-.icon-medical-library:before {
-	content: "\e658";
-}
-.icon-mammography:before {
-	content: "\e659";
-}
-.icon-laboratory:before {
-	content: "\e65a";
-}
-.icon-labor-delivery:before {
-	content: "\e65b";
-}
-.icon-kidney:before {
-	content: "\e65c";
-}
-.icon-immunizations:before {
-	content: "\e65d";
-}
-.icon-imaging-root-category:before {
-	content: "\e65e";
-}
-.icon-imaging-alternative-pet:before {
-	content: "\e65f";
-}
-.icon-imaging-alternative-mri:before {
-	content: "\e660";
-}
-.icon-imaging-alternative-mri-two:before {
-	content: "\e661";
-}
-.icon-imaging-alternative-ct:before {
-	content: "\e662";
-}
-.icon-hospital:before {
-	content: "\e663";
-}
-.icon-fire-extinguisher:before {
-	content: "\e664";
-}
-.icon-family-practice:before {
-	content: "\e665";
-}
-.icon-emergency:before {
-	content: "\e666";
-}
-.icon-elevators:before {
-	content: "\e667";
-}
-.icon-ear-nose-throat:before {
-	content: "\e668";
-}
-.icon-drinking-fountain:before {
-	content: "\e669";
-}
-.icon-diabetes-education:before {
-	content: "\e66a";
-}
-.icon-cardiology:before {
-	content: "\e66b";
-}
-.icon-billing:before {
-	content: "\e66c";
-}
-.icon-anesthesia:before {
-	content: "\e66d";
-}
-.icon-ambulance:before {
-	content: "\e66e";
-}
-.icon-alternative-complementary:before {
-	content: "\e66f";
-}
-.icon-administration:before {
-	content: "\e670";
-}
-.icon-accessibility:before {
-	content: "\e671";
-}
-.icon-social-services:before {
-	content: "\e672";
-}
-.icon-smoking:before {
-	content: "\e673";
-}
-.icon-restrooms:before {
-	content: "\e674";
-}
-.icon-restaurant:before {
-	content: "\e675";
-}
-.icon-respiratory:before {
-	content: "\e676";
-}
-.icon-oncology:before {
-	content: "\e677";
-}
-.icon-nutrition:before {
-	content: "\e678";
-}
-.icon-nursery:before {
-	content: "\e679";
-}
-.icon-no-smoking:before {
-	content: "\e67a";
-}
-.icon-neurology:before {
-	content: "\e67b";
-}
-.icon-mri-pet:before {
-	content: "\e67c";
-}
-.icon-interpreter-services:before {
-	content: "\e67d";
-}
-.icon-internal-medicine:before {
-	content: "\e67e";
-}
-.icon-intensive-care:before {
-	content: "\e67f";
-}
-.icon-inpatient:before {
-	content: "\e680";
-}
-.icon-information-us:before {
-	content: "\e681";
-}
-.icon-infectious-diseases:before {
-	content: "\e682";
-}
-.icon-hearing-assistance:before {
-	content: "\e683";
-}
-.icon-health-services:before {
-	content: "\e684";
-}
-.icon-health-education:before {
-	content: "\e685";
-}
-.icon-gift-shop:before {
-	content: "\e686";
-}
-.icon-genetics:before {
-	content: "\e687";
-}
-.icon-first-aid:before {
-	content: "\e688";
-}
-.icon-dental:before {
-	content: "\e689";
-}
-.icon-coffee-shop:before {
-	content: "\e68a";
-}
-.icon-chapel:before {
-	content: "\e68b";
-}
-.icon-cath-lab:before {
-	content: "\e68c";
-}
-.icon-care-staff-area:before {
-	content: "\e68d";
-}
-.icon-registration:before {
-	content: "\e68e";
-}
-.icon-dermatology:before {
-	content: "\e68f";
+.fa-medium:before {
+  content: "\f23a";
 }

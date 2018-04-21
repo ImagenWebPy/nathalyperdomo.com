@@ -1,562 +1,426 @@
-<!-- start: Slider -->
-<div class="fullsize-container">
-    <div class="fullsize-slider">
-        <ul>
-            <li data-transition="fade" data-slotamount="1" data-thumb="images/slider-1.jpg" data-delay="7500" data-saveperformance="off" data-title="Our Workplace">
-                <!-- MAIN IMAGE -->
-                <img src="<?= URL; ?>public/images/slider-1.jpg" data-bgfit="cover" data-bgrepeat="no-repeat" alt="">
-                <!-- LAYERS -->
-                <div class="tp-caption theme-caption rs-parallaxlevel-4 transform " data-x="20" data-y="center" data-speed="700" data-voffset="-75" data-start="600" data-easing="Power3.easeInOut">Lorem ipsum.
-                    <br>Lorem ipsum dolor sit amet.
-                    <br>Lorem Ipsum.
-                </div>
-                <div class="tp-caption sfl rs-parallaxlevel-4" data-x="20" data-y="center" data-voffset="15" data-speed="1000" data-start="2000" data-easing=""><a href="#service" class="btn-round tp-simpleresponsive button blue">Lorem ipsum</a>
-                </div>
-            </li>
-            <!-- SLIDE  -->
-            <li data-transition="fade" data-slotamount="1" data-masterspeed="1500" data-thumb="images/slider-2.jpg" data-delay="7000" data-saveperformance="off" data-title="Slide">
-                <!-- MAIN IMAGE -->
-                <img src="<?= URL; ?>public/images/slider-2.jpg" alt="fullslide6" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
-                <!-- LAYERS -->
-                <div class="caption theme-caption rs-parallaxlevel-4 transform " data-x="20" data-y="center" data-speed="700" data-voffset="-95" data-start="600" data-easing="Power3.easeInOut">Lorem ipsum.
-                    <br>Lorem ipsum dolor sit amet.
-                    <br>Lorem Ipsum.
-                </div>
-                <div class="caption mediumlarge_light_dark rs-parallaxlevel-4" data-x="20" data-y="center" data-speed="800" data-voffset="-20" data-start="1500" data-easing="Power3.easeInOut">Lorem ipsum dolor sit amet</div>
-                <div class="caption sfl rs-parallaxlevel-4" data-x="20" data-y="center" data-voffset="27" data-speed="1000" data-start="2000" data-easing=""><a href="#service" class="btn-round tp-simpleresponsive button blue">Lorem ipsum</a>
-                </div>
-            </li>
-        </ul>
-    </div>
-</div>
-<!-- end: Slider -->
-<div class="horizontal-form med-tab">
-    <div class="container">
-        <div class="tabbable-panel">
-            <div class="tabbable-line">
-                <ul class="nav nav-tabs">
-                    <li class="active">
-                        <a data-toggle="tab" href="#book">Reserva un turno</a>
-                    </li>
-                    <li class="">
-                        <a data-toggle="tab" href="#info">Llamanos </a>
-                    </li>
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane active" id="book">
-                        <form class="space-xs">
-                            <div class="row">
-                                <div class="col-sm-8">
-                                    <div class="row">
-                                        <p class="col-md-6 col-sm-6"><input class="form-control" placeholder="Nombres" type="text"></p>
-                                        <p class="col-md-6 col-sm-6"><input class="form-control" placeholder="Apellidos" type="text"></p>
+ <!-- #Content -->
+            <div id="Content">
+                <div class="content_wrapper clearfix">
+                    <!-- .sections_group -->
+                    <div class="sections_group">
+
+                        <div class="section homeservices">
+                            <div class="section_wrapper clearfix">
+                                <div class="items_group clearfix">
+                                    <div class="column one-third column_icon_box">
+                                        <div class="icon_box icon_position_top">
+                                            <a href="#">
+                                                <div class="icon_wrapper">
+                                                    <i class="icon-beaker-line"></i>
+                                                </div>
+                                                <div class="desc_wrapper">
+                                                    <h4 class="title">Tested by users</h4>
+                                                    <hr/>
+                                                    <div class="desc">
+                                                        People love our themes because each one is always carefully tested before upload. All works perfectly.
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="column one-third column_icon_box">
+                                        <div class="icon_box icon_position_top">
+                                            <div class="icon_wrapper">
+                                                <i class="icon-diamond-line"></i>
+                                            </div>
+                                            <div class="desc_wrapper">
+                                                <h4 class="title">Cut like a diamond</h4>
+                                                <hr/>
+                                                <div class="desc">
+                                                    Each element on the page has been designed with particular precision. Check all features and see how Cake awesome is.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="column one-third column_icon_box">
+                                        <div class="icon_box icon_position_top">
+                                            <a href="#">
+                                                <div class="icon_wrapper">
+                                                    <i class="icon-heart-line"></i>
+                                                </div>
+                                                <div class="desc_wrapper">
+                                                    <h4 class="title">Lovely support</h4>
+                                                    <hr/>
+                                                    <div class="desc">
+                                                        We take care of your customers as much as you do. We will make that your clients will be extremely happy!
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                                <!-- /.col 8 -->
-                                <div class="col-sm-4">
-                                    <input class="form-control sm-margin-bottom-10" placeholder="E-mail" required="" type="email" >
-                                </div>
-                                <!-- /.col 4 -->
                             </div>
-                            <!-- /row -->
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="input-group date sm-margin-bottom-10">
-                                                <input class="form-control" value="02-16-2012" id="dp" type="text" > <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+
+                        <!-- Portfolio -->
+                        <div class="section full-width homeportfolio">
+                            <div class="section_wrapper clearfix">
+                                <div class="items_group clearfix">
+                                    <div class="column one column_fancy_heading">
+                                        <div class="fancy_heading fancy_heading_color no_icon">
+                                            <h3>TASTE OUR LATEST WORKS</h3>
+                                        </div>
+                                    </div>
+                                    <div class="column one column_portfolio_slider">
+                                        <div class="portfolio_slider">
+                                            <ul class="portfolio_slider_ul">
+                                                <li><a class="photo-wrapper" href="#"><img width="380" height="380" src="<?= URL; ?>public/upload/1-380x380.jpg" class="scale-with-grid wp-post-image" alt="1"/></a>
+                                                    <div class="hover-box">
+                                                        <h5>Content Builder for portfolio</h5>
+                                                        <a class="hover-button zoom prettyphoto" href="upload/1.jpg"><i class="icon-search"></i></a><a class="hover-button link" href="#"><i class="icon-link"></i></a>
+                                                    </div>
+                                                </li>
+                                                <li><a class="photo-wrapper" href="#"><img width="380" height="380" src="<?= URL; ?>public/upload/2-380x380.jpg" class="scale-with-grid wp-post-image" alt="2"/></a>
+                                                    <div class="hover-box">
+                                                        <h5>Revolution slider right sidebar</h5>
+                                                        <a class="hover-button zoom prettyphoto" href="upload/2.jpg"><i class="icon-search"></i></a><a class="hover-button link" href="#"><i class="icon-link"></i></a>
+                                                    </div>
+                                                </li>
+                                                <li><a class="photo-wrapper" href="#"><img width="380" height="380" src="<?= URL; ?>public/upload/3-380x380.jpg" class="scale-with-grid wp-post-image" alt="3"/></a>
+                                                    <div class="hover-box">
+                                                        <h5>Video with left sidebar</h5>
+                                                        <a class="hover-button zoom prettyphoto" href="upload/3.jpg"><i class="icon-search"></i></a><a class="hover-button link" href="#"><i class="icon-link"></i></a>
+                                                    </div>
+                                                </li>
+                                                <li><a class="photo-wrapper" href="#"><img width="380" height="380" src="<?= URL; ?>public/upload/4-380x380.jpg" class="scale-with-grid wp-post-image" alt="4"/></a>
+                                                    <div class="hover-box">
+                                                        <h5>Mattis consectetur</h5>
+                                                        <a class="hover-button zoom prettyphoto" href="upload/4.jpg"><i class="icon-search"></i></a><a class="hover-button link" href="#"><i class="icon-link"></i></a>
+                                                    </div>
+                                                </li>
+                                                <li><a class="photo-wrapper" href="#"><img width="380" height="380" src="<?= URL; ?>public/upload/8-380x380.jpg" class="scale-with-grid wp-post-image" alt="8"/></a>
+                                                    <div class="hover-box">
+                                                        <h5>Faucibus orci luctus</h5>
+                                                        <a class="hover-button zoom prettyphoto" href="upload/8.jpg"><i class="icon-search"></i></a><a class="hover-button link" href="#"><i class="icon-link"></i></a>
+                                                    </div>
+                                                </li>
+                                                <li><a class="photo-wrapper" href="#"><img width="380" height="380" src="<?= URL; ?>public/upload/6-380x380.jpg" class="scale-with-grid wp-post-image" alt="6"/></a>
+                                                    <div class="hover-box">
+                                                        <h5>Aenean accumsan</h5>
+                                                        <a class="hover-button zoom prettyphoto" href="upload/6.jpg"><i class="icon-search"></i></a><a class="hover-button link" href="#"><i class="icon-link"></i></a>
+                                                    </div>
+                                                </li>
+                                                <li><a class="photo-wrapper" href="#"><img width="380" height="380" src="<?= URL; ?>public/upload/7-380x380.jpg" class="scale-with-grid wp-post-image" alt="7"/></a>
+                                                    <div class="hover-box">
+                                                        <h5>Vestibulum ante ipsum</h5>
+                                                        <a class="hover-button zoom prettyphoto" href="upload/7.jpg"><i class="icon-search"></i></a><a class="hover-button link" href="#"><i class="icon-link"></i></a>
+                                                    </div>
+                                                </li>
+                                                <li><a class="photo-wrapper" href="#"><img width="380" height="380" src="upload/5-380x380.jpg" class="scale-with-grid wp-post-image" alt="5"/></a>
+                                                    <div class="hover-box">
+                                                        <h5>Maecenas tempus</h5>
+                                                        <a class="hover-button zoom prettyphoto" href="upload/5.jpg"><i class="icon-search"></i></a><a class="hover-button link" href="#"><i class="icon-link"></i></a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Portfolio -->
+
+                        <!-- Video Section -->
+                        <div class="section highlight-left homevideosection">
+                            <div class="section_wrapper clearfix">
+                                <div class="items_group clearfix">
+                                    <div class="column one-second column_video_box">
+                                        <div class="video_box">
+                                            <div class="desc_wrapper">
+                                                <h3>SEE TUTORIAL VIDEO</h3>
+                                                <a href="#" class="icon"><i class="icon-play"></i></a>
+                                                <h6>Watch this video if you<br/>
+                                                    want to get "step by step" instruction</h6>
+                                            </div>
+                                            <div class="player_wrapper">
+                                                <div id="jp_container_264" class="jp-video mfn-jcontainer">
+                                                    <div class="jp-type-single">
+                                                        <div id="jquery_jplayer_264" class="jp-jplayer mfn-jplayer" data-m4v="upload/Sequence-01_1.mp4" data-img="" data-swf="#">
+                                                        </div>
+                                                        <div class="jp-gui">
+                                                            <div class="jp-video-play">
+                                                                <a href="javascript:;" class="jp-video-play-icon" tabindex="1">play</a>
+                                                            </div>
+                                                            <div class="jp-interface">
+                                                                <div class="jp-progress">
+                                                                    <div class="jp-seek-bar">
+                                                                        <div class="jp-play-bar">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="jp-current-time">
+                                                                </div>
+                                                                <div class="jp-duration">
+                                                                </div>
+                                                                <div class="jp-controls-holder">
+                                                                    <ul class="jp-controls">
+                                                                        <li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
+                                                                        <li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>
+                                                                        <li><a href="javascript:;" class="jp-stop" tabindex="1">stop</a></li>
+                                                                        <li><a href="javascript:;" class="jp-mute" tabindex="1" title="mute">mute</a></li>
+                                                                        <li><a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute">unmute</a></li>
+                                                                        <li><a href="javascript:;" class="jp-volume-max" tabindex="1" title="max volume">max volume</a></li>
+                                                                    </ul>
+                                                                    <div class="jp-volume-bar">
+                                                                        <div class="jp-volume-bar-value">
+                                                                        </div>
+                                                                    </div>
+                                                                    <ul class="jp-toggles">
+                                                                        <li><a href="javascript:;" class="jp-full-screen" tabindex="1" title="full screen">full screen</a></li>
+                                                                        <li><a href="javascript:;" class="jp-restore-screen" tabindex="1" title="restore screen">restore screen</a></li>
+                                                                        <li><a href="javascript:;" class="jp-repeat" tabindex="1" title="repeat">repeat</a></li>
+                                                                        <li><a href="javascript:;" class="jp-repeat-off" tabindex="1" title="repeat off">repeat off</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="jp-title">
+                                                                    <ul>
+                                                                        <li>jPlayer Video Title</li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="jp-no-solution">
+                                                            <span>Update Required</span>To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="column one-second column_testimonials">
+                                        <div class="testimonials">
+                                            <ul class="testimonials-slider">
+                                                <li>
+                                                    <blockquote>
+                                                        Be a yardstick of quality. Some people aren't used to an environment where excellence is expected.
+                                                    </blockquote>
+                                                    <div class="author">
+                                                        <a target="_blank" href="http://en.wikipedia.org/wiki/Steve_Jobs">Steve Jobs</a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <blockquote>
+                                                        Only two things are infinite, the universe and human stupidity, and I'm not sure about the former.
+                                                    </blockquote>
+                                                    <div class="author">
+                                                        <a target="_blank" href="http://en.wikipedia.org/wiki/Albert_Einstein">Albert Einstein</a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <blockquote>
+                                                        Obstacles are those frightful things you see when you take your eyes off your goal.
+                                                    </blockquote>
+                                                    <div class="author">
+                                                        Henry Ford
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <blockquote>
+                                                        Each problem that I solved became a rule which served afterwards to solve other problems.
+                                                    </blockquote>
+                                                    <div class="author">
+                                                        Rene Descartes
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Video Section -->
+
+                        <div class="section homebuild">
+                            <div class="section_wrapper clearfix">
+                                <div class="items_group clearfix">
+                                    <div class="column one-second column_column">
+                                        <div class="pad20">
+                                            <h3>BUILD TASTY LAYOUTS<br/>WITH CAKE</h3>
+                                            <hr class="hr_left"/>
+                                            <p>
+                                                Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo mullam.
+                                            </p>
+                                            <div>
+                                                <a href="#">Read more...</a>
+                                                <img class="fright" src="<?= URL; ?>public/upload/signature.gif" alt=""/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="column one-second column_image">
+                                        <div class="scale-with-grid aligncenter wp-caption no-hover">
+                                            <div class="photo">
+                                                <img class="scale-with-grid" src="<?= URL; ?>public/upload/build_themes.png" alt=""/>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- /.col 4 -->
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <select class="form-control" id="departments" name="departments">
-                                            <option value="0"  selected="selected">Lorem Ipsum</option>
-                                            <option value="1">Lorem Ipsum</option>
-                                            <option value="2">Lorem Ipsum</option>
-                                            <option value="3">Lorem Ipsum</option>
-                                            <option value="4">Lorem Ipsum</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <!-- /. col 3 -->
-                                <div class="col-sm-3">
-                                    <select class="form-control sm-margin-bottom-10">
-                                        <option value="0"  selected="selected">Lorem Ipsum</option>
-                                        <option value="1">
-                                            Lorem Ipsum
-                                        </option>
-                                        <option value="2">
-                                            Lorem Ipsum
-                                        </option>
-                                        <option value="3">
-                                            Lorem Ipsum
-                                        </option>
-                                        <option value="4">
-                                           Lorem Ipsum
-                                        </option>
-                                    </select>
-                                </div>
-                                <!-- /.col 3 -->
-                                <div class="col-sm-2">
-                                    <a class="btn btn-default btn-block" href="#">Reservar</a>
-                                </div>
-                                <!-- /.col 1 -->
-                            </div>
-                            <!-- /.row -->
-                        </form>
-                    </div>
-                    <!-- /.tab pane -->
-                    <div class="tab-pane fade" id="info">
-                        <div class="spacer40"></div>
-                        <!-- /.col 4 -->
-                        <div class="col-sm-4">
-                            <div class="med-iconBox med-iconBox--left">
-                                <div class="med-iconBox-icon icon-big color-green-light">
-                                    <span class="icon-i-first-aid" aria-hidden="true"></span>
-                                </div>
-                                <div class="med-iconBox-content">
-                                    <h4 class="med-iconBox-title hr-after">
-                                        +595 981 258 733
-                                    </h4>
-                                    <p>
-                                        Para Consultas
-                                    </p>
-                                </div>
                             </div>
                         </div>
-                        <!-- /.col 4 -->
-                    </div>
-                    <!-- /.tab pane -->
-                </div>
-                <!-- /.tab content -->
-            </div>
-            <!-- /.tabbable line-->
-        </div>
-        <!-- /.tabbable panel -->
-    </div>
-    <!-- /.container -->
-</div>
-<section class="space-sm bg-light" id="service">
-    <div class="container">
-        <div class="service-box">
-            <div class="row">
-                <div class="col-md-3 col-sm-3 clearfix cr-nav">
-                    <h3 class="f-500">Nuestros Servicios</h3>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
 
-                    <div class="customNavigation">
-                        <a class="btn btn-default carousel-prev fa fa-long-arrow-left"></a>
-                        <a class="btn btn-default carousel-next fa fa-long-arrow-right"></a>
-                    </div>
-                    <!-- cr.navigation icons:ends -->
-                </div>
-                <!-- .col 3 -->
-                <div class="col-md-9 col-sm-9">
-                    <div id="owl-demo" class="row">
-                        <div class="item">
-                            <div class="info-block">
-                                <div class="thumbnail">
-                                    <figure>
-                                        <img src="<?= URL; ?>public/images/service-9.jpg" alt="" class="img-responsive">
-                                    </figure>
-                                    <div class="round-icon bg-blue-light">
-                                        <span class="icon-i-dental" aria-hidden="true"></span>
+                        <!--  Features -->
+                        <div class="section homefeatures">
+                            <div class="section_wrapper clearfix">
+                                <div class="items_group clearfix">
+                                    <div class="column one column_column">
+                                        <h3 class="textcenter">WHAT OUR CUSTOMERS LIKE MOST</h3>
                                     </div>
-                                    <div class="caption" onclick="location.href = 'service-details.html';">
-                                        <h4>Lorem ipsum dolor sit amet</h4>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                        </p>
+                                    <div class="column one-second column_chart">
+                                        <div class="chart_box chart_position_left">
+                                            <div class="chart" data-percent="95">
+                                                <span class="num">95%</span>
+                                            </div>
+                                            <div class="desc_wrapper">
+                                                <h5>Tons Shortcodes</h5>
+                                                <hr class="hr_left">
+                                                <div class="desc">
+                                                    Sed non neque elit. Sed ut imperdiet nisi. Proin condime ntum fermentum nunc. Etiam pharetra, erat sed ferm entum feugiat, velit mauris egestas quam, ut aliquam massa nisl quis neque.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="column one-second column_chart">
+                                        <div class="chart_box chart_position_left">
+                                            <div class="chart" data-percent="80">
+                                                <span class="num">80%</span>
+                                            </div>
+                                            <div class="desc_wrapper">
+                                                <h5>Great Features</h5>
+                                                <hr class="hr_left">
+                                                <div class="desc">
+                                                    Sed non neque elit. Sed ut imperdiet nisi. Proin condime ntum fermentum nunc. Etiam pharetra, erat sed ferm entum feugiat, velit mauris egestas quam, ut aliquam massa nisl quis neque.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="column one-second column_chart">
+                                        <div class="chart_box chart_position_left">
+                                            <div class="chart" data-percent="75">
+                                                <span class="num">75%</span>
+                                            </div>
+                                            <div class="desc_wrapper">
+                                                <h5>Ease of use</h5>
+                                                <hr class="hr_left">
+                                                <div class="desc">
+                                                    Sed non neque elit. Sed ut imperdiet nisi. Proin condime ntum fermentum nunc. Etiam pharetra, erat sed ferm entum feugiat, velit mauris egestas quam, ut aliquam massa nisl quis neque.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="column one-second column_chart">
+                                        <div class="chart_box chart_position_left">
+                                            <div class="chart" data-percent="50">
+                                                <span class="num">50%</span>
+                                            </div>
+                                            <div class="desc_wrapper">
+                                                <h5>Usefulness of doc</h5>
+                                                <hr class="hr_left">
+                                                <div class="desc">
+                                                    Sed non neque elit. Sed ut imperdiet nisi. Proin condime ntum fermentum nunc. Etiam pharetra, erat sed ferm entum feugiat, velit mauris egestas quam, ut aliquam massa nisl quis neque.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
+                        <!-- Parallax -->
+                        <div class="section dark homeparallaxsection" data-stellar-background-ratio="0.5">
+                            <div class="section_wrapper clearfix">
+                                <div class="items_group clearfix">
+                                    <div class="column one column_column">
+                                        <div class="textcenter">
+                                            <h2>HAVE YOU FALL IN LOVE?</h2>
+                                            <hr class="hr_narrow"/>
+                                            <h5 class="mb50">We hope you do. We also give you best framework, lifetime updates,<br/>...and many features that you have never seen before.</h5>
+                                            <a class="button button_large" href="#" target="_blank">Bite it now</a>
+                                            <a class="button button_large button_filled" href="#">Taste more</a>
+                                        </div>
                                     </div>
-                                    <ul class="spark-actions">
-                                        <li>
-                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Find out more about dental health">
-                                                <span class="fa fa-info"></span></a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <span class="fa fa-link"></span></a>
-                                        </li>
-                                    </ul>
                                 </div>
                             </div>
-                            <!-- /.info bock -->
                         </div>
-                        <!-- /.tem -->
-                        <div class="item">
-                            <div class="info-block">
-                                <div class="thumbnail">
-                                    <figure>
-                                        <img src="<?= URL; ?>public/images/service-11.jpg" alt="" class="img-responsive">
-                                    </figure>
-                                    <div class="round-icon bg-green-light">
-                                        <span class="icon-i-genetics" aria-hidden="true"></span>
-                                    </div>
-                                    <div class="caption" onclick="location.href = 'service-details.html';">
-                                        <h4>consectetur adipisicing elit</h4>
-                                       <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                        </p>
-                                    </div>
-                                    <ul class="spark-actions">
-                                        <li>
-                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Yes,I'm your info tooltip">
-                                                <span class="fa fa-info"></span></a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <span class="fa fa-link"></span></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- /.info bock -->
-                        </div>
-                        <!-- /.tem -->
-                        <div class="item">
-                            <div class="info-block">
-                                <div class="thumbnail">
-                                    <figure>
-                                        <img src="<?= URL; ?>public/images/service-8.jpg" alt="" class="img-responsive">
-                                    </figure>
-                                    <div class="round-icon bg-red-light">
-                                        <span class="icon-i-pathology" aria-hidden="true"></span>
-                                    </div>
-                                    <div class="caption" onclick="location.href = 'service-details.html';">
-                                        <h4>sed do eiusmod tempor</h4>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                        </p>
-                                    </div>
-                                    <ul class="spark-actions">
-                                        <li>
-                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Yes,I'm your info tooltip">
-                                                <span class="fa fa-info"></span></a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <span class="fa fa-link"></span></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- /.info bock -->
-                        </div>
-                        <!-- /.tem -->
-                        <div class="item">
-                            <div class="info-block">
-                                <div class="thumbnail">
-                                    <figure>
-                                        <img src="<?= URL; ?>public/images/service-13.jpg" alt="" class="img-responsive">
-                                    </figure>
-                                    <div class="round-icon bg-blue">
-                                        <span class="icon-i-pathology" aria-hidden="true"></span>
-                                    </div>
-                                    <div class="caption" onclick="location.href = 'service-details.html';">
-                                        <h4>Paediatric Care</h4>
-                                        <p>You can find general information about making appointments, as well as other helpful tips..</p>
-                                    </div>
-                                    <ul class="spark-actions">
-                                        <li>
-                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Yes,I'm your info tooltip">
-                                                <span class="fa fa-info"></span></a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <span class="fa fa-link"></span></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- /.info bock -->
-                        </div>
-                        <!-- /.tem -->
-                        <div class="item">
-                            <div class="info-block">
-                                <div class="thumbnail">
-                                    <figure>
-                                        <img src="<?= URL; ?>public/images/service-8.png" alt="" class="img-responsive">
-                                    </figure>
-                                    <div class="round-icon bg-red">
-                                        <span class="icon-i-pathology" aria-hidden="true"></span>
-                                    </div>
-                                    <div class="caption" onclick="location.href = 'service-details.html';">
-                                        <h4>Ut enim ad minim veniam</h4>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                        </p>
-                                    </div>
-                                    <ul class="spark-actions">
-                                        <li>
-                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Yes,I'm your info tooltip">
-                                                <span class="fa fa-info"></span></a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <span class="fa fa-link"></span></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- /.info bock -->
-                        </div>
-                        <!-- /.tem -->
-                        <div class="item">
-                            <div class="info-block">
-                                <div class="thumbnail">
-                                    <figure>
-                                        <img src="<?= URL; ?>public/images/service-7.jpg" alt="" class="img-responsive">
-                                    </figure>
-                                    <div class="round-icon bg-green">
-                                        <span class="icon-i-pathology" aria-hidden="true"></span>
-                                    </div>
-                                    <div class="caption" onclick="location.href = 'service-details.html';">
-                                        <h4>Lorem ipsum dolor sit amet</h4>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                        </p>
-                                    </div>
-                                    <ul class="spark-actions">
-                                        <li>
-                                            <a href="#" data-toggle="tooltip" data-placement="top" title="Yes,I'm your info tooltip">
-                                                <span class="fa fa-info"></span></a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <span class="fa fa-link"></span></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- /.info bock -->
-                        </div>
-                        <!-- /.tem -->
-                    </div>
-                </div>
-            </div>
-            <!--col 9-->
-        </div>
-    </div>
-    <!-- /.container -->
-</section>
-<section class="space-md">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-3">
-                <p class="lead hr-after">Lorem ipsum dolor sit amet</p>
-                <p>Phasellus enim libero,ut et lobortis aliquam aliquam in tortor et libero, blandit vel sapi condimentum ultricies magn</p>
-            </div>
-            <div class="col-sm-9">
-                <div class="row margin-bottom-35">
-                    <div class="col-sm-6">
-                        <div class="med-iconBox med-iconBox--left">
-                            <div class="med-iconBox-icon icon-big color-blue">
-                                <span class="icon-i-alternative-complementary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Web Design"></span>
-                            </div>
-                            <div class="med-iconBox-content">
-                                <h4 class="med-iconBox-title hr-after">
-                                    Lorem ipsum dolor sit amet
-                                </h4>
-                                <p>
-                                    Praesent faucibus nisl sit amet nulla sollicitudin pretium a sed purus. Nullam bibendum porta magna.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.med box -->
-                    <div class="col-sm-6">
-                        <div class="med-iconBox med-iconBox--left">
-                            <div class="med-iconBox-icon icon-big color-blue">
-                                <span class="icon-i-laboratory" data-toggle="tooltip" data-placement="top" title="" data-original-title="Web Design"></span>
-                            </div>
-                            <div class="med-iconBox-content">
-                                <h4 class="med-iconBox-title hr-after">
-                                    Lorem ipsum dolor sit amet
-                                </h4>
-                                <p>
-                                    Praesent faucibus nisl sit amet nulla sollicitudin pretium a sed purus. Nullam bibendum porta magna.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.med box -->
-                </div>
-                <div class="row margin-bottom-35">
-                    <div class="col-sm-6">
-                        <div class="med-iconBox med-iconBox--left">
-                            <div class="med-iconBox-icon icon-big color-blue">
-                                <span class="icon-i-nutrition"></span>
-                            </div>
-                            <div class="med-iconBox-content">
-                                <h4 class="med-iconBox-title hr-after">
-                                    Lorem ipsum dolor sit amet
-                                </h4>
-                                <p>
-                                    Praesent faucibus nisl sit amet nulla sollicitudin pretium a sed purus. Nullam bibendum porta magna.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.med box -->
-                    <div class="col-sm-6">
-                        <div class="med-iconBox med-iconBox--left">
-                            <div class="med-iconBox-icon icon-big color-blue">
-                                <span class="icon-i-genetics" data-toggle="tooltip" data-placement="top" title="" data-original-title="Web Design"></span>
-                            </div>
-                            <div class="med-iconBox-content">
-                                <h4 class="med-iconBox-title hr-after">
-                                    Lorem ipsum dolor sit amet
-                                </h4>
-                                <p>
-                                    Praesent faucibus nisl sit amet nulla sollicitudin pretium a sed purus. Nullam bibendum porta magna.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.med box -->
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="med-iconBox med-iconBox--left">
-                            <div class="med-iconBox-icon icon-big color-blue">
-                                <span class="icon-i-respiratory" data-toggle="tooltip" data-placement="top" title="" data-original-title="Web Design"></span>
-                            </div>
-                            <div class="med-iconBox-content">
-                                <h4 class="med-iconBox-title hr-after">
-                                    Lorem ipsum dolor sit amet
-                                </h4>
-                                <p>
-                                    Praesent faucibus nisl sit amet nulla sollicitudin pretium a sed purus. Nullam bibendum porta magna.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.med box -->
-                    <div class="col-sm-6">
-                        <div class="med-iconBox med-iconBox--left">
-                            <div class="med-iconBox-icon icon-big color-blue">
-                                <span class="icon-i-intensive-care" data-toggle="tooltip" data-placement="top" title="" data-original-title="Web Design"></span>
-                            </div>
-                            <div class="med-iconBox-content">
-                                <h4 class="med-iconBox-title hr-after">
-                                    Lorem ipsum dolor sit amet
-                                </h4>
-                                <p>
-                                    Praesent faucibus nisl sit amet nulla sollicitudin pretium a sed purus. Nullam bibendum porta magna.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.med box -->
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<div class="benefits-quote bg-light">
-    <div class="container-fluid tile-container">
-        <div class="row">
-            <div class="col-sm-12 col-md-6 bg-image tile-item" data-image-src="<?= URL; ?>public/images/section-bg-1.jpg">
-            </div>
-            <div class="col-sm-12 col-md-6">
-                <div class="quote">
-                    <p>Lorem ipsum dolor sit amet</p>
-                    <blockquote>Praesent faucibus nisl sit amet nulla sollicitudin pretium a sed purus</blockquote>
-                    <img src="<?= URL; ?>public/images/user-3.jpg" alt="" class="img-responsive img-circle" />
-                    <h2>Nombre</h2>
-                </div>
-            </div>
-        </div>
-    </div>
-</div><!-- /.benefits -->
 
-<section class="tips space-md">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6 med-tab">
-                <div class="tabbable-panel">
-                    <div class="tabs-wrapper">
-                        <ul class="nav nav-tabs no-border">
-                            <li>
-                                <a href="#tab_default_1" data-toggle="tab" class="no-border">
-                                    Horas de Aperturas </a>
-                            </li>
-                            <li class="active">
-                                <a href="#tab_default_2" data-toggle="tab" class="no-border">
-                                    Videos </a>
-                            </li>
-                        </ul>
-                        <div class="tab-content">
-                            <div class="tab-pane" id="tab_default_1">
-                                <div class="open-hours">
-                                    <p>Lunes - Viernes <span>8:00 - 17:00</span>
-                                    </p>
-                                    <p>Sabados <span>9:30 - 12:00</span>
-                                    </p>
+                        <!-- Team -->
+                        <div class="section homefeatures">
+                            <div class="section_wrapper clearfix">
+                                <div class="items_group clearfix">
+                                    <div class="column one column_column">
+                                        <h3 class="textcenter">MEET OUR TEAM</h3>
+                                    </div>
+                                    <div class="column one-third column_our_team">
+                                        <div class="team team_style_modern">
+                                            <div class="photo">
+                                                <img class="scale-with-grid" src="<?= URL; ?>public/upload/our_team_1.png" alt="Paul Shepherd"/>
+                                            </div>
+                                            <div class="desc">
+                                                <div class="inside">
+                                                    <h5>Paul Shepherd</h5>
+                                                    <p class="subtitle">
+                                                        CEO
+                                                    </p>
+                                                    <div class="links">
+                                                        <a class="link" href="mailto:noreply@envato.com"><i class="icon-mail"></i></a>
+                                                        <a target="_blank" class="link" href="https://www.facebook.com/"><i class="icon-facebook"></i></a>
+                                                        <a target="_blank" class="link" href="https://twitter.com/"><i class="icon-twitter"></i></a>
+                                                        <a target="_blank" class="link" href="https://www.linkedin.com/"><i class="icon-linkedin"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="column one-third column_our_team">
+                                        <div class="team team_style_modern">
+                                            <div class="photo">
+                                                <img class="scale-with-grid" src="<?= URL; ?>public/upload/our_team_2.png" alt="Karen Donut"/>
+                                            </div>
+                                            <div class="desc">
+                                                <div class="inside">
+                                                    <h5>Karen Donut</h5>
+                                                    <p class="subtitle">
+                                                        General Director
+                                                    </p>
+                                                    <div class="links">
+                                                        <a class="link" href="mailto:noreply@envato.com"><i class="icon-mail"></i></a>
+                                                        <a target="_blank" class="link" href="https://www.facebook.com/"><i class="icon-facebook"></i></a>
+                                                        <a target="_blank" class="link" href="https://twitter.com/"><i class="icon-twitter"></i></a>
+                                                        <a target="_blank" class="link" href="https://www.linkedin.com/"><i class="icon-linkedin"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="column one-third column_our_team">
+                                        <div class="team team_style_modern">
+                                            <div class="photo">
+                                                <img class="scale-with-grid" src="<?= URL; ?>public/upload/our_team_3.png" alt="Thomas McNeil"/>
+                                            </div>
+                                            <div class="desc">
+                                                <div class="inside">
+                                                    <h5>Thomas McNeil</h5>
+                                                    <p class="subtitle">
+                                                        Account Manager
+                                                    </p>
+                                                    <div class="links">
+                                                        <a class="link" href="mailto:noreply@envato.com"><i class="icon-mail"></i></a>
+                                                        <a target="_blank" class="link" href="https://www.facebook.com/"><i class="icon-facebook"></i></a>
+                                                        <a target="_blank" class="link" href="https://twitter.com/"><i class="icon-twitter"></i></a>
+                                                        <a target="_blank" class="link" href="https://www.linkedin.com/"><i class="icon-linkedin"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <!-- /.tab pane -->
-                            <div class="tab-pane active" id="tab_default_2">
-                                <div class="responsive-video space-xs">
-                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/Bm8rz-llMhE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                                </div>
-                                <p>
-                                    Duis autem vel eum iriure dolor in hendrerit in vulputate. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit.
-                                </p>
-                                <p>
-                                    <a class="btn btn-primary" href="#" target="_blank">
-                                        Learn more...
-                                    </a>
-                                </p>
                             </div>
                         </div>
                     </div>
+                    <!-- .four-columns - sidebar -->
                 </div>
             </div>
-            <!-- /.col 5 -->
-            <div class="col-sm-4">
-                <h4 class="widget-title">últimas actualizaciones</h4>
-                <div class="sidebar card">
-                    <ul class="list-unstyled info">
-                        <li>
-                            <figure>
-                                <img src="<?= URL; ?>public/images/6.png" alt="">
-                                <div class="description">
-                                    <p>Loremp Ipsum</p>
-                                    <a><span class="icon-heart"></span>3K Likes</a>
-                                </div>
-                            </figure>
-                        </li>
-                        <li>
-                            <figure>
-                                <img src="<?= URL; ?>public/images/7.png" alt="">
-                                <div class="description">
-                                    <p>Loremp Ipsum</p>
-                                    <a><span class="icon-heart"></span>25 Likes</a>
-                                </div>
-                            </figure>
-                        </li>
-                        <li>
-                            <figure>
-                                <img src="<?= URL; ?>public/images/5.png" alt="">
-                                <div class="description">
-                                    <p>Loremp Ipsum</p>
-                                    <a><span class="icon-heart"></span>134 Likes</a>
-                                </div>
-                            </figure>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <!-- /.row -->
-    </div>
-    <!-- /.container -->
-</section>
-<!-- /.tips and news -->

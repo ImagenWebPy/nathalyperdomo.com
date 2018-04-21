@@ -1,272 +1,155 @@
 <!DOCTYPE html>
-<html lang="es">
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="es"> <!--<![endif]-->
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
-        <meta name="author" content="ImagenWeb">
+        <!-- head -->
+        <!-- meta -->
+        <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <title><?= $this->title; ?></title>
-        <link rel="icon" href="<?= URL; ?>public/images/favicon.ico"> 
-        <!-- Bootstrap core CSS -->
-        <link href="<?= URL; ?>public/css/bootstrap.min.css" rel="stylesheet">
-        <!-- WebFonts core CSS -->
-        <link href="<?= URL; ?>public/css/fonts.css" rel="stylesheet">
-        <link href="<?= URL; ?>public/css/animsition.css" rel="stylesheet">
-        <link href="<?= URL; ?>public/css/datepicker.css" rel="stylesheet">
-        <!-- Simple Line Icons -->
-        <link href="<?= URL; ?>public/MegaNavbar/assets/plugins/simple-line-icons/simple-line-icons.css" rel="stylesheet">
-        <!-- OWL -->
-        <link href="<?= URL; ?>public/css/owl.carousel.css" rel="stylesheet">
-        <!-- REVOLUTION BANNER CSS SETTINGS -->
-        <link rel="stylesheet" type="text/css" href="<?= URL; ?>public/rs-plugin/css/settings.css" media="screen" />
-        <!-- MegaNavbar-->
-        <link rel="stylesheet" type="text/css" href="<?= URL; ?>public/MegaNavbar/assets/css/MegaNavbar.min.css">
-        <link rel="stylesheet" type="text/css" href="<?= URL; ?>public/MegaNavbar/assets/css/skins/navbar-default.css">
-        <link rel="stylesheet" type="text/css" href="<?= URL; ?>public/MegaNavbar/assets/css/animation/animation.css">
-        <!-- Custom styles for this template -->
-        <link href="<?= URL; ?>public/css/style.css" rel="stylesheet">
-        <link href="<?= URL; ?>public/css/custom.css" rel="stylesheet">
-        <!-- Goole fonts -->
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <link rel="shortcut icon" href="images/favicon.png" type="image/png" />	
+        <link rel='stylesheet' id='contact-form-7-css'  href='<?= URL; ?>public/css/cform.css' type='text/css' media='all' />
+        <link rel='stylesheet' id='tp_twitter_plugin_css-css'  href='<?= URL; ?>public/css/tp_twitter_plugin.css' type='text/css' media='screen' />
+        <link rel='stylesheet' id='rs-plugin-settings-css'  href='<?= URL; ?>public/rs-plugin/css/settings.css' type='text/css' media='all' />
+        <link rel='stylesheet' id='select2-css'  href='<?= URL; ?>public/css/select.css' type='text/css' media='all' />
+        <link rel='stylesheet' id='woocommerce-layout-css'  href='<?= URL; ?>public/css/woocommerce-layout.css' type='text/css' media='all' />
+        <link rel='stylesheet' id='woocommerce-smallscreen-css'  href='<?= URL; ?>public/css/woocommerce-smallscreen.css' type='text/css' media='only screen and (max-width: 768px)' />
+        <link rel='stylesheet' id='woocommerce-general-css'  href='<?= URL; ?>public/css/woocommerce.css' type='text/css' media='all' />
+        <link rel='stylesheet' id='style-css'  href='<?= URL; ?>public/css/style.css' type='text/css' media='all' />
+        <link rel='stylesheet' id='prettyPhoto-css'  href='<?= URL; ?>public/css/prettyPhoto.css' type='text/css' media='all' />
+        <link rel='stylesheet' id='owl-carousel-css'  href='<?= URL; ?>public/js/owl-carousel/owl.carousel.css' type='text/css' media='all' />
+        <link rel='stylesheet' id='owl-theme-css'  href='<?= URL; ?>public/js/owl-carousel/owl.theme.css' type='text/css' media='all' />
+        <link rel='stylesheet' id='jplayer-css'  href='<?= URL; ?>public/css/blue.monday/jplayer.blue.monday.css' type='text/css' media='all' />
+        <link rel='stylesheet' id='jquery-ui-css'  href='<?= URL; ?>public/css/ui/jquery.ui.all.css' type='text/css' media='all' />
+        <link rel='stylesheet' id='responsive-css'  href='<?= URL; ?>public/css/responsive.css' type='text/css' media='all' />
+        <link rel='stylesheet' id='images-green-css'  href='<?= URL; ?>public/css/skins/green/images.css' type='text/css' media='all' />
+        <link rel='stylesheet' id='style-colors-php-css'  href='<?= URL; ?>public/css/style-colors.css' type='text/css' media='all' />
+        <link rel='stylesheet' id='style-php-css'  href='<?= URL; ?>public/css/style-2.css' type='text/css' media='all' />
+        <link rel='stylesheet' id='mfn-woo-css'  href='<?= URL; ?>public/css/woocommerce.css' type='text/css' media='all' />
+        <link rel="stylesheet" href="<?= URL; ?>public/css/fonts/mfn-icons.css" media="all" />
+        <link rel="stylesheet" href="<?= URL; ?>public/css/custom.css" media="all" />
+        <link rel="stylesheet" href="<?= URL; ?>public/css/nathaly.css" media="all" />
+        <link rel='stylesheet' id='Ubuntu-css'  href='http://fonts.googleapis.com/css?family=Ubuntu%3A100%2C300%2C400%2C400italic%2C700&amp;ver=4.2' type='text/css' media='all' />
         <!--[if lt IE 9]>
-        <script src="<?= URL; ?>public/https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-        <script src="<?= URL; ?>public/https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
     </head>
-    <body>
-        <div class="animsition">
-            <div class="wrapper">
-                <header id="header">
-                    <!-- Top Header Section Start -->
-                    <div class="top-bar bg-light hdden-xs bgColor">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-sm-6 list-inline list-unstyled no-margin hidden-xs">
-                                    <p class="no-margin text-white">¿Necesitas más información? Escribenos a <a href="mailto:consulta@nathalyperdomo.com">consulta@nathalyperdomo.com</a></p>
-                                </div>
+    <!-- body -->
+    <body class="home page page-id-4311 page-parent page-template-default template-slider color-custom layout-full-width header-dark header-alpha sticky-header">
+        <!-- #Wrapper -->
+        <div id="Wrapper">
+            <!-- #Action_bar -->
+            <div id="Action_bar">
+                <ul id="menu-action-menu" class="top-bar-menu">
+                    <li class="menu-item  current-menu-item page_item current_page_item "><a href="index.html">Home</a></li>
+                    <li class="menu-item  "><a href="help.html">Help Center</a></li>
+                    <li class="menu-item  "><a href="about-us.html">About us</a></li>
+                    <li class="menu-item  "><a href="contact.html">Contact</a></li>
+                    <li class="menu-item  menu-item-10792"><a href="#">Buy it</a></li>
+                </ul>
+                <div class="contact_info">
+                    <p class="phone">
+                        <i class="icon-phone"></i><a href="#">+61 (0) 3 8376 6284</a>
+                    </p>
+                    <p class="mail">
+                        <i class="icon-mail-line"></i><a href="#">noreply@envato.com</a>
+                    </p>
+                </div>
+            </div>
+            <!-- #Header -->
+            <header id="Header">
+                <!-- .header_placeholder 4sticky  -->
+                <div class="header_placeholder">
+                </div>
+                <div id="Top_bar">
+                    <div class="container">
+                        <div class="column one">
+                            <!-- .logo -->
+                            <div class="logo">
+                                <h1><a id="logo" href="index.html" title="Cake"><img class="scale-with-grid" src="<?= URL; ?>public/images/logo.png" alt="Cake"/></a></h1>
                             </div>
-                        </div>
-                    </div><!-- /.top bar -->
-                    <!-- begin Logo and info -->
-                    <div class="container middle-bar hidden-xs">
-                        <div class="row">
-                            <a href="<?= URL; ?>" class="logo col-sm-3"> 
-                                <img src="<?= URL; ?>public/images/logo.png" class="img-responsive" alt="" />
-                            </a>
-                            <div class="col-sm-8 col-sm-offset-1 contact-info">
-                                <p class="mobileHeaderFA"><i class="fa fa-mobile" aria-hidden="true"></i>  <span>+114 554 888</span></p>
+                            <!-- .menu_wrapper -->
+                            <div class="menu_wrapper">
+                                <!-- #searchform -->
+                                <form method="get" id="searchform" action="#">
+                                    <a class="icon_search icon" href="#"><i class="icon-search-line"></i></a>
+                                    <a class="icon_close icon" href="#"><i class="icon-cancel"></i></a>
+                                    <input type="text" class="field" name="s"  placeholder="Ingresa tu busqueda"/>
+                                    <input type="submit" class="submit" value="" />
+                                </form>
+
+                                <!-- #menu -->
+                                <nav id="menu" class="menu-main-menu-container">
+                                    <ul id="menu-main-menu" class="menu">
+                                        <li class="menu-item  current-menu-item page_item page-item-4311 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children"><a href="<?= URL; ?>"><span>Inicio</span></a>
+
+                                        </li>
+                                        <li class="menu-item  menu-item-has-children"><a href="about-us.html"><span>Nosotros</span></a>
+
+                                        </li>
+                                        <li class="menu-item  menu-item-has-children"><a href="accordion.html"><span>Blog</span></a>
+
+                                        </li>
+                                        <li class="menu-item  menu-item-has-children"><a href="portfolio.html"><span>Consultorio</span></a>
+
+                                        </li>
+                                        <li class="menu-item  menu-item-has-children"><a href="blog.html"><span>Conctacto</span></a>
+
+                                        </li>
+                                    </ul>
+                                </nav>
+                                <a class="responsive-menu-toggle" href="#"><i class='icon-menu'></i></a>
                             </div>
                         </div>
                     </div>
-                    <!-- /.middle -->
-                    <!-- begin MegaNavbar-->
-                    <div class="nav-wrap-holder">
-                        <div class="container" id="nav_wrapper">
-                            <nav class="navbar navbar-static-top navbar-default no-border-radius xs-height100" id="main_navbar" role="navigation">
-                                <div class="container-fluid">
-                                    <!-- Brand and toggle get grouped for better mobile display -->
-                                    <div class="navbar-header">
-                                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#MegaNavbarID">
-                                            <span class="sr-only">Toggle navigation</span>
-                                            <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-                                        </button>
-                                        <a href="index.html" class="navbar-brand logo col-sm-3 visible-xs-block"> 
-                                            <img src="<?= URL; ?>public/images/logo.png" class="img-responsive" alt="" />
-                                        </a>
+                </div>
+
+                <div id="mfn-rev-slider">
+                    <div id="rev_slider_1_1_wrapper" class="rev_slider_wrapper fullwidthbanner-container">
+                        <!-- START REVOLUTION SLIDER 4.6.9 fullwidth mode -->
+                        <div id="rev_slider_1_1" class="rev_slider fullwidthabanner">
+                            <ul>
+                                <!-- SLIDE  -->
+                                <li data-transition="notransition" data-slotamount="7" data-masterspeed="100" data-delay="6000" data-saveperformance="off">
+                                    <!-- MAIN IMAGE -->
+                                    <img src="<?= URL; ?>public/images/transparent.png" alt="home_slide_1" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
+                                    <!-- LAYERS -->
+                                    <!-- LAYER NR. 1 -->
+                                    <div class="tp-caption tp-fade fadeout" data-x="center" data-hoffset="0" data-y="bottom" data-voffset="800" data-speed="1500" data-start="1100" data-easing="Power3.easeInOut" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="600" data-endeasing="Power3.easeInOut">
+                                        <img src="<?= URL; ?>public/upload/revslider/slider1/light_glow.png" alt="">
                                     </div>
-                                    <!-- Collect the nav links, forms, and other content for toggling -->
-                                    <div class="collapse navbar-collapse" id="MegaNavbarID">
-                                        <!-- regular link -->
-                                        <ul class="nav navbar-nav navbar-left">
-                                            <li><a href="<?= URL; ?>"><i class="fa fa-home"></i> <span class="hidden-sm">Inicio</span></a></li>
-                                            <li class="divider"></li>
-                                            <li class="dropdown-full no-shadow no-border-radius">
-                                                <a data-toggle="dropdown" href="javascript:void(0);" class="dropdown-toggle"><span class="icon-i-family-practice" aria-hidden="true"></span>&nbsp;<span class="hidden-sm hidden-md reverse">Páginas</span><span class="caret"></span></a>
-                                                <div class="dropdown-menu row drop-image">
-                                                    <ul class="row">
-                                                        <li class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
-                                                            <ul>
-                                                                <li class="dropdown-header">Secciones</li>
-                                                                <li><a href="#">Acerca de mi</a></li>
-                                                            </ul>
-                                                        </li>
-                                                        <li class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
-                                                            <ul>
-                                                                <li class="dropdown-header">Blog</li>
-                                                                <li><a href="#">Post Destacado 1</a></li>
-                                                                <li><a href="#">Post Destacado 2</a></li>
-                                                                <li><a href="#">Post Destacado 3</a></li>
-                                                                <li><a href="#">Post Destacado 4</a></li>
-                                                            </ul>
-                                                        </li>
-                                                        <li class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
-                                                            <ul>
-                                                                <li class="dropdown-header">Boletín</li>
-                                                                <li>
-                                                                    <form class="form" role="form">
-                                                                        <div class="form-group">
-                                                                            <label class="sr-only" for="email">Correo Electrónico</label>
-                                                                            <input type="email" class="form-control" id="e-mail" placeholder="Correo Electrónico">
-                                                                        </div>
-                                                                        <button type="submit" class="btn btn-primary btn-block btn-fill">Sign in</button>
-                                                                    </form>
-                                                                </li>
-                                                            </ul>
-                                                        </li>
-                                                        <li class="col-xs-6 col-sm-3 col-md-3 col-lg-3 hidden-xs">
-                                                            <figure>
-                                                                <img src="<?= URL; ?>public/images/doc-3.jpg" class="img-responsive menu-img" alt="">
-                                                            </figure>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </li>
-                                            <li class="divider"></li>
-                                            <!-- dropdown active -->
-                                            <li class="dropdown-full no-border-radius no-shadow">
-                                                <a data-toggle="dropdown" href="javascript:void(0);"><i class="fa fa-calendar"></i>&nbsp;<span class="hidden-sm hidden-md reverse">Consultorio</span></a>
-                                            </li>
-                                            <!-- divider -->
-                                            <li class="divider"></li>
-                                        </ul>
-                                        <ul class="nav navbar-nav navbar-right">
-                                            <li>
-                                                <!-- search form -->
-                                                <form class="navbar-form-expanded navbar-form navbar-left visible-lg-block visible-md-block visible-xs-block" role="search">
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control" data-width="80px" data-width-expanded="170px" placeholder="Buscar" name="query">
-                                                        <span class="input-group-btn"><button class="btn btn-default" type="submit"><i class="fa fa-search"></i>&nbsp;</button></span>
-                                                    </div>
-                                                </form>
-                                            </li>
-                                            <li class="dropdown-grid visible-sm-block">
-                                                <a data-toggle="dropdown" href="javascript:void(0);" class="dropdown-toggle"><i class="fa fa-search"></i>&nbsp;</a>
-                                                <div class="dropdown-grid-wrapper" role="menu">
-                                                    <ul class="dropdown-menu col-sm-6">
-                                                        <li>
-                                                            <form class="no-margin">
-                                                                <div class="input-group">
-                                                                    <input type="text" class="form-control">
-                                                                    <span class="input-group-btn"><button class="btn btn-default" type="submit">&nbsp;<i class="fa fa-search"></i></button></span>
-                                                                </div>
-                                                            </form>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </li>
-                                            <li class="divider"></li>
-                                            <li class="dropdown-grid">
-                                                <a data-toggle="dropdown" href="javascript:void(0);" class="dropdown-toggle"><i class="fa fa-youtube-play"></i>&nbsp;<span class="hidden-sm hidden-md reverse">Media</span><span class="caret"></span></a>
-                                                <div class="dropdown-grid-wrapper" role="menu">
-                                                    <ul class="dropdown-menu no-border-radius no-shadow col-xs-12 col-sm-9 col-md-8 col-lg-7">
-                                                        <li>
-                                                            <div id="carousel-eg" class="carousel slide" data-ride="carousel">
-                                                                <div class="row">
-                                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 divided">
-                                                                        <ol class="carousel-indicators navbar-carousel-indicators h-divided">
-                                                                            <li data-target="#carousel-eg" data-slide-to="0" class="active"><a href="javascript:void(0);" class="">Video Blog 1<span class="hidden-sm hidden-xs desc">contenido del video 1</span></a>
-                                                                            </li>
-                                                                            <li data-target="#carousel-eg" data-slide-to="1" class=""><a href="javascript:void(0);" class="">Video Blog 2<span class="hidden-sm hidden-xs desc">contenido del video 2</span></a>
-                                                                            </li>
-                                                                            <li data-target="#carousel-eg" data-slide-to="2" class=""><a href="javascript:void(0);" class="">Video Blog 3<span class="hidden-sm hidden-xs desc">contenido del video 3</span></a>
-                                                                            </li>
-                                                                            <li data-target="#carousel-eg" data-slide-to="3" class=""><a href="javascript:void(0);" class="">Video Blog 4<span class="hidden-sm hidden-xs desc">contenido del video 4</span></a>
-                                                                            </li>
-                                                                        </ol>
-                                                                    </div>
-                                                                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                                                                        <div class="carousel-inner">
-                                                                            <div class="item active">
-                                                                                <div class="responsive-video">
-                                                                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/YPl0naO6GR0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="item">
-                                                                                <div class="responsive-video">
-                                                                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/v13o_AMW_wI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="item">
-                                                                                <div class="embed-responsive embed-responsive-16by9">
-                                                                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/6_tgyVM_eOY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="item">
-                                                                                <div class="embed-responsive embed-responsive-16by9">
-                                                                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/HUhNe1_CTVQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </li>
-                                            <li class="divider"></li>
-                                            <!-- dropdown grid -->
-                                            <li class="dropdown-full">
-                                                <a data-toggle="dropdown" href="javascript:void(0);" class="dropdown-toggle"><i class="fa fa-envelope"></i>&nbsp;<span class="hidden-sm hidden-md hidden-lg reverse">Account</span><span class="caret"></span></a>
-                                                <ul class="dropdown-menu no-shadow no-border-radius space-xs">
-                                                    <li class="col-sm-4">
-                                                        <address>
-                                                            <br>
-                                                            Dr. Alejandro Dávalos Nro. 437<br>
-                                                            Asunción - Paraguay<br>
-                                                            (595 981) 258-733<br>
-                                                            (595 985) 866-818
-                                                        </address>
-                                                        <address>
-                                                            <strong>Nathaly Perdomo Nutrición</strong><br>
-                                                            <a href="mailto:#">consulta@nathalyperdomo.com</a>
-                                                        </address>
-                                                        <div class="open-hours">
-                                                            <p>Lunes - Viernes <span>8:00 - 17:00</span>
-                                                            </p>
-                                                            <p>Sabados <span>9:30 - 12:00</span>
-                                                            </p>
-                                                            
-                                                        </div>
-                                                    </li>
-                                                    <li class="col-sm-7 col-sm-offset-1">
-                                                        <div id="message"></div>
-                                                        <form method="post" action="http://codenpixel.com/demo/medicina/contact.php" name="contactform" id="contactform">
-                                                            <fieldset>
-                                                                <input class="form-control" name="name" type="text" id="name" size="30" value="" placeholder="Nombre" />
-                                                                <br />
-                                                                <input class="form-control" name="email" type="text" id="email" size="30" value="" placeholder="E-mail" />
-                                                                <br />
-                                                                <input class="form-control" name="phone" type="text" id="phone" size="30" value="" placeholder="Teléfono" />
-                                                                <br />
-                                                                <select class="form-control" name="subject" id="subject">
-                                                                    <option value="0" selected="selected">Seleccione un motivo</option>
-                                                                    <option value="1">Reserva</option>
-                                                                    <option value="2">Consulta</option>
-                                                                    <option value="3">Emergencia</option>
-                                                                </select>
-                                                                <br />
-                                                                <textarea class="form-control" name="comments" cols="40" rows="3" id="comments" style="width: 100%;" placeholder="Tus Comentarios"></textarea>
-                                                                <p><span class="required">*</span> Eres Humano?</p>
-                                                                <label for="verify" accesskey="V">&nbsp;&nbsp;&nbsp;3 + 1 =</label>
-                                                                <input name="verify" type="text" id="verify" size="4" value="" style="width: 30px; border:1px solid #eee;" />
-                                                                <br />
-                                                                <br />
-                                                                <input type="submit" class="btn btn-primary btn-fill" id="submit" value="Envíar" />
-                                                            </fieldset>
-                                                        </form>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <div class="addspace" style="height:60px;"></div>
-                                        </ul>
+                                    <!-- LAYER NR. 2 -->
+                                    <div class="tp-caption large_light sft tp-resizeme gilroy-bold" data-x="center" data-hoffset="0" data-y="120" data-speed="900" data-start="500" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="900" >
+                                        Comé lo que te gusta
                                     </div>
-                                </div>
-                            </nav>
+                                    <!-- LAYER NR. 3 -->
+                                    <div class="tp-caption medium_light tp-fade tp-resizeme priscilla sliderSecondaryTextSize" data-x="center" data-hoffset="0" data-y="210" data-speed="800" data-start="800" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="800">
+                                        en la medida justa
+                                    </div>
+                                    <!-- LAYER NR. 4 -->
+                                    <div class="tp-caption customin stb" data-x="center" data-hoffset="0" data-y="320" data-customin="x:0;y:100;z:0;rotationX:-50;rotationY:0;rotationZ:0;scaleX:0.5;scaleY:0.5;skewX:0;skewY:0;opacity:0;transformPerspective:-500;transformOrigin:50% 50%;" data-speed="1500" data-start="0" data-easing="Power3.easeInOut" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="1000" data-endeasing="Power3.easeInOut">
+                                        <img src="<?= URL; ?>public/images/310x649_inicio_1.png" alt="">
+                                    </div>
+                                </li>
+                                <!-- SLIDE  -->
+                                <li data-transition="notransition" data-slotamount="7" data-masterspeed="100" data-delay="5000" data-saveperformance="off">
+                                    <!-- MAIN IMAGE -->
+                                    <img src="<?= URL; ?>public/images/slider/img1.jpg" alt="unlimited-possibilities_bgd" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
+                                    <!-- LAYERS -->
+                                    <!-- LAYER NR. 1 -->
+                                    <div class="tp-caption large_light lft tp-resizeme gilroy-bold" data-x="left" data-hoffset="0" data-y="200" data-speed="1000" data-start="500" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0" data-end="4700" data-endspeed="300" >
+                                        La salud es una relación<br> <span class="priscilla">entre tú y tu cuerpo</span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="tp-bannertimer tp-bottom">
+                            </div>
                         </div>
                     </div>
-                    <!-- /.div nav wrap holder -->
-                </header>
-                <!-- end MegaNavbar-->
+                    <!-- END REVOLUTION SLIDER -->
+                </div>
+            </header>

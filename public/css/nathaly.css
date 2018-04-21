@@ -1,0 +1,25 @@
+@font-face {
+    font-family: 'priscilla';
+    src: url('fonts/Priscilla Script.eot');
+    src: local('☺'), url('fonts/Priscilla Script.woff') format('woff'), url('fonts/Priscilla Script.ttf') format('truetype'), url('fonts/Priscilla Script.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'gilroy-bold';
+    src: url('fonts/Gilroy-Bold.eot');
+    src: local('☺'), url('fonts/Gilroy-Bold.woff') format('woff'), url('fonts/Gilroy-Bold.ttf') format('truetype'), url('fonts/Gilroy-Bold.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'gilroy';
+    src: url('fonts/Gilroy-Regular.eot');
+    src: local('☺'), url('fonts/Gilroy-Regular.woff') format('woff'), url('fonts/Gilroy-Regular.ttf') format('truetype'), url('fonts/Gilroy-Regular.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+body { font-family: 'gilroy' !important;}
+.priscilla{font-family: 'priscilla' !important;}
+.gilroy-bold{font-family: 'gilroy-bold' !important;}
+.sliderSecondaryTextSize { font-size: 30px !important;}
