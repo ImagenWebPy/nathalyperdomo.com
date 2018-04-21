@@ -5,7 +5,7 @@
         <div class="container">
             <div class="column one column_column">
                 <aside id="text-2" class="widget widget_text">
-                    <h2>STAY IN TOUCH</h2>
+                    <h2>MANTENTE EN CONTACTO</h2>
                     <hr class="hr_narrow">
                     <div class="textwidget">
                         Call us at <a href="#">+23 777 555 333</a><span>or</span><a href="contact.html">Write us a message</a>

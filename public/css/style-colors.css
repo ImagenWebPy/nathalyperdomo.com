@@ -10,11 +10,11 @@
 	}
 	
 	#Footer {
-		background-color: #19191B;
+		background-color: #FF9E16;
 	}
 	
 	#Footer .footer_copy {
-		background: #0d0d0d;
+		background: #9E1B96;
 	}	
 	
 	#back_to_top {
@@ -61,7 +61,7 @@
 	
 /* Strong */
 	.team .desc .inside p.subtitle, .chart_box .chart .num, .timeline_items li h5 span {
-		color: #486e14;
+		color: #9E1B96;
 	}
 
 /* Text hightlight & dropcap */
@@ -322,13 +322,13 @@
 }
 
 #Footer .footer_copy, #Footer .footer_copy a {
-	color: #808080;
+	color: #fff;
 }
 #Footer .social li a {
-	color: #808080;
+	color: #fff;
 }
 #Footer .social li a:hover {
-	color: #ffffff;
+	color: #808080;
 }	
 	
 	

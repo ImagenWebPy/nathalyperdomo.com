@@ -475,7 +475,7 @@
 			handler		: function(){
 				$(this).easyPieChart({
 					animate		: 1000,
-					barColor	: '#6FA81B',
+					barColor	: '#9E1B96',
 					lineCap		: 'circle',
 					lineWidth	: 10,
 					size		: 100,

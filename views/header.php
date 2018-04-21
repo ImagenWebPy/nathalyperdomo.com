@@ -11,7 +11,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <title><?= $this->title; ?></title>
-        <link rel="shortcut icon" href="images/favicon.png" type="image/png" />	
+        <link rel="icon" type="image/png" href="<?= URL; ?>public/images/favicon.png" />
         <link rel='stylesheet' id='contact-form-7-css'  href='<?= URL; ?>public/css/cform.css' type='text/css' media='all' />
         <link rel='stylesheet' id='tp_twitter_plugin_css-css'  href='<?= URL; ?>public/css/tp_twitter_plugin.css' type='text/css' media='screen' />
         <link rel='stylesheet' id='rs-plugin-settings-css'  href='<?= URL; ?>public/rs-plugin/css/settings.css' type='text/css' media='all' />
@@ -33,6 +33,7 @@
         <link rel="stylesheet" href="<?= URL; ?>public/css/fonts/mfn-icons.css" media="all" />
         <link rel="stylesheet" href="<?= URL; ?>public/css/custom.css" media="all" />
         <link rel="stylesheet" href="<?= URL; ?>public/css/nathaly.css" media="all" />
+        <link rel="stylesheet" href="<?= URL; ?>public/css/wfmi-style.css" media="all" />
         <link rel='stylesheet' id='Ubuntu-css'  href='http://fonts.googleapis.com/css?family=Ubuntu%3A100%2C300%2C400%2C400italic%2C700&amp;ver=4.2' type='text/css' media='all' />
         <!--[if lt IE 9]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -114,7 +115,7 @@
                         <div id="rev_slider_1_1" class="rev_slider fullwidthabanner">
                             <ul>
                                 <!-- SLIDE  -->
-                                <li data-transition="notransition" data-slotamount="7" data-masterspeed="100" data-delay="6000" data-saveperformance="off">
+                                <li data-transition="notransition" data-slotamount="7" data-masterspeed="100" data-delay="7000" data-saveperformance="off">
                                     <!-- MAIN IMAGE -->
                                     <img src="<?= URL; ?>public/images/transparent.png" alt="home_slide_1" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
                                     <!-- LAYERS -->
@@ -136,7 +137,7 @@
                                     </div>
                                 </li>
                                 <!-- SLIDE  -->
-                                <li data-transition="notransition" data-slotamount="7" data-masterspeed="100" data-delay="5000" data-saveperformance="off">
+                                <li data-transition="notransition" data-slotamount="7" data-masterspeed="100" data-delay="7000" data-saveperformance="off">
                                     <!-- MAIN IMAGE -->
                                     <img src="<?= URL; ?>public/images/slider/img1.jpg" alt="unlimited-possibilities_bgd" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
                                     <!-- LAYERS -->
