@@ -1,6 +1,6 @@
 <?php
 
-class Index extends Controller {
+class nosotros extends Controller {
 
     function __construct() {
         parent::__construct();
@@ -9,9 +9,9 @@ class Index extends Controller {
     public function index() {
         $this->view->description = "";
         $this->view->keywords = "";
-        $this->view->title = TITLE . 'Inicio';
+        $this->view->title = TITLE . 'Nosotros';
         $this->view->render('header');
-        $this->view->render('index/index');
+        $this->view->render('nosotros/index');
         $this->view->render('footer');
     }
 

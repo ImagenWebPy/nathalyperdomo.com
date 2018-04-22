@@ -562,172 +562,74 @@ class Helper {
      * FUNCIONES DEL INHERENTES AL SISTEMA
      * ****************************** */
 
-    /**
-     * Funcion que arma el menu de navegacion del sistema
-     * @param array $page
-     * @param int $sistema
-     * @return string
-     */
-    public function loadNavMenu($page, $sistema) {
-        $data = '';
-        if ($page[0] != 'sistemas') {
-            $classActiveDefault = '';
-            if (empty($page[0]))
-                $classActiveDefault = 'active';
-            #cargamos los modulos del sistema
-            $modulos = $this->loadModules($sistema);
-            $data = '<li class="' . $classActiveDefault . '">
-                        <a aria-expanded="false" role="button" href="' . URL . '">Dashboard</a>
-                    </li>';
-            foreach ($modulos as $modulo) {
-                $classActiveController = '';
-                #verificamos en que pagina nos encontramos para mostrar la clase active
-                switch ($page[0]) {
-                    case 'mantenimientos':
-                        $classActiveController = "active";
-                        break;
-                }
-                #verificamos si el controlador cargado es igual al pasado por el metodo para desactivar la clase active
-                if ($modulo['controlador'] != $page[0]) {
-                    $classActiveController = '';
-                }
-                $data .= '<li class="dropdown ' . $classActiveController . '">
-                            <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> ' . utf8_encode($modulo['descripcion']) . ' <span class="caret"></span></a>
-                            <ul role="menu" class="dropdown-menu">';
-                $secciones = $this->loadModulesSections($modulo['id']);
-                foreach ($secciones as $seccion) {
-                    $data .= '      <li><a href="' . URL . $modulo['controlador'] . '/' . $seccion['metodo'] . '">' . utf8_encode($seccion['descripcion']) . '</a></li>';
-                }
-                $data .= '  </ul>
-                        </li>';
-                $classActiveController = '';
-            }
-        }
-        echo $data;
-    }
-
-    /**
-     * Funcion privada utilizada para listar los modulos del sistema
-     * Si le pasamos tambien el controlador, solamente retornará el registro correspondiente al mismo
-     * @param int $idSistema
-     * @param string $controlador
-     * @return array
-     */
-    private function loadModules($idSistema, $controlador = NULL) {
-        $where = '';
-        if (!empty($controlador))
-            $where = "and pm.controlador = '$controlador'";
-        $sql = $this->dbPermisos->select("SELECT pm.id,
-                                                pm.descripcion,
-                                                pm.controlador
-                                        FROM `permisos_modulos` pm 
-                                        WHERE pm.id_permisos_sistemas = $idSistema 
-                                        and pm.estado = 1 
-                                        $where;");
-        return $sql;
-    }
-
-    /**
-     * Funcion que lista las secciones de un modulo
-     * @param int $idModulo
-     * @return array
-     */
-    private function loadModulesSections($idModulo, $metodo = NULL) {
-        $where = '';
-        if (!empty($metodo))
-            $where = "and ps.metodo = '$metodo'";
-        $sql = $this->dbPermisos->select("SELECT ps.descripcion,
-                                                ps.metodo
-                                        FROM `permisos_secciones` ps 
-                                        where ps.id_permisos_modulos = $idModulo
-                                        and ps.estado = 1 
-                                        $where;");
-        return $sql;
-    }
-
-    /**
-     * Funcion que muestra el encabezado de las paginas
-     * @param array $page
-     * @param int $idSistema
-     * @return string
-     */
-    public function loadPageHeading($page, $idSistema) {
-        $modulo = 'Dashboard';
-        $seccion = '';
-        if (!empty($page[0]))
-            $modulo = $this->loadModules($idSistema, $page[0])[0]['descripcion'];
-        if (!empty($page[1]))
-            $seccion = $this->loadModulesSections($idSistema, $page[1])[0]['descripcion'];
-        $data = '<div class="row wrapper border-bottom white-bg page-heading margin-heading">
-                    <div class="col-lg-10">';
-        if (empty($seccion)) {
-            $data .= '  <h2>' . utf8_encode($modulo) . '</h2>';
-        } else {
-            $data .= '  <h2>' . utf8_encode($seccion) . '</h2>';
-        }
-        $data .= '      <ol class="breadcrumb">
-                            <li>
-                                <a href="' . URL . 'sistemas">Inicio</a>
-                            </li>
-                            <li>
-                                <a href="#">' . utf8_encode($modulo) . '</a>
-                            </li>';
-        if (!empty($seccion)) {
-            $data .= '      <li>
-                                <a href="#">' . utf8_encode($seccion) . '</a>
-                            </li>';
-        }
-        $data .= '      </ol>
+    public function loadPageHeaderData($page) {
+        $data = array();
+        switch ($page) {
+            case 'nosotros':
+                $body = 'page page-id-3716 page-child parent-pageid-131 page-template-default  color-custom layout-full-width header-white header-bg sticky-header';
+                $header = '<div id="Subheader" class="aboutbreadcrumb">
+                            <div class="container">
+                                <div class="column one">
+                                    <h1 class="title">Sobre Nathaly</h1>
+                                    <ul class="breadcrumbs">
+                                        <li class="home"><a href="' . URL . '">Inicio</a><span><i class="icon-right-open"></i></span></li>
+                                        <li><a href="#">Sobre Nathaly</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>';
+                break;
+            default :
+                $body = 'home page page-id-4311 page-parent page-template-default template-slider color-custom layout-full-width header-dark header-alpha sticky-header';
+                $header = '<div id="mfn-rev-slider">
+                    <div id="rev_slider_1_1_wrapper" class="rev_slider_wrapper fullwidthbanner-container">
+                        <!-- START REVOLUTION SLIDER 4.6.9 fullwidth mode -->
+                        <div id="rev_slider_1_1" class="rev_slider fullwidthabanner">
+                            <ul>
+                                <!-- SLIDE  -->
+                                <li data-transition="notransition" data-slotamount="7" data-masterspeed="100" data-delay="7000" data-saveperformance="off">
+                                    <!-- MAIN IMAGE -->
+                                    <img src="<?= URL; ?>public/images/transparent.png" alt="home_slide_1" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
+                                    <!-- LAYERS -->
+                                    <!-- LAYER NR. 1 -->
+                                    <div class="tp-caption tp-fade fadeout" data-x="center" data-hoffset="0" data-y="bottom" data-voffset="800" data-speed="1500" data-start="1100" data-easing="Power3.easeInOut" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="600" data-endeasing="Power3.easeInOut">
+                                        <img src="<?= URL; ?>public/upload/revslider/slider1/light_glow.png" alt="">
+                                    </div>
+                                    <!-- LAYER NR. 2 -->
+                                    <div class="tp-caption large_light sft tp-resizeme gilroy-bold" data-x="center" data-hoffset="0" data-y="120" data-speed="900" data-start="500" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="900" >
+                                        Comé lo que te gusta
+                                    </div>
+                                    <!-- LAYER NR. 3 -->
+                                    <div class="tp-caption medium_light tp-fade tp-resizeme priscilla sliderSecondaryTextSize" data-x="center" data-hoffset="0" data-y="210" data-speed="800" data-start="800" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="800">
+                                        en la medida justa
+                                    </div>
+                                    <!-- LAYER NR. 4 -->
+                                    <div class="tp-caption customin stb" data-x="center" data-hoffset="0" data-y="320" data-customin="x:0;y:100;z:0;rotationX:-50;rotationY:0;rotationZ:0;scaleX:0.5;scaleY:0.5;skewX:0;skewY:0;opacity:0;transformPerspective:-500;transformOrigin:50% 50%;" data-speed="1500" data-start="0" data-easing="Power3.easeInOut" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="1000" data-endeasing="Power3.easeInOut">
+                                        <img src="<?= URL; ?>public/images/310x649_inicio_1.png" alt="">
+                                    </div>
+                                </li>
+                                <!-- SLIDE  -->
+                                <li data-transition="notransition" data-slotamount="7" data-masterspeed="100" data-delay="7000" data-saveperformance="off">
+                                    <!-- MAIN IMAGE -->
+                                    <img src="<?= URL; ?>public/images/slider/img1.jpg" alt="unlimited-possibilities_bgd" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
+                                    <!-- LAYERS -->
+                                    <!-- LAYER NR. 1 -->
+                                    <div class="tp-caption large_light lft tp-resizeme gilroy-bold" data-x="left" data-hoffset="0" data-y="200" data-speed="1000" data-start="500" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0" data-end="4700" data-endspeed="300" >
+                                        La salud es una relación<br> <span class="priscilla">entre tú y tu cuerpo</span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="tp-bannertimer tp-bottom">
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-lg-2">
-
-                    </div>
+                    <!-- END REVOLUTION SLIDER -->
                 </div>';
-        return $data;
-    }
-
-    /**
-     * Funcion que procesa serverside del datatable
-     * @param $_REQUEST $datos (Variable request del servidor)
-     * @param array $columnas (Definir indices numericos para el array - columnas de las tablas)
-     * @return array
-     */
-    public function cargarDataTable($datos, $tabla, $columnas) {
-
-        $columns = $columnas;
-        #Numero total de registros sin ninguna busqueda
-        $sql = $this->dbDisponible->select("SELECT COUNT(*) as cantidad FROM $tabla");
-        $totalFiltered = $sql[0]['cantidad'];
-        $totalData = $sql[0]['cantidad'];
-
-        $query = "SELECT * FROM $tabla where 1 = 1";
-        $where = "";
-        #obtenemos el primer elemento del array $columnas
-        $firstElement = reset($columnas);
-        $firstElementKey = key($columnas);
-        #eliminamos del array el primer elemento
-        unset($columnas[$firstElementKey]);
-        #obtenemos el ultimo elemento del array $columnas
-        $lastElement = end($columnas);
-        $lastElementKey = key($columnas);
-        #eliminamos del array el ultimo elemento
-        if (!empty($datos['search']['value'])) {
-            $where .= " AND ($firstElement LIKE '%" . $datos['search']['value'] . "%' ";
-            foreach ($columnas as $item) {
-                $where .= " OR $item LIKE '%" . $datos['search']['value'] . "%' ";
-            }
-            $where .= " OR $lastElement LIKE '%" . $datos['search']['value'] . "%' )";
-            #when there is a search parameter then we have to modify total number filtered rows as per search result.
-            $sql = $this->dbDisponible->select("SELECT COUNT(*) as cantidad FROM $tabla where 1 = 1 $where");
-            $totalFiltered = $sql[0]['cantidad'];
+                break;
         }
-        $query .= $where;
-        $query .= " ORDER BY " . $columns[$datos['order'][0]['column']] . "   " . $datos['order'][0]['dir'] . "  LIMIT " . $datos['start'] . " ," . $datos['length'] . "   ";
-        $sql = $this->dbDisponible->select($query);
         $data = array(
-            'sql' => $sql,
-            'totalData' => $totalData,
-            'totalFiltered' => $totalFiltered
+            'body' => $body,
+            'header' => $header
         );
         return $data;
     }

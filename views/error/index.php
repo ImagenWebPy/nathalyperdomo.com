@@ -1,7 +1,14 @@
-<div class="middle-box text-center animated fadeInDown">
-    <h1>404</h1>
-    <h3 class="font-bold">Página no encontrada</h3>
-    <div class="error-desc">
-        Lo sentimos, pero la página que está buscando no ha sido encontrada. Intente comprobar la URL en busca de errores, luego presione el botón Actualizar en su navegador.
+<div id="Error_404">
+    <div class="container">
+        <div class="column one">
+            <div class="error_pic">
+                <i class="icon-traffic-cone"></i>
+            </div>
+            <div class="error_desk">
+                <h2>Ooops... Error 404</h2>
+                <h4>Lo sentimos, pero la página que esta intentando acceder no existe</h4>
+                <p><span class="check">Por favor revise el enlace de vuelta o</span> <a class="button button_filled" href="<?= URL; ?>">ir a la página principal</a></p>
+            </div>				
+        </div>
     </div>
 </div>

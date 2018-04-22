@@ -108,7 +108,7 @@
 	#Header .menu > li.current_page_ancestor > a,
 	#Header .menu > li > a:hover,
 	#Header .menu > li.hover > a {
-		color: #9E1B96;
+		color: #fff;
 	}
 	#Header .menu > li ul li a:hover {
 		color: #9E1B96;
