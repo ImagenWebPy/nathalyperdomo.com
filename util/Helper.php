@@ -566,7 +566,7 @@ class Helper {
         $data = array();
         switch ($page) {
             case 'nosotros':
-                $body = 'page page-id-3716 page-child parent-pageid-131 page-template-default  color-custom layout-full-width header-white header-bg sticky-header';
+                $body = 'page page-id-3716 page-child parent-pageid-131 page-template-default color-custom layout-full-width header-bg sticky-header';
                 $header = '<div id="Subheader" class="aboutbreadcrumb">
                             <div class="container">
                                 <div class="column one">
@@ -579,6 +579,48 @@ class Helper {
                             </div>
                         </div>';
                 break;
+            case 'blog':
+                $body = 'page page-child page-template-default color-custom layout-full-width header-white header-bg sticky-header';
+                $header = ' <div id="Subheader" class="blogbreadcrumb">
+                                <div class="container">
+                                    <div class="column one">
+                                        <h1 class="title">Blog</h1>
+                                        <ul class="breadcrumbs">
+                                            <li class="home"><a href="' . URL . '">Inicio</a><span><i class="icon-right-open"></i></span></li>
+                                            <li><a href="#">Blog</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>';
+                break;
+            case 'consultorio':
+                $body = 'page page-child page-template-default color-custom layout-full-width header-white header-bg sticky-header';
+                $header = ' <div id="Subheader" class="consultotiobreadcrumb">
+                                <div class="container">
+                                    <div class="column one">
+                                        <h1 class="title">Consultorio</h1>
+                                        <ul class="breadcrumbs">
+                                            <li class="home"><a href="' . URL . '">Inicio</a><span><i class="icon-right-open"></i></span></li>
+                                            <li><a href="#">Consultorio</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>';
+                break;
+            case 'contacto':
+                $body = 'page page-child page-template-default color-custom layout-full-width header-white header-bg sticky-header';
+                $header = ' <div id="Subheader" class="contactobreadcrumb">
+                                <div class="container">
+                                    <div class="column one">
+                                        <h1 class="title">Contacto</h1>
+                                        <ul class="breadcrumbs">
+                                            <li class="home"><a href="' . URL . '">Inicio</a><span><i class="icon-right-open"></i></span></li>
+                                            <li><a href="#">Consultorio</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>';
+                break;
             default :
                 $body = 'home page page-id-4311 page-parent page-template-default template-slider color-custom layout-full-width header-dark header-alpha sticky-header';
                 $header = '<div id="mfn-rev-slider">
@@ -589,11 +631,11 @@ class Helper {
                                 <!-- SLIDE  -->
                                 <li data-transition="notransition" data-slotamount="7" data-masterspeed="100" data-delay="7000" data-saveperformance="off">
                                     <!-- MAIN IMAGE -->
-                                    <img src="'. URL.'public/images/transparent.png" alt="home_slide_1" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
+                                    <img src="' . URL . 'public/images/transparent.png" alt="home_slide_1" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
                                     <!-- LAYERS -->
                                     <!-- LAYER NR. 1 -->
                                     <div class="tp-caption tp-fade fadeout" data-x="center" data-hoffset="0" data-y="bottom" data-voffset="800" data-speed="1500" data-start="1100" data-easing="Power3.easeInOut" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="600" data-endeasing="Power3.easeInOut">
-                                        <img src="'. URL.'public/upload/revslider/slider1/light_glow.png" alt="">
+                                        <img src="' . URL . 'public/upload/revslider/slider1/light_glow.png" alt="">
                                     </div>
                                     <!-- LAYER NR. 2 -->
                                     <div class="tp-caption large_light sft tp-resizeme gilroy-bold" data-x="center" data-hoffset="0" data-y="120" data-speed="900" data-start="500" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="900" >
@@ -605,13 +647,13 @@ class Helper {
                                     </div>
                                     <!-- LAYER NR. 4 -->
                                     <div class="tp-caption customin stb" data-x="center" data-hoffset="0" data-y="320" data-customin="x:0;y:100;z:0;rotationX:-50;rotationY:0;rotationZ:0;scaleX:0.5;scaleY:0.5;skewX:0;skewY:0;opacity:0;transformPerspective:-500;transformOrigin:50% 50%;" data-speed="1500" data-start="0" data-easing="Power3.easeInOut" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="1000" data-endeasing="Power3.easeInOut">
-                                        <img src="'. URL.'public/images/310x649_inicio_1.png" alt="">
+                                        <img src="' . URL . 'public/images/310x649_inicio_1.png" alt="">
                                     </div>
                                 </li>
                                 <!-- SLIDE  -->
                                 <li data-transition="notransition" data-slotamount="7" data-masterspeed="100" data-delay="7000" data-saveperformance="off">
                                     <!-- MAIN IMAGE -->
-                                    <img src="'. URL.'public/images/slider/img1.jpg" alt="unlimited-possibilities_bgd" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
+                                    <img src="' . URL . 'public/images/slider/img1.jpg" alt="unlimited-possibilities_bgd" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
                                     <!-- LAYERS -->
                                     <!-- LAYER NR. 1 -->
                                     <div class="tp-caption large_light lft tp-resizeme gilroy-bold" data-x="left" data-hoffset="0" data-y="200" data-speed="1000" data-start="500" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0" data-end="4700" data-endspeed="300" >

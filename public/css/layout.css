@@ -122,7 +122,7 @@ a.button_image, span.button_image { display: block; width: 55px; height: 55px; l
 	.header-alpha.header-white #Header .menu > li.current_page_ancestor > a,
 	.header-alpha.header-white #Header .menu > li > a:hover,
 	.header-alpha.header-white #Header .menu > li.hover > a { color: #fff; }
-	.header-alpha.header-white #Header .menu > li ul li a:hover { color: #444; }
+	.header-alpha.header-white #Header .menu > li ul li a:hover { color: #fff; }
 	.header-alpha.header-white #Header .menu > li > a:after { background: #444; }
 	
 	/* Top_bar background */
@@ -140,7 +140,7 @@ a.button_image, span.button_image { display: block; width: 55px; height: 55px; l
 	/* Search */
 	#Top_bar #searchform input[type="text"] { border-color: #444; }
 	#Top_bar #searchform a.icon,
-	#Top_bar #searchform.focus input[type="text"] { color: #444; }
+	#Top_bar #searchform.focus input[type="text"] { color: #fff; }
 	
 	/* Hire us */
 	#Top_bar a#header_action_button { color: #444; }
@@ -167,7 +167,7 @@ a.button_image, span.button_image { display: block; width: 55px; height: 55px; l
 	.header-alpha.header-dark #Header .menu > li > a:after { background: #fff; }
 	
 	/* Top_bar background */
-	.header-dark #Top_bar { background: #222; }
+	.header-dark #Top_bar { background: #9E1B96; }
 	
 	/* Header cart */
 	.header-dark #Top_bar a#header_cart { color: #fff; }

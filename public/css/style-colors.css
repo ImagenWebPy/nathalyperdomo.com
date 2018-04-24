@@ -111,11 +111,11 @@
 		color: #fff;
 	}
 	#Header .menu > li ul li a:hover {
-		color: #9E1B96;
+		color: #fff;
 	}
 	
 	#Header .menu > li > a:after, #Header .menu li ul li:hover > a span:after {
-		background: #9E1B96;
+		background: #fff;
 	}
 	
 /* Subheader */
