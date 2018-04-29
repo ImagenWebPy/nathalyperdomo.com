@@ -10,6 +10,27 @@
         <link href="<?= URL; ?>public/admin/css/animate.css" rel="stylesheet">
         <link href="<?= URL; ?>public/admin/css/style.css" rel="stylesheet">
         <link href="<?= URL; ?>public/admin/css/custom.css" rel="stylesheet">
+        <?php
+        #cargamos los css de las vistas
+        if (isset($this->css)) {
+            foreach ($this->css as $css) {
+                echo '<link rel="stylesheet" href="' . URL . 'views/' . $css . '" type="text/css">';
+            }
+        }
+        if (isset($this->public_css)) {
+            foreach ($this->public_css as $public_css) {
+                echo '<link rel="stylesheet" href="' . URL . 'public/admin/' . $public_css . '" type="text/css">';
+            }
+        }
+        ?>
+        <script src="<?= URL; ?>public/admin/js/jquery-3.1.1.min.js"></script>
+        <?php
+        if (isset($this->publicHeader_js)) {
+            foreach ($this->publicHeader_js as $public_js) {
+                echo '<script type="text/javascript" src="' . URL . 'public/admin/' . $public_js . '"></script>';
+            }
+        }
+        ?>
     </head>
     <body>
         <div id="wrapper">
@@ -38,6 +59,14 @@
                             </div>
                         </li>
                         <li class="active"><a href="<?= URL; ?>admin"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboards</span></a></li>
+                        <li class="">
+                            <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Consultorio</span><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse" style="height: 0px;">
+                                <li><a href="<?= URL; ?>admin/turnos">Turnos</a></li>
+                                <li><a href="#">Pacientes</a></li>
+                                <li><a href="#">Ciudades</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </nav>

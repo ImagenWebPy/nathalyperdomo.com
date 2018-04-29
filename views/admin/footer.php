@@ -10,21 +10,9 @@
 </div>
 
 <!-- Mainly scripts -->
-<script src="<?= URL; ?>public/admin/js/jquery-3.1.1.min.js"></script>
 <script src="<?= URL; ?>public/admin/js/bootstrap.min.js"></script>
 <script src="<?= URL; ?>public/admin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="<?= URL; ?>public/admin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-
-<!-- Flot -->
-<script src="<?= URL; ?>public/admin/js/plugins/flot/jquery.flot.js"></script>
-<script src="<?= URL; ?>public/admin/js/plugins/flot/jquery.flot.tooltip.min.js"></script>
-<script src="<?= URL; ?>public/admin/js/plugins/flot/jquery.flot.spline.js"></script>
-<script src="<?= URL; ?>public/admin/js/plugins/flot/jquery.flot.resize.js"></script>
-<script src="<?= URL; ?>public/admin/js/plugins/flot/jquery.flot.pie.js"></script>
-
-<!-- Peity -->
-<script src="<?= URL; ?>public/admin/js/plugins/peity/jquery.peity.min.js"></script>
-<script src="<?= URL; ?>public/admin/js/demo/peity-demo.js"></script>
 
 <!-- Custom and plugin javascript -->
 <script src="<?= URL; ?>public/admin/js/inspinia.js"></script>
@@ -32,5 +20,24 @@
 
 <!-- jQuery UI -->
 <script src="<?= URL; ?>public/admin/js/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+<?php
+#cargamos los js de las vistas
+if (isset($this->external_js)) {
+    foreach ($this->external_js as $external) {
+        echo '<script async defer src="' . $external . '"></script>';
+    }
+}
+if (isset($this->public_js)) {
+    foreach ($this->public_js as $public_js) {
+        echo '<script type="text/javascript" src="' . URL . 'public/admin/' . $public_js . '"></script>';
+    }
+}
+if (isset($this->js)) {
+    foreach ($this->js as $js) {
+        echo '<script type="text/javascript" src="' . URL . 'views/' . $js . '"></script>';
+    }
+}
+?>
 </body>
 </html>

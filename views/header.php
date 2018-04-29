@@ -42,6 +42,27 @@ $headerData = $helper->loadPageHeaderData($page[0]);
         <link rel="stylesheet" href="<?= URL; ?>public/css/nathaly.css" media="all" />
         <link rel="stylesheet" href="<?= URL; ?>public/css/wfmi-style.css" media="all" />
         <link rel='stylesheet' id='Ubuntu-css'  href='http://fonts.googleapis.com/css?family=Ubuntu%3A100%2C300%2C400%2C400italic%2C700&amp;ver=4.2' type='text/css' media='all' />
+        <?php
+        #cargamos los css de las vistas
+        if (isset($this->css)) {
+            foreach ($this->css as $css) {
+                echo '<link rel="stylesheet" href="' . URL . 'views/' . $css . '" type="text/css">';
+            }
+        }
+        if (isset($this->public_css)) {
+            foreach ($this->public_css as $public_css) {
+                echo '<link rel="stylesheet" href="' . URL . 'public/' . $public_css . '" type="text/css">';
+            }
+        }
+        ?>
+        <?php
+        if (isset($this->publicHeader_js)) {
+            foreach ($this->publicHeader_js as $public_js) {
+                echo '<script type="text/javascript" src="' . URL . 'public/' . $public_js . '"></script>';
+            }
+        }
+        ?>
+
         <!--[if lt IE 9]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->

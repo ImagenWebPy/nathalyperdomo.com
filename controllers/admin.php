@@ -6,12 +6,24 @@ class Admin extends Controller {
         parent::__construct();
         Auth::handleLogin();
     }
-    
+
     public function index() {
 
         $this->view->title = TITLE . 'Inicio';
         $this->view->render('admin/header');
         $this->view->render('admin/index/index');
+        $this->view->render('admin/footer');
+    }
+
+    public function turnos() {
+
+        $this->view->title = TITLE . 'Turnos';
+
+        $this->view->public_css = array("css/plugins/fullcalendar/fullcalendar.css");
+        $this->view->publicHeader_js = array("js/plugins/fullcalendar/moment.min.js", "js/plugins/fullcalendar/fullcalendar.min.js");
+
+        $this->view->render('admin/header');
+        $this->view->render('admin/consultorio/turnos');
         $this->view->render('admin/footer');
     }
 
