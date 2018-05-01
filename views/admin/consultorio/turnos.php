@@ -1,3 +1,4 @@
+<?php $helper = new Helper(); ?>
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-8">
         <h2>Turnos</h2>
@@ -19,37 +20,59 @@
         <div class="col-lg-3">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Draggable Events</h5>
+                    <h5>Agregar Turno</h5>
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
                         </a>
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-wrench"></i>
-                        </a>
                     </div>
                 </div>
                 <div class="ibox-content">
-                    <div id='external-events'>
-                        <p>Drag a event and drop into callendar.</p>
-                        <div class='external-event navy-bg'>Go to shop and buy some products.</div>
-                        <div class='external-event navy-bg'>Check the new CI from Corporation.</div>
-                        <div class='external-event navy-bg'>Send documents to John.</div>
-                        <div class='external-event navy-bg'>Phone to Sandra.</div>
-                        <div class='external-event navy-bg'>Chat with Michael.</div>
-                        <p class="m-t">
-                            <input type='checkbox' id='drop-remove' class="i-checks" checked /> <label for='drop-remove'>remove after drop</label>
-                        </p>
+                    <div class="row">
+                        <form method="POST" id="frmAgregarTurnoPaciente">
+                            <div class="form-group">
+                                <label>Paciente</label>
+                                <select name="paciente" id="selectPaciente" data-placeholder="Seleccione un Paciente..." class="form-control chosen-select"  tabindex="2">
+                                    <option value="">Seleccione</option>
+                                    <option value="Opcion 1">Opcion 1</option>
+                                    <option value="Opcion 2">Opcion 2</option>
+                                    <option value="nuevo">Agregar Nuevo Paciente</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Motivo</label>
+                                <input type="text" name="motivo" value="" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Observaciones</label>
+                                <textarea name="observaciones" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Hora Desde</label>
+                                <select name="hora_desde" class="form-control chosen-select">
+                                    <option value="">Seleccione un Horario</option>
+                                    <?php foreach ($helper->getRangoHoras() as $horas): ?>
+                                        <option value="<?= $horas; ?>"><?= $horas; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Hora Hasta</label>
+                                <select name="hora_hasta" class="form-control chosen-select">
+                                    <option value="">Seleccione un Horario</option>
+                                    <?php foreach ($helper->getRangoHoras() as $horas): ?>
+                                        <option value="<?= $horas; ?>"><?= $horas; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-2">
+                                    <button class="btn btn-primary" type="submit">Agendar Paciente</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                </div>
-            </div>
-            <div class="ibox float-e-margins">
-                <div class="ibox-content">
-                    <h2>FullCalendar</h2> is a jQuery plugin that provides a full-sized, drag & drop calendar like the one below. It uses AJAX to fetch events on-the-fly for each month and is
-                    easily configured to use your own feed format (an extension is provided for Google Calendar).
-                    <p>
-                        <a href="http://arshaw.com/fullcalendar/" target="_blank">FullCalendar documentation</a>
-                    </p>
                 </div>
             </div>
         </div>
@@ -127,6 +150,7 @@
 </div>
 <script>
     $(document).ready(function () {
+        $('.chosen-select').chosen({width: "100%"});
         /* initialize the external events
          -----------------------------------------------------------------*/
         $('#external-events div.external-event').each(function () {
@@ -158,9 +182,19 @@
             editable: true,
             selectable: true,
             allDaySlot: false,
-
             events: "index.php?view=1",
-
+            businessHours: [// specify an array instead
+                {
+                    dow: [1, 2, 3, 4, 5], // Monday, Tuesday, Wednesday
+                    start: '08:00', // 8am
+                    end: '20:00' // 6pm
+                },
+                {
+                    dow: [6], // Thursday, Friday
+                    start: '09:00', // 10am
+                    end: '12:00' // 4pm
+                }
+            ],
             eventClick: function (event, jsEvent, view) {
                 endtime = $.fullCalendar.moment(event.end).format('h:mm');
                 starttime = $.fullCalendar.moment(event.start).format('dddd, MMMM Do YYYY, h:mm');
@@ -170,7 +204,6 @@
                 $('#eventID').val(event.id);
                 $('#calendarModal').modal();
             },
-
             //header and other values
             select: function (start, end, jsEvent) {
                 endtime = $.fullCalendar.moment(end).format('h:mm');
@@ -204,19 +237,16 @@
                 });
             }
         });
-
         $('#submitButton').on('click', function (e) {
             // We don't want this to act as a link so cancel the link action
             e.preventDefault();
             doSubmit();
         });
-
         $('#deleteButton').on('click', function (e) {
             // We don't want this to act as a link so cancel the link action
             e.preventDefault();
             doDelete();
         });
-
         function doDelete() {
             $("#calendarModal").modal('hide');
             var eventID = $('#eventID').val();
@@ -229,8 +259,6 @@
                         $("#calendar").fullCalendar('removeEvents', eventID);
                     else
                         return false;
-
-
                 }
             });
         }
@@ -239,7 +267,6 @@
             var title = $('#title').val();
             var startTime = $('#startTime').val();
             var endTime = $('#endTime').val();
-
             $.ajax({
                 url: 'index.php',
                 data: 'action=add&title=' + title + '&start=' + startTime + '&end=' + endTime,
@@ -255,7 +282,25 @@
                             true);
                 }
             });
-
         }
+        $(document).on("change", "#selectPaciente", function (e) {
+            if (e.handled !== true) // This will prevent event triggering more then once
+            {
+                var valor = $(this).val();
+                if (valor == 'nuevo') {
+                    $.ajax({
+                        url: "<?= URL; ?>admin/agregarNuevoPaciente",
+                        type: "POST",
+                        dataType: "json"
+                    }).done(function (data) {
+                        $(".genericModal .modal-header").removeClass("modal-header").addClass("modal-header bg-primary");
+                        $(".genericModal .modal-title").html(data.titulo);
+                        $(".genericModal .modal-body").html(data.contenido);
+                        $(".genericModal").modal("toggle");
+                    });
+                }
+            }
+            e.handled = true;
+        });
     });
 </script>

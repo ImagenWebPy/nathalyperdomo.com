@@ -19,12 +19,18 @@ class Admin extends Controller {
 
         $this->view->title = TITLE . 'Turnos';
 
-        $this->view->public_css = array("css/plugins/fullcalendar/fullcalendar.css");
-        $this->view->publicHeader_js = array("js/plugins/fullcalendar/moment.min.js", "js/plugins/fullcalendar/fullcalendar.min.js");
+        $this->view->public_css = array("css/plugins/fullcalendar/fullcalendar.css", "css/plugins/chosen/bootstrap-chosen.css");
+        $this->view->publicHeader_js = array("js/plugins/fullcalendar/moment.min.js", "js/plugins/fullcalendar/fullcalendar.min.js", "js/plugins/chosen/chosen.jquery.js");
 
         $this->view->render('admin/header');
         $this->view->render('admin/consultorio/turnos');
         $this->view->render('admin/footer');
+    }
+
+    public function agregarNuevoPaciente() {
+        header('Content-type: application/json; charset=utf-8');
+        $data = $this->model->agregarNuevoPaciente();
+        echo json_encode($data);
     }
 
 }

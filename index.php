@@ -11,6 +11,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', '1');
 ob_start();
 
+header('Content-Type: text/html; charset=utf-8');
 date_default_timezone_set("America/Asuncion");
 
 require 'config.php';

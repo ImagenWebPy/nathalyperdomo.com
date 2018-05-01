@@ -676,4 +676,25 @@ class Helper {
         return $data;
     }
 
+    /**
+     * Funcion que retorna un rango de horas con un intervalo definido
+     * @param string $inicio
+     * @param sring $fin
+     * @param int $rango
+     * @return array
+     */
+    public function getRangoHoras($inicio = '08:00', $fin = '20:30', $intervalo = 30) {
+        $horas = array();
+        $begin = new DateTime($inicio);
+        $end = new DateTime($fin);
+
+        $interval = new DateInterval('PT' . $intervalo . 'M');
+        $period = new DatePeriod($begin, $interval, $end);
+
+        foreach ($period as $dt) {
+            array_push($horas, $dt->format("H:i"));
+        }
+        return $horas;
+    }
+
 }
