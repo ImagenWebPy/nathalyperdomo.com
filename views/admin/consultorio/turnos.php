@@ -34,8 +34,9 @@
                                 <label>Paciente</label>
                                 <select name="paciente" id="selectPaciente" data-placeholder="Seleccione un Paciente..." class="form-control chosen-select"  tabindex="2">
                                     <option value="">Seleccione</option>
-                                    <option value="Opcion 1">Opcion 1</option>
-                                    <option value="Opcion 2">Opcion 2</option>
+                                    <?php foreach ($helper->getPacientes() as $paciente): ?>
+                                        <option value="<?= $paciente['id']; ?>"><?= utf8_encode($paciente['apellido']) . ' ' . utf8_encode($paciente['nombre']); ?></option>
+                                    <?php endforeach; ?>
                                     <option value="nuevo">Agregar Nuevo Paciente</option>
                                 </select>
                             </div>
@@ -46,6 +47,12 @@
                             <div class="form-group">
                                 <label>Observaciones</label>
                                 <textarea name="observaciones" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group" id="fechaPaciente">
+                                <label>Fecha</label>
+                                <div class="input-group date">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" name="fecha">
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label>Hora Desde</label>
@@ -68,7 +75,7 @@
                             <div class="hr-line-dashed"></div>
                             <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-2">
-                                    <button class="btn btn-primary" type="submit">Agendar Paciente</button>
+                                    <button class="btn btn-primary" type="submit" id="btnAgendarTurno">Agendar Turno</button>
                                 </div>
                             </div>
                         </form>
@@ -150,28 +157,15 @@
 </div>
 <script>
     $(document).ready(function () {
-        $('.chosen-select').chosen({width: "100%"});
+        $('#selectPaciente').chosen({width: "100%"});
+        $("#fechaPaciente .input-group.date").datepicker({
+            format: 'dd-mm-yyyy',
+            autoclose: true,
+        });
         /* initialize the external events
          -----------------------------------------------------------------*/
-        $('#external-events div.external-event').each(function () {
-            // store data so the calendar knows to render an event upon drop
-            $(this).data('event', {
-                title: $.trim($(this).text()), // use the element's text as the event title
-                stick: true // maintain when user navigates (see docs on the renderEvent method)
-            });
-            // make the event draggable using jQuery UI
-            $(this).draggable({
-                zIndex: 1111999,
-                revert: true, // will cause the event to go back to its
-                revertDuration: 0  //  original position after the drag
-            });
-        });
         /* initialize the calendar
          -----------------------------------------------------------------*/
-        var date = new Date();
-        var d = date.getDate();
-        var m = date.getMonth();
-        var y = date.getFullYear();
         var calendar = $('#calendar').fullCalendar({
             header: {
                 left: 'prev,next today',
@@ -182,7 +176,7 @@
             editable: true,
             selectable: true,
             allDaySlot: false,
-            events: "index.php?view=1",
+            events: '<?= URL; ?>admin/loadFullCalendar',
             businessHours: [// specify an array instead
                 {
                     dow: [1, 2, 3, 4, 5], // Monday, Tuesday, Wednesday
@@ -299,6 +293,64 @@
                         $(".genericModal").modal("toggle");
                     });
                 }
+            }
+            e.handled = true;
+        });
+        $(document).on("change", ".selectDepartamento", function (e) {
+            if (e.handled !== true) // This will prevent event triggering more then once
+            {
+                var id_departamento = $(this).val();
+                $.ajax({
+                    url: "<?= URL; ?>admin/cargarSelectCiudad",
+                    type: "POST",
+                    dataType: "json",
+                    data: {id_departamento: id_departamento}
+                }).done(function (data) {
+                    $('.selectCiudad').html('');
+                    $('.selectCiudad').append(data.contenido);
+                });
+            }
+            e.handled = true;
+        });
+        $(document).on("submit", "#frmAgregarNuevoPaciente", function (e) {
+            if (e.handled !== true) // This will prevent event triggering more then once
+            {
+                e.preventDefault();
+                $.ajax({
+                    url: "<?= URL; ?>admin/frmAgregarNuevoPaciente",
+                    type: "POST",
+                    dataType: "json",
+                    data: $("#frmAgregarNuevoPaciente").serialize(),
+                }).done(function (data) {
+                    $(".genericModal").modal("toggle");
+                    //$("#selectPaciente").append(data.contenido);
+                    $('#selectPaciente').append("<option value='" + data.key + "'>" + data.value + "</option>");
+                    $('#selectPaciente').val(data.key); // if you want it to be automatically selected
+                    $('#selectPaciente').trigger("chosen:updated");
+                });
+            }
+            e.handled = true;
+        });
+
+        $(document).on("submit", "#frmAgregarTurnoPaciente", function (e) {
+            if (e.handled !== true) // This will prevent event triggering more then once
+            {
+                e.preventDefault();
+                $.ajax({
+                    url: "<?= URL; ?>admin/frmAgregarTurnoPaciente",
+                    type: "POST",
+                    dataType: "json",
+                    data: $("#frmAgregarTurnoPaciente").serialize(),
+                }).done(function (data) {
+                    $("#calendar").fullCalendar('renderEvent',
+                            {
+                                id: data.id,
+                                title: data.title,
+                                start: data.start,
+                                end: data.end,
+                            },
+                            true);
+                });
             }
             e.handled = true;
         });

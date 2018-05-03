@@ -19,8 +19,9 @@ class Admin extends Controller {
 
         $this->view->title = TITLE . 'Turnos';
 
-        $this->view->public_css = array("css/plugins/fullcalendar/fullcalendar.css", "css/plugins/chosen/bootstrap-chosen.css");
-        $this->view->publicHeader_js = array("js/plugins/fullcalendar/moment.min.js", "js/plugins/fullcalendar/fullcalendar.min.js", "js/plugins/chosen/chosen.jquery.js");
+        $this->view->public_css = array("css/plugins/fullcalendar/fullcalendar.css", "css/plugins/chosen/bootstrap-chosen.css", "css/plugins/datapicker/datepicker3.css");
+        $this->view->publicHeader_js = array("js/plugins/fullcalendar/moment.min.js", "js/plugins/fullcalendar/fullcalendar.min.js");
+        $this->view->public_js = array("js/plugins/chosen/chosen.jquery.js", "js/plugins/datapicker/bootstrap-datepicker.js");
 
         $this->view->render('admin/header');
         $this->view->render('admin/consultorio/turnos');
@@ -30,6 +31,63 @@ class Admin extends Controller {
     public function agregarNuevoPaciente() {
         header('Content-type: application/json; charset=utf-8');
         $data = $this->model->agregarNuevoPaciente();
+        echo json_encode($data);
+    }
+
+    public function cargarSelectCiudad() {
+        header('Content-type: application/json; charset=utf-8');
+        $datos = array(
+            'id_departamento' => $this->helper->cleanInput($_POST['id_departamento'])
+        );
+        $data = $this->model->cargarSelectCiudad($datos);
+        echo json_encode($data);
+    }
+
+    public function frmAgregarNuevoPaciente() {
+        header('Content-type: application/json; charset=utf-8');
+        $datos = array(
+            'id_tipo_documento' => $this->helper->cleanInput($_POST['tipo_documento']),
+            'id_ciudad' => $this->helper->cleanInput($_POST['ciudad']),
+            'documento' => $this->helper->cleanInput($_POST['documento']),
+            'email' => $this->helper->cleanInput($_POST['email']),
+            'nombre' => $this->helper->cleanInput($_POST['nombre']),
+            'apellido' => $this->helper->cleanInput($_POST['apellido']),
+            'telefono' => $this->helper->cleanInput($_POST['telefono']),
+            'celular' => $this->helper->cleanInput($_POST['celular']),
+            'direccion' => $this->helper->cleanInput($_POST['direccion']),
+            'barrio' => $this->helper->cleanInput($_POST['barrio']),
+            'fecha_registro' => date('Y-m-d'),
+            'fecha_nacimiento' => $this->helper->cleanInput($_POST['fecha_nacimiento']),
+            'estado' => 1
+        );
+        $data = $this->model->frmAgregarNuevoPaciente($datos);
+        echo json_encode($data);
+    }
+
+    public function frmAgregarTurnoPaciente() {
+        header('Content-type: application/json; charset=utf-8');
+        $fecha = str_replace('/', '-', $_POST['fecha']);
+        $fecha = date('Y-m-d', strtotime($fecha));
+        $fecha_inicio = $fecha . ' ' . $_POST['hora_desde'] . ':00';
+        $fecha_hasta = $fecha . ' ' . $_POST['hora_hasta'] . ':00';
+        $datos = array(
+            'id_paciente' => $this->helper->cleanInput($_POST['paciente']),
+            'title' => $this->helper->cleanInput($_POST['motivo']),
+            'descripcion' => $this->helper->cleanInput($_POST['observaciones']),
+            'start' => $fecha_inicio,
+            'end' => $fecha_hasta
+        );
+        $data = $this->model->frmAgregarTurnoPaciente($datos);
+        echo json_encode($data);
+    }
+
+    public function loadFullCalendar() {
+        header('Content-type: application/json; charset=utf-8');
+        $datos = array(
+            'start' => $_GET['start'],
+            'end' => $_GET['end'],
+        );
+        $data = $this->model->loadFullCalendar($datos);
         echo json_encode($data);
     }
 

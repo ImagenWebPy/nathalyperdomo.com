@@ -696,5 +696,9 @@ class Helper {
         }
         return $horas;
     }
-
+    
+    public function getPacientes(){
+        $sql = $this->db->select("select * from paciente where estado = 1 order by apellido, nombre asc");
+        return $sql;
+    }
 }
