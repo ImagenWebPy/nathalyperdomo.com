@@ -28,6 +28,24 @@ class Admin extends Controller {
         $this->view->render('admin/footer');
     }
 
+    public function ciudades() {
+        $this->view->helper = $this->helper;
+        $this->view->title = 'Ciudadess';
+        $this->view->public_css = array("css/plugins/dataTables/datatables.min.css", "css/plugins/html5fileupload/html5fileupload.css", "css/plugins/iCheck/custom.css");
+        $this->view->public_js = array("js/plugins/dataTables/datatables.min.js", "js/plugins/html5fileupload/html5fileupload.min.js", "js/plugins/iCheck/icheck.min.js");
+        $this->view->render('admin/header');
+        $this->view->render('admin/ciudades/index');
+        $this->view->render('admin/footer');
+        if (!empty($_SESSION['message']))
+            unset($_SESSION['message']);
+    }
+
+    public function listadoDTDepartamentos() {
+        header('Content-type: application/json; charset=utf-8');
+        $data = $this->model->listadoDTDepartamentos($_REQUEST);
+        echo $data;
+    }
+
     public function agregarNuevoPaciente() {
         header('Content-type: application/json; charset=utf-8');
         $data = $this->model->agregarNuevoPaciente();
@@ -66,10 +84,15 @@ class Admin extends Controller {
 
     public function frmAgregarTurnoPaciente() {
         header('Content-type: application/json; charset=utf-8');
-        $fecha = str_replace('/', '-', $_POST['fecha']);
-        $fecha = date('Y-m-d', strtotime($fecha));
-        $fecha_inicio = $fecha . ' ' . $_POST['hora_desde'] . ':00';
-        $fecha_hasta = $fecha . ' ' . $_POST['hora_hasta'] . ':00';
+        $fecha = (!empty($_POST['fecha'])) ? str_replace('/', '-', $_POST['fecha']) : NULL;
+        if ($fecha != NULL) {
+            $fecha = date('Y-m-d', strtotime($fecha));
+            $fecha_inicio = $fecha . ' ' . $_POST['hora_desde'] . ':00';
+            $fecha_hasta = $fecha . ' ' . $_POST['hora_hasta'] . ':00';
+        } else {
+            $fecha_inicio = (!empty($_POST['fecha_hora_desde'])) ? $_POST['fecha_hora_desde'] : NULL;
+            $fecha_hasta = (!empty($_POST['fecha_hora_hasta'])) ? $_POST['fecha_hora_hasta'] : NULL;
+        }
         $datos = array(
             'id_paciente' => $this->helper->cleanInput($_POST['paciente']),
             'title' => $this->helper->cleanInput($_POST['motivo']),
@@ -88,6 +111,58 @@ class Admin extends Controller {
             'end' => $_GET['end'],
         );
         $data = $this->model->loadFullCalendar($datos);
+        echo json_encode($data);
+    }
+
+    public function update_turno() {
+        header('Content-type: application/json; charset=utf-8');
+        $datos = array(
+            'id' => $_POST['id'],
+            'start' => $_POST['start'],
+            'end' => $_POST['end'],
+        );
+        $data = $this->model->update_turno($datos);
+        echo json_encode($data);
+    }
+
+    public function eliminar_turno() {
+        header('Content-type: application/json; charset=utf-8');
+        $datos = array(
+            'id' => $_POST['id'],
+        );
+        $data = $this->model->eliminar_turno($datos);
+        echo json_encode($data);
+    }
+
+    public function cambiarEstado() {
+        header('Content-type: application/json; charset=utf-8');
+        $datos = array(
+            'id' => $this->helper->cleanInput($_POST['id']),
+            'tabla' => $this->helper->cleanInput($_POST['tabla']),
+            'campo' => $this->helper->cleanInput($_POST['campo']),
+            'seccion' => $this->helper->cleanInput($_POST['seccion']),
+            'estado' => (!empty($_POST['estado'])) ? $this->helper->cleanInput($_POST['estado']) : 0,
+        );
+        $data = $this->model->cambiarEstado($datos);
+        echo json_encode($data);
+    }
+
+    public function modal_editar_departamento() {
+        $datos = array(
+            'id' => $this->helper->cleanInput($_POST['id'])
+        );
+        $data = $this->model->modal_editar_departamento($datos);
+        echo json_encode($data);
+    }
+
+    public function frmEditarDepartamento() {
+        header('Content-type: application/json; charset=utf-8');
+        $datos = array(
+            'id' => $this->helper->cleanInput($_POST['id']),
+            'descripcion' => $this->helper->cleanInput($_POST['descripcion']),
+            'estado' => (!empty($_POST['estado'])) ? $this->helper->cleanInput($_POST['estado']) : 0
+        );
+        $data = $this->model->frmEditarDepartamento($datos);
         echo json_encode($data);
     }
 

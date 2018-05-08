@@ -64,7 +64,7 @@
                             <ul class="nav nav-second-level collapse" style="height: 0px;">
                                 <li><a href="<?= URL; ?>admin/turnos">Turnos</a></li>
                                 <li><a href="#">Pacientes</a></li>
-                                <li><a href="#">Ciudades</a></li>
+                                <li><a href="<?= URL; ?>admin/ciudades">Ciudades</a></li>
                             </ul>
                         </li>
                     </ul>

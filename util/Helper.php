@@ -696,9 +696,70 @@ class Helper {
         }
         return $horas;
     }
-    
-    public function getPacientes(){
+
+    public function getPacientes() {
         $sql = $this->db->select("select * from paciente where estado = 1 order by apellido, nombre asc");
         return $sql;
     }
+
+    public function formularioAgregarTurno($evento = FALSE) {
+        $idForm = ($evento == FALSE) ? 'frmAgregarTurnoPaciente' : 'frmAgregarTurnoPacienteModal';
+        $data = '<form method="POST" id="' . $idForm . '">
+                            <div class="form-group">
+                                <label>Paciente</label>
+                                <select name="paciente" id="selectPaciente" data-placeholder="Seleccione un Paciente..." class="form-control chosen-select selectPaciente"  tabindex="2">
+                                    <option value="">Seleccione</option>';
+        foreach ($this->getPacientes() as $paciente) {
+            $data .= '              <option value="' . $paciente['id'] . '">' . utf8_encode($paciente['apellido']) . ' ' . utf8_encode($paciente['nombre']) . '</option>';
+        }
+        $data .= '                  <option value="nuevo">Agregar Nuevo Paciente</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Motivo</label>
+                                <input type="text" name="motivo" value="" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Observaciones</label>
+                                <textarea name="observaciones" class="form-control"></textarea>
+                            </div>';
+        if ($evento == FALSE) {
+            $data .= '      <div class="form-group" id="fechaPaciente">
+                                <label>Fecha</label>
+                                <div class="input-group date">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" name="fecha">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Hora Desde</label>
+                                <select name="hora_desde" class="form-control chosen-select">
+                                    <option value="">Seleccione un Horario</option>';
+            foreach ($this->getRangoHoras() as $horas) {
+                $data .= '              <option value="' . $horas . '">' . $horas . '</option>';
+            }
+            $data .= '              </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Hora Hasta</label>
+                                <select name="hora_hasta" class="form-control chosen-select hora_desde">
+                                    <option value="">Seleccione un Horario</option>';
+            foreach ($this->getRangoHoras() as $horas) {
+                $data .= '              <option value="' . $horas . '">' . $horas . '</option>';
+            }
+            $data .= '              </select>
+                            </div>';
+        } else {
+            $data .= '<input type="hidden" name="fecha_hora_desde" id="hiddenHoraDesde">'
+                    . '<input type="hidden" name="fecha_hora_hasta" id="hiddenHoraHasta">';
+        }
+        $data .= '          <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-2">
+                                    <button class="btn btn-primary" type="submit" id="btnAgendarTurno">Agendar Turno</button>
+                                </div>
+                            </div>
+                        </form>';
+        return $data;
+    }
+
 }
