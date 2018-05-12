@@ -116,7 +116,7 @@
 
 
 
-<script type='text/javascript' src='<?= URL; ?>public/js/jquery/jquery.js'></script>
+
 <script type='text/javascript' src='<?= URL; ?>public/js/jquery/jquery-migrate.min.js'></script>
 <script type='text/javascript' src='<?= URL; ?>public/rs-plugin/js/jquery.themepunch.tools.min.js'></script>
 <script type='text/javascript' src='<?= URL; ?>public/rs-plugin/js/jquery.themepunch.revolution.min.js'></script>

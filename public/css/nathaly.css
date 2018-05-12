@@ -24,3 +24,9 @@ body { font-family: 'gilroy' !important;}
 .gilroy-bold{font-family: 'gilroy-bold' !important;}
 .sliderSecondaryTextSize { font-size: 30px !important;}
 #Subheader .title{ color: #fff !important;}
+.aboutus-img{
+    position: relative;
+    top: 40px;
+    left: 13px;
+    overflow: hidden;
+}

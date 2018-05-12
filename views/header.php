@@ -55,6 +55,7 @@ $headerData = $helper->loadPageHeaderData($page[0]);
             }
         }
         ?>
+        <script type='text/javascript' src='<?= URL; ?>public/js/jquery/jquery.js'></script>
         <?php
         if (isset($this->publicHeader_js)) {
             foreach ($this->publicHeader_js as $public_js) {
@@ -108,7 +109,7 @@ $headerData = $helper->loadPageHeaderData($page[0]);
                                         <li class="menu-item  menu-item-has-children"><a href="<?= URL; ?>consultorio"><span>Consultorio</span></a>
 
                                         </li>
-                                        <li class="menu-item  menu-item-has-children"><a href="<?= URL; ?>contacto"><span>Conctacto</span></a>
+                                        <li class="menu-item  menu-item-has-children"><a href="<?= URL; ?>contacto"><span>Contacto</span></a>
 
                                         </li>
                                     </ul>
