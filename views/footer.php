@@ -1,3 +1,11 @@
+<?php
+$helper = new Helper();
+$footerNosotros = $helper->web_page_nosotros("texto");
+$textoNosotros = substr(strip_tags($footerNosotros[0]['texto']), 1, 160);
+$blog = $helper->index_blog(2);
+$web_datos = $helper->web_datos();
+$redes = $helper->web_redes();
+?>
 <!-- #Footer -->
 <footer id="Footer" class="clearfix">
 
@@ -7,9 +15,6 @@
                 <aside id="text-2" class="widget widget_text">
                     <h2>MANTENTE EN CONTACTO</h2>
                     <hr class="hr_narrow">
-                    <div class="textwidget">
-                        Call us at <a href="#">+23 777 555 333</a><span>or</span><a href="contact.html">Write us a message</a>
-                    </div>
                 </aside>
             </div>
         </div>
@@ -20,12 +25,10 @@
 
             <div class="one-third column">
                 <aside id="text-5" class="widget widget_text">
-                    <h4>About our company</h4>
+                    <h4>Acerca de mí</h4>
                     <div class="textwidget">
-                        <h6>We really love working for you and your customers</h6>
-                        <p>
-                            We do what we love and this is the best in our life. Try a piece of our work and you will not want to swap for anything else!
-                        </p>
+                        <h6><?= $textoNosotros; ?>...</h6>
+                        <p><a href="<?= URL; ?>/nosotros">Mas sobre mí</a></p>
                     </div>
                 </aside>
             </div>
@@ -35,28 +38,19 @@
                     <h4>Latest posts</h4>
                     <div class="Recent_posts">
                         <ul>
-                            <li class="post-519 post type-post status-publish format-standard has-post-thumbnail hentry category-motion tag-css3 tag-framework tag-wordpress">
-                                <div class="photo">
-                                    <img width="80" height="60" src="<?= URL; ?>public/upload/1-80x60.jpg" class="scale-with-grid wp-post-image" alt="1"/>
-                                </div>
-                                <div class="desc ">
-                                    <h6><a class="title" href="#">Content Builder for posts</a></h6>
-                                    <p>
-                                        <span class="date">February 18, 2014</span> | <span class="comments">comments off</span>
-                                    </p>
-                                </div>
-                            </li>
-                            <li class="post-507 post type-post status-publish format-standard has-post-thumbnail hentry category-jquery tag-themeforest">
-                                <div class="photo">
-                                    <img width="80" height="60" src="<?= URL; ?>public/upload/3-80x60.jpg" class="scale-with-grid wp-post-image" alt="3"/>
-                                </div>
-                                <div class="desc ">
-                                    <h6><a class="title" href="#">Revolution Slider left sidebar</a></h6>
-                                    <p>
-                                        <span class="date">February 17, 2014</span> | <span class="comments">comments off</span>
-                                    </p>
-                                </div>
-                            </li>
+                            <?php foreach ($blog as $item): ?>
+                                <li class="post-519 post type-post status-publish format-standard has-post-thumbnail hentry category-motion tag-css3 tag-framework tag-wordpress">
+                                    <div class="photo">
+                                        <img width="80" height="40" src="<?= URL; ?>public/images/blog/<?= utf8_encode($item['imagen_thumb']); ?>" class="scale-with-grid wp-post-image" alt="1"/>
+                                    </div>
+                                    <div class="desc ">
+                                        <h6><a class="title" href="#"><?= utf8_encode($item['titulo']); ?></a></h6>
+                                        <p>
+                                            <span class="date"><?= date('d-m-Y', strtotime($item['fecha_blog'])); ?></span>
+                                        </p>
+                                    </div>
+                                </li>
+                            <?php endforeach; ?>
                         </ul>
                     </div>
                 </aside>
@@ -64,19 +58,23 @@
 
             <div class="one-third column">
                 <aside id="widget_mfn_recent_comments-2" class="widget widget_mfn_recent_comments">
-                    <h4>Recent comments</h4>
+                    <h4>Como contactarme</h4>
                     <div class="Recent_comments">
                         <ul>
                             <li>
                                 <p>
-                                    <i class="icon-user"></i><strong>Szejk</strong> commented on <a href="#" title="Szejk | Content Builder for posts">Content Builder for posts</a>
+                                    <a href="tel:<?= $web_datos['telefono']; ?>">Teléfono: <?= $web_datos['telefono'] . '-' . $web_datos['telefono_2'] ?></a>
                                 </p>
-                                <span class="date"><i class="icon-calendar-line"></i> January 30, 2014</span></li>
                             <li>
                                 <p>
-                                    <i class="icon-user"></i><strong>Karboniusz</strong> commented on <a href="#" title="Karboniusz | Content Builder for posts">Content Builder for posts</a>
+                                    <a href="#">Dirección: <?= utf8_encode($web_datos['direccion']); ?></a>
                                 </p>
-                                <span class="date"><i class="icon-calendar-line"></i> January 30, 2014</span></li>
+                            </li>
+                            <li>
+                                <p>
+                                    <a href="mailto:<?= utf8_encode($web_datos['email']); ?>">Email: <?= utf8_encode($web_datos['email']); ?></a>
+                                </p>
+                            </li>
                         </ul>
                     </div>
                 </aside>
@@ -90,20 +88,16 @@
                 <a id="back_to_top" href="#"><i class="icon-up-open-big"></i></a>
                 <!-- Copyrights -->
                 <div class="copyright">
-                    &copy; 2015 Cake. All Rights Reserved. <a target="_blank" rel="nofollow" href="#">Max Themes</a>
+                    &copy; 2018.
                 </div>
                 <!-- Social -->
                 <div class="social">
                     <ul>
-                        <li class="facebook"><a target="_blank" href="#" title="Facebook"><i class="icon-facebook"></i></a></li>
-                        <li class="googleplus"><a target="_blank" href="#" title="Google+"><i class="icon-gplus"></i></a></li>
-                        <li class="twitter"><a target="_blank" href="#" title="Twitter"><i class="icon-twitter"></i></a></li>
-                        <li class="vimeo"><a target="_blank" href="#" title="Vimeo"><i class="icon-vimeo"></i></a></li>
-                        <li class="youtube"><a target="_blank" href="#" title="YouTube"><i class="icon-play"></i></a></li>
-                        <li class="flickr"><a target="_blank" href="#" title="Flickr"><i class="icon-flickr"></i></a></li>
-                        <li class="linked_in"><a target="_blank" href="#" title="LinkedIn"><i class="icon-linkedin"></i></a></li>
-                        <li class="pinterest"><a target="_blank" href="#" title="Pinterest"><i class="icon-pinterest"></i></a></li>
-                        <li class="dribbble"><a target="_blank" href="#" title="Dribbble"><i class="icon-dribbble"></i></a></li>
+                        <?php foreach ($redes as $item): ?>
+                            <li class="<?= utf8_encode($item['class']); ?>">
+                                <a target="_blank" href="#" title="<?= utf8_encode($item['descripcion']); ?>"><i class="<?= utf8_encode($item['class_i']); ?>"></i></a>
+                            </li>
+                        <?php endforeach; ?>
                     </ul>
                 </div>
             </div>

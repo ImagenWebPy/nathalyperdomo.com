@@ -2,6 +2,7 @@
 $helper = new Helper();
 $page = $helper->getPage();
 $headerData = $helper->loadPageHeaderData($page[0]);
+$web_datos = $helper->web_datos();
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
@@ -82,7 +83,7 @@ $headerData = $helper->loadPageHeaderData($page[0]);
                         <div class="column one">
                             <!-- .logo -->
                             <div class="logo">
-                                <h1><a id="logo" href="index.html" title="Cake"><img class="scale-with-grid" src="<?= URL; ?>public/images/logo.png" alt="Cake"/></a></h1>
+                                <h1><a id="logo" href="<?= URL; ?>" title="<?= utf8_encode($web_datos['nombre']); ?>"><img class="scale-with-grid" src="<?= URL; ?>public/images/<?= utf8_encode($web_datos['logo']); ?>" alt="<?= utf8_encode($web_datos['nombre']); ?>"/></a></h1>
                             </div>
                             <!-- .menu_wrapper -->
                             <div class="menu_wrapper">
