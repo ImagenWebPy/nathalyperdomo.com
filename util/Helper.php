@@ -562,6 +562,13 @@ class Helper {
      * FUNCIONES DEL INHERENTES AL SISTEMA
      * ****************************** */
 
+    public function armaUrlBlog($id, $tabla, $campo) {
+        $sql = $this->db->select("select $campo from $tabla where id = $id");
+        $tituloBlog = $this->cleanUrl($sql[0][$campo]);
+        $url = URL . "blog/post/$id/" . $tituloBlog;
+        return $url;
+    }
+
     public function loadPageHeaderData($page) {
         $data = array();
         switch ($page) {

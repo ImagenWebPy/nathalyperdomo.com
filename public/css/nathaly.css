@@ -30,3 +30,29 @@ body { font-family: 'gilroy' !important;}
     left: 13px;
     overflow: hidden;
 }
+.divNosotros {
+    height: 360px;
+    overflow-y: scroll;
+}
+ul.pagination {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+ul.pagination li {display: inline;}
+ul.pagination li.active {background-color: rgba(158,27,150,0.5);
+                         color: #fff;
+                         padding: 11px 16px;
+                         position: relative;
+                         top: 8px;}
+ul.pagination li.active a {background-color: #9E1B96;
+                           color: #fff;}
+ul.pagination li a:hover{background-color: rgba(158,27,150,0.5); color: #fff;}
+
+ul.pagination li a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}

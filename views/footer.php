@@ -35,7 +35,7 @@ $redes = $helper->web_redes();
 
             <div class="one-third column">
                 <aside id="widget_mfn_recent_posts-2" class="widget widget_mfn_recent_posts">
-                    <h4>Latest posts</h4>
+                    <h4>Ultimas Publicaciones</h4>
                     <div class="Recent_posts">
                         <ul>
                             <?php foreach ($blog as $item): ?>
@@ -44,7 +44,7 @@ $redes = $helper->web_redes();
                                         <img width="80" height="40" src="<?= URL; ?>public/images/blog/<?= utf8_encode($item['imagen_thumb']); ?>" class="scale-with-grid wp-post-image" alt="1"/>
                                     </div>
                                     <div class="desc ">
-                                        <h6><a class="title" href="#"><?= utf8_encode($item['titulo']); ?></a></h6>
+                                        <h6><a class="title" href="<?= $helper->armaUrlBlog($item['id'], 'web_blog', 'titulo'); ?>"><?= utf8_encode($item['titulo']); ?></a></h6>
                                         <p>
                                             <span class="date"><?= date('d-m-Y', strtotime($item['fecha_blog'])); ?></span>
                                         </p>

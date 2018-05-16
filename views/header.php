@@ -104,7 +104,7 @@ $web_datos = $helper->web_datos();
                                         <li class="menu-item  menu-item-has-children"><a href="<?= URL; ?>nosotros"><span>Nathaly</span></a>
 
                                         </li>
-                                        <li class="menu-item  menu-item-has-children"><a href="<?= URL; ?>blog"><span>Blog</span></a>
+                                        <li class="menu-item  menu-item-has-children"><a href="<?= URL; ?>blog/listado"><span>Blog</span></a>
 
                                         </li>
                                         <li class="menu-item  menu-item-has-children"><a href="<?= URL; ?>consultorio"><span>Consultorio</span></a>

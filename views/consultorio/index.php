@@ -13,28 +13,34 @@
                                 <form id="contact-form" class="contact">
                                     <p>
                                         <span class="wpcf7-form-control-wrap name">
+                                            <label class="label">Nombre: </label>
                                             <input type="text"  name="name" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false" placeholder="Nombre"/>
                                         </span>
-
                                         <span class="wpcf7-form-control-wrap email">
+                                            <label class="label">Email: </label>
                                             <input type="text" name="mail" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email" aria-required="true" aria-invalid="false" placeholder="E-mail"/>
                                         </span>
-
+                                        <span class="wpcf7-form-control-wrap email">
+                                            <label class="label">Teléfono: </label>
+                                            <input type="text" name="mail" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email" aria-required="true" aria-invalid="false" placeholder="E-mail"/>
+                                        </span>
                                         <span class="wpcf7-form-control-wrap subject">
+                                            <label class="label">Fecha: </label>
                                             <select name="hora_desde">
-                                                <option value="">Seleccione una Hora</option>
+                                                <option value="">Fecha</option>
                                             </select>
                                         </span>
                                         <span class="wpcf7-form-control-wrap subject">
+                                            <label class="label">Hora: </label>
                                             <select name="hora_hasta">
                                                 <option value="">Seleccione una Hora</option>
                                             </select>
                                         </span>
-
                                         <span class="wpcf7-form-control-wrap message">
+                                            <label class="label">Comentarios: </label>
                                             <textarea  name="comment" id="comment" cols="40" rows="6" class="wpcf7-form-control wpcf7-textarea wpcf7-validates-as-required" aria-required="true" aria-invalid="false" placeholder="Mensaje"></textarea>
                                         </span>
-                                        <input type="submit" id="submit_contact" value="Enviar Mensaje" class="wpcf7-form-control wpcf7-submit"/>
+                                        <input type="submit" id="submit_contact" value="Enviar Reserva" class="wpcf7-form-control wpcf7-submit"/>
                                     <div id="msg" class="message"></div>
                                     <p></p>
                                 </form>

@@ -9,6 +9,7 @@ class nosotros extends Controller {
     public function index() {
         $this->view->description = "";
         $this->view->keywords = "";
+        $this->view->datos_nosotros = $this->model->datos_nosotros();
         $this->view->title = TITLE . 'Nosotros';
         $this->view->render('header');
         $this->view->render('nosotros/index');
