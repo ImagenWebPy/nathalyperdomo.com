@@ -1,9 +1,13 @@
+<?php
+$helper = new Helper();
+?>
 <div id="Content">
     <div class="content_wrapper clearfix">
         <div class="sections_group">
             <div class="section left-sidebar pad0">
                 <div class="section_wrapper clearfix">
                     <div class="items_group clearfix">
+
                         <div class="column two-third column_column">
                             <h3>Reserva tu turno</h3>
                             <hr class="hr_left">
@@ -26,14 +30,15 @@
                                         </span>
                                         <span class="wpcf7-form-control-wrap subject">
                                             <label class="label">Fecha: </label>
-                                            <select name="hora_desde">
-                                                <option value="">Fecha</option>
-                                            </select>
+                                            <input data-provide="datepicker">
                                         </span>
                                         <span class="wpcf7-form-control-wrap subject">
                                             <label class="label">Hora: </label>
                                             <select name="hora_hasta">
                                                 <option value="">Seleccione una Hora</option>
+                                                <?php foreach ($helper->getRangoHoraWeb() as $item): ?>
+                                                    <option value="<?= $item; ?>"><?= $item; ?></option>
+                                                <?php endforeach; ?>
                                             </select>
                                         </span>
                                         <span class="wpcf7-form-control-wrap message">
@@ -46,9 +51,31 @@
                                 </form>
                             </div>
                         </div>
+                        <div class="four columns section_sidebar">
+                            <div class="widget-area clearfix">
+                                <aside id="text-3" class="widget widget_text">
+                                    <div class="textwidget">
+                                        <h3>Address</h3>
+                                        <hr class="hr_left">
+                                        <h6>Envato<br>
+                                            Level 13, 2 Elizabeth St, Melbourne<br>
+                                            Victoria 3000 Australia</h6>
+                                        <p>
+                                            <i class="icon-phone"></i><a href="#">+61 (0) 3 8376</a>
+                                        </p>
+                                        <a href="mailto:noreply@envato.com" class="button button_large button_icon"><i class="icon-mail-line"></i></a>
+                                        <a href="#" class="button button_large button_icon"><i class="icon-twitter"></i></a>
+                                        <a href="#" class="button button_large button_icon"><i class="icon-facebook"></i></a>
+                                    </div>
+                                </aside>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $('.datepicker').datepicker();
+</script>

@@ -713,6 +713,39 @@ class Helper {
         return $horas;
     }
 
+    public function getRangoHoraWeb($inicio = '09:00', $fin = '18:30', $intervalo = 30) {
+        $horas_desde = array();
+        $begin_desde = new DateTime($inicio);
+        $end_desde = new DateTime($fin);
+        $end_desde->sub(new DateInterval('PT30M'));
+
+        $interval_desde = new DateInterval('PT' . $intervalo . 'M');
+        $period_desde = new DatePeriod($begin_desde, $interval_desde, $end_desde);
+
+        foreach ($period_desde as $dt) {
+            array_push($horas_desde, $dt->format("H:i"));
+        }
+
+        $horas_hasta = array();
+        $begin_hasta = new DateTime($inicio);
+        $begin_hasta->add(new DateInterval('PT30M'));
+        $end_hasta = new DateTime($fin);
+
+        $interval_hasta = new DateInterval('PT' . $intervalo . 'M');
+        $period_hasta = new DatePeriod($begin_hasta, $interval_hasta, $end_hasta);
+
+        foreach ($period_hasta as $dt) {
+            array_push($horas_hasta, $dt->format("H:i"));
+        }
+        $cant = (count($horas_desde) - 1);
+        $option = array();
+        for ($i = 0; $i <= $cant; $i++) {
+            $opcion = $horas_desde[$i] . ' - ' . $horas_hasta[$i];
+            array_push($option, $opcion);
+        }
+        return $option;
+    }
+
     public function getPacientes() {
         $sql = $this->db->select("select * from paciente where estado = 1 order by apellido, nombre asc");
         return $sql;
