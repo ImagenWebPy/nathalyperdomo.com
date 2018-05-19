@@ -657,7 +657,7 @@ class Helper {
                                     </div>
                                     <!-- LAYER NR. 4 -->
                                     <div class="tp-caption customin stb" data-x="center" data-hoffset="0" data-y="320" data-customin="x:0;y:100;z:0;rotationX:-50;rotationY:0;rotationZ:0;scaleX:0.5;scaleY:0.5;skewX:0;skewY:0;opacity:0;transformPerspective:-500;transformOrigin:50% 50%;" data-speed="1500" data-start="0" data-easing="Power3.easeInOut" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="1000" data-endeasing="Power3.easeInOut">
-                                        <img src="' . URL . 'public/images/' . utf8_encode($item['imagen']) . '" alt="">
+                                        <img src="' . URL . 'public/images/slider/' . utf8_encode($item['imagen']) . '" alt="">
                                     </div>
                                 </li>';
                     }
@@ -862,6 +862,52 @@ class Helper {
     public function web_redes() {
         $sql = $this->db->select("SELECT * FROM `web_redes` where estado = 1 ORDER BY orden ASC;");
         return $sql;
+    }
+
+    public function getActivePageAdmin($page) {
+        $dashboard = $inicio = $nathaly = $consultorio = $turnos = $pacientes = $ciudades = $contacto = '';
+        switch ($page) {
+            case'inicio':
+                $inicio = 'class ="active"';
+                break;
+            case'nathaly':
+                $nathaly = 'class ="active"';
+                break;
+            case'turnos':
+                $consultorio = 'class ="active"';
+                $turnos = 'class ="active"';
+                break;
+            case'pacientes':
+                $consultorio = 'class ="active"';
+                $pacientes = 'class ="active"';
+                break;
+            case'ciudades':
+                $consultorio = 'class ="active"';
+                $ciudades = 'class ="active"';
+                break;
+            case'contacto':
+                $contacto = 'class ="active"';
+                break;
+            default :
+                $dashboard = 'class ="active"';
+                break;
+        }
+        $data = array(
+            'type' => 'success',
+            'paginas' => array(
+                'dashboard' => $dashboard,
+                'inicio' => $inicio,
+                'nathaly' => $nathaly,
+                'consultorio' => array(
+                    'consultorio' => $consultorio,
+                    'turnos' => $turnos,
+                    'pacientes' => $pacientes,
+                    'ciudades' => $ciudades
+                ),
+                'contacto' => $contacto,
+            )
+        );
+        return $data;
     }
 
 }

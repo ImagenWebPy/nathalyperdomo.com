@@ -58,29 +58,7 @@ if (isset($this->js)) {
 ?>
 <script type="text/javascript">
     $(function () {
-        $(document).on("click", ".btnCambiarEstado", function (e) {
-            if (e.handled !== true) // This will prevent event triggering more then once
-            {
-                var id = $(this).attr("data-id");
-                var tabla = $(this).attr("data-tabla");
-                var campo = $(this).attr("data-campo");
-                var estado = $(this).attr("data-estado");
-                var seccion = $(this).attr("data-seccion");
-                var rowid = $(this).attr("data-rowid");
-                console.log(rowid);
-                console.log(id);
-                $.ajax({
-                    url: "<?= URL; ?>admin/cambiarEstado",
-                    type: "POST",
-                    data: {id: id, tabla: tabla, campo: campo, estado: estado, seccion: seccion},
-                    dataType: "json"
-                }).done(function (data) {
-                    $('#' + rowid + id).html(data.content);
-                });
-            }
-            e.handled = true;
-        });
-        $(document).on("click", ".btnEditar", function (e) {
+        $(document).on("click", ".editDTContenido", function (e) {
             if (e.handled !== true) // This will prevent event triggering more then once
             {
                 var id = $(this).attr("data-id");
@@ -95,6 +73,26 @@ if (isset($this->js)) {
                     $(".genericModal .modal-title").html(data.titulo);
                     $(".genericModal .modal-body").html(data.content);
                     $(".genericModal").modal("toggle");
+                });
+            }
+            e.handled = true;
+        });
+        $(document).on("click", ".btnCambiarEstado", function (e) {
+            if (e.handled !== true) // This will prevent event triggering more then once
+            {
+                var id = $(this).attr("data-id");
+                var tabla = $(this).attr("data-tabla");
+                var campo = $(this).attr("data-campo");
+                var estado = $(this).attr("data-estado");
+                var seccion = $(this).attr("data-seccion");
+                var rowid = $(this).attr("data-rowid");
+                $.ajax({
+                    url: "<?= URL; ?>admin/cambiarEstado",
+                    type: "POST",
+                    data: {id: id, tabla: tabla, campo: campo, estado: estado, seccion: seccion},
+                    dataType: "json"
+                }).done(function (data) {
+                    $('#' + rowid + id).html(data.content);
                 });
             }
             e.handled = true;

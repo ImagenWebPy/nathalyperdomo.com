@@ -1,3 +1,8 @@
+<?php
+$helper = new Helper();
+$pagina = (!empty($helper->getPage()[1])) ? $helper->getPage()[1] : '';
+$paginaActual = $helper->getActivePageAdmin($pagina);
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -58,15 +63,18 @@
                                 IN+
                             </div>
                         </li>
-                        <li class="active"><a href="<?= URL; ?>admin"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboards</span></a></li>
-                        <li class="">
-                            <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Consultorio</span><span class="fa arrow"></span></a>
+                        <li <?= $paginaActual['paginas']['dashboard']; ?>><a href="<?= URL; ?>admin"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboards</span></a></li>
+                        <li <?= $paginaActual['paginas']['inicio']; ?>><a href="<?= URL; ?>admin/inicio"><i class="fa fa-home"></i> <span class="nav-label">Inicio</span></a></li>
+                        <li <?= $paginaActual['paginas']['nathaly']; ?>><a href="<?= URL; ?>admin/nathaly"><i class="fa fa-leaf"></i> <span class="nav-label">Nathaly</span></a></li>
+                        <li <?= $paginaActual['paginas']['consultorio']['consultorio']; ?>>
+                            <a href="#"><i class="fa fa-user-md"></i> <span class="nav-label">Consultorio</span><span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level collapse" style="height: 0px;">
-                                <li><a href="<?= URL; ?>admin/turnos">Turnos</a></li>
-                                <li><a href="#">Pacientes</a></li>
-                                <li><a href="<?= URL; ?>admin/ciudades">Ciudades</a></li>
+                                <li <?= $paginaActual['paginas']['consultorio']['turnos']; ?>><a href="<?= URL; ?>admin/turnos">Turnos</a></li>
+                                <li <?= $paginaActual['paginas']['consultorio']['pacientes']; ?>><a href="#">Pacientes</a></li>
+                                <li <?= $paginaActual['paginas']['consultorio']['ciudades']; ?>><a href="<?= URL; ?>admin/ciudades">Ciudades</a></li>
                             </ul>
                         </li>
+                        <li <?= $paginaActual['paginas']['contacto']; ?>><a href="<?= URL; ?>admin/contacto"><i class="fa fa-envelope-o"></i> <span class="nav-label">Contacto</span></a></li>
                     </ul>
                 </div>
             </nav>

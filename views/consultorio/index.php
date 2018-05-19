@@ -30,11 +30,11 @@ $helper = new Helper();
                                         </span>
                                         <span class="wpcf7-form-control-wrap subject">
                                             <label class="label">Fecha: </label>
-                                            <input data-provide="datepicker">
+                                            <input type="text" data-provide="datepicker" ss="wpcf7-form-control wpcf7-textarea wpcf7-validates-as-required">
                                         </span>
                                         <span class="wpcf7-form-control-wrap subject">
                                             <label class="label">Hora: </label>
-                                            <select name="hora_hasta">
+                                            <select name="hora_hasta" ss="wpcf7-form-control wpcf7-textarea wpcf7-validates-as-required">
                                                 <option value="">Seleccione una Hora</option>
                                                 <?php foreach ($helper->getRangoHoraWeb() as $item): ?>
                                                     <option value="<?= $item; ?>"><?= $item; ?></option>
@@ -51,19 +51,19 @@ $helper = new Helper();
                                 </form>
                             </div>
                         </div>
-                        <div class="four columns section_sidebar">
+                        <div class="three-column columns section_sidebar">
                             <div class="widget-area clearfix">
                                 <aside id="text-3" class="widget widget_text">
                                     <div class="textwidget">
-                                        <h3>Address</h3>
+                                        <h3>Dirección</h3>
                                         <hr class="hr_left">
-                                        <h6>Envato<br>
-                                            Level 13, 2 Elizabeth St, Melbourne<br>
-                                            Victoria 3000 Australia</h6>
+                                        <h6>Consultorio<br>
+                                            <?= utf8_encode($this->direccion['direccion']); ?></h6>
                                         <p>
-                                            <i class="icon-phone"></i><a href="#">+61 (0) 3 8376</a>
+                                            <i class="icon-phone"></i><a href="#"><?= utf8_encode($this->direccion['telefono']); ?></a><br>
+                                            <i class="icon-phone"></i><a href="#"><?= utf8_encode($this->direccion['telefono_2']); ?></a>
                                         </p>
-                                        <a href="mailto:noreply@envato.com" class="button button_large button_icon"><i class="icon-mail-line"></i></a>
+                                        <a href="mailto:<?= utf8_encode($this->direccion['email']); ?>" class="button button_large button_icon"><i class="icon-mail-line"></i></a>
                                         <a href="#" class="button button_large button_icon"><i class="icon-twitter"></i></a>
                                         <a href="#" class="button button_large button_icon"><i class="icon-facebook"></i></a>
                                     </div>
@@ -76,6 +76,9 @@ $helper = new Helper();
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    $('.datepicker').datepicker();
-</script>
+<!--<script type="text/javascript">
+    $('.datepicker').datepicker({
+        format: 'mm/dd/yyyy',
+        startDate: '-3d'
+    });
+</script>-->

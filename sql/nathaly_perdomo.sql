@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2018-05-02 23:39:47
+Date: 2018-05-18 21:53:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -352,6 +352,25 @@ CREATE TABLE `ficha_paciente` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for horarios
+-- ----------------------------
+DROP TABLE IF EXISTS `horarios`;
+CREATE TABLE `horarios` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `fecha_desde` date DEFAULT NULL,
+  `fecha_hasta` date DEFAULT NULL,
+  `hora_desde` time DEFAULT NULL,
+  `hora_hasta` time DEFAULT NULL,
+  `intervalo` int(2) unsigned DEFAULT NULL,
+  `estado` int(1) unsigned DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of horarios
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for paciente
 -- ----------------------------
 DROP TABLE IF EXISTS `paciente`;
@@ -376,12 +395,14 @@ CREATE TABLE `paciente` (
   KEY `fk_id_ciudad_paciente` (`id_ciudad`),
   CONSTRAINT `fk_id_ciudad_paciente` FOREIGN KEY (`id_ciudad`) REFERENCES `ciudad` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_id_tipo_documento_paciente` FOREIGN KEY (`id_tipo_documento`) REFERENCES `tipo_documento` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of paciente
 -- ----------------------------
 INSERT INTO `paciente` VALUES ('1', '1', '13', '1234567', 'email@email.com', 'Nombre', 'Apellido', '601606', '0976921801', 'Direccion', 'Recoleta', '2018-05-02 00:00:00', '1969-12-31', '1');
+INSERT INTO `paciente` VALUES ('2', '1', '13', '123456', 'raul.ramirez@imagenwebhq.com', 'Juan', 'Perez', '601606', '0976921801', 'Una Direccion', 'Un BARRIO', '2018-05-04 00:00:00', '2018-01-05', '1');
+INSERT INTO `paciente` VALUES ('3', '1', '13', '654321', 'email@email.com', 'Jhon', 'Doe', '601606', '0976921801', 'Dos direcciones', 'Recoleta', '2018-05-04 00:00:00', '2018-09-05', '1');
 
 -- ----------------------------
 -- Table structure for tipo_documento
@@ -415,7 +436,7 @@ CREATE TABLE `turno` (
   PRIMARY KEY (`id`),
   KEY `fk_id_paciente_turno` (`id_paciente`),
   CONSTRAINT `fk_id_paciente_turno` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of turno
@@ -427,5 +448,266 @@ INSERT INTO `turno` VALUES ('5', '1', 'Motivo', 'asasas', '2018-05-05 10:00:00',
 INSERT INTO `turno` VALUES ('6', '1', 'asasa', 'asasasas', '2018-03-05 10:00:00', '2018-03-05 11:30:00');
 INSERT INTO `turno` VALUES ('7', '1', 'aaa', 'aaaa', '2018-02-05 09:00:00', '2018-02-05 09:30:00');
 INSERT INTO `turno` VALUES ('8', '1', 'sasa', 'asasa', '2018-02-05 08:30:00', '2018-02-05 09:00:00');
-INSERT INTO `turno` VALUES ('9', '1', 'sdasd', 'sadasdsa', '2018-05-02 10:30:00', '2018-05-02 11:30:00');
+INSERT INTO `turno` VALUES ('10', '3', 'asasa', 'asasasas', '2018-05-03 10:00:00', '2018-05-03 10:30:00');
+INSERT INTO `turno` VALUES ('11', '1', 'Masas', 'oooooo', '2018-05-03 17:00:00', '2018-05-03 17:30:00');
+
+-- ----------------------------
+-- Table structure for web_blog
+-- ----------------------------
+DROP TABLE IF EXISTS `web_blog`;
+CREATE TABLE `web_blog` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(145) DEFAULT NULL,
+  `contenido` longtext,
+  `imagen` varchar(120) DEFAULT NULL,
+  `imagen_thumb` varchar(145) DEFAULT NULL,
+  `url_youtube` varchar(120) DEFAULT NULL,
+  `fecha_blog` date DEFAULT NULL,
+  `fecha_publicacion` datetime DEFAULT NULL,
+  `estado` int(1) DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of web_blog
+-- ----------------------------
+INSERT INTO `web_blog` VALUES ('1', 'Lorem ipsum dolor sit amet', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt ut mi vel convallis. Fusce condimentum neque sit amet quam condimentum, eget vulputate magna tempor. Vivamus pretium metus id orci facilisis interdum. Phasellus laoreet ultrices lorem vel blandit. Etiam iaculis pellentesque fringilla. Donec convallis aliquam dui, et posuere purus viverra ut. Nulla pharetra venenatis dui non maximus.</p>', 'blog1.jpg', 'blog1-thumb.jpg', '#', '2018-05-14', '2018-05-14 11:24:05', '1');
+INSERT INTO `web_blog` VALUES ('2', 'Lorem ipsum dolor sit amet', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt ut mi vel convallis. Fusce condimentum neque sit amet quam condimentum, eget vulputate magna tempor. Vivamus pretium metus id orci facilisis interdum. Phasellus laoreet ultrices lorem vel blandit. Etiam iaculis pellentesque fringilla. Donec convallis aliquam dui, et posuere purus viverra ut. Nulla pharetra venenatis dui non maximus.</p>', 'blog2.jpg', 'blog2-thumb.jpg', '#', '2018-05-15', '2018-05-15 11:24:05', '1');
+INSERT INTO `web_blog` VALUES ('3', 'Lorem ipsum dolor sit amet', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt ut mi vel convallis. Fusce condimentum neque sit amet quam condimentum, eget vulputate magna tempor. Vivamus pretium metus id orci facilisis interdum. Phasellus laoreet ultrices lorem vel blandit. Etiam iaculis pellentesque fringilla. Donec convallis aliquam dui, et posuere purus viverra ut. Nulla pharetra venenatis dui non maximus.</p>', 'blog3.jpg', 'blog3-thumb.jpg', '#', '2018-05-16', '2018-05-16 11:24:05', '1');
+INSERT INTO `web_blog` VALUES ('4', 'Lorem ipsum dolor sit amet', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt ut mi vel convallis. Fusce condimentum neque sit amet quam condimentum, eget vulputate magna tempor. Vivamus pretium metus id orci facilisis interdum. Phasellus laoreet ultrices lorem vel blandit. Etiam iaculis pellentesque fringilla. Donec convallis aliquam dui, et posuere purus viverra ut. Nulla pharetra venenatis dui non maximus.</p>', 'blog4.jpg', 'blog4-thumb.jpg', '#', '2018-05-17', '2018-05-16 11:24:05', '1');
+
+-- ----------------------------
+-- Table structure for web_datos
+-- ----------------------------
+DROP TABLE IF EXISTS `web_datos`;
+CREATE TABLE `web_datos` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `telefono` varchar(30) DEFAULT NULL,
+  `telefono_2` varchar(30) DEFAULT NULL,
+  `direccion` varchar(120) DEFAULT NULL,
+  `latitud` varchar(45) DEFAULT NULL,
+  `longitud` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `logo` varchar(45) DEFAULT NULL,
+  `logo_2` varchar(45) DEFAULT NULL,
+  `nombre` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of web_datos
+-- ----------------------------
+INSERT INTO `web_datos` VALUES ('1', '+595 981 258 733', '+595 985 866 818', 'Dr. Alejandro Dávalos No. 437', '-25.294814', '-57.595430', 'consulta@nathalyperdomo.com\r\n\r\n\r\n', 'logo.png', null, 'Nathaly Perdomo');
+
+-- ----------------------------
+-- Table structure for web_frases
+-- ----------------------------
+DROP TABLE IF EXISTS `web_frases`;
+CREATE TABLE `web_frases` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `frase` text,
+  `autor` varchar(60) DEFAULT NULL,
+  `estado` int(1) DEFAULT '1',
+  `orden` int(2) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of web_frases
+-- ----------------------------
+INSERT INTO `web_frases` VALUES ('1', 'Un hombre muy ocupado para cuidar de su salud es como un mecánico muy ocupado por cuidar sus herramientas.', 'Proverbio español', '1', '1');
+INSERT INTO `web_frases` VALUES ('2', 'Hoy en día, más del 95% de las enfermedades crónicas están causadas por la comida, ingredientes tóxicos, deficiencias nutricionales y falta de ejercicio físico.', 'Mike Adams', '1', '2');
+INSERT INTO `web_frases` VALUES ('3', 'No te recompenses con comidas poco saludables, recompénsate con actividades divertidas y saludables.', null, '1', '3');
+INSERT INTO `web_frases` VALUES ('4', 'No conviertas tu estómago en una bolsa de basura.', null, '1', '4');
+
+-- ----------------------------
+-- Table structure for web_header_images
+-- ----------------------------
+DROP TABLE IF EXISTS `web_header_images`;
+CREATE TABLE `web_header_images` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `seccion` enum('Nathaly','Blog','Consultorio','Contacto','Busqueda') DEFAULT NULL,
+  `imagen` varchar(120) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of web_header_images
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for web_inicio_caracteristicas
+-- ----------------------------
+DROP TABLE IF EXISTS `web_inicio_caracteristicas`;
+CREATE TABLE `web_inicio_caracteristicas` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(80) DEFAULT NULL,
+  `contenido` text,
+  `icon` varchar(60) DEFAULT NULL,
+  `enlace` varchar(120) DEFAULT NULL,
+  `orden` int(2) unsigned DEFAULT NULL,
+  `estado` int(1) DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of web_inicio_caracteristicas
+-- ----------------------------
+INSERT INTO `web_inicio_caracteristicas` VALUES ('1', 'Lorem ipsum dolor sit amet', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt ut mi vel convallis. Fusce condimentum neque sit amet quam condimentum, eget vulputate magna tempor. Vivamus pretium metus id orci facilisis interdum. Phasellus laoreet ultrices lorem vel blandit. Etiam iaculis pellentesque fringilla. Donec convallis aliquam dui, et posuere purus viverra ut. Nulla pharetra venenatis dui non maximus.', 'medical-icon-i-alternative-complementary', '#', '1', '1');
+INSERT INTO `web_inicio_caracteristicas` VALUES ('2', 'Lorem ipsum dolor sit amet', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt ut mi vel convallis. Fusce condimentum neque sit amet quam condimentum, eget vulputate magna tempor. Vivamus pretium metus id orci facilisis interdum. Phasellus laoreet ultrices lorem vel blandit. Etiam iaculis pellentesque fringilla. Donec convallis aliquam dui, et posuere purus viverra ut. Nulla pharetra venenatis dui non maximus.', 'medical-icon-i-cardiology', '#', '2', '1');
+INSERT INTO `web_inicio_caracteristicas` VALUES ('3', 'Lorem ipsum dolor sit amet', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt ut mi vel convallis. Fusce condimentum neque sit amet quam condimentum, eget vulputate magna tempor. Vivamus pretium metus id orci facilisis interdum. Phasellus laoreet ultrices lorem vel blandit. Etiam iaculis pellentesque fringilla. Donec convallis aliquam dui, et posuere purus viverra ut. Nulla pharetra venenatis dui non maximus.', 'medical-icon-i-nutrition', '#', '3', '1');
+
+-- ----------------------------
+-- Table structure for web_inicio_nosotros
+-- ----------------------------
+DROP TABLE IF EXISTS `web_inicio_nosotros`;
+CREATE TABLE `web_inicio_nosotros` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(80) DEFAULT NULL,
+  `contenido` text,
+  `imagen` varchar(120) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of web_inicio_nosotros
+-- ----------------------------
+INSERT INTO `web_inicio_nosotros` VALUES ('1', 'UN MUNDO EN NUTRICION', 'Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo mullam.', '576x454-index.png');
+
+-- ----------------------------
+-- Table structure for web_inicio_parallax
+-- ----------------------------
+DROP TABLE IF EXISTS `web_inicio_parallax`;
+CREATE TABLE `web_inicio_parallax` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `texto` varchar(80) DEFAULT NULL,
+  `imagen` varchar(120) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of web_inicio_parallax
+-- ----------------------------
+INSERT INTO `web_inicio_parallax` VALUES ('1', 'EMPIEZA HOY MISMO A CUIDARTE', 'index-image-section.jpg');
+
+-- ----------------------------
+-- Table structure for web_inicio_servicios
+-- ----------------------------
+DROP TABLE IF EXISTS `web_inicio_servicios`;
+CREATE TABLE `web_inicio_servicios` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `servicio` varchar(80) DEFAULT NULL,
+  `contenido` text,
+  `orden` int(2) unsigned DEFAULT NULL,
+  `estado` int(1) DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of web_inicio_servicios
+-- ----------------------------
+INSERT INTO `web_inicio_servicios` VALUES ('1', 'Planes de Alimentación', 'Sed non neque elit. Sed ut imperdiet nisi. Proin condime ntum fermentum nunc. Etiam pharetra, erat sed ferm entum feugiat, velit mauris egestas quam, ut aliquam massa nisl quis neque.', '1', '1');
+INSERT INTO `web_inicio_servicios` VALUES ('2', 'Trastornos de la alimentación', 'Sed non neque elit. Sed ut imperdiet nisi. Proin condime ntum fermentum nunc. Etiam pharetra, erat sed ferm entum feugiat, velit mauris egestas quam, ut aliquam massa nisl quis neque.', '2', '1');
+INSERT INTO `web_inicio_servicios` VALUES ('3', 'Nutrición Clinica', 'Sed non neque elit. Sed ut imperdiet nisi. Proin condime ntum fermentum nunc. Etiam pharetra, erat sed ferm entum feugiat, velit mauris egestas quam, ut aliquam massa nisl quis neque.', '3', '1');
+INSERT INTO `web_inicio_servicios` VALUES ('4', 'Control del peso', 'Sed non neque elit. Sed ut imperdiet nisi. Proin condime ntum fermentum nunc. Etiam pharetra, erat sed ferm entum feugiat, velit mauris egestas quam, ut aliquam massa nisl quis neque.', '4', '1');
+
+-- ----------------------------
+-- Table structure for web_inicio_slider
+-- ----------------------------
+DROP TABLE IF EXISTS `web_inicio_slider`;
+CREATE TABLE `web_inicio_slider` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `texto_1` varchar(60) DEFAULT NULL,
+  `texto_2` varchar(60) DEFAULT NULL,
+  `imagen` varchar(120) DEFAULT NULL,
+  `principal` int(1) DEFAULT '0',
+  `orden` int(2) unsigned DEFAULT NULL,
+  `estado` int(1) DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of web_inicio_slider
+-- ----------------------------
+INSERT INTO `web_inicio_slider` VALUES ('1', 'Comé lo que te gusta', 'en la medida justa', '310x649_inicio_1.png', '1', null, '1');
+INSERT INTO `web_inicio_slider` VALUES ('2', 'La salud es una relación', 'entre tú y tu cuerpo', 'img1.jpg', '0', '1', '1');
+
+-- ----------------------------
+-- Table structure for web_inicio_video
+-- ----------------------------
+DROP TABLE IF EXISTS `web_inicio_video`;
+CREATE TABLE `web_inicio_video` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(80) DEFAULT NULL,
+  `texto_info` varchar(80) DEFAULT NULL,
+  `url_video` varchar(120) DEFAULT NULL,
+  `texto_info2` varchar(80) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of web_inicio_video
+-- ----------------------------
+INSERT INTO `web_inicio_video` VALUES ('1', 'DESDE LA COMODIDAD DE TU CASA', 'o desde la clinica', '#', 'Tu eliges');
+
+-- ----------------------------
+-- Table structure for web_nosotros
+-- ----------------------------
+DROP TABLE IF EXISTS `web_nosotros`;
+CREATE TABLE `web_nosotros` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `imagen_header` varchar(120) DEFAULT NULL,
+  `imagen_lila` varchar(120) DEFAULT NULL,
+  `texto` text,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of web_nosotros
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for web_page_nosotros
+-- ----------------------------
+DROP TABLE IF EXISTS `web_page_nosotros`;
+CREATE TABLE `web_page_nosotros` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `imagen_header` varchar(120) DEFAULT NULL,
+  `imagen_lila` varchar(120) DEFAULT NULL,
+  `texto` text,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of web_page_nosotros
+-- ----------------------------
+INSERT INTO `web_page_nosotros` VALUES ('1', 'aboutus-header.jpg', 'aboutus.png', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt ut mi vel convallis. Fusce condimentum neque sit amet quam condimentum, eget vulputate magna tempor. Vivamus pretium metus id orci facilisis interdum. Phasellus laoreet ultrices lorem vel blandit. Etiam iaculis pellentesque fringilla. Donec convallis aliquam dui, et posuere purus viverra ut. Nulla pharetra venenatis dui non maximus.</p>\r\n\r\n<p>Sed id condimentum mauris, quis lacinia lacus. Pellentesque sit amet risus in risus pharetra pulvinar. Vestibulum vulputate posuere quam, eget consequat tortor mattis a. Sed sagittis efficitur pellentesque. Fusce sed placerat nunc. Duis pulvinar in felis non ultrices. Sed rutrum dolor at ligula dictum eleifend. Duis fringilla quam diam, eget tempor ante egestas ac. Nulla congue nunc pharetra mauris dapibus scelerisque. Nam elementum metus orci, vel placerat nisi feugiat non. Donec laoreet molestie pharetra. Vivamus vitae dictum purus, quis fermentum libero. Nunc luctus nibh dui, at malesuada purus fringilla non. Proin facilisis augue quis risus faucibus, volutpat ultricies sem auctor.</p>');
+
+-- ----------------------------
+-- Table structure for web_redes
+-- ----------------------------
+DROP TABLE IF EXISTS `web_redes`;
+CREATE TABLE `web_redes` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(60) DEFAULT NULL,
+  `enlace` varchar(145) DEFAULT NULL,
+  `estado` int(1) unsigned DEFAULT '1',
+  `orden` int(2) DEFAULT NULL,
+  `class` varchar(30) DEFAULT NULL,
+  `class_i` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of web_redes
+-- ----------------------------
+INSERT INTO `web_redes` VALUES ('1', 'Facebook', '#', '1', '1', 'facebook', 'icon-facebook');
+INSERT INTO `web_redes` VALUES ('2', 'Google+', '#', '1', '2', 'googleplus', 'icon-gplus');
+INSERT INTO `web_redes` VALUES ('3', 'Twitter', '#', '1', '3', 'twitter', 'icon-twitter');
+INSERT INTO `web_redes` VALUES ('4', 'Vimeo', '#', '1', '4', 'vimeo', 'icon-vimeo');
+INSERT INTO `web_redes` VALUES ('5', 'Youtube', '#', '1', '5', 'youtube', 'icon-play');
+INSERT INTO `web_redes` VALUES ('6', 'Flickr', '#', '1', '6', 'flickr', 'icon-flickr');
+INSERT INTO `web_redes` VALUES ('7', 'Linkedin', '#', '1', '7', 'linked_in', 'icon-linkedin');
+INSERT INTO `web_redes` VALUES ('8', 'Pinterest', '#', '1', '8', 'pinterest', 'icon-pinterest');
+INSERT INTO `web_redes` VALUES ('9', 'Dribble', '#', '1', '9', 'dribbble', 'icon-dribbble');
 SET FOREIGN_KEY_CHECKS=1;

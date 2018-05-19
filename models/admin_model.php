@@ -312,6 +312,31 @@ class Admin_Model extends Model {
                         . '<td>' . $estado . '</td>'
                         . '<td>' . $btnEditar . '</td>';
                 break;
+            case 'slider':
+                if ($sql[0]['estado'] == 1) {
+                    $estado = '<a class="pointer btnCambiarEstado" data-seccion="slider" data-rowid="slider_" data-tabla="web_inicio_slider" data-campo="estado" data-id="' . $id . '" data-estado="1"><span class="label label-primary">Activo</span></a>';
+                } else {
+                    $estado = '<a class="pointer btnCambiarEstado" data-seccion="slider" data-rowid="slider_" data-tabla="web_inicio_slider" data-campo="estado" data-id="' . $id . '" data-estado="0"><span class="label label-danger">Inactivo</span></a>';
+                }
+                $btnEditar = '<a class="editDTContenido pointer btn-xs" data-id="' . $id . '" data-url="modalEditarDTSlider"><i class="fa fa-edit"></i> Editar </a>';
+                if (!empty($sql[0]['imagen'])) {
+                    $img = '<img src="' . URL . 'public/images/slider/' . $sql[0]['imagen'] . '" style="width: 160px;">';
+                } else {
+                    $img = '';
+                }
+                if ($sql[0]['principal'] == 1) {
+                    $principal = '<span class="badge badge-warning">Principal</span>';
+                } else {
+                    $principal = '<span class="badge">Normal</span>';
+                }
+                $data = '<td>' . $sql[0]['orden'] . '</td>'
+                        . '<td>' . $img . '</td>'
+                        . '<td>' . utf8_encode($sql[0]['texto_1']) . '</td>'
+                        . '<td>' . utf8_encode($sql[0]['texto_2']) . '</td>'
+                        . '<td>' . $principal . '</td>'
+                        . '<td>' . $estado . '</td>'
+                        . '<td>' . $btnEditar . '</td>';
+                break;
         }
         return $data;
     }
@@ -379,6 +404,42 @@ class Admin_Model extends Model {
             'id' => $id
         );
         return $data;
+    }
+
+    public function listadoDTSlider() {
+        $sql = $this->db->select("SELECT * FROM web_inicio_slider ORDER BY orden ASC;");
+        $datos = array();
+        foreach ($sql as $item) {
+            $id = $item['id'];
+            if ($item['estado'] == 1) {
+                $estado = '<a class="pointer btnCambiarEstado" data-seccion="slider" data-rowid="slider_" data-tabla="web_inicio_slider" data-campo="estado" data-id="' . $id . '" data-estado="1"><span class="label label-primary">Activo</span></a>';
+            } else {
+                $estado = '<a class="pointer btnCambiarEstado" data-seccion="slider" data-rowid="slider_" data-tabla="web_inicio_slider" data-campo="estado" data-id="' . $id . '" data-estado="0"><span class="label label-danger">Inactivo</span></a>';
+            }
+            $btnEditar = '<a class="editDTContenido pointer btn-xs" data-id="' . $id . '" data-url="modalEditarDTSlider"><i class="fa fa-edit"></i> Editar </a>';
+            if (!empty($item['imagen'])) {
+                $img = '<img src="' . URL . 'public/images/slider/' . $item['imagen'] . '" style="width: 160px;">';
+            } else {
+                $img = '-';
+            }
+            if ($item['principal'] == 1) {
+                $principal = '<span class="badge badge-warning">Principal</span>';
+            } else {
+                $principal = '<span class="badge">Normal</span>';
+            }
+            array_push($datos, array(
+                "DT_RowId" => "slider_$id",
+                'orden' => $item['orden'],
+                'imagen' => $img,
+                'texto1' => utf8_encode($item['texto_1']),
+                'texto2' => utf8_encode($item['texto_2']),
+                'principal' => $principal,
+                'estado' => $estado,
+                'editar' => $btnEditar
+            ));
+        }
+        $json = '{"data": ' . json_encode($datos) . '}';
+        return $json;
     }
 
 }

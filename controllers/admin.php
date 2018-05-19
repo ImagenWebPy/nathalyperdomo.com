@@ -30,11 +30,23 @@ class Admin extends Controller {
 
     public function ciudades() {
         $this->view->helper = $this->helper;
-        $this->view->title = 'Ciudadess';
+        $this->view->title = 'Ciudades';
         $this->view->public_css = array("css/plugins/dataTables/datatables.min.css", "css/plugins/html5fileupload/html5fileupload.css", "css/plugins/iCheck/custom.css");
         $this->view->public_js = array("js/plugins/dataTables/datatables.min.js", "js/plugins/html5fileupload/html5fileupload.min.js", "js/plugins/iCheck/icheck.min.js");
         $this->view->render('admin/header');
         $this->view->render('admin/ciudades/index');
+        $this->view->render('admin/footer');
+        if (!empty($_SESSION['message']))
+            unset($_SESSION['message']);
+    }
+
+    public function inicio() {
+        $this->view->helper = $this->helper;
+        $this->view->title = 'Inicio';
+        $this->view->public_css = array("css/plugins/dataTables/datatables.min.css", "css/plugins/html5fileupload/html5fileupload.css", "css/plugins/iCheck/custom.css");
+        $this->view->public_js = array("js/plugins/dataTables/datatables.min.js", "js/plugins/html5fileupload/html5fileupload.min.js", "js/plugins/iCheck/icheck.min.js");
+        $this->view->render('admin/header');
+        $this->view->render('admin/contenido/inicio');
         $this->view->render('admin/footer');
         if (!empty($_SESSION['message']))
             unset($_SESSION['message']);
@@ -164,6 +176,21 @@ class Admin extends Controller {
         );
         $data = $this->model->frmEditarDepartamento($datos);
         echo json_encode($data);
+    }
+
+    public function listadoDTSlider() {
+        header('Content-type: application/json; charset=utf-8');
+        $data = $this->model->listadoDTSlider();
+        echo $data;
+    }
+
+    public function modalEditarDTSlider() {
+        header('Content-type: application/json; charset=utf-8');
+        $data = array(
+            'id' => $this->helper->cleanInput($_POST['id'])
+        );
+        $datos = $this->model->modalEditarDTSlider($data);
+        echo $datos;
     }
 
 }
