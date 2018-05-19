@@ -673,16 +673,17 @@ class Helper {
                                     <div class="tp-caption large_light lft tp-resizeme gilroy-bold" data-x="left" data-hoffset="0" data-y="200" data-speed="1000" data-start="500" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0" data-end="4700" data-endspeed="300" >
                                         ' . utf8_encode($item['texto_1']) . '<br> <span class="priscilla">' . utf8_encode($item['texto_2']) . '</span>
                                     </div>
-                                </li>
-                            </ul>
+                                </li>';
+                    }
+                }
+                $header .= '</ul>
                             <div class="tp-bannertimer tp-bottom">
                             </div>
                         </div>
                     </div>
                     <!-- END REVOLUTION SLIDER -->
                 </div>';
-                    }
-                }
+
                 break;
         }
         $data = array(

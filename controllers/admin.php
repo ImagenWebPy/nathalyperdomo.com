@@ -43,7 +43,7 @@ class Admin extends Controller {
     public function inicio() {
         $this->view->helper = $this->helper;
         $this->view->title = 'Inicio';
-        $this->view->public_css = array("css/plugins/dataTables/datatables.min.css", "css/plugins/html5fileupload/html5fileupload.css", "css/plugins/iCheck/custom.css");
+        $this->view->public_css = array("css/plugins/dataTables/datatables.min.css", "css/plugins/html5fileupload/html5fileupload.css", "css/plugins/iCheck/custom.css", "css/wfmi-style.css");
         $this->view->public_js = array("js/plugins/dataTables/datatables.min.js", "js/plugins/html5fileupload/html5fileupload.min.js", "js/plugins/iCheck/icheck.min.js");
         $this->view->render('admin/header');
         $this->view->render('admin/contenido/inicio');
@@ -193,4 +193,170 @@ class Admin extends Controller {
         echo $datos;
     }
 
+    public function frmEditarSlider() {
+        header('Content-type: application/json; charset=utf-8');
+        $datos = array(
+            'id' => $this->helper->cleanInput($_POST['id']),
+            'texto_1' => (!empty($_POST['texto_1'])) ? $this->helper->cleanInput($_POST['texto_1']) : NULL,
+            'texto_2' => (!empty($_POST['texto_2'])) ? $this->helper->cleanInput($_POST['texto_2']) : NULL,
+            'orden' => (!empty($_POST['orden'])) ? $this->helper->cleanInput($_POST['orden']) : NULL,
+            'principal' => (!empty($_POST['principal'])) ? $this->helper->cleanInput($_POST['principal']) : NULL,
+            'estado' => (!empty($_POST['estado'])) ? $this->helper->cleanInput($_POST['estado']) : 0,
+        );
+        $data = $this->model->frmEditarSlider($datos);
+        echo json_encode($data);
+    }
+
+    public function modalAgregarSlider() {
+        header('Content-type: application/json; charset=utf-8');
+        $datos = $this->model->modalAgregarSlider();
+        echo json_encode($datos);
+    }
+
+    public function frmAgregarSlider() {
+        if (!empty($_POST)) {
+            $principal = $_POST['principal'];
+            $data = array(
+                'texto_1' => (!empty($_POST['texto_1'])) ? $this->helper->cleanInput($_POST['texto_1']) : NULL,
+                'texto_2' => (!empty($_POST['texto_2'])) ? $this->helper->cleanInput($_POST['texto_2']) : NULL,
+                'orden' => (!empty($_POST['orden'])) ? $this->helper->cleanInput($_POST['orden']) : NULL,
+                'principal' => (!empty($principal)) ? $this->helper->cleanInput($principal) : NULL,
+                'estado' => (!empty($_POST['estado'])) ? $_POST['estado'] : 0,
+            );
+            $idPost = $this->model->frmAgregarSlider($data);
+            #IMAGENES
+            if (!empty($_FILES['file_archivo']['name'])) {
+                $error = false;
+                $dir = 'public/images/slider/';
+                $serverdir = $dir;
+                #IMAGENES
+                $newname = $idPost . '_' . $_FILES['file_archivo']['name'];
+                $fname = $this->helper->cleanUrl($newname);
+                $contents = file_get_contents($_FILES['file_archivo']['tmp_name']);
+
+                $handle = fopen($serverdir . $fname, 'w');
+                fwrite($handle, $contents);
+                fclose($handle);
+                #############
+                #SE REDIMENSIONA LA IMAGEN
+                #############
+                # ruta de la imagen a redimensionar 
+                $imagen = $serverdir . $fname;
+                # ruta de la imagen final, si se pone el mismo nombre que la imagen, esta se sobreescribe 
+                $imagen_final = $fname;
+                if ($principal != 1) {
+                    $ancho = 1920;
+                    $alto = 1080;
+                } else {
+                    $ancho = 310;
+                    $alto = 649;
+                }
+                $this->helper->redimensionar($imagen, $imagen_final, $ancho, $alto, $serverdir);
+                #############
+                $imagenes = array(
+                    'id' => $idPost,
+                    'imagenes' => $fname
+                );
+                $this->model->frmAddSliderImg($imagenes);
+            }
+            Session::set('message', array(
+                'type' => 'success',
+                'mensaje' => 'Se ha agregado correctamente el slider'
+            ));
+        }
+        header('Location:' . URL . 'admin/slider/');
+    }
+
+    public function uploadImgSlider() {
+        if (!empty($_POST)) {
+            $idPost = $_POST['data']['id'];
+            #verificamos si la imagen es la principal
+            $sql = $this->db->select("select principal from web_inicio_slider where id = $idPost");
+            $error = false;
+            $absolutedir = dirname(__FILE__);
+            $dir = 'public/images/slider/';
+            $serverdir = $dir;
+            $tmp = explode(',', $_POST['file']);
+            $file = base64_decode($tmp[1]);
+            $ext = explode('.', $_POST['filename']);
+            $extension = strtolower(end($ext));
+            $name = $_POST['name'];
+            $filename = $this->helper->cleanUrl($idPost . '_' . $name);
+            $filename = $filename . '.' . $extension;
+            $handle = fopen($serverdir . $filename, 'w');
+            fwrite($handle, $file);
+            fclose($handle);
+            #############
+            #SE REDIMENSIONA LA IMAGEN
+            #############
+            # ruta de la imagen a redimensionar 
+            $imagen = $serverdir . $filename;
+            # ruta de la imagen final, si se pone el mismo nombre que la imagen, esta se sobreescribe 
+            $imagen_final = $filename;
+            if ($sql[0]['principal'] != 1) {
+                $ancho = 1920;
+                $alto = 1080;
+            } else {
+                $ancho = 310;
+                $alto = 649;
+            }
+            $this->helper->redimensionar($imagen, $imagen_final, $ancho, $alto, $serverdir);
+            #############
+            header('Content-type: application/json; charset=utf-8');
+            $data = array(
+                'id' => $idPost,
+                'imagen' => $filename
+            );
+            $response = $this->model->uploadImgSlider($data);
+            echo json_encode($response);
+        }
+    }
+
+    public function listadoDTCaracteristicas() {
+        header('Content-type: application/json; charset=utf-8');
+        $data = $this->model->listadoDTCaracteristicas();
+        echo $data;
+    }
+
+    public function modalEditarCaracteristicas() {
+        header('Content-type: application/json; charset=utf-8');
+        $data = array(
+            'id' => $this->helper->cleanInput($_POST['id'])
+        );
+        $datos = $this->model->modalEditarCaracteristicas($data);
+        echo $datos;
+    }
+
+    public function frmEditarCaracteristicas() {
+        header('Content-type: application/json; charset=utf-8');
+        $datos = array(
+            'id' => $this->helper->cleanInput($_POST['id']),
+            'titulo' => $this->helper->cleanInput($_POST['titulo']),
+            'contenido' => $this->helper->cleanInput($_POST['contenido']),
+            'icon' => $this->helper->cleanInput($_POST['icon']),
+            'orden' => $this->helper->cleanInput($_POST['orden']),
+            'estado' => (!empty($_POST['estado'])) ? $this->helper->cleanInput($_POST['estado']) : 0,
+        );
+        $data = $this->model->frmEditarCaracteristicas($datos);
+        echo json_encode($data);
+    }
+    
+    public function modalAgregarCaracteristicas() {
+        header('Content-type: application/json; charset=utf-8');
+        $datos = $this->model->modalAgregarCaracteristicas();
+        echo json_encode($datos);
+    }
+    
+    public function frmAgregarCaracteristicas(){
+        header('Content-type: application/json; charset=utf-8');
+        $datos = array(
+            'titulo' => $this->helper->cleanInput($_POST['titulo']),
+            'contenido' => $this->helper->cleanInput($_POST['contenido']),
+            'icon' => $this->helper->cleanInput($_POST['icon']),
+            'orden' => $this->helper->cleanInput($_POST['orden']),
+            'estado' => (!empty($_POST['estado'])) ? $this->helper->cleanInput($_POST['estado']) : 0,
+        );
+        $data = $this->model->frmAgregarCaracteristicas($datos);
+        echo json_encode($data);
+    }
 }

@@ -337,6 +337,20 @@ class Admin_Model extends Model {
                         . '<td>' . $estado . '</td>'
                         . '<td>' . $btnEditar . '</td>';
                 break;
+            case 'caracteristicas';
+                if ($sql[0]['estado'] == 1) {
+                    $estado = '<a class="pointer btnCambiarEstado" data-seccion="caracteristicas" data-rowid="caracteristicas_" data-tabla="web_inicio_caracteristicas" data-campo="estado" data-id="' . $id . '" data-estado="1"><span class="label label-primary">Activo</span></a>';
+                } else {
+                    $estado = '<a class="pointer btnCambiarEstado" data-seccion="caracteristicas" data-rowid="caracteristicas_" data-tabla="web_inicio_caracteristicas" data-campo="estado" data-id="' . $id . '" data-estado="0"><span class="label label-danger">Inactivo</span></a>';
+                }
+                $icono = '<i class="' . utf8_encode($sql[0]['icon']) . '"></i>';
+                $btnEditar = '<a class="editDTContenido pointer btn-xs" data-id="' . $id . '" data-url="modalEditarCaracteristicas"><i class="fa fa-edit"></i> Editar </a>';
+                $data = '<td>' . utf8_encode($sql[0]['orden']) . '</td>'
+                        . '<td>' . utf8_encode($sql[0]['titulo']) . '</td>'
+                        . '<td>' . $icono . '</td>'
+                        . '<td>' . $estado . '</td>'
+                        . '<td>' . $btnEditar . '</td>';
+                break;
         }
         return $data;
     }
@@ -440,6 +454,425 @@ class Admin_Model extends Model {
         }
         $json = '{"data": ' . json_encode($datos) . '}';
         return $json;
+    }
+
+    public function modalEditarDTSlider($datos) {
+        $id = $datos['id'];
+        $sql = $this->db->select("select * from web_inicio_slider where id = $id");
+        $checked = "";
+        $checkedPrincipal = "";
+        if ($sql[0]['estado'] == 1)
+            $checked = 'checked';
+        if ($sql[0]['principal'] == 1)
+            $checkedPrincipal = 'checked';
+        $modal = '<div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Modificar Datos del Slider</h3>
+                    </div>
+                    <div class="row">
+                        <form role="form" id="frmEditarSlider" method="POST">
+                            <input type="hidden" name="id" value="' . $id . '">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Texto 1</label>
+                                    <input type="text" name="texto_1" class="form-control" placeholder="Texto 1" value="' . utf8_encode($sql[0]['texto_1']) . '">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Texto 2</label>
+                                    <input type="text" name="texto_2" class="form-control" placeholder="Texto 2" value="' . utf8_encode($sql[0]['texto_2']) . '">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Orden</label>
+                                    <input type="text" name="orden" class="form-control" placeholder="Orden" value="' . utf8_encode($sql[0]['orden']) . '">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="i-checks"><label> <input type="checkbox" name="estado" value="1" ' . $checked . '> <i></i> Mostrar </label></div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="i-checks"><label> <input type="checkbox" name="principal" value="1" ' . $checkedPrincipal . '> <i></i> Principal </label></div>
+                            </div>
+                            <button type="submit" class="btn btn-block btn-primary btn-lg">Editar Contenido</button>
+                        </form>
+                        <hr>
+                        <div class="col-md-12">
+                            <h3>Imagen</h3>
+                            <div class="alert alert-info alert-dismissable">
+                                <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                                Detalles de la imagen a subir:<br>
+                                    -Formato: JPG,PNG (La imagen principal tiene que ser PNG transparente)<br>
+                                    -Dimensión: Imagen Normal: 1920 x 1080px, Imagen Principal: 310 x 649px<br>
+                                    -Tamaño: Hasta 2MB<br>
+                                <strong>Obs.: Las imagenes serán redimensionadas automaticamente a la dimensión especificada y se reducirá la calidad de la misma.</strong>
+                            </div>
+                            <div class="html5fileupload fileSlider" data-max-filesize="2048000" data-url="' . URL . 'admin/uploadImgSlider" data-valid-extensions="JPG,JPEG,jpg,png,jpeg,PNG" style="width: 100%;">
+                                <input type="file" name="file_archivo" />
+                            </div>
+                            <script>
+                                $(".html5fileupload.fileSlider").html5fileupload({
+                                    data:{id:' . $id . '},
+                                    onAfterStartSuccess: function(response) {
+                                        $("#imgSlider" + response.id).html(response.content);
+                                        $("#slider_" + response.id).html(response.row);
+                                    }
+                                });
+                            </script>
+                        </div>
+                        <div class="col-md-12" id="imgSlider' . $id . '">';
+        if (!empty($sql[0]['imagen'])) {
+            $modal .= '     <img class="img-responsive" src="' . URL . 'public/images/slider/' . $sql[0]['imagen'] . '">';
+        }
+        $modal .= '     </div>
+                    </div>
+                </div>
+                <script>
+                    $(document).ready(function () {
+                        $(".i-checks").iCheck({
+                            checkboxClass: "icheckbox_square-green",
+                            radioClass: "iradio_square-green",
+                        });
+                    });
+                </script>';
+        $data = array(
+            'titulo' => 'Editar Slider',
+            'content' => $modal
+        );
+        return json_encode($data);
+    }
+
+    public function frmEditarSlider($datos) {
+        $id = $datos['id'];
+        $estado = 1;
+        if (empty($datos['estado'])) {
+            $estado = 0;
+        }
+        $update = array(
+            'texto_1' => utf8_decode($datos['texto_1']),
+            'texto_2' => utf8_decode($datos['texto_2']),
+            'orden' => $datos['orden'],
+            'principal' => $datos['principal'],
+            'estado' => $estado
+        );
+        $this->db->update('web_inicio_slider', $update, "id = $id");
+        $data = array(
+            'type' => 'success',
+            'id' => $id,
+            'content' => $this->rowDataTable('slider', 'web_inicio_slider', $id)
+        );
+        return $data;
+    }
+
+    public function modalAgregarSlider() {
+        $modal = '<div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Agregar Slider</h3>
+                    </div>
+                    <div class="row">
+                        <form role="form" action="' . URL . 'admin/frmAgregarSlider" method="POST" enctype="multipart/form-data">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Texto 1</label>
+                                    <input type="text" name="texto_1" class="form-control" placeholder="Texto 1" value="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Texto 2</label>
+                                    <input type="text" name="texto_2" class="form-control" placeholder="Texto 2" value="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Orden</label>
+                                    <input type="text" name="orden" class="form-control" placeholder="Orden">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="i-checks"><label> <input type="checkbox" name="estado" value="1"> <i></i> Mostrar </label></div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="i-checks"><label> <input type="checkbox" name="principal" value="1"> <i></i> Principal </label></div>
+                            </div>
+                            <div class="col-md-12">
+                                <h3>Imagen</h3>
+                                <div class="alert alert-info alert-dismissable">
+                                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                                    Detalles de la imagen a subir:<br>
+                                        -Formato: JPG,PNG (La imagen principal tiene que ser PNG transparente)<br>
+                                        -Dimensión: Imagen Normal: 1920 x 1080px, Imagen Principal: 310 x 649px<br>
+                                        -Tamaño: Hasta 2MB<br>
+                                    <strong>Obs.: Las imagenes serán redimensionadas automaticamente a la dimensión especificada y se reducirá la calidad de la misma.</strong>
+                                </div>
+                                <div class="html5fileupload fileAgregarSlider" data-form="true" data-max-filesize="2048000"  data-valid-extensions="JPG,JPEG,jpg,png,jpeg,PNG" style="width: 100%;">
+                                    <input type="file" name="file_archivo" />
+                                </div>
+                                <script>
+                                    $(".html5fileupload.fileAgregarSlider").html5fileupload();
+                                </script>
+                            </div>
+                            <button type="submit" class="btn btn-block btn-primary btn-lg">Agregar Slider</button>
+                        </form>
+                    </div>
+                </div>
+                <script>
+                    $(document).ready(function () {
+                        $(".i-checks").iCheck({
+                            checkboxClass: "icheckbox_square-green",
+                            radioClass: "iradio_square-green",
+                        });
+                    });
+                </script>';
+        $data = array(
+            'titulo' => 'Agregar Slider',
+            'content' => $modal
+        );
+        return $data;
+    }
+
+    public function frmAgregarSlider($datos) {
+        $this->db->insert('web_inicio_slider', array(
+            'texto_1' => utf8_decode($datos['texto_1']),
+            'texto_2' => utf8_decode($datos['texto_2']),
+            'orden' => $datos['orden'],
+            'principal' => $datos['principal'],
+            'estado' => $datos['estado']
+        ));
+        $id = $this->db->lastInsertId();
+        return $id;
+    }
+
+    public function frmAddSliderImg($imagenes) {
+        $id = $imagenes['id'];
+        $update = array(
+            'imagen' => $imagenes['imagenes']
+        );
+        $this->db->update('web_inicio_slider', $update, "id = $id");
+    }
+
+    public function uploadImgSlider($datos) {
+        $id = $datos['id'];
+        $update = array(
+            'imagen' => $datos['imagen']
+        );
+        $this->db->update('web_inicio_slider', $update, "id = $id");
+        $contenido = '<img class="img-responsive" src="' . URL . 'public/images/slider/' . $datos['imagen'] . '">';
+        $data = array(
+            "result" => true,
+            'id' => $id,
+            'content' => $contenido,
+            'row' => $this->rowDataTable('slider', 'web_inicio_slider', $id)
+        );
+        return $data;
+    }
+
+    public function listadoDTCaracteristicas() {
+        $sql = $this->db->select("SELECT * FROM `web_inicio_caracteristicas` order by orden asc;");
+        $datos = array();
+        foreach ($sql as $item) {
+            $id = $item['id'];
+            if ($item['estado'] == 1) {
+                $estado = '<a class="pointer btnCambiarEstado" data-seccion="caracteristicas" data-rowid="caracteristicas_" data-tabla="web_inicio_caracteristicas" data-campo="estado" data-id="' . $id . '" data-estado="1"><span class="label label-primary">Activo</span></a>';
+            } else {
+                $estado = '<a class="pointer btnCambiarEstado" data-seccion="caracteristicas" data-rowid="caracteristicas_" data-tabla="web_inicio_caracteristicas" data-campo="estado" data-id="' . $id . '" data-estado="0"><span class="label label-danger">Inactivo</span></a>';
+            }
+            $icono = '<i class="' . utf8_encode($item['icon']) . '"></i>';
+            $btnEditar = '<a class="editDTContenido pointer btn-xs" data-id="' . $id . '" data-url="modalEditarCaracteristicas"><i class="fa fa-edit"></i> Editar </a>';
+            array_push($datos, array(
+                "DT_RowId" => "caracteristicas_$id",
+                'orden' => utf8_encode($item['orden']),
+                'item' => utf8_encode($item['titulo']),
+                'icono' => $icono,
+                'estado' => $estado,
+                'accion' => $btnEditar
+            ));
+        }
+        $json = '{"data": ' . json_encode($datos) . '}';
+        return $json;
+    }
+
+    public function modalEditarCaracteristicas($datos) {
+        $id = $datos['id'];
+        $sql = $this->db->select("SELECT * FROM web_inicio_caracteristicas where id = $id");
+        $sqlIconos = $this->db->select("SELECT * FROM web_medical_icon where estado = 1");
+        $checked = "";
+        if ($sql[0]['estado'] == 1)
+            $checked = 'checked';
+        $modal = '<div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Modificar Datos</h3>
+                    </div>
+                    <div class="row">
+                        <form role="form" id="frmEditarCaracteristicas" method="POST">
+                            <input type="hidden" name="id" value="' . $id . '">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Título</label>
+                                    <input type="text" name="titulo" class="form-control" value="' . utf8_encode($sql[0]['titulo']) . '">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Contenido</label>
+                                    <textarea style="height:80px;" name="contenido" class="form-control">' . utf8_encode($sql[0]['contenido']) . '</textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Orden</label>
+                                    <input type="text" name="orden" class="form-control" placeholder="Orden" value="' . utf8_encode($sql[0]['orden']) . '">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Icono</label>
+                                    <select class="form-control" name="icon">
+                                        <option value="">Seleccione un Icono</option>';
+        foreach ($sqlIconos as $item) {
+            $selected = ($item['descripcion'] == $sql[0]['icon']) ? 'selected' : '';
+            $modal .= '                 <option value="' . $item['descripcion'] . '" ' . $selected . '>' . $item['descripcion'] . '<i class="' . $item['descripcion'] . '"></i></option>';
+        }
+        $modal .= '                 </select>
+                               </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="i-checks"><label> <input type="checkbox" name="estado" value="1" ' . $checked . '> <i></i> Mostrar </label></div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="btn-submit">
+                                <button type="submit" class="btn btn-block btn-primary btn-lg">Editar Contenido</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <script>
+                    $(document).ready(function () {
+                        $(".i-checks").iCheck({
+                            checkboxClass: "icheckbox_square-green",
+                            radioClass: "iradio_square-green",
+                        });
+                    });
+                </script>';
+        $data = array(
+            'titulo' => 'Editar Item Caracteristicas',
+            'content' => $modal
+        );
+        return json_encode($data);
+    }
+
+    public function modalAgregarCaracteristicas() {
+        $sqlIconos = $this->db->select("SELECT * FROM web_medical_icon where estado = 1");
+        $modal = '<div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Agregar Caracteristica</h3>
+                    </div>
+                    <div class="row">
+                        <form role="form" id="frmAgregarCaracteristicas" method="POST">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Título</label>
+                                    <input type="text" name="titulo" class="form-control" value="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Contenido</label>
+                                    <textarea style="height:80px;" name="contenido" class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Orden</label>
+                                    <input type="text" name="orden" class="form-control" placeholder="Orden" value="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Icono</label>
+                                    <select class="form-control" name="icon">
+                                        <option value="">Seleccione un Icono</option>';
+        foreach ($sqlIconos as $item) {
+            $modal .= '                 <option value="' . $item['descripcion'] . '">' . $item['descripcion'] . '<i class="' . $item['descripcion'] . '"></i></option>';
+        }
+        $modal .= '                 </select>
+                               </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="i-checks"><label> <input type="checkbox" name="estado" value="1"> <i></i> Mostrar </label></div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="btn-submit">
+                                <button type="submit" class="btn btn-block btn-primary btn-lg">Agregar Contenido</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <script>
+                    $(document).ready(function () {
+                        $(".i-checks").iCheck({
+                            checkboxClass: "icheckbox_square-green",
+                            radioClass: "iradio_square-green",
+                        });
+                    });
+                </script>';
+        $data = array(
+            'titulo' => 'Agregar Caracteristicas',
+            'content' => $modal
+        );
+        return $data;
+    }
+
+    public function frmEditarCaracteristicas($datos) {
+        $id = $datos['id'];
+        $estado = 1;
+        if (empty($datos['estado'])) {
+            $estado = 0;
+        }
+        $update = array(
+            'titulo' => utf8_decode($datos['titulo']),
+            'contenido' => utf8_decode($datos['contenido']),
+            'icon' => utf8_decode($datos['icon']),
+            'orden' => utf8_decode($datos['orden']),
+            'estado' => $estado
+        );
+        $this->db->update('web_inicio_caracteristicas', $update, "id = $id");
+        $data = array(
+            'type' => 'success',
+            'content' => $this->rowDataTable('caracteristicas', 'web_inicio_caracteristicas', $id),
+            'id' => $id
+        );
+        return $data;
+    }
+
+    public function frmAgregarCaracteristicas($datos) {
+        $this->db->insert('web_inicio_caracteristicas', array(
+            'titulo' => utf8_decode($datos['titulo']),
+            'contenido' => utf8_decode($datos['contenido']),
+            'icon' => utf8_decode($datos['icon']),
+            'orden' => utf8_decode($datos['orden']),
+            'estado' => $datos['estado']
+        ));
+        $id = $this->db->lastInsertId();
+        $sql = $this->db->select("select * from web_inicio_caracteristicas where id = $id");
+        if ($sql[0]['estado'] == 1) {
+            $estado = '<a class="pointer btnCambiarEstado" data-seccion="caracteristicas" data-rowid="caracteristicas_" data-tabla="web_inicio_caracteristicas" data-campo="estado" data-id="' . $id . '" data-estado="1"><span class="label label-primary">Activo</span></a>';
+        } else {
+            $estado = '<a class="pointer btnCambiarEstado" data-seccion="caracteristicas" data-rowid="caracteristicas_" data-tabla="web_inicio_caracteristicas" data-campo="estado" data-id="' . $id . '" data-estado="0"><span class="label label-danger">Inactivo</span></a>';
+        }
+        $icono = '<i class="' . utf8_encode($sql[0]['icon']) . '"></i>';
+        $btnEditar = '<a class="editDTContenido pointer btn-xs" data-id="' . $id . '" data-url="modalEditarCaracteristicas"><i class="fa fa-edit"></i> Editar </a>';
+        $data = array(
+            'type' => 'success',
+            'orden' => utf8_encode($sql[0]['orden']),
+            'item' => utf8_encode($sql[0]['titulo']),
+            'icono' => $icono,
+            'estado' => $estado,
+            'accion' => $btnEditar
+        );
+        return $data;
     }
 
 }
