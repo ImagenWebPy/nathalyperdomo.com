@@ -22,7 +22,7 @@
                         <div class="column one-second column_image">
                             <div class="scale-with-grid aligncenter wp-caption no-hover">
                                 <div class="photo">
-                                    <img class="scale-with-grid aboutus-img" src="<?= URL; ?>public/images/<?= utf8_encode($this->datos_nosotros['imagen_lila']); ?>" alt=""/>
+                                    <img class="scale-with-grid aboutus-img" src="<?= URL; ?>public/images/<?= utf8_encode($this->datos_nosotros['imagen']); ?>" alt=""/>
                                 </div>
                             </div>
                         </div>

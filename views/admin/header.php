@@ -66,6 +66,7 @@ $paginaActual = $helper->getActivePageAdmin($pagina);
                         <li <?= $paginaActual['paginas']['dashboard']; ?>><a href="<?= URL; ?>admin"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboards</span></a></li>
                         <li <?= $paginaActual['paginas']['inicio']; ?>><a href="<?= URL; ?>admin/inicio"><i class="fa fa-home"></i> <span class="nav-label">Inicio</span></a></li>
                         <li <?= $paginaActual['paginas']['nathaly']; ?>><a href="<?= URL; ?>admin/nathaly"><i class="fa fa-leaf"></i> <span class="nav-label">Nathaly</span></a></li>
+                        
                         <li <?= $paginaActual['paginas']['consultorio']['consultorio']; ?>>
                             <a href="#"><i class="fa fa-user-md"></i> <span class="nav-label">Consultorio</span><span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level collapse" style="height: 0px;">
@@ -74,6 +75,7 @@ $paginaActual = $helper->getActivePageAdmin($pagina);
                                 <li <?= $paginaActual['paginas']['consultorio']['ciudades']; ?>><a href="<?= URL; ?>admin/ciudades">Ciudades</a></li>
                             </ul>
                         </li>
+                        <li <?= $paginaActual['paginas']['blog']; ?>><a href="<?= URL; ?>admin/blog"><i class="fa fa-pencil-square-o"></i> <span class="nav-label">Blog</span></a></li>
                         <li <?= $paginaActual['paginas']['contacto']; ?>><a href="<?= URL; ?>admin/contacto"><i class="fa fa-envelope-o"></i> <span class="nav-label">Contacto</span></a></li>
                     </ul>
                 </div>

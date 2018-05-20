@@ -351,6 +351,46 @@ class Admin_Model extends Model {
                         . '<td>' . $estado . '</td>'
                         . '<td>' . $btnEditar . '</td>';
                 break;
+            case 'frases':
+                if ($sql[0]['estado'] == 1) {
+                    $estado = '<a class="pointer btnCambiarEstado" data-seccion="frases" data-rowid="frases_" data-tabla="web_frases" data-campo="estado" data-id="' . $id . '" data-estado="1"><span class="label label-primary">Activo</span></a>';
+                } else {
+                    $estado = '<a class="pointer btnCambiarEstado" data-seccion="frases" data-rowid="frases_" data-tabla="web_frases" data-campo="estado" data-id="' . $id . '" data-estado="0"><span class="label label-danger">Inactivo</span></a>';
+                }
+                $btnEditar = '<a class="editDTContenido pointer btn-xs" data-id="' . $id . '" data-url="modalEditarFrases"><i class="fa fa-edit"></i> Editar </a>';
+                $data = '<td>' . utf8_encode($sql[0]['orden']) . '</td>'
+                        . '<td>' . utf8_encode($sql[0]['frase']) . '</td>'
+                        . '<td>' . utf8_encode($sql[0]['autor']) . '</td>'
+                        . '<td>' . $estado . '</td>'
+                        . '<td>' . $btnEditar . '</td>';
+                break;
+            case 'servicios':
+                if ($sql[0]['estado'] == 1) {
+                    $estado = '<a class="pointer btnCambiarEstado" data-seccion="servicios" data-rowid="servicios_" data-tabla="web_inicio_servicios" data-campo="estado" data-id="' . $id . '" data-estado="1"><span class="label label-primary">Activo</span></a>';
+                } else {
+                    $estado = '<a class="pointer btnCambiarEstado" data-seccion="servicios" data-rowid="servicios_" data-tabla="web_inicio_servicios" data-campo="estado" data-id="' . $id . '" data-estado="0"><span class="label label-danger">Inactivo</span></a>';
+                }
+                $btnEditar = '<a class="editDTContenido pointer btn-xs" data-id="' . $id . '" data-url="modalEditarServicios"><i class="fa fa-edit"></i> Editar </a>';
+                $data = '<td>' . utf8_encode($sql[0]['orden']) . '</td>'
+                        . '<td>' . utf8_encode($sql[0]['servicio']) . '</td>'
+                        . '<td>' . $estado . '</td>'
+                        . '<td>' . $btnEditar . '</td>';
+                break;
+            case 'verContacto':
+                if ($sql[0]['leido'] == 1) {
+                    $estado = '<span class="label label-primary">Leído</span>';
+                } else {
+                    $estado = '<span class="label label-danger">No Leído</span>';
+                }
+                $btnEditar = '<a class="btnVerContacto pointer btn-xs" data-id="' . $id . '" data-url="modalVerContacto"><i class="fa fa-edit"></i> Ver Datos </a>';
+                $data = '<td>' . $id . '</td>'
+                        . '<td>' . utf8_encode($sql[0]['nombre']) . '</td>'
+                        . '<td>' . utf8_encode($sql[0]['email']) . '</td>'
+                        . '<td>' . utf8_encode($sql[0]['asunto']) . '</td>'
+                        . '<td>' . date('d-m-Y H:i:s', strtotime($sql[0]['fecha'])) . '</td>'
+                        . '<td>' . $estado . '</td>'
+                        . '<td>' . $btnEditar . '</td>';
+                break;
         }
         return $data;
     }
@@ -694,6 +734,53 @@ class Admin_Model extends Model {
         return $json;
     }
 
+    public function listadoDTServicios() {
+        $sql = $this->db->select("SELECT * FROM `web_inicio_servicios` order by orden asc;");
+        $datos = array();
+        foreach ($sql as $item) {
+            $id = $item['id'];
+            if ($item['estado'] == 1) {
+                $estado = '<a class="pointer btnCambiarEstado" data-seccion="servicios" data-rowid="servicios_" data-tabla="web_inicio_servicios" data-campo="estado" data-id="' . $id . '" data-estado="1"><span class="label label-primary">Activo</span></a>';
+            } else {
+                $estado = '<a class="pointer btnCambiarEstado" data-seccion="servicios" data-rowid="servicios_" data-tabla="web_inicio_servicios" data-campo="estado" data-id="' . $id . '" data-estado="0"><span class="label label-danger">Inactivo</span></a>';
+            }
+            $btnEditar = '<a class="editDTContenido pointer btn-xs" data-id="' . $id . '" data-url="modalEditarServicios"><i class="fa fa-edit"></i> Editar </a>';
+            array_push($datos, array(
+                "DT_RowId" => "servicios_$id",
+                'orden' => utf8_encode($item['orden']),
+                'servicio' => utf8_encode($item['servicio']),
+                'estado' => $estado,
+                'accion' => $btnEditar
+            ));
+        }
+        $json = '{"data": ' . json_encode($datos) . '}';
+        return $json;
+    }
+
+    public function listadoDTFrases() {
+        $sql = $this->db->select("SELECT * FROM `web_frases` order by orden asc;");
+        $datos = array();
+        foreach ($sql as $item) {
+            $id = $item['id'];
+            if ($item['estado'] == 1) {
+                $estado = '<a class="pointer btnCambiarEstado" data-seccion="frases" data-rowid="frases_" data-tabla="web_frases" data-campo="estado" data-id="' . $id . '" data-estado="1"><span class="label label-primary">Activo</span></a>';
+            } else {
+                $estado = '<a class="pointer btnCambiarEstado" data-seccion="frases" data-rowid="frases_" data-tabla="web_frases" data-campo="estado" data-id="' . $id . '" data-estado="0"><span class="label label-danger">Inactivo</span></a>';
+            }
+            $btnEditar = '<a class="editDTContenido pointer btn-xs" data-id="' . $id . '" data-url="modalEditarFrases"><i class="fa fa-edit"></i> Editar </a>';
+            array_push($datos, array(
+                "DT_RowId" => "frases_" . $id,
+                'orden' => utf8_encode($item['orden']),
+                'frase' => utf8_encode($item['frase']),
+                'autor' => utf8_encode($item['autor']),
+                'estado' => $estado,
+                'accion' => $btnEditar
+            ));
+        }
+        $json = '{"data": ' . json_encode($datos) . '}';
+        return $json;
+    }
+
     public function modalEditarCaracteristicas($datos) {
         $id = $datos['id'];
         $sql = $this->db->select("SELECT * FROM web_inicio_caracteristicas where id = $id");
@@ -761,6 +848,218 @@ class Admin_Model extends Model {
             'content' => $modal
         );
         return json_encode($data);
+    }
+
+    public function modalEditarFrases($datos) {
+        $id = $datos['id'];
+        $sql = $this->db->select("SELECT * FROM web_frases where id = $id");
+        $checked = "";
+        if ($sql[0]['estado'] == 1)
+            $checked = 'checked';
+        $modal = '<div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Modificar Datos</h3>
+                    </div>
+                    <div class="row">
+                        <form role="form" id="frmEditarFrases" method="POST">
+                            <input type="hidden" name="id" value="' . $id . '">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Autor</label>
+                                    <input type="text" name="autor" class="form-control" value="' . utf8_encode($sql[0]['autor']) . '">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Frase</label>
+                                    <textarea style="height:80px;" name="frase" class="form-control">' . utf8_encode($sql[0]['frase']) . '</textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Orden</label>
+                                    <input type="text" name="orden" class="form-control" placeholder="Orden" value="' . utf8_encode($sql[0]['orden']) . '">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="i-checks"><label> <input type="checkbox" name="estado" value="1" ' . $checked . '> <i></i> Mostrar </label></div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="btn-submit">
+                                <button type="submit" class="btn btn-block btn-primary btn-lg">Editar Frase</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <script>
+                    $(document).ready(function () {
+                        $(".i-checks").iCheck({
+                            checkboxClass: "icheckbox_square-green",
+                            radioClass: "iradio_square-green",
+                        });
+                    });
+                </script>';
+        $data = array(
+            'titulo' => 'Editar Frase',
+            'content' => $modal
+        );
+        return json_encode($data);
+    }
+
+    public function modalEditarServicios($datos) {
+        $id = $datos['id'];
+        $sql = $this->db->select("SELECT * FROM web_inicio_servicios where id = $id");
+        $checked = "";
+        if ($sql[0]['estado'] == 1)
+            $checked = 'checked';
+        $modal = '<div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Modificar Datos</h3>
+                    </div>
+                    <div class="row">
+                        <form role="form" id="frmEditarServicios" method="POST">
+                            <input type="hidden" name="id" value="' . $id . '">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Nombre Servicio</label>
+                                    <input type="text" name="servicio" class="form-control" value="' . utf8_encode($sql[0]['servicio']) . '">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Contenido</label>
+                                    <textarea style="height:80px;" name="contenido" class="form-control">' . utf8_encode($sql[0]['contenido']) . '</textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Orden</label>
+                                    <input type="text" name="orden" class="form-control" placeholder="Orden" value="' . utf8_encode($sql[0]['orden']) . '">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="i-checks"><label> <input type="checkbox" name="estado" value="1" ' . $checked . '> <i></i> Mostrar </label></div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="btn-submit">
+                                <button type="submit" class="btn btn-block btn-primary btn-lg">Editar Servicio</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <script>
+                    $(document).ready(function () {
+                        $(".i-checks").iCheck({
+                            checkboxClass: "icheckbox_square-green",
+                            radioClass: "iradio_square-green",
+                        });
+                    });
+                </script>';
+        $data = array(
+            'titulo' => 'Editar Servicio',
+            'content' => $modal
+        );
+        return json_encode($data);
+    }
+
+    public function modalAgregarFrases() {
+        $modal = '<div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Agregar Datos</h3>
+                    </div>
+                    <div class="row">
+                        <form role="form" id="frmAgregarFrases" method="POST">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Autor</label>
+                                    <input type="text" name="autor" class="form-control" value="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Frase</label>
+                                    <textarea style="height:80px;" name="frase" class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Orden</label>
+                                    <input type="text" name="orden" class="form-control" placeholder="Orden" value="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="i-checks"><label> <input type="checkbox" name="estado" value="1"><i></i> Mostrar </label></div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="btn-submit">
+                                <button type="submit" class="btn btn-block btn-primary btn-lg">Editar Frase</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <script>
+                    $(document).ready(function () {
+                        $(".i-checks").iCheck({
+                            checkboxClass: "icheckbox_square-green",
+                            radioClass: "iradio_square-green",
+                        });
+                    });
+                </script>';
+        $data = array(
+            'titulo' => 'Agregar Frase',
+            'content' => $modal
+        );
+        return $data;
+    }
+
+    public function modalAgregarServicio() {
+        $modal = '<div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Agregar Datos</h3>
+                    </div>
+                    <div class="row">
+                        <form role="form" id="frmAgregarServicio" method="POST">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Nombre Servicio</label>
+                                    <input type="text" name="servicio" class="form-control" value="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Contenido</label>
+                                    <textarea style="height:80px;" name="contenido" class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Orden</label>
+                                    <input type="text" name="orden" class="form-control" placeholder="Orden" value="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="i-checks"><label> <input type="checkbox" name="estado" value="1"><i></i> Mostrar </label></div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="btn-submit">
+                                <button type="submit" class="btn btn-block btn-primary btn-lg">Agregar Servicio</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <script>
+                    $(document).ready(function () {
+                        $(".i-checks").iCheck({
+                            checkboxClass: "icheckbox_square-green",
+                            radioClass: "iradio_square-green",
+                        });
+                    });
+                </script>';
+        $data = array(
+            'titulo' => 'Agregar Servicio',
+            'content' => $modal
+        );
+        return $data;
     }
 
     public function modalAgregarCaracteristicas() {
@@ -847,6 +1146,48 @@ class Admin_Model extends Model {
         return $data;
     }
 
+    public function frmEditarFrases($datos) {
+        $id = $datos['id'];
+        $estado = 1;
+        if (empty($datos['estado'])) {
+            $estado = 0;
+        }
+        $update = array(
+            'frase' => utf8_decode($datos['frase']),
+            'autor' => utf8_decode($datos['autor']),
+            'orden' => utf8_decode($datos['orden']),
+            'estado' => $estado
+        );
+        $this->db->update('web_frases', $update, "id = $id");
+        $data = array(
+            'type' => 'success',
+            'content' => $this->rowDataTable('frases', 'web_frases', $id),
+            'id' => $id
+        );
+        return $data;
+    }
+
+    public function frmEditarServicios($datos) {
+        $id = $datos['id'];
+        $estado = 1;
+        if (empty($datos['estado'])) {
+            $estado = 0;
+        }
+        $update = array(
+            'servicio' => utf8_decode($datos['servicio']),
+            'contenido' => utf8_decode($datos['contenido']),
+            'orden' => utf8_decode($datos['orden']),
+            'estado' => $estado
+        );
+        $this->db->update('web_inicio_servicios', $update, "id = $id");
+        $data = array(
+            'type' => 'success',
+            'content' => $this->rowDataTable('servicios', 'web_inicio_servicios', $id),
+            'id' => $id
+        );
+        return $data;
+    }
+
     public function frmAgregarCaracteristicas($datos) {
         $this->db->insert('web_inicio_caracteristicas', array(
             'titulo' => utf8_decode($datos['titulo']),
@@ -873,6 +1214,294 @@ class Admin_Model extends Model {
             'accion' => $btnEditar
         );
         return $data;
+    }
+
+    public function frmAgregarFrases($datos) {
+        $this->db->insert('web_frases', array(
+            'frase' => utf8_decode($datos['frase']),
+            'autor' => utf8_decode($datos['autor']),
+            'orden' => utf8_decode($datos['orden']),
+            'estado' => $datos['estado']
+        ));
+        $id = $this->db->lastInsertId();
+        $sql = $this->db->select("select * from web_frases where id = $id");
+        if ($sql[0]['estado'] == 1) {
+            $estado = '<a class="pointer btnCambiarEstado" data-seccion="frases" data-rowid="frases_" data-tabla="web_frases" data-campo="estado" data-id="' . $id . '" data-estado="1"><span class="label label-primary">Activo</span></a>';
+        } else {
+            $estado = '<a class="pointer btnCambiarEstado" data-seccion="frases" data-rowid="frases_" data-tabla="web_frases" data-campo="estado" data-id="' . $id . '" data-estado="0"><span class="label label-danger">Inactivo</span></a>';
+        }
+        $btnEditar = '<a class="editDTContenido pointer btn-xs" data-id="' . $id . '" data-url="modalEditarFrases"><i class="fa fa-edit"></i> Editar </a>';
+        $data = array(
+            'type' => 'success',
+            'orden' => utf8_encode($sql[0]['orden']),
+            'frase' => utf8_encode($sql[0]['frase']),
+            'autor' => utf8_encode($sql[0]['autor']),
+            'estado' => $estado,
+            'accion' => $btnEditar
+        );
+        return $data;
+    }
+
+    public function frmAgregarServicio($datos) {
+        $this->db->insert('web_inicio_servicios', array(
+            'servicio' => utf8_decode($datos['servicio']),
+            'contenido' => utf8_decode($datos['contenido']),
+            'orden' => utf8_decode($datos['orden']),
+            'estado' => $datos['estado']
+        ));
+        $id = $this->db->lastInsertId();
+        $sql = $this->db->select("select * from web_inicio_servicios where id = $id");
+        if ($sql[0]['estado'] == 1) {
+            $estado = '<a class="pointer btnCambiarEstado" data-seccion="servicios" data-rowid="servicios_" data-tabla="web_inicio_servicios" data-campo="estado" data-id="' . $id . '" data-estado="1"><span class="label label-primary">Activo</span></a>';
+        } else {
+            $estado = '<a class="pointer btnCambiarEstado" data-seccion="servicios" data-rowid="servicios_" data-tabla="web_inicio_servicios" data-campo="estado" data-id="' . $id . '" data-estado="0"><span class="label label-danger">Inactivo</span></a>';
+        }
+        $btnEditar = '<a class="editDTContenido pointer btn-xs" data-id="' . $id . '" data-url="modalEditarServicios"><i class="fa fa-edit"></i> Editar </a>';
+        $data = array(
+            'type' => 'success',
+            'orden' => utf8_encode($sql[0]['orden']),
+            'servicio' => utf8_encode($sql[0]['servicio']),
+            'estado' => $estado,
+            'accion' => $btnEditar
+        );
+        return $data;
+    }
+
+    public function datosVideoInicio() {
+        $sql = $this->db->select('select * from web_inicio_video where id = 1');
+        return $sql[0];
+    }
+
+    public function datosInicioNosotros() {
+        $sql = $this->db->select('select * from web_inicio_nosotros where id = 1');
+        return $sql[0];
+    }
+
+    public function datosInicioImagenParallax() {
+        $sql = $this->db->select('select * from web_inicio_parallax where id = 1');
+        return $sql[0];
+    }
+
+    public function datosNathaly() {
+        $sql = $this->db->select('select * from web_page_nosotros where id = 1');
+        return $sql[0];
+    }
+
+    public function frmVideoInicio($datos) {
+        $update = array(
+            'titulo' => utf8_decode($datos['titulo']),
+            'texto_info' => utf8_decode($datos['texto_info']),
+            'texto_info2' => utf8_decode($datos['texto_info2']),
+            'url_video' => utf8_decode($datos['url_video'])
+        );
+        $this->db->update('web_inicio_video', $update, "id = 1");
+        $data = array(
+            'type' => 'success',
+            'content' => 'Se han guardado correctamente los cambios para el video del inicio.'
+        );
+        return $data;
+    }
+
+    public function frmInicioNosotros($datos) {
+        $update = array(
+            'titulo' => utf8_decode($datos['titulo']),
+            'contenido' => utf8_decode($datos['contenido'])
+        );
+        $this->db->update('web_inicio_nosotros', $update, "id = 1");
+        $data = array(
+            'type' => 'success',
+            'content' => 'Se han guardado correctamente los cambios para el contenido de Nosotros del Inicio.'
+        );
+        return $data;
+    }
+
+    public function frmInicioImagenParallax($datos) {
+        $update = array(
+            'texto' => utf8_decode($datos['texto'])
+        );
+        $this->db->update('web_inicio_parallax', $update, "id = 1");
+        $data = array(
+            'type' => 'success',
+            'content' => 'Se han guardado correctamente los cambios para el texto de la imagen Parallax del Inicio.'
+        );
+        return $data;
+    }
+
+    public function frmNosotrosTexto($datos) {
+        $update = array(
+            'texto' => utf8_decode($datos['texto'])
+        );
+        $this->db->update('web_page_nosotros', $update, "id = 1");
+        $data = array(
+            'type' => 'success',
+            'content' => 'Se han guardado correctamente los cambios para el texto.'
+        );
+        return $data;
+    }
+
+    public function uploadImgInicioNosotros($datos) {
+        $id = 1;
+        $update = array(
+            'imagen' => $datos['imagen']
+        );
+        $this->db->update('web_inicio_nosotros', $update, "id = $id");
+        $contenido = '<img class="img-responsive" src="' . URL . 'public/images/' . $datos['imagen'] . '">';
+        $data = array(
+            "result" => true,
+            'content' => $contenido,
+        );
+        return $data;
+    }
+
+    public function uploadImgNosotrosPagina($datos) {
+        $id = 1;
+        $update = array(
+            'imagen' => $datos['imagen']
+        );
+        $this->db->update('web_page_nosotros', $update, "id = $id");
+        $contenido = '<img class="img-responsive" src="' . URL . 'public/images/' . $datos['imagen'] . '">';
+        $data = array(
+            "result" => true,
+            'content' => $contenido,
+        );
+        return $data;
+    }
+
+    public function uploadImgInicioParallax($datos) {
+        $id = 1;
+        $update = array(
+            'imagen' => $datos['imagen']
+        );
+        $this->db->update('web_inicio_parallax', $update, "id = $id");
+        $contenido = '<img class="img-responsive" src="' . URL . 'public/images/' . $datos['imagen'] . '">';
+        $data = array(
+            "result" => true,
+            'content' => $contenido,
+        );
+        return $data;
+    }
+
+    public function uploadImgNosotrosCabecera($datos) {
+        $id = 1;
+        $update = array(
+            'imagen_header' => $datos['imagen']
+        );
+        $this->db->update('web_page_nosotros', $update, "id = $id");
+        $contenido = '<img class="img-responsive" src="' . URL . 'public/images/' . $datos['imagen'] . '">';
+        $data = array(
+            "result" => true,
+            'content' => $contenido,
+        );
+        return $data;
+    }
+
+    public function listadoDTContacto($datos) {
+        $columns = array(
+            0 => 'id',
+            1 => 'nombre',
+            2 => 'email',
+            3 => 'asunto',
+            4 => 'fecha',
+            5 => 'visto',
+            6 => 'accion',
+        );
+        #getting total number records without any search
+        $sql = $this->db->select("SELECT COUNT(*) as cantidad FROM web_contacto");
+        $totalFiltered = $sql[0]['cantidad'];
+        $totalData = $sql[0]['cantidad'];
+
+        $query = "SELECT * FROM web_contacto where 1 = 1";
+        $where = "";
+        if (!empty($datos['search']['value'])) {
+            $where .= " AND (nombre LIKE '%" . $requestData['search']['value'] . "%' ";
+            $where .= " OR email LIKE '%" . $requestData['search']['value'] . "%' ";
+            $where .= " OR asunto LIKE '%" . $requestData['search']['value'] . "%' ";
+            $where .= " OR fecha LIKE '%" . $requestData['search']['value'] . "%' )";
+            #when there is a search parameter then we have to modify total number filtered rows as per search result.
+            $sql = $this->db->select("SELECT COUNT(*) as cantidad FROM web_contacto where 1 = 1 $where");
+            $totalFiltered = $sql[0]['cantidad'];
+        }
+        $query .= $where;
+        $query .= " ORDER BY " . $columns[$datos['order'][0]['column']] . "   " . $datos['order'][0]['dir'] . "  LIMIT " . $datos['start'] . " ," . $datos['length'] . "   ";
+        $sql = $this->db->select($query);
+        $data = array();
+        foreach ($sql as $row) {  // preparing an array
+            $id = $row["id"];
+            if ($row['leido'] == 1) {
+                $estado = '<span class="label label-primary">Leído</span>';
+            } else {
+                $estado = '<span class="label label-danger">No Leído</span>';
+            }
+            $btnEditar = '<a class="btnVerContacto pointer btn-xs" data-id="' . $id . '" data-url="modalVerContacto"><i class="fa fa-edit"></i> Ver Datos </a>';
+            $nestedData = array();
+            $nestedData['DT_RowId'] = 'contacto_' . $id;
+            $nestedData[] = $id;
+            $nestedData[] = utf8_encode($row["nombre"]);
+            $nestedData[] = utf8_encode($row["email"]);
+            $nestedData[] = utf8_encode($row["asunto"]);
+            $nestedData[] = date('d-m-Y H:i:s', strtotime($row["fecha"]));
+            $nestedData[] = $estado;
+            $nestedData[] = $btnEditar;
+            $data[] = $nestedData;
+        }
+
+        $json_data = array(
+            "draw" => intval($datos['draw']), // for every request/draw by clientside , they send a number as a parameter, when they recieve a response/data they first check the draw number, so we are sending same number in draw. 
+            "recordsTotal" => intval($totalData), // total number of records
+            "recordsFiltered" => intval($totalFiltered), // total number of records after searching, if there is no searching then totalFiltered = totalData
+            "data" => $data   // total data array
+        );
+
+        return json_encode($json_data);
+    }
+
+    public function modalVerContacto($datos) {
+        $id = $datos['id'];
+        $sql = $this->db->select("SELECT * FROM web_contacto where id = $id");
+        $modal = '<div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Formulario de contacto enviado por ' . utf8_encode($sql[0]['nombre']) . '</h3>
+                    </div>
+                    <div class="row">
+                        <table class="table table-hover">
+                            <tr>
+                                <td class="text-bold">Nombre:</td>
+                                <td>' . utf8_encode($sql[0]['nombre']) . '</td>
+                            </tr>
+                            <tr>
+                                <td class="text-bold">Email:</td>
+                                <td>' . utf8_encode($sql[0]['email']) . '</td>
+                            </tr>
+                            <tr>
+                                <td class="text-bold">Asunto:</td>
+                                <td>' . utf8_encode($sql[0]['asunto']) . '</td>
+                            </tr>
+                            <tr>
+                                <td class="text-bold">Mensaje:</td>
+                                <td>' . utf8_encode($sql[0]['mensaje']) . '</td>
+                            </tr>
+                            <tr>
+                                <td class="text-bold">IP:</td>
+                                <td>' . utf8_encode($sql[0]['ip']) . '</td>
+                            </tr>
+                            <tr>
+                                <td class="text-bold">Fecha:</td>
+                                <td>' . date('d-m-Y H:i:s', strtotime($sql[0]['fecha'])) . '</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>';
+        $update = array(
+            'leido' => 1
+        );
+        $this->db->update('web_contacto', $update, "id = $id");
+        $data = array(
+            'titulo' => 'Ver datos de contacto',
+            'content' => $modal,
+            'id' => $id,
+            'row' => $this->rowDataTable('verContacto', 'web_contacto', $id)
+        );
+        return json_encode($data);
     }
 
 }
