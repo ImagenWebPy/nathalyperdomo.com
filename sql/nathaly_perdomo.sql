@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2018-05-18 21:53:05
+Date: 2018-05-20 12:25:31
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -477,6 +477,27 @@ INSERT INTO `web_blog` VALUES ('3', 'Lorem ipsum dolor sit amet', '<p>Lorem ipsu
 INSERT INTO `web_blog` VALUES ('4', 'Lorem ipsum dolor sit amet', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt ut mi vel convallis. Fusce condimentum neque sit amet quam condimentum, eget vulputate magna tempor. Vivamus pretium metus id orci facilisis interdum. Phasellus laoreet ultrices lorem vel blandit. Etiam iaculis pellentesque fringilla. Donec convallis aliquam dui, et posuere purus viverra ut. Nulla pharetra venenatis dui non maximus.</p>', 'blog4.jpg', 'blog4-thumb.jpg', '#', '2018-05-17', '2018-05-16 11:24:05', '1');
 
 -- ----------------------------
+-- Table structure for web_contacto
+-- ----------------------------
+DROP TABLE IF EXISTS `web_contacto`;
+CREATE TABLE `web_contacto` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(120) DEFAULT NULL,
+  `email` varchar(60) DEFAULT NULL,
+  `asunto` varchar(145) DEFAULT NULL,
+  `mensaje` text,
+  `fecha` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `leido` int(1) DEFAULT '0',
+  `ip` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of web_contacto
+-- ----------------------------
+INSERT INTO `web_contacto` VALUES ('1', 'Raul', 'raul.chuky@gmail.com', 'Prueba', 'Esto es una prueba del mensaje', '2018-05-20 12:22:33', '1', null);
+
+-- ----------------------------
 -- Table structure for web_datos
 -- ----------------------------
 DROP TABLE IF EXISTS `web_datos`;
@@ -510,7 +531,7 @@ CREATE TABLE `web_frases` (
   `estado` int(1) DEFAULT '1',
   `orden` int(2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of web_frases
@@ -519,6 +540,8 @@ INSERT INTO `web_frases` VALUES ('1', 'Un hombre muy ocupado para cuidar de su s
 INSERT INTO `web_frases` VALUES ('2', 'Hoy en día, más del 95% de las enfermedades crónicas están causadas por la comida, ingredientes tóxicos, deficiencias nutricionales y falta de ejercicio físico.', 'Mike Adams', '1', '2');
 INSERT INTO `web_frases` VALUES ('3', 'No te recompenses con comidas poco saludables, recompénsate con actividades divertidas y saludables.', null, '1', '3');
 INSERT INTO `web_frases` VALUES ('4', 'No conviertas tu estómago en una bolsa de basura.', null, '1', '4');
+INSERT INTO `web_frases` VALUES ('5', 'frase larga', 'autor', '0', '5');
+INSERT INTO `web_frases` VALUES ('6', 'frase 2 34 321', 'Autor 45 123', '0', '6');
 
 -- ----------------------------
 -- Table structure for web_header_images
@@ -548,7 +571,7 @@ CREATE TABLE `web_inicio_caracteristicas` (
   `orden` int(2) unsigned DEFAULT NULL,
   `estado` int(1) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of web_inicio_caracteristicas
@@ -556,6 +579,7 @@ CREATE TABLE `web_inicio_caracteristicas` (
 INSERT INTO `web_inicio_caracteristicas` VALUES ('1', 'Lorem ipsum dolor sit amet', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt ut mi vel convallis. Fusce condimentum neque sit amet quam condimentum, eget vulputate magna tempor. Vivamus pretium metus id orci facilisis interdum. Phasellus laoreet ultrices lorem vel blandit. Etiam iaculis pellentesque fringilla. Donec convallis aliquam dui, et posuere purus viverra ut. Nulla pharetra venenatis dui non maximus.', 'medical-icon-i-alternative-complementary', '#', '1', '1');
 INSERT INTO `web_inicio_caracteristicas` VALUES ('2', 'Lorem ipsum dolor sit amet', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt ut mi vel convallis. Fusce condimentum neque sit amet quam condimentum, eget vulputate magna tempor. Vivamus pretium metus id orci facilisis interdum. Phasellus laoreet ultrices lorem vel blandit. Etiam iaculis pellentesque fringilla. Donec convallis aliquam dui, et posuere purus viverra ut. Nulla pharetra venenatis dui non maximus.', 'medical-icon-i-cardiology', '#', '2', '1');
 INSERT INTO `web_inicio_caracteristicas` VALUES ('3', 'Lorem ipsum dolor sit amet', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt ut mi vel convallis. Fusce condimentum neque sit amet quam condimentum, eget vulputate magna tempor. Vivamus pretium metus id orci facilisis interdum. Phasellus laoreet ultrices lorem vel blandit. Etiam iaculis pellentesque fringilla. Donec convallis aliquam dui, et posuere purus viverra ut. Nulla pharetra venenatis dui non maximus.', 'medical-icon-i-nutrition', '#', '3', '1');
+INSERT INTO `web_inicio_caracteristicas` VALUES ('4', 'Titulo', 'Contenido', 'medical-icon-i-waiting-area', null, '4', '0');
 
 -- ----------------------------
 -- Table structure for web_inicio_nosotros
@@ -566,13 +590,14 @@ CREATE TABLE `web_inicio_nosotros` (
   `titulo` varchar(80) DEFAULT NULL,
   `contenido` text,
   `imagen` varchar(120) DEFAULT NULL,
+  `imagen_header` varchar(120) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of web_inicio_nosotros
 -- ----------------------------
-INSERT INTO `web_inicio_nosotros` VALUES ('1', 'UN MUNDO EN NUTRICION', 'Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo mullam.', '576x454-index.png');
+INSERT INTO `web_inicio_nosotros` VALUES ('1', 'UN MUNDO EN NUTRICION', '<p>Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris in erat justo mullam.</p>', '576x454-index.png', 'aboutus-header.jpg');
 
 -- ----------------------------
 -- Table structure for web_inicio_parallax
@@ -601,7 +626,7 @@ CREATE TABLE `web_inicio_servicios` (
   `orden` int(2) unsigned DEFAULT NULL,
   `estado` int(1) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of web_inicio_servicios
@@ -610,6 +635,7 @@ INSERT INTO `web_inicio_servicios` VALUES ('1', 'Planes de Alimentación', 'Sed 
 INSERT INTO `web_inicio_servicios` VALUES ('2', 'Trastornos de la alimentación', 'Sed non neque elit. Sed ut imperdiet nisi. Proin condime ntum fermentum nunc. Etiam pharetra, erat sed ferm entum feugiat, velit mauris egestas quam, ut aliquam massa nisl quis neque.', '2', '1');
 INSERT INTO `web_inicio_servicios` VALUES ('3', 'Nutrición Clinica', 'Sed non neque elit. Sed ut imperdiet nisi. Proin condime ntum fermentum nunc. Etiam pharetra, erat sed ferm entum feugiat, velit mauris egestas quam, ut aliquam massa nisl quis neque.', '3', '1');
 INSERT INTO `web_inicio_servicios` VALUES ('4', 'Control del peso', 'Sed non neque elit. Sed ut imperdiet nisi. Proin condime ntum fermentum nunc. Etiam pharetra, erat sed ferm entum feugiat, velit mauris egestas quam, ut aliquam massa nisl quis neque.', '4', '1');
+INSERT INTO `web_inicio_servicios` VALUES ('5', 'Servicio', 'Prueba del servivio', '5', '0');
 
 -- ----------------------------
 -- Table structure for web_inicio_slider
@@ -624,13 +650,14 @@ CREATE TABLE `web_inicio_slider` (
   `orden` int(2) unsigned DEFAULT NULL,
   `estado` int(1) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of web_inicio_slider
 -- ----------------------------
 INSERT INTO `web_inicio_slider` VALUES ('1', 'Comé lo que te gusta', 'en la medida justa', '310x649_inicio_1.png', '1', null, '1');
 INSERT INTO `web_inicio_slider` VALUES ('2', 'La salud es una relación', 'entre tú y tu cuerpo', 'img1.jpg', '0', '1', '1');
+INSERT INTO `web_inicio_slider` VALUES ('3', 'Texto 1', 'Texto 2', '3_KICKS-AUTOLOGIA-1.jpg', '0', '2', '1');
 
 -- ----------------------------
 -- Table structure for web_inicio_video
@@ -651,20 +678,98 @@ CREATE TABLE `web_inicio_video` (
 INSERT INTO `web_inicio_video` VALUES ('1', 'DESDE LA COMODIDAD DE TU CASA', 'o desde la clinica', '#', 'Tu eliges');
 
 -- ----------------------------
+-- Table structure for web_medical_icon
+-- ----------------------------
+DROP TABLE IF EXISTS `web_medical_icon`;
+CREATE TABLE `web_medical_icon` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(80) DEFAULT NULL,
+  `estado` int(1) DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=63 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of web_medical_icon
+-- ----------------------------
+INSERT INTO `web_medical_icon` VALUES ('1', 'medical-icon-i-womens-health', '1');
+INSERT INTO `web_medical_icon` VALUES ('2', 'medical-icon-i-waiting-area', '1');
+INSERT INTO `web_medical_icon` VALUES ('3', 'medical-icon-i-volume-control', '1');
+INSERT INTO `web_medical_icon` VALUES ('4', 'medical-icon-i-ultrasound', '1');
+INSERT INTO `web_medical_icon` VALUES ('5', 'medical-icon-i-text-telephone', '1');
+INSERT INTO `web_medical_icon` VALUES ('6', 'medical-icon-i-surgery', '1');
+INSERT INTO `web_medical_icon` VALUES ('7', 'medical-icon-i-stairs', '1');
+INSERT INTO `web_medical_icon` VALUES ('8', 'medical-icon-i-radiology', '1');
+INSERT INTO `web_medical_icon` VALUES ('9', 'medical-icon-i-physical-therapy', '1');
+INSERT INTO `web_medical_icon` VALUES ('10', 'medical-icon-i-pharmacy', '1');
+INSERT INTO `web_medical_icon` VALUES ('11', 'medical-icon-i-pediatrics', '1');
+INSERT INTO `web_medical_icon` VALUES ('12', 'medical-icon-i-pathology', '1');
+INSERT INTO `web_medical_icon` VALUES ('13', 'medical-icon-i-outpatient', '1');
+INSERT INTO `web_medical_icon` VALUES ('14', 'medical-icon-i-mental-health', '1');
+INSERT INTO `web_medical_icon` VALUES ('15', 'medical-icon-i-medical-records', '1');
+INSERT INTO `web_medical_icon` VALUES ('16', 'medical-icon-i-medical-library', '1');
+INSERT INTO `web_medical_icon` VALUES ('17', 'medical-icon-i-mammography', '1');
+INSERT INTO `web_medical_icon` VALUES ('18', 'medical-icon-i-laboratory', '1');
+INSERT INTO `web_medical_icon` VALUES ('19', 'medical-icon-i-labor-delivery', '1');
+INSERT INTO `web_medical_icon` VALUES ('20', 'medical-icon-i-immunizations', '1');
+INSERT INTO `web_medical_icon` VALUES ('21', 'medical-icon-i-imaging-root-category', '1');
+INSERT INTO `web_medical_icon` VALUES ('22', 'medical-icon-i-imaging-alternative-pet', '1');
+INSERT INTO `web_medical_icon` VALUES ('23', 'medical-icon-i-imaging-alternative-mri', '1');
+INSERT INTO `web_medical_icon` VALUES ('24', 'medical-icon-i-imaging-alternative-mri-two', '1');
+INSERT INTO `web_medical_icon` VALUES ('25', 'medical-icon-i-imaging-alternative-ct', '1');
+INSERT INTO `web_medical_icon` VALUES ('26', 'medical-icon-i-fire-extinguisher', '1');
+INSERT INTO `web_medical_icon` VALUES ('27', 'medical-icon-i-family-practice', '1');
+INSERT INTO `web_medical_icon` VALUES ('28', 'medical-icon-i-emergency', '1');
+INSERT INTO `web_medical_icon` VALUES ('29', 'medical-icon-i-elevators', '1');
+INSERT INTO `web_medical_icon` VALUES ('30', 'medical-icon-i-ear-nose-throat', '1');
+INSERT INTO `web_medical_icon` VALUES ('31', 'medical-icon-i-drinking-fountain', '1');
+INSERT INTO `web_medical_icon` VALUES ('32', 'medical-icon-i-cardiology', '1');
+INSERT INTO `web_medical_icon` VALUES ('33', 'medical-icon-i-billing', '1');
+INSERT INTO `web_medical_icon` VALUES ('34', 'medical-icon-i-anesthesia', '1');
+INSERT INTO `web_medical_icon` VALUES ('35', 'medical-icon-i-ambulance', '1');
+INSERT INTO `web_medical_icon` VALUES ('36', 'medical-icon-i-alternative-complementary', '1');
+INSERT INTO `web_medical_icon` VALUES ('37', 'medical-icon-i-administration', '1');
+INSERT INTO `web_medical_icon` VALUES ('38', 'medical-icon-i-social-services', '1');
+INSERT INTO `web_medical_icon` VALUES ('39', 'medical-icon-i-smoking', '1');
+INSERT INTO `web_medical_icon` VALUES ('40', 'medical-icon-i-restrooms', '1');
+INSERT INTO `web_medical_icon` VALUES ('41', 'medical-icon-i-restaurant', '1');
+INSERT INTO `web_medical_icon` VALUES ('42', 'medical-icon-i-respiratory', '1');
+INSERT INTO `web_medical_icon` VALUES ('43', 'medical-icon-i-registration', '1');
+INSERT INTO `web_medical_icon` VALUES ('44', 'medical-icon-i-oncology', '1');
+INSERT INTO `web_medical_icon` VALUES ('45', 'medical-icon-i-nutrition', '1');
+INSERT INTO `web_medical_icon` VALUES ('46', 'medical-icon-i-nursery', '1');
+INSERT INTO `web_medical_icon` VALUES ('47', 'medical-icon-i-no-smoking', '1');
+INSERT INTO `web_medical_icon` VALUES ('48', 'medical-icon-i-neurology', '1');
+INSERT INTO `web_medical_icon` VALUES ('49', 'medical-icon-i-mri-pet', '1');
+INSERT INTO `web_medical_icon` VALUES ('50', 'medical-icon-i-interpreter-services', '1');
+INSERT INTO `web_medical_icon` VALUES ('51', 'medical-icon-i-internal-medicine', '1');
+INSERT INTO `web_medical_icon` VALUES ('52', 'medical-icon-i-intensive-care', '1');
+INSERT INTO `web_medical_icon` VALUES ('53', 'medical-icon-i-inpatient', '1');
+INSERT INTO `web_medical_icon` VALUES ('54', 'medical-icon-i-information-us', '1');
+INSERT INTO `web_medical_icon` VALUES ('55', 'medical-icon-i-infectious-diseases', '1');
+INSERT INTO `web_medical_icon` VALUES ('56', 'medical-icon-i-hearing-assistance', '1');
+INSERT INTO `web_medical_icon` VALUES ('57', 'medical-icon-i-health-services', '1');
+INSERT INTO `web_medical_icon` VALUES ('58', 'medical-icon-i-health-education', '1');
+INSERT INTO `web_medical_icon` VALUES ('59', 'medical-icon-i-gift-shop', '1');
+INSERT INTO `web_medical_icon` VALUES ('60', 'medical-icon-i-genetics', '1');
+INSERT INTO `web_medical_icon` VALUES ('61', 'medical-icon-i-first-aid', '1');
+INSERT INTO `web_medical_icon` VALUES ('62', 'medical-icon-i-dermatology', '1');
+
+-- ----------------------------
 -- Table structure for web_nosotros
 -- ----------------------------
 DROP TABLE IF EXISTS `web_nosotros`;
 CREATE TABLE `web_nosotros` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `imagen_header` varchar(120) DEFAULT NULL,
-  `imagen_lila` varchar(120) DEFAULT NULL,
+  `imagen` varchar(120) DEFAULT NULL,
   `texto` text,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of web_nosotros
 -- ----------------------------
+INSERT INTO `web_nosotros` VALUES ('1', 'aboutus-header.jpg', null, null);
 
 -- ----------------------------
 -- Table structure for web_page_nosotros
@@ -673,7 +778,7 @@ DROP TABLE IF EXISTS `web_page_nosotros`;
 CREATE TABLE `web_page_nosotros` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `imagen_header` varchar(120) DEFAULT NULL,
-  `imagen_lila` varchar(120) DEFAULT NULL,
+  `imagen` varchar(120) DEFAULT NULL,
   `texto` text,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
@@ -681,7 +786,7 @@ CREATE TABLE `web_page_nosotros` (
 -- ----------------------------
 -- Records of web_page_nosotros
 -- ----------------------------
-INSERT INTO `web_page_nosotros` VALUES ('1', 'aboutus-header.jpg', 'aboutus.png', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt ut mi vel convallis. Fusce condimentum neque sit amet quam condimentum, eget vulputate magna tempor. Vivamus pretium metus id orci facilisis interdum. Phasellus laoreet ultrices lorem vel blandit. Etiam iaculis pellentesque fringilla. Donec convallis aliquam dui, et posuere purus viverra ut. Nulla pharetra venenatis dui non maximus.</p>\r\n\r\n<p>Sed id condimentum mauris, quis lacinia lacus. Pellentesque sit amet risus in risus pharetra pulvinar. Vestibulum vulputate posuere quam, eget consequat tortor mattis a. Sed sagittis efficitur pellentesque. Fusce sed placerat nunc. Duis pulvinar in felis non ultrices. Sed rutrum dolor at ligula dictum eleifend. Duis fringilla quam diam, eget tempor ante egestas ac. Nulla congue nunc pharetra mauris dapibus scelerisque. Nam elementum metus orci, vel placerat nisi feugiat non. Donec laoreet molestie pharetra. Vivamus vitae dictum purus, quis fermentum libero. Nunc luctus nibh dui, at malesuada purus fringilla non. Proin facilisis augue quis risus faucibus, volutpat ultricies sem auctor.</p>');
+INSERT INTO `web_page_nosotros` VALUES ('1', 'aboutus-header.jpg', 'aboutus.png', '                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt ut mi vel convallis. Fusce condimentum neque sit amet quam condimentum, eget vulputate magna tempor. Vivamus pretium metus id orci facilisis interdum. Phasellus laoreet ultrices lorem vel blandit. Etiam iaculis pellentesque fringilla. Donec convallis aliquam dui, et posuere purus viverra ut. Nulla pharetra venenatis dui non maximus.</p>\r\n\r\n<p>Sed id condimentum mauris, quis lacinia lacus. Pellentesque sit amet risus in risus pharetra pulvinar. Vestibulum vulputate posuere quam, eget consequat tortor mattis a. Sed sagittis efficitur pellentesque. Fusce sed placerat nunc. Duis pulvinar in felis non ultrices. Sed rutrum dolor at ligula dictum eleifend. Duis fringilla quam diam, eget tempor ante egestas ac. Nulla congue nunc pharetra mauris dapibus scelerisque. Nam elementum metus orci, vel placerat nisi feugiat non. Donec laoreet molestie pharetra. Vivamus vitae dictum purus, quis fermentum libero. Nunc luctus nibh dui, at malesuada purus fringilla non. Proin facilisis augue quis risus faucibus, volutpat ultricies sem auctor.</p>                            ');
 
 -- ----------------------------
 -- Table structure for web_redes

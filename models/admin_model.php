@@ -391,6 +391,21 @@ class Admin_Model extends Model {
                         . '<td>' . $estado . '</td>'
                         . '<td>' . $btnEditar . '</td>';
                 break;
+            case 'blog':
+                if (sql[0]['estado'] == 1) {
+                    $estado = '<a class="pointer btnCambiarEstado" data-seccion="blog" data-rowid="blog_" data-tabla="web_blog" data-campo="estado" data-id="' . $id . '" data-estado="1"><span class="label label-primary">Activo</span></a>';
+                } else {
+                    $estado = '<a class="pointer btnCambiarEstado" data-seccion="blog" data-rowid="blog_" data-tabla="web_blog" data-campo="estado" data-id="' . $id . '" data-estado="0"><span class="label label-danger">Inactivo</span></a>';
+                }
+                $btnEditar = '<a class="editDTContenido pointer btn-xs" data-id="' . $id . '" data-url="modalEditarBlogPost"><i class="fa fa-edit"></i> Editar </a>';
+                $imagen = '<img class="img-responsive imgBlogTable" src="' . URL . 'public/images/blog/' . sql[0]['imagen_thumb'] . '">';
+                $data = '<td>' . sql[0]['id'] . '</td>'
+                        . '<td>' . utf8_encode(sql[0]['id']) . '</td>'
+                        . '<td>' . $imagen . '</td>'
+                        . '<td>' . date('d-m-Y', strtotime(sql[0]['fecha_blog'])) . '</td>'
+                        . '<td>' . $estado . '</td>'
+                        . '<td>' . $btnEditar . '</td>';
+                break;
         }
         return $data;
     }
@@ -1455,6 +1470,63 @@ class Admin_Model extends Model {
         return json_encode($json_data);
     }
 
+    public function listadoDTBlog($datos) {
+        $columns = array(
+            0 => 'id',
+            1 => 'titulo',
+            2 => 'imagen_thumb',
+            3 => 'fecha_blog',
+            4 => 'estado',
+            6 => 'accion',
+        );
+        #getting total number records without any search
+        $sql = $this->db->select("SELECT COUNT(*) as cantidad FROM web_blog");
+        $totalFiltered = $sql[0]['cantidad'];
+        $totalData = $sql[0]['cantidad'];
+
+        $query = "SELECT * FROM web_blog where 1 = 1";
+        $where = "";
+        if (!empty($datos['search']['value'])) {
+            $where .= " AND (titulo LIKE '%" . $requestData['search']['value'] . "%' ";
+            $where .= " OR fecha_blog LIKE '%" . $requestData['search']['value'] . "%')";
+            #when there is a search parameter then we have to modify total number filtered rows as per search result.
+            $sql = $this->db->select("SELECT COUNT(*) as cantidad FROM web_contacto where 1 = 1 $where");
+            $totalFiltered = $sql[0]['cantidad'];
+        }
+        $query .= $where;
+        $query .= " ORDER BY " . $columns[$datos['order'][0]['column']] . "   " . $datos['order'][0]['dir'] . "  LIMIT " . $datos['start'] . " ," . $datos['length'] . "   ";
+        $sql = $this->db->select($query);
+        $data = array();
+        foreach ($sql as $row) {  // preparing an array
+            $id = $row["id"];
+            if ($row['estado'] == 1) {
+                $estado = '<a class="pointer btnCambiarEstado" data-seccion="blog" data-rowid="blog_" data-tabla="web_blog" data-campo="estado" data-id="' . $id . '" data-estado="1"><span class="label label-primary">Activo</span></a>';
+            } else {
+                $estado = '<a class="pointer btnCambiarEstado" data-seccion="blog" data-rowid="blog_" data-tabla="web_blog" data-campo="estado" data-id="' . $id . '" data-estado="0"><span class="label label-danger">Inactivo</span></a>';
+            }
+            $btnEditar = '<a class="editDTContenido pointer btn-xs" data-id="' . $id . '" data-url="modalEditarBlogPost"><i class="fa fa-edit"></i> Editar </a>';
+            $imagen = '<img class="img-responsive imgBlogTable" src="' . URL . 'public/images/blog/' . $row['imagen_thumb'] . '">';
+            $nestedData = array();
+            $nestedData['DT_RowId'] = 'blog_' . $id;
+            $nestedData[] = $id;
+            $nestedData[] = utf8_encode($row["titulo"]);
+            $nestedData[] = $imagen;
+            $nestedData[] = date('d-m-Y', strtotime($row["fecha_blog"]));
+            $nestedData[] = $estado;
+            $nestedData[] = $btnEditar;
+            $data[] = $nestedData;
+        }
+
+        $json_data = array(
+            "draw" => intval($datos['draw']), // for every request/draw by clientside , they send a number as a parameter, when they recieve a response/data they first check the draw number, so we are sending same number in draw. 
+            "recordsTotal" => intval($totalData), // total number of records
+            "recordsFiltered" => intval($totalFiltered), // total number of records after searching, if there is no searching then totalFiltered = totalData
+            "data" => $data   // total data array
+        );
+
+        return json_encode($json_data);
+    }
+
     public function modalVerContacto($datos) {
         $id = $datos['id'];
         $sql = $this->db->select("SELECT * FROM web_contacto where id = $id");
@@ -1500,6 +1572,113 @@ class Admin_Model extends Model {
             'content' => $modal,
             'id' => $id,
             'row' => $this->rowDataTable('verContacto', 'web_contacto', $id)
+        );
+        return json_encode($data);
+    }
+
+    public function modalEditarBlogPost($datos) {
+        $id = $datos['id'];
+        $sql = $this->db->select("select * from web_blog where id = $id");
+        $checked = "";
+        if ($sql[0]['estado'] == 1)
+            $checked = 'checked';
+        $modal = '<div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Modificar Datos</h3>
+                    </div>
+                    <div class="row">
+                        <form role="form" id="frmEditarBlogPost" method="POST">
+                            <input type="hidden" name="id" value="' . $id . '">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Titulo</label>
+                                        <input type="text" name="titulo" class="form-control" placeholder="Nombre" value="' . utf8_encode($sql[0]['titulo']) . '">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="i-checks"><label> <input type="checkbox" name="estado" value="1" ' . $checked . '> <i></i> Mostrar </label></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>ID video Youtube</label>
+                                        <input type="text" name="url_youtube" class="form-control" placeholder="ID video Youtube" value="' . utf8_encode($sql[0]['url_youtube']) . '">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group" id="data_1">
+                                            <label class="font-normal">Fecha Publicación</label>
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" value="' . date('d/m/Y', strtotime($sql[0]['fecha_blog'])) . '">
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Contenido</label>
+                                        <textarea name="contenido" class="summernote">' . utf8_encode($sql[0]['contenido']) . '</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                                <button type="submit" class="btn btn-block btn-primary btn-lg">Editar Contenido</button>
+                            
+                        </form>
+                        <hr>
+                        <div class="col-md-12">
+                            <h3>Imagen</h3>
+                            <div class="alert alert-info alert-dismissable">
+                                <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                                Detalles de la imagen a subir:<br>
+                                    -Formato: JPG, PNG<br>
+                                    -Dimensión: Hasta 1200 x 800px<br>
+                                    -Tamaño: 2MB<br>
+                                <strong>Obs.: Las imagenes serán redimensionadas automaticamente a la dimensión especificada y se reducirá la calidad de la misma.</strong>
+                            </div>
+                            <div class="html5fileupload fileTestimonio" data-max-filesize="2048000" data-url="' . URL . 'admin/uploadImgBlog" data-valid-extensions="JPG,JPEG,jpg,png,jpeg,PNG" style="width: 100%;">
+                                <input type="file" name="file_archivo" />
+                            </div>
+                            <script>
+                                $(".html5fileupload.fileTestimonio").html5fileupload({
+                                    data:{id:' . $id . '},
+                                    onAfterStartSuccess: function(response) {
+                                        $("#imgTestimonio" + response.id).html(response.content);
+                                        $("#testimonios_" + response.id).html(response.row);
+                                    }
+                                });
+                            </script>
+                        </div>
+                        <div class="col-md-12" id="imgTestimonio' . $id . '">';
+        if (!empty($sql[0]['imagen'])) {
+            $modal .= '     <img class="img-responsive" src="' . URL . 'public/images/blog/' . $sql[0]['imagen'] . '">';
+        }
+        $modal .= '     </div>
+                    </div>
+                </div>
+                <script>
+                    $(document).ready(function () {
+                        $(".summernote").summernote();
+                        $(".i-checks").iCheck({
+                            checkboxClass: "icheckbox_square-green",
+                            radioClass: "iradio_square-green",
+                        });
+                        $("#data_1 .input-group.date").datepicker({
+                            todayBtn: "linked",
+                            keyboardNavigation: false,
+                            forceParse: false,
+                            calendarWeeks: true,
+                            autoclose: true,
+                            format: "dd/mm/yyyy",
+                        });
+                    });
+                </script>';
+        $data = array(
+            'titulo' => 'Editar Entrada del Blog',
+            'content' => $modal
         );
         return json_encode($data);
     }

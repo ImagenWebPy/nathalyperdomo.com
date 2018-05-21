@@ -55,6 +55,18 @@ class Admin extends Controller {
             unset($_SESSION['message']);
     }
 
+    public function blog() {
+        $this->view->helper = $this->helper;
+        $this->view->title = 'Blog';
+        $this->view->public_css = array("css/plugins/dataTables/datatables.min.css", "css/plugins/html5fileupload/html5fileupload.css", "css/plugins/iCheck/custom.css", "css/wfmi-style.css", "css/plugins/toastr/toastr.min.css", "css/plugins/summernote/summernote.css", "css/plugins/datapicker/datepicker3.css");
+        $this->view->public_js = array("js/plugins/dataTables/datatables.min.js", "js/plugins/html5fileupload/html5fileupload.min.js", "js/plugins/iCheck/icheck.min.js", "js/plugins/toastr/toastr.min.js", "js/plugins/summernote/summernote.min.js", "js/plugins/datapicker/bootstrap-datepicker.js");
+        $this->view->render('admin/header');
+        $this->view->render('admin/blog/index');
+        $this->view->render('admin/footer');
+        if (!empty($_SESSION['message']))
+            unset($_SESSION['message']);
+    }
+
     public function contacto() {
         $this->view->helper = $this->helper;
         $this->view->datosVideoInicio = $this->model->datosVideoInicio();
@@ -653,12 +665,27 @@ class Admin extends Controller {
         echo $data;
     }
 
+    public function listadoDTBlog() {
+        header('Content-type: application/json; charset=utf-8');
+        $data = $this->model->listadoDTBlog($_REQUEST);
+        echo $data;
+    }
+
     public function modalVerContacto() {
         header('Content-type: application/json; charset=utf-8');
         $data = array(
             'id' => $this->helper->cleanInput($_POST['id'])
         );
         $datos = $this->model->modalVerContacto($data);
+        echo $datos;
+    }
+
+    public function modalEditarBlogPost() {
+        header('Content-type: application/json; charset=utf-8');
+        $data = array(
+            'id' => $this->helper->cleanInput($_POST['id'])
+        );
+        $datos = $this->model->modalEditarBlogPost($data);
         echo $datos;
     }
 
