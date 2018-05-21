@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2018-05-20 12:25:31
+Date: 2018-05-21 19:52:49
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -466,14 +466,14 @@ CREATE TABLE `web_blog` (
   `fecha_publicacion` datetime DEFAULT NULL,
   `estado` int(1) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of web_blog
 -- ----------------------------
 INSERT INTO `web_blog` VALUES ('1', 'Lorem ipsum dolor sit amet', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt ut mi vel convallis. Fusce condimentum neque sit amet quam condimentum, eget vulputate magna tempor. Vivamus pretium metus id orci facilisis interdum. Phasellus laoreet ultrices lorem vel blandit. Etiam iaculis pellentesque fringilla. Donec convallis aliquam dui, et posuere purus viverra ut. Nulla pharetra venenatis dui non maximus.</p>', 'blog1.jpg', 'blog1-thumb.jpg', '#', '2018-05-14', '2018-05-14 11:24:05', '1');
 INSERT INTO `web_blog` VALUES ('2', 'Lorem ipsum dolor sit amet', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt ut mi vel convallis. Fusce condimentum neque sit amet quam condimentum, eget vulputate magna tempor. Vivamus pretium metus id orci facilisis interdum. Phasellus laoreet ultrices lorem vel blandit. Etiam iaculis pellentesque fringilla. Donec convallis aliquam dui, et posuere purus viverra ut. Nulla pharetra venenatis dui non maximus.</p>', 'blog2.jpg', 'blog2-thumb.jpg', '#', '2018-05-15', '2018-05-15 11:24:05', '1');
-INSERT INTO `web_blog` VALUES ('3', 'Lorem ipsum dolor sit amet', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt ut mi vel convallis. Fusce condimentum neque sit amet quam condimentum, eget vulputate magna tempor. Vivamus pretium metus id orci facilisis interdum. Phasellus laoreet ultrices lorem vel blandit. Etiam iaculis pellentesque fringilla. Donec convallis aliquam dui, et posuere purus viverra ut. Nulla pharetra venenatis dui non maximus.</p>', 'blog3.jpg', 'blog3-thumb.jpg', '#', '2018-05-16', '2018-05-16 11:24:05', '1');
+INSERT INTO `web_blog` VALUES ('3', 'Lorem ipsum dolor sit amet 2', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt ut mi vel convallis. Fusce condimentum neque sit amet quam condimentum, eget vulputate magna tempor. Vivamus pretium metus id orci facilisis interdum. Phasellus laoreet ultrices lorem vel blandit. Etiam iaculis pellentesque fringilla. Donec convallis aliquam dui, et posuere purus viverra ut. Nulla pharetra venenatis dui non maximus.</p>', 'blog3.jpg', 'blog3-thumb.jpg', '#', '2018-05-24', '2018-05-16 11:24:05', '1');
 INSERT INTO `web_blog` VALUES ('4', 'Lorem ipsum dolor sit amet', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt ut mi vel convallis. Fusce condimentum neque sit amet quam condimentum, eget vulputate magna tempor. Vivamus pretium metus id orci facilisis interdum. Phasellus laoreet ultrices lorem vel blandit. Etiam iaculis pellentesque fringilla. Donec convallis aliquam dui, et posuere purus viverra ut. Nulla pharetra venenatis dui non maximus.</p>', 'blog4.jpg', 'blog4-thumb.jpg', '#', '2018-05-17', '2018-05-16 11:24:05', '1');
 
 -- ----------------------------
@@ -495,7 +495,6 @@ CREATE TABLE `web_contacto` (
 -- ----------------------------
 -- Records of web_contacto
 -- ----------------------------
-INSERT INTO `web_contacto` VALUES ('1', 'Raul', 'raul.chuky@gmail.com', 'Prueba', 'Esto es una prueba del mensaje', '2018-05-20 12:22:33', '1', null);
 
 -- ----------------------------
 -- Table structure for web_datos
@@ -540,8 +539,6 @@ INSERT INTO `web_frases` VALUES ('1', 'Un hombre muy ocupado para cuidar de su s
 INSERT INTO `web_frases` VALUES ('2', 'Hoy en día, más del 95% de las enfermedades crónicas están causadas por la comida, ingredientes tóxicos, deficiencias nutricionales y falta de ejercicio físico.', 'Mike Adams', '1', '2');
 INSERT INTO `web_frases` VALUES ('3', 'No te recompenses con comidas poco saludables, recompénsate con actividades divertidas y saludables.', null, '1', '3');
 INSERT INTO `web_frases` VALUES ('4', 'No conviertas tu estómago en una bolsa de basura.', null, '1', '4');
-INSERT INTO `web_frases` VALUES ('5', 'frase larga', 'autor', '0', '5');
-INSERT INTO `web_frases` VALUES ('6', 'frase 2 34 321', 'Autor 45 123', '0', '6');
 
 -- ----------------------------
 -- Table structure for web_header_images
@@ -579,7 +576,6 @@ CREATE TABLE `web_inicio_caracteristicas` (
 INSERT INTO `web_inicio_caracteristicas` VALUES ('1', 'Lorem ipsum dolor sit amet', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt ut mi vel convallis. Fusce condimentum neque sit amet quam condimentum, eget vulputate magna tempor. Vivamus pretium metus id orci facilisis interdum. Phasellus laoreet ultrices lorem vel blandit. Etiam iaculis pellentesque fringilla. Donec convallis aliquam dui, et posuere purus viverra ut. Nulla pharetra venenatis dui non maximus.', 'medical-icon-i-alternative-complementary', '#', '1', '1');
 INSERT INTO `web_inicio_caracteristicas` VALUES ('2', 'Lorem ipsum dolor sit amet', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt ut mi vel convallis. Fusce condimentum neque sit amet quam condimentum, eget vulputate magna tempor. Vivamus pretium metus id orci facilisis interdum. Phasellus laoreet ultrices lorem vel blandit. Etiam iaculis pellentesque fringilla. Donec convallis aliquam dui, et posuere purus viverra ut. Nulla pharetra venenatis dui non maximus.', 'medical-icon-i-cardiology', '#', '2', '1');
 INSERT INTO `web_inicio_caracteristicas` VALUES ('3', 'Lorem ipsum dolor sit amet', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt ut mi vel convallis. Fusce condimentum neque sit amet quam condimentum, eget vulputate magna tempor. Vivamus pretium metus id orci facilisis interdum. Phasellus laoreet ultrices lorem vel blandit. Etiam iaculis pellentesque fringilla. Donec convallis aliquam dui, et posuere purus viverra ut. Nulla pharetra venenatis dui non maximus.', 'medical-icon-i-nutrition', '#', '3', '1');
-INSERT INTO `web_inicio_caracteristicas` VALUES ('4', 'Titulo', 'Contenido', 'medical-icon-i-waiting-area', null, '4', '0');
 
 -- ----------------------------
 -- Table structure for web_inicio_nosotros
@@ -635,7 +631,6 @@ INSERT INTO `web_inicio_servicios` VALUES ('1', 'Planes de Alimentación', 'Sed 
 INSERT INTO `web_inicio_servicios` VALUES ('2', 'Trastornos de la alimentación', 'Sed non neque elit. Sed ut imperdiet nisi. Proin condime ntum fermentum nunc. Etiam pharetra, erat sed ferm entum feugiat, velit mauris egestas quam, ut aliquam massa nisl quis neque.', '2', '1');
 INSERT INTO `web_inicio_servicios` VALUES ('3', 'Nutrición Clinica', 'Sed non neque elit. Sed ut imperdiet nisi. Proin condime ntum fermentum nunc. Etiam pharetra, erat sed ferm entum feugiat, velit mauris egestas quam, ut aliquam massa nisl quis neque.', '3', '1');
 INSERT INTO `web_inicio_servicios` VALUES ('4', 'Control del peso', 'Sed non neque elit. Sed ut imperdiet nisi. Proin condime ntum fermentum nunc. Etiam pharetra, erat sed ferm entum feugiat, velit mauris egestas quam, ut aliquam massa nisl quis neque.', '4', '1');
-INSERT INTO `web_inicio_servicios` VALUES ('5', 'Servicio', 'Prueba del servivio', '5', '0');
 
 -- ----------------------------
 -- Table structure for web_inicio_slider
@@ -657,7 +652,6 @@ CREATE TABLE `web_inicio_slider` (
 -- ----------------------------
 INSERT INTO `web_inicio_slider` VALUES ('1', 'Comé lo que te gusta', 'en la medida justa', '310x649_inicio_1.png', '1', null, '1');
 INSERT INTO `web_inicio_slider` VALUES ('2', 'La salud es una relación', 'entre tú y tu cuerpo', 'img1.jpg', '0', '1', '1');
-INSERT INTO `web_inicio_slider` VALUES ('3', 'Texto 1', 'Texto 2', '3_KICKS-AUTOLOGIA-1.jpg', '0', '2', '1');
 
 -- ----------------------------
 -- Table structure for web_inicio_video
