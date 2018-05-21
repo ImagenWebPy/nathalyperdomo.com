@@ -564,7 +564,7 @@ class Helper {
 
     public function armaUrlBlog($id, $tabla, $campo) {
         $sql = $this->db->select("select $campo from $tabla where id = $id");
-        $tituloBlog = $this->cleanUrl($sql[0][$campo]);
+        $tituloBlog = $this->cleanUrl(utf8_encode($sql[0][$campo]));
         $url = URL . "blog/post/$id/" . $tituloBlog;
         return $url;
     }

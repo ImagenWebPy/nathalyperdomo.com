@@ -256,6 +256,12 @@ class Admin extends Controller {
         echo json_encode($datos);
     }
 
+    public function modalAgregarBlogPost() {
+        header('Content-type: application/json; charset=utf-8');
+        $datos = $this->model->modalAgregarBlogPost();
+        echo json_encode($datos);
+    }
+
     public function frmAgregarSlider() {
         if (!empty($_POST)) {
             $principal = $_POST['principal'];
@@ -308,6 +314,76 @@ class Admin extends Controller {
             ));
         }
         header('Location:' . URL . 'admin/slider/');
+    }
+
+    public function frmAgregarBlogPost() {
+        if (!empty($_POST)) {
+            $data = array(
+                'titulo' => (!empty($_POST['titulo'])) ? $this->helper->cleanInput($_POST['titulo']) : NULL,
+                'url_youtube' => (!empty($_POST['url_youtube'])) ? $this->helper->cleanInput($_POST['url_youtube']) : NULL,
+                'fecha_blog' => (!empty($_POST['fecha_blog'])) ? $this->helper->cleanInput($_POST['fecha_blog']) : NULL,
+                'contenido' => (!empty($_POST['contenido'])) ? $_POST['contenido'] : NULL,
+                'estado' => (!empty($_POST['estado'])) ? $_POST['estado'] : 0,
+            );
+            $idPost = $this->model->frmAgregarBlogPost($data);
+            #IMAGENES
+            if (!empty($_FILES['file_archivo']['name'])) {
+                $error = false;
+                $dir = 'public/images/blog/';
+                $serverdir = $dir;
+                #IMAGEN
+                $newname = $idPost . '_' . $_FILES['file_archivo']['name'];
+                $fname = $this->helper->cleanUrl($newname);
+                $contents = file_get_contents($_FILES['file_archivo']['tmp_name']);
+
+                $handle = fopen($serverdir . $fname, 'w');
+                fwrite($handle, $contents);
+                fclose($handle);
+
+                #############
+                #SE REDIMENSIONA LA IMAGEN
+                #############
+                # ruta de la imagen a redimensionar 
+                $imagen = $serverdir . $fname;
+                $imagen_final = $fname;
+                $ancho = 1280;
+                $alto = 720;
+
+                $this->helper->redimensionar($imagen, $imagen_final, $ancho, $alto, $serverdir);
+
+                #IMAGEN THUMB
+                $newname_thumb = $idPost . '_thumb-' . $_FILES['file_archivo']['name'];
+                $fname_thumb = $this->helper->cleanUrl($newname_thumb);
+                $contents = file_get_contents($_FILES['file_archivo']['tmp_name']);
+
+                $handle = fopen($serverdir . $fname_thumb, 'w');
+                fwrite($handle, $contents);
+                fclose($handle);
+
+                #############
+                #SE REDIMENSIONA LA IMAGEN
+                #############
+                # ruta de la imagen a redimensionar 
+                $imagen_thumb = $serverdir . $fname_thumb;
+                $imagen_final_thumb = $fname_thumb;
+                $ancho_thumb = 330;
+                $alto_thumb = 380;
+
+                $this->helper->redimensionar($imagen_thumb, $imagen_final_thumb, $ancho_thumb, $alto_thumb, $serverdir);
+                #############
+                $imagenes = array(
+                    'id' => $idPost,
+                    'imagen' => $fname,
+                    'imagen_thumb' => $fname_thumb
+                );
+                $this->model->frmAddBlogImg($imagenes);
+            }
+            Session::set('message', array(
+                'type' => 'success',
+                'mensaje' => 'Se ha agregado correctamente el contenido'
+            ));
+        }
+        header('Location:' . URL . 'admin/blog/');
     }
 
     public function uploadImgSlider() {
@@ -424,6 +500,20 @@ class Admin extends Controller {
             'estado' => (!empty($_POST['estado'])) ? $this->helper->cleanInput($_POST['estado']) : 0,
         );
         $data = $this->model->frmEditarFrases($datos);
+        echo json_encode($data);
+    }
+
+    public function frmEditarBlogPost() {
+        header('Content-type: application/json; charset=utf-8');
+        $datos = array(
+            'id' => $this->helper->cleanInput($_POST['id']),
+            'titulo' => $this->helper->cleanInput($_POST['titulo']),
+            'url_youtube' => $this->helper->cleanInput($_POST['url_youtube']),
+            'contenido' => $_POST['contenido'],
+            'fecha_blog' => $this->helper->cleanInput($_POST['fecha_blog']),
+            'estado' => (!empty($_POST['estado'])) ? $this->helper->cleanInput($_POST['estado']) : 0,
+        );
+        $data = $this->model->frmEditarBlogPost($datos);
         echo json_encode($data);
     }
 

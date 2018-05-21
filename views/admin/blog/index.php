@@ -93,5 +93,21 @@
             }
 
         });
+        $(document).on("submit", "#frmEditarBlogPost", function (e) {
+            var url = "<?= URL ?>admin/frmEditarBlogPost"; // the script where you handle the form input.
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: $("#frmEditarBlogPost").serialize(), // serializes the form's elements.
+                success: function (data)
+                {
+                    if (data.type == 'success') {
+                        $("#blog_" + data.id).html(data.content);
+                        $(".genericModal").modal("toggle");
+                    }
+                }
+            });
+            e.preventDefault(); // avoid to execute the actual submit of the form.
+        });
     });
 </script>

@@ -392,17 +392,17 @@ class Admin_Model extends Model {
                         . '<td>' . $btnEditar . '</td>';
                 break;
             case 'blog':
-                if (sql[0]['estado'] == 1) {
+                if ($sql[0]['estado'] == 1) {
                     $estado = '<a class="pointer btnCambiarEstado" data-seccion="blog" data-rowid="blog_" data-tabla="web_blog" data-campo="estado" data-id="' . $id . '" data-estado="1"><span class="label label-primary">Activo</span></a>';
                 } else {
                     $estado = '<a class="pointer btnCambiarEstado" data-seccion="blog" data-rowid="blog_" data-tabla="web_blog" data-campo="estado" data-id="' . $id . '" data-estado="0"><span class="label label-danger">Inactivo</span></a>';
                 }
                 $btnEditar = '<a class="editDTContenido pointer btn-xs" data-id="' . $id . '" data-url="modalEditarBlogPost"><i class="fa fa-edit"></i> Editar </a>';
-                $imagen = '<img class="img-responsive imgBlogTable" src="' . URL . 'public/images/blog/' . sql[0]['imagen_thumb'] . '">';
-                $data = '<td>' . sql[0]['id'] . '</td>'
-                        . '<td>' . utf8_encode(sql[0]['id']) . '</td>'
+                $imagen = '<img class="img-responsive imgBlogTable" src="' . URL . 'public/images/blog/' . $sql[0]['imagen_thumb'] . '">';
+                $data = '<td>' . $sql[0]['id'] . '</td>'
+                        . '<td>' . utf8_encode($sql[0]['titulo']) . '</td>'
                         . '<td>' . $imagen . '</td>'
-                        . '<td>' . date('d-m-Y', strtotime(sql[0]['fecha_blog'])) . '</td>'
+                        . '<td>' . date('d-m-Y', strtotime($sql[0]['fecha_blog'])) . '</td>'
                         . '<td>' . $estado . '</td>'
                         . '<td>' . $btnEditar . '</td>';
                 break;
@@ -700,12 +700,37 @@ class Admin_Model extends Model {
         return $id;
     }
 
+    public function frmAgregarBlogPost($datos) {
+        $fecha_blog = $datos['fecha_blog'];
+        $fecha_blog = str_replace('/', '-', $fecha_blog);
+        $fecha_blog = date('Y-m-d', strtotime($fecha_blog));
+        $this->db->insert('web_blog', array(
+            'titulo' => utf8_decode($datos['titulo']),
+            'contenido' => utf8_decode($datos['contenido']),
+            'url_youtube' => $datos['url_youtube'],
+            'fecha_blog' => $fecha_blog,
+            'fecha_publicacion' => date('Y-m-d H:i:s'),
+            'estado' => $datos['estado']
+        ));
+        $id = $this->db->lastInsertId();
+        return $id;
+    }
+
     public function frmAddSliderImg($imagenes) {
         $id = $imagenes['id'];
         $update = array(
             'imagen' => $imagenes['imagenes']
         );
         $this->db->update('web_inicio_slider', $update, "id = $id");
+    }
+
+    public function frmAddBlogImg($imagenes) {
+        $id = $imagenes['id'];
+        $update = array(
+            'imagen' => $imagenes['imagen'],
+            'imagen_thumb' => $imagenes['imagen_thumb']
+        );
+        $this->db->update('web_blog', $update, "id = $id");
     }
 
     public function uploadImgSlider($datos) {
@@ -1182,6 +1207,31 @@ class Admin_Model extends Model {
         return $data;
     }
 
+    public function frmEditarBlogPost($datos) {
+        $id = $datos['id'];
+        $estado = 1;
+        $fecha_blog = $datos['fecha_blog'];
+        $fecha_blog = str_replace('/', '-', $fecha_blog);
+        $fecha_blog = date('Y-m-d', strtotime($fecha_blog));
+        if (empty($datos['estado'])) {
+            $estado = 0;
+        }
+        $update = array(
+            'titulo' => utf8_decode($datos['titulo']),
+            'url_youtube' => utf8_decode($datos['url_youtube']),
+            'contenido' => utf8_decode($datos['contenido']),
+            'fecha_blog' => $fecha_blog,
+            'estado' => $estado
+        );
+        $this->db->update('web_blog', $update, "id = $id");
+        $data = array(
+            'type' => 'success',
+            'content' => $this->rowDataTable('blog', 'web_blog', $id),
+            'id' => $id
+        );
+        return $data;
+    }
+
     public function frmEditarServicios($datos) {
         $id = $datos['id'];
         $estado = 1;
@@ -1611,7 +1661,7 @@ class Admin_Model extends Model {
                                     <div class="form-group" id="data_1">
                                             <label class="font-normal">Fecha Publicación</label>
                                             <div class="input-group date">
-                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" value="' . date('d/m/Y', strtotime($sql[0]['fecha_blog'])) . '">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" name="fecha_blog" value="' . date('d/m/Y', strtotime($sql[0]['fecha_blog'])) . '">
                                             </div>
                                         </div>
                                 </div>
@@ -1661,7 +1711,11 @@ class Admin_Model extends Model {
                 </div>
                 <script>
                     $(document).ready(function () {
-                        $(".summernote").summernote();
+                        $(".summernote").summernote({
+                            height: 300, // set editor height
+                            minHeight: null, // set minimum height of editor
+                            maxHeight: null // set maximum height of editor
+                        });
                         $(".i-checks").iCheck({
                             checkboxClass: "icheckbox_square-green",
                             radioClass: "iradio_square-green",
@@ -1681,6 +1735,97 @@ class Admin_Model extends Model {
             'content' => $modal
         );
         return json_encode($data);
+    }
+
+    public function modalAgregarBlogPost() {
+        $modal = '<div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Agregar Contenido al Blog</h3>
+                    </div>
+                    <div class="row">
+                        <form role="form" action="' . URL . 'admin/frmAgregarBlogPost" method="POST" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Titulo</label>
+                                        <input type="text" name="titulo" class="form-control" placeholder="Titulo" value="">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="i-checks"><label> <input type="checkbox" name="estado" value="1"> <i></i> Mostrar </label></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>ID video Youtube</label>
+                                        <input type="text" name="url_youtube" class="form-control" placeholder="ID video Youtube" value="">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group" id="data_1">
+                                            <label class="font-normal">Fecha Publicación</label>
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" name="fecha_blog" value="">
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Contenido</label>
+                                        <textarea name="contenido" class="summernote"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <h3>Imagen</h3>
+                                <div class="alert alert-info alert-dismissable">
+                                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                                    Detalles de la imagen a subir:<br>
+                                        -Formato: JPG,PNG<br>
+                                        -Dimensión: 1280 x 720<br>
+                                        -Tamaño: Hasta 2MB<br>
+                                    <strong>Obs.: Las imagenes serán redimensionadas automaticamente a la dimensión especificada y se reducirá la calidad de la misma.</strong>
+                                </div>
+                                <div class="html5fileupload fileAgregarBlog" data-form="true" data-max-filesize="2048000"  data-valid-extensions="JPG,JPEG,jpg,png,jpeg,PNG" style="width: 100%;">
+                                    <input type="file" name="file_archivo" />
+                                </div>
+                                <script>
+                                    $(".html5fileupload.fileAgregarBlog").html5fileupload();
+                                </script>
+                            </div>
+                            <button type="submit" class="btn btn-block btn-primary btn-lg">Agregar Blog</button>
+                        </form>
+                    </div>
+                </div>
+                <script>
+                    $(document).ready(function () {
+                        $(".summernote").summernote({
+                            height: 300, // set editor height
+                            minHeight: null, // set minimum height of editor
+                            maxHeight: null // set maximum height of editor
+                        });
+                        $(".i-checks").iCheck({
+                            checkboxClass: "icheckbox_square-green",
+                            radioClass: "iradio_square-green",
+                        });
+                        $("#data_1 .input-group.date").datepicker({
+                            todayBtn: "linked",
+                            keyboardNavigation: false,
+                            forceParse: false,
+                            calendarWeeks: true,
+                            autoclose: true,
+                            format: "dd/mm/yyyy",
+                        });
+                    });
+                </script>';
+        $data = array(
+            'titulo' => 'Agregar Entrada del Blog',
+            'content' => $modal
+        );
+        return $data;
     }
 
 }
