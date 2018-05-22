@@ -866,7 +866,7 @@ class Helper {
     }
 
     public function getActivePageAdmin($page) {
-        $dashboard = $inicio = $nathaly = $consultorio = $turnos = $pacientes = $ciudades = $contacto = $blog = '';
+        $dashboard = $inicio = $nathaly = $consultorio = $turnos = $pacientes = $ciudades = $contacto = $blog = $usuarios = '';
         switch ($page) {
             case'inicio':
                 $inicio = 'class ="active"';
@@ -892,6 +892,9 @@ class Helper {
             case'contacto':
                 $contacto = 'class ="active"';
                 break;
+            case 'usuarios':
+                $usuarios = 'class="active"';
+                break;
             default :
                 $dashboard = 'class ="active"';
                 break;
@@ -910,6 +913,7 @@ class Helper {
                 ),
                 'blog' => $blog,
                 'contacto' => $contacto,
+                'usuarios' => $usuarios
             )
         );
         return $data;

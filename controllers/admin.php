@@ -779,4 +779,78 @@ class Admin extends Controller {
         echo $datos;
     }
 
+    public function usuarios() {
+        $this->view->title = 'Usuarios';
+        #cargamos las librerias extras
+        $this->view->helper = new Helper();
+        $this->view->public_css = array("css/plugins/dataTables/datatables.min.css", "css/plugins/html5fileupload/html5fileupload.css", "css/plugins/iCheck/custom.css", "css/plugins/summernote/summernote.css", "css/plugins/html5fileupload/html5fileupload.css", "css/plugins/toastr/toastr.min.css", "css/plugins/datapicker/datepicker3.css");
+        $this->view->public_js = array("js/plugins/dataTables/datatables.min.js", "js/plugins/dataTables/dataTables.rowReorder.min.js", "js/plugins/html5fileupload/html5fileupload.min.js", "js/plugins/iCheck/icheck.min.js", "js/plugins/pdfobject/pdfobject.min.js", "js/plugins/html5fileupload/html5fileupload.min.js", "js/plugins/toastr/toastr.min.js", "js/plugins/datapicker/bootstrap-datepicker.js", "js/plugins/input-mask/jquery.inputmask.js", "js/plugins/input-mask/jquery.inputmask.numeric.extensions.js", "js/plugins/datapicker/locales/bootstrap-datepicker.es.min.js");
+        $this->view->publicHeader_js = array("js/plugins/html5fileupload/html5fileupload.min.js");
+        $this->view->render('admin/header');
+        $this->view->render('admin/usuarios/index');
+        $this->view->render('admin/footer');
+        if (!empty($_SESSION['message']))
+            unset($_SESSION['message']);
+    }
+
+    public function listadoDTUsuarios() {
+        header('Content-type: application/json; charset=utf-8');
+        $data = $this->model->listadoDTUsuarios();
+        echo $data;
+    }
+
+    public function modalEditarDTUsuario() {
+        header('Content-type: application/json; charset=utf-8');
+        $data = array(
+            'id' => $this->helper->cleanInput($_POST['id'])
+        );
+        $datos = $this->model->modalEditarDTUsuario($data);
+        echo $datos;
+    }
+
+    public function frmEditarUsuario() {
+        header('Content-type: application/json; charset=utf-8');
+        $datos = array(
+            'id' => $this->helper->cleanInput($_POST['id']),
+            'nombre' => $this->helper->cleanInput($_POST['nombre']),
+            'email' => $this->helper->cleanInput($_POST['email']),
+            'id_rol' => $this->helper->cleanInput($_POST['id_rol']),
+            'contrasena' => (!empty($_POST['contrasena'])) ? $this->helper->cleanInput($_POST['contrasena']) : NULL,
+            'estado' => (!empty($_POST['estado'])) ? $this->helper->cleanInput($_POST['estado']) : 0
+        );
+        $data = $this->model->frmEditarUsuario($datos);
+        echo json_encode($data);
+    }
+
+    public function modalAgregarUsuario() {
+        header('Content-type: application/json; charset=utf-8');
+        $datos = $this->model->modalAgregarUsuario();
+        echo json_encode($datos);
+    }
+
+    public function frmAgregarUsuario() {
+        if (!empty($_POST)) {
+            $data = array(
+                'nombre' => (!empty($_POST['nombre'])) ? $this->helper->cleanInput($_POST['nombre']) : NULL,
+                'email' => (!empty($_POST['email'])) ? $this->helper->cleanInput($_POST['email']) : NULL,
+                'id_rol' => (!empty($_POST['id_rol'])) ? $this->helper->cleanInput($_POST['id_rol']) : NULL,
+                'contrasena' => (!empty($_POST['contrasena'])) ? $this->helper->cleanInput($_POST['contrasena']) : NULL,
+                'estado' => (!empty($_POST['estado'])) ? $_POST['estado'] : 0,
+            );
+            $id = $this->model->frmAgregarUsuario($data);
+            if (!empty($id)) {
+                Session::set('message', array(
+                    'type' => 'success',
+                    'mensaje' => 'Se ha agregado correctamente el usuario'
+                ));
+            } else {
+                Session::set('message', array(
+                    'type' => 'error',
+                    'mensaje' => 'Lo sentimos, ha ocurrido un error inesperado.'
+                ));
+            }
+        }
+        header('Location:' . URL . 'admin/usuarios/');
+    }
+
 }

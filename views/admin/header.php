@@ -2,6 +2,7 @@
 $helper = new Helper();
 $pagina = (!empty($helper->getPage()[1])) ? $helper->getPage()[1] : '';
 $paginaActual = $helper->getActivePageAdmin($pagina);
+$rol = $_SESSION['usuarioLogueado']['rol'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -64,19 +65,29 @@ $paginaActual = $helper->getActivePageAdmin($pagina);
                             </div>
                         </li>
                         <li <?= $paginaActual['paginas']['dashboard']; ?>><a href="<?= URL; ?>admin"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboards</span></a></li>
-                        <li <?= $paginaActual['paginas']['inicio']; ?>><a href="<?= URL; ?>admin/inicio"><i class="fa fa-home"></i> <span class="nav-label">Inicio</span></a></li>
-                        <li <?= $paginaActual['paginas']['nathaly']; ?>><a href="<?= URL; ?>admin/nathaly"><i class="fa fa-leaf"></i> <span class="nav-label">Nathaly</span></a></li>
-                        
-                        <li <?= $paginaActual['paginas']['consultorio']['consultorio']; ?>>
-                            <a href="#"><i class="fa fa-user-md"></i> <span class="nav-label">Consultorio</span><span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse" style="height: 0px;">
-                                <li <?= $paginaActual['paginas']['consultorio']['turnos']; ?>><a href="<?= URL; ?>admin/turnos">Turnos</a></li>
-                                <li <?= $paginaActual['paginas']['consultorio']['pacientes']; ?>><a href="#">Pacientes</a></li>
-                                <li <?= $paginaActual['paginas']['consultorio']['ciudades']; ?>><a href="<?= URL; ?>admin/ciudades">Ciudades</a></li>
-                            </ul>
-                        </li>
-                        <li <?= $paginaActual['paginas']['blog']; ?>><a href="<?= URL; ?>admin/blog"><i class="fa fa-pencil-square-o"></i> <span class="nav-label">Blog</span></a></li>
-                        <li <?= $paginaActual['paginas']['contacto']; ?>><a href="<?= URL; ?>admin/contacto"><i class="fa fa-envelope-o"></i> <span class="nav-label">Contacto</span></a></li>
+                        <?php if (($rol == 'Administrador') || ($rol == 'Editor')): ?>
+                            <li <?= $paginaActual['paginas']['inicio']; ?>><a href="<?= URL; ?>admin/inicio"><i class="fa fa-home"></i> <span class="nav-label">Inicio</span></a></li>
+                            <li <?= $paginaActual['paginas']['nathaly']; ?>><a href="<?= URL; ?>admin/nathaly"><i class="fa fa-leaf"></i> <span class="nav-label">Nathaly</span></a></li>
+                        <?php endif; ?>
+                        <?php if (($rol == 'Administrador') || ($rol == 'Editor') || ($rol == 'Consultorio')): ?>
+                            <li <?= $paginaActual['paginas']['consultorio']['consultorio']; ?>>
+                                <a href="#"><i class="fa fa-user-md"></i> <span class="nav-label">Consultorio</span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse" style="height: 0px;">
+                                    <li <?= $paginaActual['paginas']['consultorio']['turnos']; ?>><a href="<?= URL; ?>admin/turnos">Turnos</a></li>
+                                    <li <?= $paginaActual['paginas']['consultorio']['pacientes']; ?>><a href="#">Pacientes</a></li>
+                                    <li <?= $paginaActual['paginas']['consultorio']['ciudades']; ?>><a href="<?= URL; ?>admin/ciudades">Ciudades</a></li>
+                                </ul>
+                            </li>
+                        <?php endif; ?>
+                        <?php if (($rol == 'Administrador') || ($rol == 'Editor')): ?>
+                            <li <?= $paginaActual['paginas']['blog']; ?>><a href="<?= URL; ?>admin/blog"><i class="fa fa-pencil-square-o"></i> <span class="nav-label">Blog</span></a></li>
+                            <li <?= $paginaActual['paginas']['contacto']; ?>><a href="<?= URL; ?>admin/contacto"><i class="fa fa-envelope-o"></i> <span class="nav-label">Contacto</span></a></li>
+                        <?php endif; ?>
+                        <?php if ($rol == 'Administrador'): ?>
+                            <li <?= $paginaActual['paginas']['usuarios']; ?>>
+                                <a href="<?= URL; ?>admin/usuarios"><i class="fa fa-users"></i> <span class="nav-label">Usuarios</span></a>
+                            </li>
+                        <?php endif; ?>
                     </ul>
                 </div>
             </nav>
