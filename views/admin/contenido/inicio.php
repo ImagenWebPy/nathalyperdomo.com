@@ -469,9 +469,8 @@
                     if (data.type == 'success') {
                         var table = $(".dataTables-frases").DataTable();
                         table.row.add({
-                            "orden": data.orden,
-                            "frase": data.frase,
-                            "autor": data.autor,
+                            "departamento": data.departamento,
+                            "ciudad": data.ciudad,
                             "estado": data.estado,
                             "accion": data.accion
                         }).draw();
