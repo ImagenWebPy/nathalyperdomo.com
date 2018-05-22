@@ -16,4 +16,16 @@ class Contacto extends Controller {
         $this->view->render('footer');
     }
 
+    public function frmContacto() {
+        $datos = array(
+            'nombre' => $this->helper->cleanInput($_POST['nombre']),
+            'email' => $this->helper->cleanInput($_POST['email']),
+            'asunto' => $this->helper->cleanInput($_POST['asunto']),
+            'mensaje' => $this->helper->cleanInput($_POST['mensaje'])
+        );
+        header('Content-type: application/json; charset=utf-8');
+        $data = $this->model->frmContacto($datos);
+        echo json_encode($data);
+    }
+
 }

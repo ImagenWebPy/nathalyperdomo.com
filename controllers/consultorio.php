@@ -18,4 +18,18 @@ class Consultorio extends Controller {
         $this->view->render('footer');
     }
 
+    public function reserva() {
+        $datos = array(
+            'nombre' => $this->helper->cleanInput($_POST['nombre']),
+            'email' => $this->helper->cleanInput($_POST['email']),
+            'telefono' => $this->helper->cleanInput($_POST['telefono']),
+            'fecha_reserva' => $this->helper->cleanInput($_POST['fecha_reserva']),
+            'hora_reserva' => $this->helper->cleanInput($_POST['hora_reserva']),
+            'comentario' => $this->helper->cleanInput($_POST['comentario'])
+        );
+        header('Content-type: application/json; charset=utf-8');
+        $data = $this->model->reserva($datos);
+        echo json_encode($data);
+    }
+
 }
