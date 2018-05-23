@@ -2089,7 +2089,15 @@ class Admin_Model extends Model {
                                         <div class="panel-body">
                                             <div class="row">
                                                 <div class="col-md-3 pull-right">
-                                                    <button type="button" class="btn btn-w-m btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Agregar Item Ficha</button>
+                                                    <button type="button" class="btn btn-w-m btn-primary btnAgregarDatoFichaPaciente"><i class="fa fa-plus" aria-hidden="true"></i> Agregar Item Ficha</button>
+                                                </div>
+                                                <div class="col-md-12 divAgregarFichaPaciente">
+                                                    <form class="frmAgregarDatoFichaCliente">
+                                                        <div class="form-group">
+                                                            <label>Contenido</label>
+                                                            <textarea name="contenido" class="summernote"></textarea>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                             <div class="row">';
@@ -2102,7 +2110,7 @@ class Admin_Model extends Model {
                                                     </div>
                                                 </div>
                                                 <script>
-                                                    getresult("' . URL . 'admin/getresult");
+                                                    getresult("' . URL . 'admin/getresult/' . $id . '");
                                                 </script>';
         $modal .= '                         </div>
                                         </div>
@@ -2119,6 +2127,15 @@ class Admin_Model extends Model {
                         </div>
                     </div>
                 </div>
+                <script>
+                    $(document).ready(function () {
+                        $(".summernote").summernote({
+                            height: 300, // set editor height
+                            minHeight: null, // set minimum height of editor
+                            maxHeight: null // set maximum height of editor
+                        });
+                    });
+                </script>
                 ';
         $data = array(
             'titulo' => 'Editar Entrada del Blog',
@@ -2425,8 +2442,7 @@ class Admin_Model extends Model {
         return $id;
     }
 
-    public function getresult($datos) {
-        $pagina = $datos;
+    public function getresult($idPaciente, $pagina) {
         if (!empty($pagina)) {
             $page = $pagina;
         } else {
@@ -2435,20 +2451,28 @@ class Admin_Model extends Model {
         $setLimit = CANT_FICHA;
         $pageLimit = ($setLimit * $page) - $setLimit;
         $sql = $this->db->select("select * from ficha_paciente
+                                where id_paciente = $idPaciente
                                 ORDER BY fecha desc
                                 LIMIT $pageLimit, $setLimit");
-        $condicion = "FROM ficha_paciente";
+        $condicion = "FROM ficha_paciente WHERE 1=1";
 
         $div = '';
-        foreach ($sql as $item) {
-            $fecha = date('d-m-Y H:i:s', strtotime($item['fecha']));
-            $div .= '                         <div class="hr-line-dashed"></div>
+        if (!empty($sql)) {
+            foreach ($sql as $item) {
+                $fecha = date('d-m-Y H:i:s', strtotime($item['fecha']));
+                $div .= '                         <div class="hr-line-dashed"></div>
                                                 <div class="search-result">
                                                     <h3><a href="#">' . $fecha . '</a></h3>
                                                     ' . utf8_encode($item['descripcion_consulta']) . '
                                                 </div>';
+            }
+        } else {
+            $div .= '<p>&nbsp;</p><div class="alert alert-info alert-dismissable">
+                                <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                                El paciente seleccionado aún no posee ningún registro en su ficha.
+                            </div>';
         }
-        $div .= $this->helper->mostrarPaginador($setLimit, $page, 'ficha_paciente', 'admin/getresult', $condicion, TRUE);
+        $div .= $this->helper->mostrarPaginador($setLimit, $page, 'ficha_paciente', 'admin/getresult/' . $idPaciente, $condicion, TRUE);
         return $div;
     }
 

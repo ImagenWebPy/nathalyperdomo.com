@@ -926,13 +926,14 @@ class Admin extends Controller {
 
     public function getresult() {
         $url = $this->helper->getUrl();
-        if (!empty($url[2])) {
-            $pagina = $url[2];
+        $idPaciente = $url[2];
+        if (!empty($url[3])) {
+            $pagina = $url[3];
         } else {
             $pagina = 1;
         }
         header('Content-type: application/json; charset=utf-8');
-        $datos = $this->model->getresult($pagina);
+        $datos = $this->model->getresult($idPaciente,$pagina);
         echo json_encode($datos);
     }
 

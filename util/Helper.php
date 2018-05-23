@@ -192,10 +192,16 @@ class Helper {
      * @return string
      */
     public function mostrarPaginador($per_page, $page, $table, $section, $condicion = NULL, $inPage = FALSE) {
+        $where = '';
+        if ($inPage == TRUE) {
+            $id_paciente = explode('/', $section);
+            $id_paciente = end($id_paciente);
+            $where = 'and id_paciente = ' . $id_paciente;
+        }
         if (!empty($condicion)) {
-            $query = $this->db->select("SELECT COUNT(*) as totalCount $condicion");
+            $query = $this->db->select("SELECT COUNT(*) as totalCount $condicion $where");
         } else {
-            $query = $this->db->select("SELECT COUNT(*) as totalCount FROM $table where estado = 1");
+            $query = $this->db->select("SELECT COUNT(*) as totalCount FROM $table where estado = 1 $where");
         }
         $total = $query[0]['totalCount'];
         $adjacents = "2";
