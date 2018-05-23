@@ -74,7 +74,7 @@ $rol = $_SESSION['usuarioLogueado']['rol'];
                                 <a href="#"><i class="fa fa-user-md"></i> <span class="nav-label">Consultorio</span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level collapse" style="height: 0px;">
                                     <li <?= $paginaActual['paginas']['consultorio']['turnos']; ?>><a href="<?= URL; ?>admin/turnos">Turnos</a></li>
-                                    <li <?= $paginaActual['paginas']['consultorio']['pacientes']; ?>><a href="#">Pacientes</a></li>
+                                    <li <?= $paginaActual['paginas']['consultorio']['pacientes']; ?>><a href="<?= URL; ?>admin/pacientes">Pacientes</a></li>
                                     <li <?= $paginaActual['paginas']['consultorio']['ciudades']; ?>><a href="<?= URL; ?>admin/ciudades">Ciudades</a></li>
                                 </ul>
                             </li>

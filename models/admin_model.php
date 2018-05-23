@@ -499,6 +499,23 @@ class Admin_Model extends Model {
                         . '<td>' . $estado . '</td>'
                         . '<td>' . $btnEditar . '</td>';
                 break;
+            case 'paciente':
+                if ($sql[0]['estado'] == 1) {
+                    $estado = '<a class="pointer btnCambiarEstado" data-seccion="paciente" data-rowid="paciente_" data-tabla="paciente" data-campo="estado" data-id="' . $id . '" data-estado="1"><span class="label label-primary">Activo</span></a>';
+                } else {
+                    $estado = '<a class="pointer btnCambiarEstado" data-seccion="paciente" data-rowid="paciente_" data-tabla="paciente" data-campo="estado" data-id="' . $id . '" data-estado="0"><span class="label label-danger">Inactivo</span></a>';
+                }
+                $btnEditar = '<a class="editDTContenido pointer btn-xs" data-id="' . $id . '" data-url="modalEditarDatosPaciente"><i class="fa fa-edit"></i> Ver Datos / Editar </a>';
+                $data = '<td>' . $id . '</td>'
+                        . '<td>' . utf8_encode($sql[0]['nombre']) . '</td>'
+                        . '<td>' . utf8_encode($sql[0]['apellido']) . '</td>'
+                        . '<td>' . utf8_encode($sql[0]['email']) . '</td>'
+                        . '<td>' . utf8_encode($sql[0]['documento']) . '</td>'
+                        . '<td>' . utf8_encode($sql[0]['telefono']) . '</td>'
+                        . '<td>' . utf8_encode($sql[0]['celular']) . '</td>'
+                        . '<td>' . $estado . '</td>'
+                        . '<td>' . $btnEditar . '</td>';
+                break;
         }
         return $data;
     }
@@ -1769,6 +1786,72 @@ class Admin_Model extends Model {
         return json_encode($json_data);
     }
 
+    public function listadoDTPacientes($datos) {
+        $columns = array(
+            0 => 'id',
+            1 => 'nombre',
+            2 => 'apellido',
+            3 => 'email',
+            4 => 'documento',
+            5 => 'telefono',
+            6 => 'celular',
+            7 => 'estado',
+            8 => 'accion'
+        );
+        #getting total number records without any search
+        $sql = $this->db->select("SELECT COUNT(*) as cantidad FROM paciente");
+        $totalFiltered = $sql[0]['cantidad'];
+        $totalData = $sql[0]['cantidad'];
+
+        $query = "SELECT * FROM paciente where 1 = 1";
+        $where = "";
+        if (!empty($datos['search']['value'])) {
+            $where .= " AND (nombre LIKE '%" . $requestData['search']['value'] . "%' ";
+            $where .= " OR apellido LIKE '%" . $requestData['search']['value'] . "%' ";
+            $where .= " OR email LIKE '%" . $requestData['search']['value'] . "%' ";
+            $where .= " OR documento LIKE '%" . $requestData['search']['value'] . "%' ";
+            $where .= " OR telefono LIKE '%" . $requestData['search']['value'] . "%' ";
+            $where .= " OR celular LIKE '%" . $requestData['search']['value'] . "%' )";
+            #when there is a search parameter then we have to modify total number filtered rows as per search result.
+            $sql = $this->db->select("SELECT COUNT(*) as cantidad FROM paciente where 1 = 1 $where");
+            $totalFiltered = $sql[0]['cantidad'];
+        }
+        $query .= $where;
+        $query .= " ORDER BY " . $columns[$datos['order'][0]['column']] . "   " . $datos['order'][0]['dir'] . "  LIMIT " . $datos['start'] . " ," . $datos['length'] . "   ";
+        $sql = $this->db->select($query);
+        $data = array();
+        foreach ($sql as $row) {  // preparing an array
+            $id = $row["id"];
+            if ($row['estado'] == 1) {
+                $estado = '<a class="pointer btnCambiarEstado" data-seccion="paciente" data-rowid="paciente_" data-tabla="paciente" data-campo="estado" data-id="' . $id . '" data-estado="1"><span class="label label-primary">Activo</span></a>';
+            } else {
+                $estado = '<a class="pointer btnCambiarEstado" data-seccion="paciente" data-rowid="paciente_" data-tabla="paciente" data-campo="estado" data-id="' . $id . '" data-estado="0"><span class="label label-danger">Inactivo</span></a>';
+            }
+            $btnEditar = '<a class="editDTContenido pointer btn-xs" data-id="' . $id . '" data-url="modalEditarDatosPaciente"><i class="fa fa-edit"></i> Ver Datos / Editar </a>';
+            $nestedData = array();
+            $nestedData['DT_RowId'] = 'paciente_' . $id;
+            $nestedData[] = $id;
+            $nestedData[] = utf8_encode($row["nombre"]);
+            $nestedData[] = utf8_encode($row["apellido"]);
+            $nestedData[] = utf8_encode($row["email"]);
+            $nestedData[] = utf8_encode($row["documento"]);
+            $nestedData[] = utf8_encode($row["telefono"]);
+            $nestedData[] = utf8_encode($row["celular"]);
+            $nestedData[] = $estado;
+            $nestedData[] = $btnEditar;
+            $data[] = $nestedData;
+        }
+
+        $json_data = array(
+            "draw" => intval($datos['draw']), // for every request/draw by clientside , they send a number as a parameter, when they recieve a response/data they first check the draw number, so we are sending same number in draw. 
+            "recordsTotal" => intval($totalData), // total number of records
+            "recordsFiltered" => intval($totalFiltered), // total number of records after searching, if there is no searching then totalFiltered = totalData
+            "data" => $data   // total data array
+        );
+
+        return json_encode($json_data);
+    }
+
     public function listadoDTBlog($datos) {
         $columns = array(
             0 => 'id',
@@ -1979,6 +2062,64 @@ class Admin_Model extends Model {
                         });
                     });
                 </script>';
+        $data = array(
+            'titulo' => 'Editar Entrada del Blog',
+            'content' => $modal
+        );
+        return json_encode($data);
+    }
+
+    public function modalEditarDatosPaciente($datos) {
+        $id = $datos['id'];
+        $sqlFicha = $this->db->select("SELECT * FROM `ficha_paciente` WHERE id_paciente = $id ORDER BY fecha DESC;");
+        $modal = '
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Datos del paciente</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="tabs-container">
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a data-toggle="tab" href="#tab-1"> <i class="fa fa-user" aria-hidden="true"></i> Ficha</a></li>
+                                    <li class=""><a data-toggle="tab" href="#tab-2"><i class="fa fa-info-circle" aria-hidden="true"></i> Datos</a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div id="tab-1" class="tab-pane active">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-md-3 pull-right">
+                                                    <button type="button" class="btn btn-w-m btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Agregar Item Ficha</button>
+                                                </div>
+                                            </div>
+                                            <div class="row">';
+        $modal .= '                             <div id="overlay"><div><i class="fa fa-circle-o-notch fa-spin" style="font-size:34px"></i></div></div>
+                                                <div class="page-content">
+
+
+                                                    <div id="pagination-result">
+                                                        <input type="hidden" name="rowcount" id="rowcount" />
+                                                    </div>
+                                                </div>
+                                                <script>
+                                                    getresult("' . URL . 'admin/getresult");
+                                                </script>';
+        $modal .= '                         </div>
+                                        </div>
+                                    </div>
+                                    <div id="tab-2" class="tab-pane">
+                                        <div class="panel-body">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                ';
         $data = array(
             'titulo' => 'Editar Entrada del Blog',
             'content' => $modal
@@ -2282,6 +2423,32 @@ class Admin_Model extends Model {
         ));
         $id = $this->db->lastInsertId();
         return $id;
+    }
+
+    public function getresult($datos) {
+        if (!empty($pagina)) {
+            $page = $pagina;
+        } else {
+            $page = 1;
+        }
+        $setLimit = 2;
+        $pageLimit = ($setLimit * $page) - $setLimit;
+        $sql = $this->db->select("select * from ficha_paciente
+                                ORDER BY fecha desc
+                                LIMIT $pageLimit, $setLimit");
+        $condicion = "FROM ficha_paciente";
+
+        $div = '';
+        foreach ($sql as $item) {
+            $fecha = date('d-m-Y H:i:s', strtotime($item['fecha']));
+            $div .= '                         <div class="hr-line-dashed"></div>
+                                                <div class="search-result">
+                                                    <h3><a href="#">' . $fecha . '</a></h3>
+                                                    ' . utf8_encode($item['descripcion_consulta']) . '
+                                                </div>';
+        }
+        $div .= $this->helper->mostrarPaginador($setLimit, $page, 'ficha_paciente', 'admin/getresult', $condicion);
+        return $div;
     }
 
 }

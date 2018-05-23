@@ -67,6 +67,19 @@ class Admin extends Controller {
             unset($_SESSION['message']);
     }
 
+    public function pacientes() {
+        $this->view->helper = $this->helper;
+        $this->view->title = 'Pacientes';
+        $this->view->public_css = array("css/plugins/dataTables/datatables.min.css", "css/plugins/html5fileupload/html5fileupload.css", "css/plugins/iCheck/custom.css", "css/wfmi-style.css", "css/plugins/toastr/toastr.min.css", "css/plugins/summernote/summernote.css", "css/plugins/datapicker/datepicker3.css");
+        $this->view->publicHeader_js = array("js/ajax-pagination");
+        $this->view->public_js = array("js/plugins/dataTables/datatables.min.js", "js/plugins/html5fileupload/html5fileupload.min.js", "js/plugins/iCheck/icheck.min.js", "js/plugins/toastr/toastr.min.js", "js/plugins/summernote/summernote.min.js", "js/plugins/datapicker/bootstrap-datepicker.js");
+        $this->view->render('admin/header');
+        $this->view->render('admin/pacientes/index');
+        $this->view->render('admin/footer');
+        if (!empty($_SESSION['message']))
+            unset($_SESSION['message']);
+    }
+
     public function contacto() {
         $this->view->helper = $this->helper;
         $this->view->datosVideoInicio = $this->model->datosVideoInicio();
@@ -567,7 +580,7 @@ class Admin extends Controller {
         $datos = $this->model->modalAgregarFrases();
         echo json_encode($datos);
     }
-    
+
     public function modalAgregarCiudad() {
         header('Content-type: application/json; charset=utf-8');
         $datos = $this->model->modalAgregarCiudad();
@@ -604,7 +617,7 @@ class Admin extends Controller {
         $data = $this->model->frmAgregarFrases($datos);
         echo json_encode($data);
     }
-    
+
     public function frmAgregarCiudad() {
         header('Content-type: application/json; charset=utf-8');
         $datos = array(
@@ -798,6 +811,12 @@ class Admin extends Controller {
         echo $data;
     }
 
+    public function listadoDTPacientes() {
+        header('Content-type: application/json; charset=utf-8');
+        $data = $this->model->listadoDTPacientes($_REQUEST);
+        echo $data;
+    }
+
     public function listadoDTBlog() {
         header('Content-type: application/json; charset=utf-8');
         $data = $this->model->listadoDTBlog($_REQUEST);
@@ -851,6 +870,15 @@ class Admin extends Controller {
         echo $datos;
     }
 
+    public function modalEditarDatosPaciente() {
+        header('Content-type: application/json; charset=utf-8');
+        $data = array(
+            'id' => $this->helper->cleanInput($_POST['id'])
+        );
+        $datos = $this->model->modalEditarDatosPaciente($data);
+        echo $datos;
+    }
+
     public function frmEditarUsuario() {
         header('Content-type: application/json; charset=utf-8');
         $datos = array(
@@ -894,6 +922,18 @@ class Admin extends Controller {
             }
         }
         header('Location:' . URL . 'admin/usuarios/');
+    }
+
+    public function getresult() {
+        $url = $this->helper->getUrl();
+        if (!empty($url[2])) {
+            $pagina = $url[2];
+        } else {
+            $pagina = 1;
+        }
+        header('Content-type: application/json; charset=utf-8');
+        $datos = $this->model->getresult($pagina);
+        echo json_encode($datos);
     }
 
 }

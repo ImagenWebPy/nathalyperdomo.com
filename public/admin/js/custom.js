@@ -9,3 +9,4 @@ function resetLabels(params) {
         $(params[i]).css('display', 'none');
     }
 }
+
