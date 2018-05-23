@@ -7,6 +7,7 @@ function getresult(url) {
             $("#overlay").show();
         },
         success: function (data) {
+            $("#pagination-result").html("");
             $("#pagination-result").html(data);
             setInterval(function () {
                 $("#overlay").hide();

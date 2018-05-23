@@ -2426,12 +2426,13 @@ class Admin_Model extends Model {
     }
 
     public function getresult($datos) {
+        $pagina = $datos;
         if (!empty($pagina)) {
             $page = $pagina;
         } else {
             $page = 1;
         }
-        $setLimit = 2;
+        $setLimit = CANT_FICHA;
         $pageLimit = ($setLimit * $page) - $setLimit;
         $sql = $this->db->select("select * from ficha_paciente
                                 ORDER BY fecha desc
@@ -2447,7 +2448,7 @@ class Admin_Model extends Model {
                                                     ' . utf8_encode($item['descripcion_consulta']) . '
                                                 </div>';
         }
-        $div .= $this->helper->mostrarPaginador($setLimit, $page, 'ficha_paciente', 'admin/getresult', $condicion);
+        $div .= $this->helper->mostrarPaginador($setLimit, $page, 'ficha_paciente', 'admin/getresult', $condicion, TRUE);
         return $div;
     }
 
