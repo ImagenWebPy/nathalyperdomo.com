@@ -1522,6 +1522,51 @@ class Admin_Model extends Model {
         return $data;
     }
 
+    public function frmAgregarDatosPaciente($datos) {
+        $fecha = (!empty($datos['fecha_nacimiento'])) ? date('Y-m-d', strtotime($datos['fecha_nacimiento'])) : NULL;
+        $this->db->insert('paciente', array(
+            'id_tipo_documento' => $datos['id_tipo_documento'],
+            'id_ciudad' => $datos['id_ciudad'],
+            'documento' => utf8_decode($datos['documento']),
+            'email' => utf8_decode($datos['email']),
+            'nombre' => utf8_decode($datos['nombre']),
+            'apellido' => utf8_decode($datos['apellido']),
+            'telefono' => utf8_decode($datos['telefono']),
+            'celular' => utf8_decode($datos['celular']),
+            'direccion' => utf8_decode($datos['direccion']),
+            'barrio' => utf8_decode($datos['barrio']),
+            'fecha_registro' => date('Y-m-d H:i:s'),
+            'fecha_nacimiento' => $fecha,
+            'estado' => $datos['estado']
+        ));
+        $id = $this->db->lastInsertId();
+        $sql = $this->db->select("select p.*, tp.descripcion as tipo_documento, c.descripcion as ciudad, d.descripcion as departamento, d.id as id_departamento
+                                    from paciente p
+                                    LEFT JOIN tipo_documento tp on tp.id = p.id_tipo_documento
+                                    LEFT JOIN ciudad c on c.id = p.id_ciudad
+                                    LEFT JOIN departamento d on d.id = c.id_departamento
+                                    where p.id = $id");
+        if ($sql[0]['estado'] == 1) {
+            $estado = '<a class="pointer btnCambiarEstado" data-seccion="paciente" data-rowid="paciente_" data-tabla="paciente" data-campo="estado" data-id="' . $id . '" data-estado="1"><span class="label label-primary">Activo</span></a>';
+        } else {
+            $estado = '<a class="pointer btnCambiarEstado" data-seccion="paciente" data-rowid="paciente_" data-tabla="paciente" data-campo="estado" data-id="' . $id . '" data-estado="0"><span class="label label-danger">Inactivo</span></a>';
+        }
+        $btnEditar = '<a class="editDTContenido pointer btn-xs" data-id="' . $id . '" data-url="modalEditarDatosPaciente"><i class="fa fa-edit"></i> Ver Datos / Editar </a>';
+        $data = array(
+            'type' => 'success',
+            'id' => $id,
+            'nombre' => utf8_encode($sql[0]['nombre']),
+            'apellido' => utf8_encode($sql[0]['apellido']),
+            'email' => utf8_encode($sql[0]['email']),
+            'documento' => (!empty($sql[0]['documento'])) ? utf8_encode($sql[0]['documento']) : '-',
+            'telefono' => (!empty($sql[0]['telefono'])) ? utf8_encode($sql[0]['telefono']) : '-',
+            'celular' => (!empty($sql[0]['celular'])) ? utf8_encode($sql[0]['celular']) : '-',
+            'estado' => $estado,
+            'accion' => $btnEditar
+        );
+        return $data;
+    }
+
     public function frmAgregarFrases($datos) {
         $this->db->insert('web_frases', array(
             'frase' => utf8_decode($datos['frase']),
@@ -1642,6 +1687,28 @@ class Admin_Model extends Model {
         $data = array(
             'type' => 'success',
             'content' => 'Se han guardado correctamente los cambios para el contenido de Nosotros del Inicio.'
+        );
+        return $data;
+    }
+
+    public function frmAgregarDatoFichaCliente($datos) {
+        $id_paciente = $datos['id_paciente'];
+        $this->db->insert('ficha_paciente', array(
+            'id_paciente' => $id_paciente,
+            'fecha' => date('Y-m-d H:i:s'),
+            'descripcion_consulta' => utf8_decode($datos['descripcion_consulta'])
+        ));
+        $id = $this->db->lastInsertId();
+        $sql = $this->db->select("select * from ficha_paciente where id = $id");
+        $div = '<div class="hr-line-dashed"></div>
+                <div class="search-result">
+                    <h3><a href="#">' . date('d-m-Y H:i:s', strtotime($sql[0]['fecha'])) . '</a></h3>
+                    ' . utf8_encode($sql[0]['descripcion_consulta']) . '
+                </div>';
+        $data = array(
+            'type' => 'success',
+            'mensaje' => 'Se ha agregado correctamente los datos a la ficha del paciente.',
+            'content' => $div
         );
         return $data;
     }
@@ -2072,6 +2139,17 @@ class Admin_Model extends Model {
     public function modalEditarDatosPaciente($datos) {
         $id = $datos['id'];
         $sqlFicha = $this->db->select("SELECT * FROM `ficha_paciente` WHERE id_paciente = $id ORDER BY fecha DESC;");
+        $sqlPaciente = $this->db->select("select p.*, tp.descripcion as tipo_documento, c.descripcion as ciudad, d.descripcion as departamento, d.id as id_departamento
+                                        from paciente p
+                                        LEFT JOIN tipo_documento tp on tp.id = p.id_tipo_documento
+                                        LEFT JOIN ciudad c on c.id = p.id_ciudad
+                                        LEFT JOIN departamento d on d.id = c.id_departamento
+                                        where p.id = $id");
+        $sqlTipoDocumento = $this->db->select("select * from tipo_documento where estado = 1");
+        $sqlDepartamento = $this->db->select("Select * from departamento where estado = 1");
+        $sqlCiudad = $this->db->select("Select * from ciudad where id_departamento = " . $sqlPaciente[0]['id_departamento'] . " and estado = 1");
+        if ($sqlPaciente[0]['estado'] == 1)
+            $checked = 'checked';
         $modal = '
                 <div class="box box-primary">
                     <div class="box-header with-border">
@@ -2091,22 +2169,22 @@ class Admin_Model extends Model {
                                                 <div class="col-md-3 pull-right">
                                                     <button type="button" class="btn btn-w-m btn-primary btnAgregarDatoFichaPaciente"><i class="fa fa-plus" aria-hidden="true"></i> Agregar Item Ficha</button>
                                                 </div>
-                                                <div class="col-md-12 divAgregarFichaPaciente">
-                                                    <form class="frmAgregarDatoFichaCliente">
+                                                <div class="col-md-12 divAgregarFichaPaciente" style="display:none;">
+                                                    <form class="frmAgregarDatoFichaCliente" method="POST">
+                                                        <input type="hidden" name="id_paciente" value="' . $id . '">
                                                         <div class="form-group">
                                                             <label>Contenido</label>
                                                             <textarea name="contenido" class="summernote"></textarea>
                                                         </div>
+                                                        <button type="submit" class="btn btn-w-m btn-primary btn-block btn-lg"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar Datos</button>
                                                     </form>
+                                                    
                                                 </div>
                                             </div>
                                             <div class="row">';
         $modal .= '                             <div id="overlay"><div><i class="fa fa-circle-o-notch fa-spin" style="font-size:34px"></i></div></div>
                                                 <div class="page-content">
-
-
                                                     <div id="pagination-result">
-                                                        <input type="hidden" name="rowcount" id="rowcount" />
                                                     </div>
                                                 </div>
                                                 <script>
@@ -2117,12 +2195,122 @@ class Admin_Model extends Model {
                                     </div>
                                     <div id="tab-2" class="tab-pane">
                                         <div class="panel-body">
-                                            
+                                            <form method="POST" class="frmEditarDatosPaciente">
+                                                <input type="hidden" name="id" value="' . $sqlPaciente[0]['id'] . '">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Nombre</label>
+                                                            <input type="text" name="nombre" class="form-control" placeholder="Nombre" value="' . utf8_encode($sqlPaciente[0]['nombre']) . '" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Apellido</label>
+                                                            <input type="text" name="apellido" class="form-control" placeholder="Apellido" value="' . utf8_encode($sqlPaciente[0]['apellido']) . '" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Email</label>
+                                                            <input type="email" name="email" class="form-control" placeholder="Email" value="' . utf8_encode($sqlPaciente[0]['email']) . '" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Tipo Documento</label>
+                                                            <select class="form-control m-b" name="id_tipo_documento"> 
+                                                                <option value="">Tipo de Documento</option>';
+        foreach ($sqlTipoDocumento as $item) {
+            $selected = ($item['id'] == $sqlPaciente[0]['id_tipo_documento']) ? 'selected' : '';
+            $modal .= '                 <option value="' . $item['id'] . '" ' . $selected . '>' . utf8_encode($item['descripcion']) . '</option>';
+        }
+        $modal .= '                </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Documento</label>
+                                                            <input type="text" name="documento" class="form-control" placeholder="Nro. Documento" value="' . utf8_encode($sqlPaciente[0]['documento']) . '" required>
+                                                        </div>
+                                                    </div>
+                                                </div><!--/row-->
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Teléfono</label>
+                                                            <input type="text" name="telefono" class="form-control" placeholder="Teléfono" value="' . utf8_encode($sqlPaciente[0]['telefono']) . '">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Celular</label>
+                                                            <input type="text" name="celular" class="form-control" placeholder="Celular" value="' . utf8_encode($sqlPaciente[0]['celular']) . '">
+                                                        </div>
+                                                    </div>
+                                                </div><!--/row-->
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Dirección</label>
+                                                            <input type="text" name="direccion" class="form-control" placeholder="Dirección" value="' . utf8_encode($sqlPaciente[0]['direccion']) . '">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Barrio</label>
+                                                            <input type="text" name="barrio" class="form-control" placeholder="Barrio" value="' . utf8_encode($sqlPaciente[0]['barrio']) . '">
+                                                        </div>
+                                                    </div>
+                                                </div><!--/row-->
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Departamento</label>
+                                                            <select class="form-control m-b selectDepartamento" name="id_departamento"> 
+                                                                <option value="">Departamento</option>';
+        foreach ($sqlDepartamento as $item) {
+            $selected = ($item['id'] == $sqlPaciente[0]['id_departamento']) ? 'selected' : '';
+            $modal .= '                 <option value="' . $item['id'] . '" ' . $selected . '>' . utf8_encode($item['descripcion']) . '</option>';
+        }
+        $modal .= '                </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Ciudad</label>
+                                                            <select class="form-control m-b selectCiudad" name="id_ciudad"> 
+                                                                <option value="">Ciudad</option>';
+        foreach ($sqlCiudad as $item) {
+            $selected = ($item['id'] == $sqlPaciente[0]['id_ciudad']) ? 'selected' : '';
+            $modal .= '                 <option value="' . $item['id'] . '" ' . $selected . '>' . utf8_encode($item['descripcion']) . '</option>';
+        }
+        $modal .= '                </select>
+                                                        </div>
+                                                    </div>
+                                                </div><!--/row-->
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group" id="data_1">
+                                                            <label class="font-normal">Fecha Nacimiento</label>
+                                                            <div class="input-group date">
+                                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" name="fecha_nacimiento" value="' . date('d/m/Y', strtotime($sqlPaciente[0]['fecha_nacimiento'])) . '">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="i-checks"><label> <input type="checkbox" name="estado" value="1" ' . $checked . '> <i></i> Mostrar </label></div>
+                                                    </div>
+                                                </div><!--/row-->
+                                                <button type="submit" class="btn btn-w-m btn-primary btn-block btn-lg">Modificar Datos</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
@@ -2134,11 +2322,23 @@ class Admin_Model extends Model {
                             minHeight: null, // set minimum height of editor
                             maxHeight: null // set maximum height of editor
                         });
+                        $(".i-checks").iCheck({
+                            checkboxClass: "icheckbox_square-green",
+                            radioClass: "iradio_square-green",
+                        });
+                        $("#data_1 .input-group.date").datepicker({
+                            todayBtn: "linked",
+                            keyboardNavigation: false,
+                            forceParse: false,
+                            calendarWeeks: true,
+                            autoclose: true,
+                            format: "dd/mm/yyyy",
+                        });
                     });
                 </script>
                 ';
         $data = array(
-            'titulo' => 'Editar Entrada del Blog',
+            'titulo' => 'Datos del Paciente',
             'content' => $modal
         );
         return json_encode($data);
@@ -2230,6 +2430,145 @@ class Admin_Model extends Model {
                 </script>';
         $data = array(
             'titulo' => 'Agregar Entrada del Blog',
+            'content' => $modal
+        );
+        return $data;
+    }
+
+    public function modalAgregarPaciente() {
+        $sqlTipoDocumento = $this->db->select("select * from tipo_documento where estado = 1");
+        $sqlDepartamento = $this->db->select("Select * from departamento where estado = 1");
+        $modal = '<div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Agregar Paciente</h3>
+                    </div>
+                    <div class="row">
+                        <form method="POST" class="frmAgregarDatosPaciente">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Nombre</label>
+                                                            <input type="text" name="nombre" class="form-control" placeholder="Nombre" value="" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Apellido</label>
+                                                            <input type="text" name="apellido" class="form-control" placeholder="Apellido" value="" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label>Email</label>
+                                                            <input type="email" name="email" class="form-control" placeholder="Email" value="" required>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                                
+                                                    
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Tipo Documento</label>
+                                                            <select class="form-control m-b" name="id_tipo_documento"> 
+                                                                <option value="">Tipo de Documento</option>';
+        foreach ($sqlTipoDocumento as $item) {
+            $modal .= '                 <option value="' . $item['id'] . '">' . utf8_encode($item['descripcion']) . '</option>';
+        }
+        $modal .= '                </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Documento</label>
+                                                            <input type="text" name="documento" class="form-control" placeholder="Nro. Documento" value="">
+                                                        </div>
+                                                    </div>
+                                                </div><!--/row-->
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Teléfono</label>
+                                                            <input type="text" name="telefono" class="form-control" placeholder="Teléfono" value="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Celular</label>
+                                                            <input type="text" name="celular" class="form-control" placeholder="Celular" value="">
+                                                        </div>
+                                                    </div>
+                                                </div><!--/row-->
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Dirección</label>
+                                                            <input type="text" name="direccion" class="form-control" placeholder="Dirección" value="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Barrio</label>
+                                                            <input type="text" name="barrio" class="form-control" placeholder="Barrio" value="">
+                                                        </div>
+                                                    </div>
+                                                </div><!--/row-->
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Departamento</label>
+                                                            <select class="form-control m-b selectDepartamento" name="id_departamento"> 
+                                                                <option value="">Departamento</option>';
+        foreach ($sqlDepartamento as $item) {
+            $modal .= '                 <option value="' . $item['id'] . '">' . utf8_encode($item['descripcion']) . '</option>';
+        }
+        $modal .= '                </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Ciudad</label>
+                                                            <select class="form-control m-b selectCiudad" name="id_ciudad"> 
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div><!--/row-->
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group" id="data_1">
+                                                            <label class="font-normal">Fecha Nacimiento</label>
+                                                            <div class="input-group date">
+                                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" name="fecha_nacimiento" value="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="i-checks"><label> <input type="checkbox" name="estado" value="1"> <i></i> Mostrar </label></div>
+                                                    </div>
+                                                </div><!--/row-->
+                                                <button type="submit" class="btn btn-w-m btn-primary btn-block btn-lg">Agregar Paciente</button>
+                                            </form>                        
+                    </div>
+                </div>
+                <script>
+                    $(document).ready(function () {
+                        $(".i-checks").iCheck({
+                            checkboxClass: "icheckbox_square-green",
+                            radioClass: "iradio_square-green",
+                        });
+                        $("#data_1 .input-group.date").datepicker({
+                            todayBtn: "linked",
+                            keyboardNavigation: false,
+                            forceParse: false,
+                            calendarWeeks: true,
+                            autoclose: true,
+                            format: "dd/mm/yyyy",
+                        });
+                    });
+                </script>';
+        $data = array(
+            'titulo' => 'Agregar Paciente',
             'content' => $modal
         );
         return $data;
@@ -2474,6 +2813,46 @@ class Admin_Model extends Model {
         }
         $div .= $this->helper->mostrarPaginador($setLimit, $page, 'ficha_paciente', 'admin/getresult/' . $idPaciente, $condicion, TRUE);
         return $div;
+    }
+
+    public function frmEditarDatosPaciente($datos) {
+        $id = $datos['id'];
+        $estado = 1;
+        if (empty($datos['estado'])) {
+            $estado = 0;
+        }
+
+        $fechaNacimiento = (!empty($datos['fecha_nacimiento'])) ? date('Y-m-d', strtotime($datos['fecha_nacimiento'])) : NULL;
+        $update = array(
+            'nombre' => utf8_decode($datos['nombre']),
+            'apellido' => utf8_decode($datos['apellido']),
+            'id_tipo_documento' => utf8_decode($datos['id_tipo_documento']),
+            'documento' => utf8_decode($datos['documento']),
+            'telefono' => utf8_decode($datos['telefono']),
+            'celular' => utf8_decode($datos['celular']),
+            'direccion' => utf8_decode($datos['direccion']),
+            'barrio' => utf8_decode($datos['barrio']),
+            'id_ciudad' => utf8_decode($datos['id_ciudad']),
+            'fecha_nacimiento' => $fechaNacimiento,
+            'estado' => $estado
+        );
+        $this->db->update('paciente', $update, "id = $id");
+        $data = array(
+            'type' => 'success',
+            'content' => $this->rowDataTable('paciente', 'paciente', $id),
+            'id' => $id
+        );
+        return $data;
+    }
+
+    public function selectLoadCiudad($datos) {
+        $id = $datos['id_departamento'];
+        $sql = $this->db->select("select id, descripcion from ciudad where id_departamento = $id");
+        $option = '';
+        foreach ($sql as $item) {
+            $option .= '<option value="' . $item['id'] . '">' . utf8_encode($item['descripcion']) . '</option>';
+        }
+        return $option;
     }
 
 }

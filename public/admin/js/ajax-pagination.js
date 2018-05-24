@@ -2,7 +2,6 @@ function getresult(url) {
     $.ajax({
         url: url,
         type: "GET",
-        data: {rowcount: $("#rowcount").val()},
         beforeSend: function () {
             $("#overlay").show();
         },

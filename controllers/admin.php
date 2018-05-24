@@ -248,6 +248,27 @@ class Admin extends Controller {
         echo json_encode($data);
     }
 
+    public function frmEditarDatosPaciente() {
+        header('Content-type: application/json; charset=utf-8');
+        $datos = array(
+            'id' => $this->helper->cleanInput($_POST['id']),
+            'nombre' => $this->helper->cleanInput($_POST['nombre']),
+            'apellido' => $this->helper->cleanInput($_POST['apellido']),
+            'id_tipo_documento' => $this->helper->cleanInput($_POST['id_tipo_documento']),
+            'documento' => $this->helper->cleanInput($_POST['documento']),
+            'telefono' => $this->helper->cleanInput($_POST['telefono']),
+            'celular' => $this->helper->cleanInput($_POST['celular']),
+            'direccion' => $this->helper->cleanInput($_POST['direccion']),
+            'barrio' => $this->helper->cleanInput($_POST['barrio']),
+            'id_departamento' => $this->helper->cleanInput($_POST['id_departamento']),
+            'id_ciudad' => $this->helper->cleanInput($_POST['id_ciudad']),
+            'fecha_nacimiento' => $this->helper->cleanInput($_POST['fecha_nacimiento']),
+            'estado' => (!empty($_POST['estado'])) ? $this->helper->cleanInput($_POST['estado']) : 0
+        );
+        $data = $this->model->frmEditarDatosPaciente($datos);
+        echo json_encode($data);
+    }
+
     public function frmEditarCiudad() {
         header('Content-type: application/json; charset=utf-8');
         $datos = array(
@@ -275,6 +296,15 @@ class Admin extends Controller {
         echo $datos;
     }
 
+    public function selectLoadCiudad() {
+        header('Content-type: application/json; charset=utf-8');
+        $data = array(
+            'id_departamento' => $this->helper->cleanInput($_POST['id_departamento'])
+        );
+        $datos = $this->model->selectLoadCiudad($data);
+        echo json_encode($datos);
+    }
+
     public function frmEditarSlider() {
         header('Content-type: application/json; charset=utf-8');
         $datos = array(
@@ -298,6 +328,12 @@ class Admin extends Controller {
     public function modalAgregarBlogPost() {
         header('Content-type: application/json; charset=utf-8');
         $datos = $this->model->modalAgregarBlogPost();
+        echo json_encode($datos);
+    }
+
+    public function modalAgregarPaciente() {
+        header('Content-type: application/json; charset=utf-8');
+        $datos = $this->model->modalAgregarPaciente();
         echo json_encode($datos);
     }
 
@@ -606,6 +642,27 @@ class Admin extends Controller {
         echo json_encode($data);
     }
 
+    public function frmAgregarDatosPaciente() {
+        header('Content-type: application/json; charset=utf-8');
+
+        $datos = array(
+            'nombre' => $this->helper->cleanInput($_POST['nombre']),
+            'email' => $this->helper->cleanInput($_POST['email']),
+            'apellido' => $this->helper->cleanInput($_POST['apellido']),
+            'id_tipo_documento' => (!empty($_POST['id_tipo_documento'])) ? $this->helper->cleanInput($_POST['id_tipo_documento']) : NULL,
+            'documento' => (!empty($_POST['documento'])) ? $this->helper->cleanInput($_POST['documento']) : NULL,
+            'telefono' => (!empty($_POST['telefono'])) ? $this->helper->cleanInput($_POST['telefono']) : NULL,
+            'celular' => (!empty($_POST['celular'])) ? $this->helper->cleanInput($_POST['celular']) : NULL,
+            'direccion' => (!empty($_POST['direccion'])) ? $this->helper->cleanInput($_POST['direccion']) : NULL,
+            'barrio' => (!empty($_POST['barrio'])) ? $this->helper->cleanInput($_POST['barrio']) : NULL,
+            'id_ciudad' => (!empty($_POST['id_ciudad'])) ? $this->helper->cleanInput($_POST['id_ciudad']) : NULL,
+            'fecha_nacimiento' => (!empty($_POST['fecha_nacimiento'])) ? $this->helper->cleanInput($_POST['fecha_nacimiento']) : NULL,
+            'estado' => (!empty($_POST['estado'])) ? $this->helper->cleanInput($_POST['estado']) : 0
+        );
+        $data = $this->model->frmAgregarDatosPaciente($datos);
+        echo json_encode($data);
+    }
+
     public function frmAgregarFrases() {
         header('Content-type: application/json; charset=utf-8');
         $datos = array(
@@ -660,6 +717,16 @@ class Admin extends Controller {
             'contenido' => $_POST['contenido']
         );
         $data = $this->model->frmInicioNosotros($datos);
+        echo json_encode($data);
+    }
+
+    public function frmAgregarDatoFichaCliente() {
+        header('Content-type: application/json; charset=utf-8');
+        $datos = array(
+            'id_paciente' => $this->helper->cleanInput($_POST['id_paciente']),
+            'descripcion_consulta' => $_POST['contenido']
+        );
+        $data = $this->model->frmAgregarDatoFichaCliente($datos);
         echo json_encode($data);
     }
 
@@ -933,7 +1000,7 @@ class Admin extends Controller {
             $pagina = 1;
         }
         header('Content-type: application/json; charset=utf-8');
-        $datos = $this->model->getresult($idPaciente,$pagina);
+        $datos = $this->model->getresult($idPaciente, $pagina);
         echo json_encode($datos);
     }
 
