@@ -57,9 +57,9 @@
 </div>
 <script type="text/javascript">
     function initMap() {
-        var uluru = {lat: -25.294814, lng: -57.595430};
+        var uluru = {lat: <?= $this->datosMapa['latitud']; ?>, lng: <?= $this->datosMapa['longitud']; ?>};
         var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 17,
+            zoom: <?= $this->datosMapa['zoommap']; ?>,
             center: uluru
         });
         var marker = new google.maps.Marker({

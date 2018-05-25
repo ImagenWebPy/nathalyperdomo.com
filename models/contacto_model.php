@@ -32,4 +32,9 @@ class Contacto_Model extends Model {
         return $data;
     }
 
+    public function datosMapa() {
+        $sql = $this->db->select("SELECT latitud, longitud, zoommap, tipo_mapa FROM `web_datos`;");
+        return $sql[0];
+    }
+
 }

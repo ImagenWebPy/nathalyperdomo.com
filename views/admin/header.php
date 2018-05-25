@@ -82,6 +82,9 @@ $rol = $_SESSION['usuarioLogueado']['rol'];
                         <?php if (($rol == 'Administrador') || ($rol == 'Editor')): ?>
                             <li <?= $paginaActual['paginas']['blog']; ?>><a href="<?= URL; ?>admin/blog"><i class="fa fa-pencil-square-o"></i> <span class="nav-label">Blog</span></a></li>
                             <li <?= $paginaActual['paginas']['contacto']; ?>><a href="<?= URL; ?>admin/contacto"><i class="fa fa-envelope-o"></i> <span class="nav-label">Contacto</span></a></li>
+                            <li <?= $paginaActual['paginas']['redes']; ?>><a href="<?= URL; ?>admin/redes"><i class="fa fa-share-square-o"></i> <span class="nav-label">Redes</span></a></li>
+                            <li <?= $paginaActual['paginas']['logo']; ?>><a href="<?= URL; ?>admin/logo"><i class="fa fa-arrows-alt"></i> <span class="nav-label">Logos</span></a></li>
+                            <li <?= $paginaActual['paginas']['direccion']; ?>><a href="<?= URL; ?>admin/direccion"><i class="fa fa-map-marker"></i> <span class="nav-label">Direcciones</span></a></li>
                         <?php endif; ?>
                         <?php if ($rol == 'Administrador'): ?>
                             <li <?= $paginaActual['paginas']['usuarios']; ?>>

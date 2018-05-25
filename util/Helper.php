@@ -881,7 +881,7 @@ class Helper {
     }
 
     public function getActivePageAdmin($page) {
-        $dashboard = $inicio = $nathaly = $consultorio = $turnos = $pacientes = $ciudades = $contacto = $blog = $usuarios = '';
+        $dashboard = $inicio = $nathaly = $consultorio = $turnos = $pacientes = $ciudades = $contacto = $blog = $usuarios = $redes = $logo = $direccion = '';
         switch ($page) {
             case'inicio':
                 $inicio = 'class ="active"';
@@ -909,6 +909,14 @@ class Helper {
                 break;
             case 'usuarios':
                 $usuarios = 'class="active"';
+            case 'redes':
+                $redes = 'class="active"';
+                break;
+            case 'logo':
+                $logo = 'class="active"';
+                break;
+            case 'direccion':
+                $direccion = 'class="active"';
                 break;
             default :
                 $dashboard = 'class ="active"';
@@ -928,10 +936,18 @@ class Helper {
                 ),
                 'blog' => $blog,
                 'contacto' => $contacto,
-                'usuarios' => $usuarios
+                'usuarios' => $usuarios,
+                'redes' => $redes,
+                'logo' => $logo,
+                'direccion' => $direccion
             )
         );
         return $data;
+    }
+
+    public function getLogos() {
+        $sql = $this->db->select("select logo, logo_2 from web_datos where id = 1");
+        return $sql[0];
     }
 
 }

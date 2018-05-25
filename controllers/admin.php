@@ -1004,4 +1004,136 @@ class Admin extends Controller {
         echo json_encode($datos);
     }
 
+    public function redes() {
+        $this->view->helper = $this->helper;
+        $this->view->title = 'Redes';
+        $this->view->getRedesTable = $this->model->getRedesTable();
+        $this->view->public_css = array("css/plugins/iCheck/custom.css");
+        $this->view->public_js = array("js/plugins/iCheck/icheck.min.js");
+        $this->view->render('admin/header');
+        $this->view->render('admin/contenido/redes');
+        $this->view->render('admin/footer');
+        if (!empty($_SESSION['message']))
+            unset($_SESSION['message']);
+    }
+
+    public function modalEditarRedes() {
+        header('Content-type: application/json; charset=utf-8');
+        $data = array(
+            'id' => $this->helper->cleanInput($_POST['id'])
+        );
+        $datos = $this->model->modalEditarRedes($data);
+        echo $datos;
+    }
+
+    public function frmEditarRedes() {
+        header('Content-type: application/json; charset=utf-8');
+        $datos = array(
+            'id' => $this->helper->cleanInput($_POST['id']),
+            'descripcion' => $this->helper->cleanInput($_POST['descripcion']),
+            'enlace' => $this->helper->cleanInput($_POST['enlace']),
+            'estado' => (!empty($_POST['estado'])) ? $this->helper->cleanInput($_POST['estado']) : 0,
+        );
+        $data = $this->model->frmEditarRedes($datos);
+        echo json_encode($data);
+    }
+
+    public function logo() {
+        $this->view->helper = $this->helper;
+        $this->view->title = 'Redes';
+        $this->view->logos = $this->helper->getLogos();
+        $this->view->public_css = array("css/plugins/html5fileupload/html5fileupload.css");
+        $this->view->publicHeader_js = array("js/plugins/html5fileupload/html5fileupload.min.js");
+        $this->view->render('admin/header');
+        $this->view->render('admin/contenido/logos');
+        $this->view->render('admin/footer');
+        if (!empty($_SESSION['message']))
+            unset($_SESSION['message']);
+    }
+
+    public function uploadImgLogoCabacera() {
+        if (!empty($_POST)) {
+            $error = false;
+            $absolutedir = dirname(__FILE__);
+            $dir = 'public/images/';
+            $serverdir = $dir;
+            $tmp = explode(',', $_POST['file']);
+            $file = base64_decode($tmp[1]);
+            $ext = explode('.', $_POST['filename']);
+            $extension = strtolower(end($ext));
+            $name = $_POST['name'];
+            $filename = $this->helper->cleanUrl($name);
+            $filename = $filename . '.' . $extension;
+            $handle = fopen($serverdir . $filename, 'w');
+            fwrite($handle, $file);
+            fclose($handle);
+            #############
+            header('Content-type: application/json; charset=utf-8');
+            $data = array(
+                'imagen' => $filename
+            );
+            $response = $this->model->uploadImgLogoCabacera($data);
+            echo json_encode($response);
+        }
+    }
+
+    public function uploadImgLogoPie() {
+        if (!empty($_POST)) {
+            $error = false;
+            $absolutedir = dirname(__FILE__);
+            $dir = 'public/images/';
+            $serverdir = $dir;
+            $tmp = explode(',', $_POST['file']);
+            $file = base64_decode($tmp[1]);
+            $ext = explode('.', $_POST['filename']);
+            $extension = strtolower(end($ext));
+            $name = $_POST['name'];
+            $filename = $this->helper->cleanUrl($name);
+            $filename = $filename . '.' . $extension;
+            $handle = fopen($serverdir . $filename, 'w');
+            fwrite($handle, $file);
+            fclose($handle);
+            #############
+            header('Content-type: application/json; charset=utf-8');
+            $data = array(
+                'imagen' => $filename
+            );
+            $response = $this->model->uploadImgLogoPie($data);
+            echo json_encode($response);
+        }
+    }
+
+    public function direccion() {
+        $this->view->helper = $this->helper;
+        $this->view->title = 'Direcciones';
+        $this->view->datosDirecciones = $this->model->datosDirecciones();
+        $this->view->public_css = array("css/plugins/toastr/toastr.min.css");
+        $this->view->public_js = array("js/plugins/toastr/toastr.min.js");
+        $this->view->render('admin/header');
+        $this->view->render('admin/contenido/direcciones');
+        $this->view->render('admin/footer');
+        if (!empty($_SESSION['message']))
+            unset($_SESSION['message']);
+    }
+
+    public function frmEditarDirecciones() {
+        header('Content-type: application/json; charset=utf-8');
+        $datos = array(
+            'direccion' => $this->helper->cleanInput($_POST['direccion']),
+            'ciudad' => $this->helper->cleanInput($_POST['ciudad']),
+            'email' => $this->helper->cleanInput($_POST['email']),
+            'telefono' => $this->helper->cleanInput($_POST['telefono']),
+            'telefono_2' => $this->helper->cleanInput($_POST['telefono_2']),
+            'latitud' => $this->helper->cleanInput($_POST['latitud']),
+            'longitud' => $this->helper->cleanInput($_POST['longitud']),
+            'tipo_mapa' => $this->helper->cleanInput($_POST['tipo_mapa']),
+            'zoommap' => $this->helper->cleanInput($_POST['zoommap']),
+            'nombre' => $this->helper->cleanInput($_POST['nombre'])
+        );
+        $data = $this->model->frmEditarDirecciones($datos);
+        echo json_encode($data);
+    }
+
+    
+
 }

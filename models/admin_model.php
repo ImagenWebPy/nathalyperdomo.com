@@ -516,6 +516,18 @@ class Admin_Model extends Model {
                         . '<td>' . $estado . '</td>'
                         . '<td>' . $btnEditar . '</td>';
                 break;
+            case 'redes':
+                if ($sql[0]['estado'] == 1) {
+                    $estado = '<a class="pointer btnCambiarEstado" data-seccion="redes" data-rowid="redes_" data-tabla="web_redes" data-campo="estado" data-id="' . $id . '" data-estado="1"><span class="label label-primary">Activo</span></a>';
+                } else {
+                    $estado = '<a class="pointer btnCambiarEstado" data-seccion="redes" data-rowid="redes_" data-tabla="web_redes" data-campo="estado" data-id="' . $id . '" data-estado="0"><span class="label label-danger">Inactivo</span></a>';
+                }
+                $btnEditar = '<a class="editDTContenido pointer btn-xs" data-id="' . $id . '" data-url="modalEditarRedes"><i class="fa fa-edit"></i> Editar </a>';
+                $data = '<td>' . utf8_encode($sql[0]['descripcion']) . '</td>'
+                        . '<td>' . utf8_encode($sql[0]['enlace']) . '</td>'
+                        . '<td>' . $estado . '</td>'
+                        . '<td>' . $btnEditar . '</td>';
+                break;
         }
         return $data;
     }
@@ -2853,6 +2865,136 @@ class Admin_Model extends Model {
             $option .= '<option value="' . $item['id'] . '">' . utf8_encode($item['descripcion']) . '</option>';
         }
         return $option;
+    }
+
+    public function getRedesTable() {
+        $sql = $this->db->select("select * from web_redes");
+        return $sql;
+    }
+
+    public function modalEditarRedes($datos) {
+        $id = $datos['id'];
+        $sql = $this->db->select("SELECT * FROM web_redes where id = $id");
+        $checked = "";
+        if ($sql[0]['estado'] == 1)
+            $checked = 'checked';
+        $modal = '<div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Modificar Datos</h3>
+                    </div>
+                    <div class="row">
+                        <form role="form" id="frmEditarRedes" method="POST">
+                            <input type="hidden" name="id" value="' . $id . '">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Nombre Red Social</label>
+                                    <input type="text" name="descripcion" class="form-control" placeholder="Nombre Red Social" value="' . utf8_encode($sql[0]['descripcion']) . '">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Enlace</label>
+                                    <input type="text" name="enlace" class="form-control" placeholder="Enlace" value="' . utf8_encode($sql[0]['enlace']) . '">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="i-checks"><label> <input type="checkbox" name="estado" value="1" ' . $checked . '> <i></i> Mostrar </label></div>
+                            </div>
+                            <div class="btn-submit">
+                                <button type="submit" class="btn btn-block btn-primary btn-lg">Editar Red Social</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <script>
+                    $(document).ready(function () {
+                        $(".i-checks").iCheck({
+                            checkboxClass: "icheckbox_square-green",
+                            radioClass: "iradio_square-green",
+                        });
+                    });
+                </script>';
+        $data = array(
+            'titulo' => 'Editar Red Social',
+            'content' => $modal
+        );
+        return json_encode($data);
+    }
+
+    public function frmEditarRedes($datos) {
+        $id = $datos['id'];
+        $estado = 1;
+        if (empty($datos['estado'])) {
+            $estado = 0;
+        }
+        $update = array(
+            'descripcion' => utf8_decode($datos['descripcion']),
+            'enlace' => utf8_decode($datos['enlace']),
+            'estado' => $estado
+        );
+        $this->db->update('web_redes', $update, "id = $id");
+        $data = array(
+            'type' => 'success',
+            'content' => $this->rowDataTable('redes', 'web_redes', $id),
+            'id' => $id
+        );
+        return $data;
+    }
+
+    public function uploadImgLogoCabacera($datos) {
+        $id = 1;
+        $update = array(
+            'logo' => $datos['imagen']
+        );
+        $this->db->update('web_datos', $update, "id = $id");
+        $contenido = '<img class="img-responsive" src="' . URL . 'public/images//' . $datos['imagen'] . '">';
+        $data = array(
+            "result" => true,
+            'content' => $contenido,
+        );
+        return $data;
+    }
+
+    public function uploadImgLogoPie($datos) {
+        $id = 1;
+        $update = array(
+            'logo_2' => $datos['imagen']
+        );
+        $this->db->update('web_datos', $update, "id = $id");
+        $contenido = '<img class="img-responsive" src="' . URL . 'public/images//' . $datos['imagen'] . '">';
+        $data = array(
+            "result" => true,
+            'content' => $contenido,
+        );
+        return $data;
+    }
+
+    public function datosDirecciones() {
+        $sql = $this->db->select("select * from web_datos where id = 1");
+        return $sql[0];
+    }
+
+    public function frmEditarDirecciones($datos) {
+        $id = 1;
+        $update = array(
+            'direccion' => utf8_decode($datos['direccion']),
+            'ciudad' => utf8_decode($datos['ciudad']),
+            'email' => utf8_decode($datos['email']),
+            'telefono' => utf8_decode($datos['telefono']),
+            'telefono_2' => utf8_decode($datos['telefono_2']),
+            'latitud' => utf8_decode($datos['latitud']),
+            'longitud' => utf8_decode($datos['longitud']),
+            'tipo_mapa' => utf8_decode($datos['tipo_mapa']),
+            'zoommap' => utf8_decode($datos['zoommap']),
+            'nombre' => utf8_decode($datos['nombre'])
+        );
+        $row = $this->db->update('web_datos', $update, "id = $id");
+        $data = array(
+            'type' => 'success',
+            'content' => 'Se han actualizado correctamente los datos',
+            'id' => $id
+        );
+        return $data;
     }
 
 }
