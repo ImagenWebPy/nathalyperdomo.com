@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2018-05-21 19:52:49
+Date: 2018-05-24 21:40:58
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -345,11 +345,21 @@ CREATE TABLE `ficha_paciente` (
   `descripcion_consulta` longtext,
   `receta` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of ficha_paciente
 -- ----------------------------
+INSERT INTO `ficha_paciente` VALUES ('1', '1', '2018-05-16 19:48:29', '<p>Esto es un registro de prueba en al ficha<p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam volutpat mattis neque in pretium. Ut a mattis augue. Ut in massa quis ante laoreet pretium in nec nunc. Proin congue metus a velit porta, eget rhoncus mauris tincidunt. Donec vehicula scelerisque arcu a efficitur. Sed tempus magna ante, commodo viverra massa consectetur eget. Proin ac venenatis metus, vitae ornare orci. Donec aliquet consequat purus, quis bibendum orci mattis eget. Donec quis est quis tortor imperdiet congue. Nullam pharetra ex eu nibh blandit, non facilisis nisi blandit.</p>\r\n<p>Vivamus nec posuere nisl. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam quis mauris eu neque fringilla pulvinar. Integer feugiat magna pulvinar enim posuere convallis. Nulla interdum, arcu nec pretium laoreet, nulla nisl bibendum sapien, facilisis efficitur lectus leo quis quam. Nullam ultrices hendrerit lorem. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris porta lorem ac dictum pretium. Vivamus ac lorem semper, vestibulum metus sit amet, bibendum sapien. Nulla eleifend posuere diam, vitae ultricies massa egestas ut. Morbi hendrerit egestas vestibulum. Praesent dictum mauris sed lorem varius, et dictum ligula vulputate. Nullam ultrices a sem eleifend sodales. Ut eget odio turpis. Integer vel ipsum mattis, cursus neque ac, tincidunt neque. Vivamus aliquam ullamcorper lacus, quis bibendum leo iaculis ac.</p>', null);
+INSERT INTO `ficha_paciente` VALUES ('2', '1', '2018-05-15 20:52:17', '<p>Esto es un registro de prueba en al ficha<p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam volutpat mattis neque in pretium. Ut a mattis augue. Ut in massa quis ante laoreet pretium in nec nunc. Proin congue metus a velit porta, eget rhoncus mauris tincidunt. Donec vehicula scelerisque arcu a efficitur. Sed tempus magna ante, commodo viverra massa consectetur eget. Proin ac venenatis metus, vitae ornare orci. Donec aliquet consequat purus, quis bibendum orci mattis eget. Donec quis est quis tortor imperdiet congue. Nullam pharetra ex eu nibh blandit, non facilisis nisi blandit.</p>\r\n<p>Vivamus nec posuere nisl. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam quis mauris eu neque fringilla pulvinar. Integer feugiat magna pulvinar enim posuere convallis. Nulla interdum, arcu nec pretium laoreet, nulla nisl bibendum sapien, facilisis efficitur lectus leo quis quam. Nullam ultrices hendrerit lorem. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris porta lorem ac dictum pretium. Vivamus ac lorem semper, vestibulum metus sit amet, bibendum sapien. Nulla eleifend posuere diam, vitae ultricies massa egestas ut. Morbi hendrerit egestas vestibulum. Praesent dictum mauris sed lorem varius, et dictum ligula vulputate. Nullam ultrices a sem eleifend sodales. Ut eget odio turpis. Integer vel ipsum mattis, cursus neque ac, tincidunt neque. Vivamus aliquam ullamcorper lacus, quis bibendum leo iaculis ac.</p>', null);
+INSERT INTO `ficha_paciente` VALUES ('3', '1', '2018-05-14 20:52:34', '<p>Esto es un registro de prueba en al ficha<p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam volutpat mattis neque in pretium. Ut a mattis augue. Ut in massa quis ante laoreet pretium in nec nunc. Proin congue metus a velit porta, eget rhoncus mauris tincidunt. Donec vehicula scelerisque arcu a efficitur. Sed tempus magna ante, commodo viverra massa consectetur eget. Proin ac venenatis metus, vitae ornare orci. Donec aliquet consequat purus, quis bibendum orci mattis eget. Donec quis est quis tortor imperdiet congue. Nullam pharetra ex eu nibh blandit, non facilisis nisi blandit.</p>\r\n<p>Vivamus nec posuere nisl. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam quis mauris eu neque fringilla pulvinar. Integer feugiat magna pulvinar enim posuere convallis. Nulla interdum, arcu nec pretium laoreet, nulla nisl bibendum sapien, facilisis efficitur lectus leo quis quam. Nullam ultrices hendrerit lorem. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris porta lorem ac dictum pretium. Vivamus ac lorem semper, vestibulum metus sit amet, bibendum sapien. Nulla eleifend posuere diam, vitae ultricies massa egestas ut. Morbi hendrerit egestas vestibulum. Praesent dictum mauris sed lorem varius, et dictum ligula vulputate. Nullam ultrices a sem eleifend sodales. Ut eget odio turpis. Integer vel ipsum mattis, cursus neque ac, tincidunt neque. Vivamus aliquam ullamcorper lacus, quis bibendum leo iaculis ac.</p>', null);
+INSERT INTO `ficha_paciente` VALUES ('4', '1', '2018-05-13 21:07:57', '<p>Esto es un registro de prueba en al ficha<p>\r\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam volutpat mattis neque in pretium. Ut a mattis augue. Ut in massa quis ante laoreet pretium in nec nunc. Proin congue metus a velit porta, eget rhoncus mauris tincidunt. Donec vehicula scelerisque arcu a efficitur. Sed tempus magna ante, commodo viverra massa consectetur eget. Proin ac venenatis metus, vitae ornare orci. Donec aliquet consequat purus, quis bibendum orci mattis eget. Donec quis est quis tortor imperdiet congue. Nullam pharetra ex eu nibh blandit, non facilisis nisi blandit.</p>\r\n<p>Vivamus nec posuere nisl. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam quis mauris eu neque fringilla pulvinar. Integer feugiat magna pulvinar enim posuere convallis. Nulla interdum, arcu nec pretium laoreet, nulla nisl bibendum sapien, facilisis efficitur lectus leo quis quam. Nullam ultrices hendrerit lorem. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris porta lorem ac dictum pretium. Vivamus ac lorem semper, vestibulum metus sit amet, bibendum sapien. Nulla eleifend posuere diam, vitae ultricies massa egestas ut. Morbi hendrerit egestas vestibulum. Praesent dictum mauris sed lorem varius, et dictum ligula vulputate. Nullam ultrices a sem eleifend sodales. Ut eget odio turpis. Integer vel ipsum mattis, cursus neque ac, tincidunt neque. Vivamus aliquam ullamcorper lacus, quis bibendum leo iaculis ac.</p>', null);
+INSERT INTO `ficha_paciente` VALUES ('5', '2', '2018-05-23 20:01:51', '<p>paciente nro 2</p>', null);
+INSERT INTO `ficha_paciente` VALUES ('6', '3', '2018-05-23 20:02:56', '<p>paciente nro 3</p>', null);
+INSERT INTO `ficha_paciente` VALUES ('7', '4', '2018-05-23 20:03:59', '<p>pacieten 4</p>', null);
+INSERT INTO `ficha_paciente` VALUES ('8', '1', '2018-05-21 20:07:19', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec scelerisque, augue id mattis interdum, arcu turpis malesuada justo, nec porta massa felis vitae dui. Cras condimentum leo vel turpis dignissim rhoncus in dapibus turpis. Aliquam interdum nulla et leo sodales, quis fringilla quam molestie. Aenean eget odio nec risus tempus posuere. Donec sed massa nec eros vestibulum ornare. Nullam eget rutrum est. Fusce tempus tristique eleifend. Suspendisse posuere semper orci vitae maximus. Phasellus quis volutpat nisl. Curabitur euismod ut nibh eu pharetra. Nulla in nisi leo.</p>', null);
+INSERT INTO `ficha_paciente` VALUES ('9', '1', '2018-05-22 20:07:25', '<p>In hendrerit nec quam at efficitur. Curabitur malesuada sapien vel mi vestibulum pellentesque. Aenean finibus elit eget ligula pretium, eu consequat nunc feugiat. Proin sapien sapien, aliquam volutpat suscipit in, ullamcorper at metus. Proin at ullamcorper libero. Praesent scelerisque nec dui eget porttitor. In hac habitasse platea dictumst. Donec turpis velit, dictum a aliquam nec, finibus sed nunc.</p>', null);
+INSERT INTO `ficha_paciente` VALUES ('10', '1', '2018-05-23 20:07:28', '<p>Duis pellentesque orci sit amet sagittis varius. Nam rhoncus dui a molestie varius. Fusce sit amet finibus velit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Donec at tellus metus. Nunc ac augue pharetra, ullamcorper purus ac, blandit ligula. Nullam congue sit amet risus sed vulputate.</p>', null);
 
 -- ----------------------------
 -- Table structure for horarios
@@ -395,14 +405,19 @@ CREATE TABLE `paciente` (
   KEY `fk_id_ciudad_paciente` (`id_ciudad`),
   CONSTRAINT `fk_id_ciudad_paciente` FOREIGN KEY (`id_ciudad`) REFERENCES `ciudad` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_id_tipo_documento_paciente` FOREIGN KEY (`id_tipo_documento`) REFERENCES `tipo_documento` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of paciente
 -- ----------------------------
 INSERT INTO `paciente` VALUES ('1', '1', '13', '1234567', 'email@email.com', 'Nombre', 'Apellido', '601606', '0976921801', 'Direccion', 'Recoleta', '2018-05-02 00:00:00', '1969-12-31', '1');
 INSERT INTO `paciente` VALUES ('2', '1', '13', '123456', 'raul.ramirez@imagenwebhq.com', 'Juan', 'Perez', '601606', '0976921801', 'Una Direccion', 'Un BARRIO', '2018-05-04 00:00:00', '2018-01-05', '1');
-INSERT INTO `paciente` VALUES ('3', '1', '13', '654321', 'email@email.com', 'Jhon', 'Doe', '601606', '0976921801', 'Dos direcciones', 'Recoleta', '2018-05-04 00:00:00', '2018-09-05', '1');
+INSERT INTO `paciente` VALUES ('3', '1', '13', '654321', 'email@email.com', 'Jhon 1', 'Doe 2', '601606', '0976921801', 'Dos direcciones', 'Recoleta', '2018-05-04 00:00:00', '2004-03-03', '1');
+INSERT INTO `paciente` VALUES ('4', null, null, null, 'raul.chuky@gmail.com', 'rAUL', null, null, '0976921801', null, null, '2018-05-21 00:00:00', null, '1');
+INSERT INTO `paciente` VALUES ('5', '2', '7', '123-3', '', 'Nombre', 'Apellido', '121', '12122', 'Una', 'Recoleta', '2018-05-23 23:11:29', '2018-10-05', '1');
+INSERT INTO `paciente` VALUES ('6', '2', '114', '654321-5', 'raul.chuky@gmail.com', 'nombre', 'Apellido', '121212', '12121212', 'Dos direcciones', 'Recoleta', '2018-05-23 23:16:19', '1969-12-31', '1');
+INSERT INTO `paciente` VALUES ('7', null, null, '', 'raul.chuky@gmail.com', 'Jhon 1', 'Doe 2', '', '', '', '', '2018-05-23 23:20:16', '1969-12-31', '1');
+INSERT INTO `paciente` VALUES ('8', '2', '4', '123456', 'NOSE@nose.cpm', 'hOLA', 'Apellido', '0976921801', '0976921801', 'Dos direcciones', 'Recoleta', '2018-05-23 23:23:00', '1969-12-31', '1');
 
 -- ----------------------------
 -- Table structure for tipo_documento
@@ -436,7 +451,7 @@ CREATE TABLE `turno` (
   PRIMARY KEY (`id`),
   KEY `fk_id_paciente_turno` (`id_paciente`),
   CONSTRAINT `fk_id_paciente_turno` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of turno
@@ -450,6 +465,9 @@ INSERT INTO `turno` VALUES ('7', '1', 'aaa', 'aaaa', '2018-02-05 09:00:00', '201
 INSERT INTO `turno` VALUES ('8', '1', 'sasa', 'asasa', '2018-02-05 08:30:00', '2018-02-05 09:00:00');
 INSERT INTO `turno` VALUES ('10', '3', 'asasa', 'asasasas', '2018-05-03 10:00:00', '2018-05-03 10:30:00');
 INSERT INTO `turno` VALUES ('11', '1', 'Masas', 'oooooo', '2018-05-03 17:00:00', '2018-05-03 17:30:00');
+INSERT INTO `turno` VALUES ('12', '4', 'Reserva Web', 'hOLA', '1969-12-31 11:00:00', '1969-12-31 11:30:00');
+INSERT INTO `turno` VALUES ('13', '4', 'Reserva Web', 'Hla', '2018-05-22 10:00:00', '2018-05-22 10:30:00');
+INSERT INTO `turno` VALUES ('14', '4', 'Reserva Web', 'sdasdsad', '2018-05-23 09:30:00', '2018-05-23 10:00:00');
 
 -- ----------------------------
 -- Table structure for web_blog
@@ -490,11 +508,13 @@ CREATE TABLE `web_contacto` (
   `leido` int(1) DEFAULT '0',
   `ip` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of web_contacto
 -- ----------------------------
+INSERT INTO `web_contacto` VALUES ('2', 'rAUL', 'raul.chuky@gmail.com', 'aSUNTO', 'sadasdsa', '2018-05-21 21:00:41', '0', '::1');
+INSERT INTO `web_contacto` VALUES ('3', 'rAUL', 'raul.chuky@gmail.com', 'aSUNTO', 'asasasasas', '2018-05-21 21:03:43', '0', '::1');
 
 -- ----------------------------
 -- Table structure for web_datos
@@ -511,13 +531,16 @@ CREATE TABLE `web_datos` (
   `logo` varchar(45) DEFAULT NULL,
   `logo_2` varchar(45) DEFAULT NULL,
   `nombre` varchar(45) DEFAULT NULL,
+  `ciudad` varchar(60) DEFAULT NULL,
+  `zoommap` varchar(30) DEFAULT NULL,
+  `tipo_mapa` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of web_datos
 -- ----------------------------
-INSERT INTO `web_datos` VALUES ('1', '+595 981 258 733', '+595 985 866 818', 'Dr. Alejandro Dávalos No. 437', '-25.294814', '-57.595430', 'consulta@nathalyperdomo.com\r\n\r\n\r\n', 'logo.png', null, 'Nathaly Perdomo');
+INSERT INTO `web_datos` VALUES ('1', '+595 981 258 733', '+595 985 866 818', 'Dr. Alejandro Dávalos No. 437', '-25.294814', '-57.595430', 'consulta@nathalyperdomo.com', 'logo.png', 'logo.png', 'Nathaly Perdomo', 'Asunción - Paraguay', '17', 'ROADMAP');
 
 -- ----------------------------
 -- Table structure for web_frases
