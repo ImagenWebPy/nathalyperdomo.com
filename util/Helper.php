@@ -775,7 +775,7 @@ class Helper {
                                 <select name="paciente" id="selectPaciente" data-placeholder="Seleccione un Paciente..." class="form-control chosen-select selectPaciente"  tabindex="2">
                                     <option value="">Seleccione</option>';
         foreach ($this->getPacientes() as $paciente) {
-            $data .= '              <option value="' . $paciente['id'] . '">' . utf8_encode($paciente['apellido']) . ' ' . utf8_encode($paciente['nombre']) . '</option>';
+            $data .= '              <option value="' . $paciente['id'] . '">' . utf8_encode($paciente['nombre']) . ' ' . utf8_encode($paciente['apellido']) . '</option>';
         }
         $data .= '                  <option value="nuevo">Agregar Nuevo Paciente</option>
                                 </select>
@@ -881,7 +881,7 @@ class Helper {
     }
 
     public function getActivePageAdmin($page) {
-        $dashboard = $inicio = $nathaly = $consultorio = $turnos = $pacientes = $ciudades = $contacto = $blog = $usuarios = $redes = $logo = $direccion = '';
+        $dashboard = $inicio = $nathaly = $consultorio = $turnos = $pacientes = $ciudades = $contacto = $blog = $blogListado = $blogBusquedas = $usuarios = $redes = $logo = $direccion = '';
         switch ($page) {
             case'inicio':
                 $inicio = 'class ="active"';
@@ -891,6 +891,11 @@ class Helper {
                 break;
             case'blog':
                 $blog = 'class ="active"';
+                $blogListado = 'class ="active"';
+                break;
+            case'busquedas':
+                $blog = 'class ="active"';
+                $blogBusquedas = 'class ="active"';
                 break;
             case'turnos':
                 $consultorio = 'class ="active"';
@@ -934,7 +939,11 @@ class Helper {
                     'pacientes' => $pacientes,
                     'ciudades' => $ciudades
                 ),
-                'blog' => $blog,
+                'blog' => array(
+                    'blog' => $blog,
+                    'listado' => $blogListado,
+                    'busqueda' => $blogBusquedas
+                ),
                 'contacto' => $contacto,
                 'usuarios' => $usuarios,
                 'redes' => $redes,

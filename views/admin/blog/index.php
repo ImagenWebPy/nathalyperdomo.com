@@ -104,6 +104,23 @@
                     if (data.type == 'success') {
                         $("#blog_" + data.id).html(data.content);
                         $(".genericModal").modal("toggle");
+                        $(".summernote").summernote({
+                            height: 300, // set editor height
+                            minHeight: null, // set minimum height of editor
+                            maxHeight: null // set maximum height of editor
+                        });
+                        $(".i-checks").iCheck({
+                            checkboxClass: "icheckbox_square-green",
+                            radioClass: "iradio_square-green",
+                        });
+                        $("#data_1 .input-group.date").datepicker({
+                            todayBtn: "linked",
+                            keyboardNavigation: false,
+                            forceParse: false,
+                            calendarWeeks: true,
+                            autoclose: true,
+                            format: "dd/mm/yyyy",
+                        });
                     }
                 }
             });

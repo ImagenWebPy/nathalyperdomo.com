@@ -287,8 +287,11 @@
                             {
                                 id: data.id,
                                 title: data.title,
+                                descripcion: data.descripcion,
                                 start: data.start,
                                 end: data.end,
+                                nombre: data.nombre,
+                                apellido: data.apellido,
                             },
                             true);
                 });
@@ -309,8 +312,11 @@
                             {
                                 id: data.id,
                                 title: data.title,
+                                descripcion: data.descripcion,
                                 start: data.start,
                                 end: data.end,
+                                nombre: data.nombre,
+                                apellido: data.apellido,
                             },
                             true);
                     $('#createEventModal').modal("toggle");

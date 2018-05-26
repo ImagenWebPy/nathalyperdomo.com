@@ -179,19 +179,25 @@ class Admin_Model extends Model {
     }
 
     public function frmAgregarTurnoPaciente($datos) {
+        $idPaciente = $datos['id_paciente'];
         $this->db->insert('turno', array(
-            'id_paciente' => $datos['id_paciente'],
+            'id_paciente' => $idPaciente,
             'title' => $datos['title'],
             'descripcion' => $datos['descripcion'],
             'start' => $datos['start'],
             'end' => $datos['end']
         ));
         $id = $this->db->lastInsertId();
+        $sqlPaciente = $this->db->select("select * from paciente where id = $idPaciente");
         $data = array(
             'id' => $id,
+            'id_paciente' => $idPaciente,
             'title' => $datos['title'],
+            'descripcion' => $datos['descripcion'],
             'start' => $datos['start'],
-            'end' => $datos['end']
+            'end' => $datos['end'],
+            'nombre' => utf8_encode($sqlPaciente[0]['nombre']),
+            'apellido' => utf8_encode($sqlPaciente[0]['apellido'])
         );
         return $data;
     }
@@ -1535,7 +1541,7 @@ class Admin_Model extends Model {
     }
 
     public function frmAgregarDatosPaciente($datos) {
-        $fecha = (!empty($datos['fecha_nacimiento'])) ? date('Y-m-d', strtotime($datos['fecha_nacimiento'])) : NULL;
+        $fecha = (!empty($datos['fecha_nacimiento'])) ? $datos['fecha_nacimiento'] : NULL;
         $this->db->insert('paciente', array(
             'id_tipo_documento' => $datos['id_tipo_documento'],
             'id_ciudad' => $datos['id_ciudad'],
@@ -1548,7 +1554,7 @@ class Admin_Model extends Model {
             'direccion' => utf8_decode($datos['direccion']),
             'barrio' => utf8_decode($datos['barrio']),
             'fecha_registro' => date('Y-m-d H:i:s'),
-            'fecha_nacimiento' => $fecha,
+            'fecha_nacimiento' => date('Y-m-d', strtotime($fecha)),
             'estado' => $datos['estado']
         ));
         $id = $this->db->lastInsertId();
@@ -1567,9 +1573,9 @@ class Admin_Model extends Model {
         $data = array(
             'type' => 'success',
             'id' => $id,
-            'nombre' => utf8_encode($sql[0]['nombre']),
-            'apellido' => utf8_encode($sql[0]['apellido']),
-            'email' => utf8_encode($sql[0]['email']),
+            'nombre' => (!empty($sql[0]['nombre'])) ? utf8_encode($sql[0]['nombre']) : '',
+            'apellido' => (!empty($sql[0]['apellido'])) ? utf8_encode($sql[0]['apellido']) : '',
+            'email' => (!empty($sql[0]['email'])) ? utf8_encode($sql[0]['email']) : '-',
             'documento' => (!empty($sql[0]['documento'])) ? utf8_encode($sql[0]['documento']) : '-',
             'telefono' => (!empty($sql[0]['telefono'])) ? utf8_encode($sql[0]['telefono']) : '-',
             'celular' => (!empty($sql[0]['celular'])) ? utf8_encode($sql[0]['celular']) : '-',
@@ -1865,6 +1871,56 @@ class Admin_Model extends Model {
         return json_encode($json_data);
     }
 
+    public function listadoDTBusqueda($datos) {
+        $columns = array(
+            0 => 'id',
+            1 => 'busqueda',
+            2 => 'cantidad',
+            3 => 'fecha',
+            4 => 'ip'
+        );
+        #getting total number records without any search
+        $sql = $this->db->select("SELECT COUNT(*) as cantidad FROM web_blog_busquedas");
+        $totalFiltered = $sql[0]['cantidad'];
+        $totalData = $sql[0]['cantidad'];
+
+        $query = "SELECT * FROM web_blog_busquedas where 1 = 1";
+        $where = "";
+        if (!empty($datos['search']['value'])) {
+            $where .= " AND (busqueda LIKE '%" . $requestData['search']['value'] . "%' ";
+            $where .= " OR cantidad LIKE '%" . $requestData['search']['value'] . "%' ";
+            $where .= " OR fecha LIKE '%" . $requestData['search']['value'] . "%' ";
+            $where .= " OR ip LIKE '%" . $requestData['search']['value'] . "%' )";
+            #when there is a search parameter then we have to modify total number filtered rows as per search result.
+            $sql = $this->db->select("SELECT COUNT(*) as cantidad FROM web_blog_busquedas where 1 = 1 $where");
+            $totalFiltered = $sql[0]['cantidad'];
+        }
+        $query .= $where;
+        $query .= " ORDER BY " . $columns[$datos['order'][0]['column']] . "   " . $datos['order'][0]['dir'] . "  LIMIT " . $datos['start'] . " ," . $datos['length'] . "   ";
+        $sql = $this->db->select($query);
+        $data = array();
+        foreach ($sql as $row) {  // preparing an array
+            $id = $row["id"];
+            $nestedData = array();
+            $nestedData['DT_RowId'] = 'contacto_' . $id;
+            $nestedData[] = $id;
+            $nestedData[] = utf8_encode($row["busqueda"]);
+            $nestedData[] = number_format($row["cantidad"], 0, ',', '.');
+            $nestedData[] = date('d-m-Y H:i:s', strtotime($row["fecha"]));
+            $nestedData[] = utf8_encode($row["ip"]);
+            $data[] = $nestedData;
+        }
+
+        $json_data = array(
+            "draw" => intval($datos['draw']), // for every request/draw by clientside , they send a number as a parameter, when they recieve a response/data they first check the draw number, so we are sending same number in draw. 
+            "recordsTotal" => intval($totalData), // total number of records
+            "recordsFiltered" => intval($totalFiltered), // total number of records after searching, if there is no searching then totalFiltered = totalData
+            "data" => $data   // total data array
+        );
+
+        return json_encode($json_data);
+    }
+
     public function listadoDTPacientes($datos) {
         $columns = array(
             0 => 'id',
@@ -2122,23 +2178,7 @@ class Admin_Model extends Model {
                 </div>
                 <script>
                     $(document).ready(function () {
-                        $(".summernote").summernote({
-                            height: 300, // set editor height
-                            minHeight: null, // set minimum height of editor
-                            maxHeight: null // set maximum height of editor
-                        });
-                        $(".i-checks").iCheck({
-                            checkboxClass: "icheckbox_square-green",
-                            radioClass: "iradio_square-green",
-                        });
-                        $("#data_1 .input-group.date").datepicker({
-                            todayBtn: "linked",
-                            keyboardNavigation: false,
-                            forceParse: false,
-                            calendarWeeks: true,
-                            autoclose: true,
-                            format: "dd/mm/yyyy",
-                        });
+                        
                     });
                 </script>';
         $data = array(
@@ -2160,6 +2200,7 @@ class Admin_Model extends Model {
         $sqlTipoDocumento = $this->db->select("select * from tipo_documento where estado = 1");
         $sqlDepartamento = $this->db->select("Select * from departamento where estado = 1");
         $sqlCiudad = $this->db->select("Select * from ciudad where id_departamento = " . $sqlPaciente[0]['id_departamento'] . " and estado = 1");
+        $checked = '';
         if ($sqlPaciente[0]['estado'] == 1)
             $checked = 'checked';
         $modal = '
@@ -2198,10 +2239,7 @@ class Admin_Model extends Model {
                                                 <div class="page-content">
                                                     <div id="pagination-result">
                                                     </div>
-                                                </div>
-                                                <script>
-                                                    getresult("' . URL . 'admin/getresult/' . $id . '");
-                                                </script>';
+                                                </div>';
         $modal .= '                         </div>
                                         </div>
                                     </div>
@@ -2326,30 +2364,9 @@ class Admin_Model extends Model {
                             </div>
                         </div>
                     </div>
-                </div>
-                <script>
-                    $(document).ready(function () {
-                        $(".summernote").summernote({
-                            height: 300, // set editor height
-                            minHeight: null, // set minimum height of editor
-                            maxHeight: null // set maximum height of editor
-                        });
-                        $(".i-checks").iCheck({
-                            checkboxClass: "icheckbox_square-green",
-                            radioClass: "iradio_square-green",
-                        });
-                        $("#data_1 .input-group.date").datepicker({
-                            todayBtn: "linked",
-                            keyboardNavigation: false,
-                            forceParse: false,
-                            calendarWeeks: true,
-                            autoclose: true,
-                            format: "dd/mm/yyyy",
-                        });
-                    });
-                </script>
-                ';
+                </div>';
         $data = array(
+            'id_paciente' => $id,
             'titulo' => 'Datos del Paciente',
             'content' => $modal
         );
@@ -2421,23 +2438,7 @@ class Admin_Model extends Model {
                 </div>
                 <script>
                     $(document).ready(function () {
-                        $(".summernote").summernote({
-                            height: 300, // set editor height
-                            minHeight: null, // set minimum height of editor
-                            maxHeight: null // set maximum height of editor
-                        });
-                        $(".i-checks").iCheck({
-                            checkboxClass: "icheckbox_square-green",
-                            radioClass: "iradio_square-green",
-                        });
-                        $("#data_1 .input-group.date").datepicker({
-                            todayBtn: "linked",
-                            keyboardNavigation: false,
-                            forceParse: false,
-                            calendarWeeks: true,
-                            autoclose: true,
-                            format: "dd/mm/yyyy",
-                        });
+                        
                     });
                 </script>';
         $data = array(

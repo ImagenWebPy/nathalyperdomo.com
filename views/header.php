@@ -88,10 +88,10 @@ $web_datos = $helper->web_datos();
                             <!-- .menu_wrapper -->
                             <div class="menu_wrapper">
                                 <!-- #searchform -->
-                                <form method="get" id="searchform" action="#">
+                                <form method="POST" id="searchform" action="<?= URL; ?>blog/busqueda">
                                     <a class="icon_search icon" href="#"><i class="icon-search-line"></i></a>
                                     <a class="icon_close icon" href="#"><i class="icon-cancel"></i></a>
-                                    <input type="text" class="field" name="s"  placeholder="Ingresa tu busqueda"/>
+                                    <input type="text" class="field" name="busqueda"  placeholder="Ingresa tu busqueda"/>
                                     <input type="submit" class="submit" value="" />
                                 </form>
 

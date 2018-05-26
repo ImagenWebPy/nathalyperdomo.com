@@ -82,14 +82,25 @@ class Admin extends Controller {
 
     public function contacto() {
         $this->view->helper = $this->helper;
-        $this->view->datosVideoInicio = $this->model->datosVideoInicio();
-        $this->view->datosInicioNosotros = $this->model->datosInicioNosotros();
-        $this->view->datosInicioImagenParallax = $this->model->datosInicioImagenParallax();
+
         $this->view->title = 'Contacto';
         $this->view->public_css = array("css/plugins/dataTables/datatables.min.css");
         $this->view->public_js = array("js/plugins/dataTables/datatables.min.js");
         $this->view->render('admin/header');
         $this->view->render('admin/contacto/index');
+        $this->view->render('admin/footer');
+        if (!empty($_SESSION['message']))
+            unset($_SESSION['message']);
+    }
+   
+    public function busquedas() {
+        $this->view->helper = $this->helper;
+
+        $this->view->title = 'Busquedas en el Blog';
+        $this->view->public_css = array("css/plugins/dataTables/datatables.min.css");
+        $this->view->public_js = array("js/plugins/dataTables/datatables.min.js");
+        $this->view->render('admin/header');
+        $this->view->render('admin/blog/busquedas');
         $this->view->render('admin/footer');
         if (!empty($_SESSION['message']))
             unset($_SESSION['message']);
@@ -877,6 +888,12 @@ class Admin extends Controller {
         $data = $this->model->listadoDTContacto($_REQUEST);
         echo $data;
     }
+    
+    public function listadoDTBusqueda() {
+        header('Content-type: application/json; charset=utf-8');
+        $data = $this->model->listadoDTBusqueda($_REQUEST);
+        echo $data;
+    }
 
     public function listadoDTPacientes() {
         header('Content-type: application/json; charset=utf-8');
@@ -1133,7 +1150,5 @@ class Admin extends Controller {
         $data = $this->model->frmEditarDirecciones($datos);
         echo json_encode($data);
     }
-
-    
 
 }

@@ -1,7 +1,7 @@
 <div class="footer">
-<!--    <div class="pull-right">
+    <div class="pull-right">
         Desarrollo <a href="https://imagenwebhq.com" target="_blank"><img class="logoIweb" src="<?= URL; ?>/public/admin/img/logo-iweb.png" alt="Imagen Web"></a>
-    </div>-->
+    </div>
 </div>
 </div>
 </div>
@@ -57,7 +57,7 @@ if (isset($this->js)) {
 }
 ?>
 <script type="text/javascript">
-    $(function () {
+    $(document).ready(function () {
         $(document).on("click", ".editDTContenido", function (e) {
             if (e.handled !== true) // This will prevent event triggering more then once
             {
@@ -69,10 +69,32 @@ if (isset($this->js)) {
                     data: {id: id},
                     dataType: "json"
                 }).done(function (data) {
+
+
                     $(".genericModal .modal-header").removeClass("modal-header").addClass("modal-header bg-primary");
                     $(".genericModal .modal-title").html(data.titulo);
                     $(".genericModal .modal-body").html(data.content);
                     $(".genericModal").modal("toggle");
+                    if (typeof data.id_paciente !== 'undefined') {
+                        getresult("<?= URL; ?>admin/getresult/" + data.id_paciente);
+                    }
+                    $(".summernote").summernote({
+                        height: 300, // set editor height
+                        minHeight: null, // set minimum height of editor
+                        maxHeight: null // set maximum height of editor
+                    });
+                    $(".i-checks").iCheck({
+                        checkboxClass: "icheckbox_square-green",
+                        radioClass: "iradio_square-green",
+                    });
+                    $("#data_1 .input-group.date").datepicker({
+                        todayBtn: "linked",
+                        keyboardNavigation: false,
+                        forceParse: false,
+                        calendarWeeks: true,
+                        autoclose: true,
+                        format: "dd/mm/yyyy",
+                    });
                 });
             }
             e.handled = true;
@@ -110,6 +132,23 @@ if (isset($this->js)) {
                     $(".genericModal .modal-title").html(data.titulo);
                     $(".genericModal .modal-body").html(data.content);
                     $(".genericModal").modal("toggle");
+                    $(".summernote").summernote({
+                        height: 300, // set editor height
+                        minHeight: null, // set minimum height of editor
+                        maxHeight: null // set maximum height of editor
+                    });
+                    $(".i-checks").iCheck({
+                        checkboxClass: "icheckbox_square-green",
+                        radioClass: "iradio_square-green",
+                    });
+                    $("#data_1 .input-group.date").datepicker({
+                        todayBtn: "linked",
+                        keyboardNavigation: false,
+                        forceParse: false,
+                        calendarWeeks: true,
+                        autoclose: true,
+                        format: "dd/mm/yyyy",
+                    });
                 });
             }
             e.handled = true;

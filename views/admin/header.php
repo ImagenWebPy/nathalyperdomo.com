@@ -80,7 +80,13 @@ $rol = $_SESSION['usuarioLogueado']['rol'];
                             </li>
                         <?php endif; ?>
                         <?php if (($rol == 'Administrador') || ($rol == 'Editor')): ?>
-                            <li <?= $paginaActual['paginas']['blog']; ?>><a href="<?= URL; ?>admin/blog"><i class="fa fa-pencil-square-o"></i> <span class="nav-label">Blog</span></a></li>
+                            <li <?= $paginaActual['paginas']['blog']['blog']; ?>>
+                                <a href="#"><i class="fa fa-pencil-square-o"></i> <span class="nav-label">Blog</span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse" style="height: 0px;">
+                                    <li <?= $paginaActual['paginas']['blog']['listado']; ?>><a href="<?= URL; ?>admin/blog">Listado</a></li>
+                                    <li <?= $paginaActual['paginas']['blog']['busqueda']; ?>><a href="<?= URL; ?>admin/busquedas">Busquedas</a></li>
+                                </ul>
+                            </li>
                             <li <?= $paginaActual['paginas']['contacto']; ?>><a href="<?= URL; ?>admin/contacto"><i class="fa fa-envelope-o"></i> <span class="nav-label">Contacto</span></a></li>
                             <li <?= $paginaActual['paginas']['redes']; ?>><a href="<?= URL; ?>admin/redes"><i class="fa fa-share-square-o"></i> <span class="nav-label">Redes</span></a></li>
                             <li <?= $paginaActual['paginas']['logo']; ?>><a href="<?= URL; ?>admin/logo"><i class="fa fa-arrows-alt"></i> <span class="nav-label">Logos</span></a></li>

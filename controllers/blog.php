@@ -35,4 +35,17 @@ class Blog extends Controller {
         $this->view->render('footer');
     }
 
+    public function busqueda() {
+        $datos = array(
+            'busqueda' => $this->helper->cleanInput($_POST['busqueda'])
+        );
+        $this->view->title = TITLE;
+        $this->view->description = "";
+        $this->view->keywords = "";
+        $this->view->resultadosBusquedas = $this->model->resultadosBusquedas($datos);
+        $this->view->render('header');
+        $this->view->render('blog/busqueda');
+        $this->view->render('footer');
+    }
+
 }
