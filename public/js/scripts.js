@@ -434,39 +434,20 @@
         /* ---------------------------------------------------------------------------
          * Video Box
          * --------------------------------------------------------------------------- */
-        $('.video_box').each(function () {
-            var el = $(this);
-            var desc = el.children('.desc_wrapper');
-            var player = el.children('.player_wrapper');
 
-            desc.find('.icon').click(function (e) {
-                e.preventDefault();
-
-                var itemH = desc.outerHeight();
-                el.attr('data-height', itemH);
-
-                player.height(itemH)
-                        .find('.jp-video, .jp-jplayer').height(itemH);
-
-                desc.hide();
-                player
-                        .show()
-                        .find('.jp-play').click();
-            });
+        $(document).on("click", "#btnVideoIndex", function (e) {
+            if (e.handled !== true) // This will prevent event triggering more then once
+            {
+                var url = $(this).attr("data-url");
+                var title = $(this).attr("data-title");
+                var iframe = '<div class="h_iframe"><iframe width="560" height="315" src="https://www.youtube.com/embed/' + url + '" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>';
+                $(".genericModal .modal-header").removeClass("modal-header").addClass("modal-header bg-primary");
+                $(".genericModal .modal-title").html(title);
+                $(".genericModal .modal-body").html(iframe);
+                $(".genericModal").modal('toggle');
+            }
+            e.handled = true;
         });
-
-        function videoBoxHeight() {
-            $('.video_box').each(function () {
-                var el = $(this);
-                var player = el.children('.player_wrapper');
-                var itemH = $(this).attr('data-height');
-
-                if (itemH) {
-                    player.height(itemH)
-                            .find('.jp-video, .jp-jplayer').height(itemH);
-                }
-            });
-        }
 
 
         /* ---------------------------------------------------------------------------
@@ -537,17 +518,6 @@
         iframesHeight();
 
 
-        /* ---------------------------------------------------------------------------
-         * Debouncedresize
-         * --------------------------------------------------------------------------- */
-        $(window).bind("debouncedresize", function () {
-
-            iframesHeight();
-            videoBoxHeight();
-
-            $('.masonry .isotope').isotope();
-            mfnSliderPortfolio_setup();
-        });
 
         /* ---------------------------------------------------------------------------
          * isotope

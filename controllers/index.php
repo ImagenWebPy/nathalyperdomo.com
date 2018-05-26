@@ -17,6 +17,9 @@ class Index extends Controller {
         $this->view->index_nosotros = $this->helper->index_nosotros();
         $this->view->index_parallax = $this->helper->index_parallax();
         $this->view->index_servicios = $this->helper->index_servicios();
+
+        $this->view->public_css = array('plugins/modal-bootstrap/css/bootstrap.min.css');
+        $this->view->public_js = array('plugins/modal-bootstrap/js/bootstrap.min.js');
         $this->view->title = TITLE . 'Inicio';
         $this->view->render('header');
         $this->view->render('index/index');

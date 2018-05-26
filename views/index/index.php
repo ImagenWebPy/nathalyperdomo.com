@@ -65,7 +65,7 @@
                             <div class="video_box">
                                 <div class="desc_wrapper">
                                     <h3><?= utf8_encode($this->index_video['titulo']); ?></h3>
-                                    <a href="<?= utf8_encode($this->index_video['url_video']); ?>" class="icon" id="btnVideoIndex"><i class="icon-play"></i></a>
+                                    <a data-title="<?= utf8_encode($this->index_video['titulo']); ?>" data-url="<?= utf8_encode($this->index_video['url_video']); ?>" class="icon" id="btnVideoIndex"><i class="icon-play"></i></a>
                                     <h6><?= utf8_encode($this->index_video['texto_info']); ?><br/>
                                         <?= utf8_encode($this->index_video['texto_info2']); ?></h6>
                                 </div>
