@@ -188,6 +188,10 @@ class Admin_Model extends Model {
             'end' => $datos['end']
         ));
         $id = $this->db->lastInsertId();
+        $sqlColor = $this->db->select("select ece.color
+                                        from turno t
+                                        LEFT JOIN estado_color_evento ece on ece.estado = t.estado
+                                        where t.id = $id");
         $sqlPaciente = $this->db->select("select * from paciente where id = $idPaciente");
         $data = array(
             'id' => $id,
@@ -197,7 +201,8 @@ class Admin_Model extends Model {
             'start' => $datos['start'],
             'end' => $datos['end'],
             'nombre' => utf8_encode($sqlPaciente[0]['nombre']),
-            'apellido' => utf8_encode($sqlPaciente[0]['apellido'])
+            'apellido' => utf8_encode($sqlPaciente[0]['apellido']),
+            'color' => $sqlColor[0]['color']
         );
         return $data;
     }
@@ -205,10 +210,36 @@ class Admin_Model extends Model {
     public function loadFullCalendar($datos) {
         $start = date('Y-m-d H:i:s', strtotime($datos['start']));
         $end = date('Y-m-d H:i:s', strtotime($datos['end']));
-        $sql = $this->db->select("select t.*, p.nombre, p.apellido from turno t
-                                LEFT JOIN paciente p on p.id = t.id_paciente 
+        $sql = $this->db->select("select t.*, p.nombre, p.apellido, ece.color 
+                                from turno t
+                                LEFT JOIN paciente p on p.id = t.id_paciente
+                                LEFT JOIN estado_color_evento ece on ece.estado = t.estado
                                 where t.start >= '$start' and t.end <= '$end'");
-        return $sql;
+        $data = array();
+        $estados = $this->helper->getEnumOptions('turno', 'estado');
+
+        foreach ($sql as $item) {
+            $selectEstados = '<div class="row"><div class="col-md-4"><select data-id="' . $item['id'] . '" class="selectEstadoTurno form-control"></div></div>';
+            foreach ($estados as $estado) {
+                $selected = ($item['estado'] == $estado) ? 'selected' : '';
+                $selectEstados .= '<option value="' . $estado . '" ' . $selected . '>' . $estado . '</option>';
+            }
+            $selectEstados .= '</option>';
+            array_push($data, array(
+                'id' => $item['id'],
+                'id_paciente' => $item['id_paciente'],
+                'title' => utf8_encode($item['title']),
+                'descripcion' => utf8_encode($item['descripcion']),
+                'start' => $item['start'],
+                'end' => $item['end'],
+                'estado' => $item['estado'],
+                'nombre' => utf8_encode($item['nombre']),
+                'apellido' => utf8_encode($item['apellido']),
+                'color' => $item['color'],
+                'estado' => $selectEstados
+            ));
+        }
+        return $data;
     }
 
     public function update_turno($datos) {
@@ -216,6 +247,14 @@ class Admin_Model extends Model {
         $update = array(
             'start' => date('Y-m-d H:i:s', strtotime($datos['start'])),
             'end' => date('Y-m-d H:i:s', strtotime($datos['end'])),
+        );
+        $this->db->update('turno', $update, "id = $id");
+    }
+
+    public function cambiarEstadoTurno($datos) {
+        $id = $datos['id'];
+        $update = array(
+            'estado' => $datos['estado'],
         );
         $this->db->update('turno', $update, "id = $id");
     }

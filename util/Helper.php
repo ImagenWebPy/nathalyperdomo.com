@@ -968,4 +968,9 @@ class Helper {
         return $sql[0];
     }
 
+    public function obtenerEstadoColorTurno() {
+        $sql = $this->db->select("SELECT * FROM `estado_color_evento`;");
+        return $sql;
+    }
+
 }

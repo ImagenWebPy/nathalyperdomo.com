@@ -1,4 +1,11 @@
-<?php $helper = new Helper(); ?>
+<?php
+$helper = new Helper();
+$estados = $helper->obtenerEstadoColorTurno();
+$estadoColor = '';
+foreach ($estados as $item) {
+    $estadoColor .= '<a class="collapse-link"><i class="fa-square" style="color: ' . $item['color'] . '; background:' . $item['color'] . '; "></i> ' . $item['estado'] . '</a>';
+}
+?>
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-8">
         <h2>Turnos</h2>
@@ -39,6 +46,7 @@
                 <div class="ibox-title">
                     <h5>Calendario</h5>
                     <div class="ibox-tools">
+                        <?= $estadoColor; ?>
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
                         </a>
@@ -82,6 +90,7 @@
                 <div id="modalTitulo" style="margin-top:5px;"></div>
                 <div id="modalDesde" style="margin-top:10px;"></div>
                 <div id="modalHasta"></div>
+                <div id="modalEstado"></div>
                 <hr>
                 <div id="modalObservacion" style="margin-top:5px;"></div>
             </div>
@@ -134,6 +143,7 @@
                 $('#modalTitulo').html(event.title);
                 $('#modalDesde').html('Desde: ' + starttime);
                 $('#modalHasta').html('Hasta: ' + endtime);
+                $('#modalEstado').html(event.estado);
                 $('#modalObservacion').html(event.descripcion);
                 $('#eventID').val(event.id);
                 $('#calendarModal').modal();
@@ -238,6 +248,25 @@
             }
             e.handled = true;
         });
+        $(document).on("change", ".selectEstadoTurno", function (e) {
+            if (e.handled !== true) // This will prevent event triggering more then once
+            {
+                var valor = $(this).val();
+                var id = $(this).attr('data-id');
+                $.ajax({
+                    url: "<?= URL; ?>admin/cambiarEstadoTurno",
+                    type: "POST",
+                    dataType: "json",
+                    data: {id: id, estado: valor}
+                }).done(function (data) {
+                    $(".genericModal .modal-header").removeClass("modal-header").addClass("modal-header bg-primary");
+                    $(".genericModal .modal-title").html(data.titulo);
+                    $(".genericModal .modal-body").html(data.contenido);
+                    $(".genericModal").modal("toggle");
+                });
+            }
+            e.handled = true;
+        });
         $(document).on("change", ".selectDepartamento", function (e) {
             if (e.handled !== true) // This will prevent event triggering more then once
             {
@@ -292,6 +321,7 @@
                                 end: data.end,
                                 nombre: data.nombre,
                                 apellido: data.apellido,
+                                color: data.color
                             },
                             true);
                 });
@@ -317,6 +347,7 @@
                                 end: data.end,
                                 nombre: data.nombre,
                                 apellido: data.apellido,
+                                color: data.color
                             },
                             true);
                     $('#createEventModal').modal("toggle");

@@ -225,6 +225,16 @@ class Admin extends Controller {
         $data = $this->model->update_turno($datos);
         echo json_encode($data);
     }
+    
+    public function cambiarEstadoTurno() {
+        header('Content-type: application/json; charset=utf-8');
+        $datos = array(
+            'id' => $_POST['id'],
+            'estado' => $_POST['estado']
+        );
+        $data = $this->model->cambiarEstadoTurno($datos);
+        echo json_encode($data);
+    }
 
     public function eliminar_turno() {
         header('Content-type: application/json; charset=utf-8');
