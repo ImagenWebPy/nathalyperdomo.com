@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2018-05-24 21:40:58
+Date: 2018-05-26 16:34:43
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -335,6 +335,24 @@ INSERT INTO `departamento` VALUES ('16', 'Alto Paraguay', '1');
 INSERT INTO `departamento` VALUES ('17', 'Boquerón', '1');
 
 -- ----------------------------
+-- Table structure for estado_color_evento
+-- ----------------------------
+DROP TABLE IF EXISTS `estado_color_evento`;
+CREATE TABLE `estado_color_evento` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `estado` enum('PENDIENTE','CONFIRMADO','CANCELADO') DEFAULT NULL,
+  `color` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of estado_color_evento
+-- ----------------------------
+INSERT INTO `estado_color_evento` VALUES ('1', 'CONFIRMADO', '#2ab31a');
+INSERT INTO `estado_color_evento` VALUES ('2', 'PENDIENTE', '#f59a11');
+INSERT INTO `estado_color_evento` VALUES ('3', 'CANCELADO', '#f93131');
+
+-- ----------------------------
 -- Table structure for ficha_paciente
 -- ----------------------------
 DROP TABLE IF EXISTS `ficha_paciente`;
@@ -405,7 +423,7 @@ CREATE TABLE `paciente` (
   KEY `fk_id_ciudad_paciente` (`id_ciudad`),
   CONSTRAINT `fk_id_ciudad_paciente` FOREIGN KEY (`id_ciudad`) REFERENCES `ciudad` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_id_tipo_documento_paciente` FOREIGN KEY (`id_tipo_documento`) REFERENCES `tipo_documento` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of paciente
@@ -418,6 +436,8 @@ INSERT INTO `paciente` VALUES ('5', '2', '7', '123-3', '', 'Nombre', 'Apellido',
 INSERT INTO `paciente` VALUES ('6', '2', '114', '654321-5', 'raul.chuky@gmail.com', 'nombre', 'Apellido', '121212', '12121212', 'Dos direcciones', 'Recoleta', '2018-05-23 23:16:19', '1969-12-31', '1');
 INSERT INTO `paciente` VALUES ('7', null, null, '', 'raul.chuky@gmail.com', 'Jhon 1', 'Doe 2', '', '', '', '', '2018-05-23 23:20:16', '1969-12-31', '1');
 INSERT INTO `paciente` VALUES ('8', '2', '4', '123456', 'NOSE@nose.cpm', 'hOLA', 'Apellido', '0976921801', '0976921801', 'Dos direcciones', 'Recoleta', '2018-05-23 23:23:00', '1969-12-31', '1');
+INSERT INTO `paciente` VALUES ('9', '1', '1', '654321', 'raul.chuky@gmail.com', 'hola', 'hola', '0976921801', '0976921801', 'Dos direcciones', 'Recoleta', '2018-05-25 21:15:09', '1969-12-31', '1');
+INSERT INTO `paciente` VALUES ('10', '2', '1', '78787878', 'NOSE@nose.cpm', 'rAUL', 'Doe 2', '601606', '456', 'Dos direcciones', 'Recoleta', '2018-05-25 21:33:58', '2018-02-05', '1');
 
 -- ----------------------------
 -- Table structure for tipo_documento
@@ -448,26 +468,38 @@ CREATE TABLE `turno` (
   `descripcion` text,
   `start` datetime DEFAULT NULL,
   `end` datetime DEFAULT NULL,
+  `estado` enum('PENDIENTE','CONFIRMADO','CANCELADO') DEFAULT 'PENDIENTE',
   PRIMARY KEY (`id`),
   KEY `fk_id_paciente_turno` (`id_paciente`),
   CONSTRAINT `fk_id_paciente_turno` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of turno
 -- ----------------------------
-INSERT INTO `turno` VALUES ('2', '1', 'Motivo', 'Observaciones', '2018-03-05 10:30:00', '2018-03-05 11:00:00');
-INSERT INTO `turno` VALUES ('3', '1', 'Motivo', 'oo', '2018-04-05 09:30:00', '2018-04-05 10:00:00');
-INSERT INTO `turno` VALUES ('4', '1', 'Motivo', 'oo', '2018-04-05 09:30:00', '2018-04-05 10:00:00');
-INSERT INTO `turno` VALUES ('5', '1', 'Motivo', 'asasas', '2018-05-05 10:00:00', '2018-05-05 10:30:00');
-INSERT INTO `turno` VALUES ('6', '1', 'asasa', 'asasasas', '2018-03-05 10:00:00', '2018-03-05 11:30:00');
-INSERT INTO `turno` VALUES ('7', '1', 'aaa', 'aaaa', '2018-02-05 09:00:00', '2018-02-05 09:30:00');
-INSERT INTO `turno` VALUES ('8', '1', 'sasa', 'asasa', '2018-02-05 08:30:00', '2018-02-05 09:00:00');
-INSERT INTO `turno` VALUES ('10', '3', 'asasa', 'asasasas', '2018-05-03 10:00:00', '2018-05-03 10:30:00');
-INSERT INTO `turno` VALUES ('11', '1', 'Masas', 'oooooo', '2018-05-03 17:00:00', '2018-05-03 17:30:00');
-INSERT INTO `turno` VALUES ('12', '4', 'Reserva Web', 'hOLA', '1969-12-31 11:00:00', '1969-12-31 11:30:00');
-INSERT INTO `turno` VALUES ('13', '4', 'Reserva Web', 'Hla', '2018-05-22 10:00:00', '2018-05-22 10:30:00');
-INSERT INTO `turno` VALUES ('14', '4', 'Reserva Web', 'sdasdsad', '2018-05-23 09:30:00', '2018-05-23 10:00:00');
+INSERT INTO `turno` VALUES ('2', '1', 'Motivo', 'Observaciones', '2018-03-05 10:30:00', '2018-03-05 11:00:00', 'PENDIENTE');
+INSERT INTO `turno` VALUES ('3', '1', 'Motivo', 'oo', '2018-04-05 09:30:00', '2018-04-05 10:00:00', 'PENDIENTE');
+INSERT INTO `turno` VALUES ('4', '1', 'Motivo', 'oo', '2018-04-05 09:30:00', '2018-04-05 10:00:00', 'PENDIENTE');
+INSERT INTO `turno` VALUES ('5', '1', 'Motivo', 'asasas', '2018-05-05 10:00:00', '2018-05-05 10:30:00', 'PENDIENTE');
+INSERT INTO `turno` VALUES ('6', '1', 'asasa', 'asasasas', '2018-03-05 10:00:00', '2018-03-05 11:30:00', 'PENDIENTE');
+INSERT INTO `turno` VALUES ('7', '1', 'aaa', 'aaaa', '2018-02-05 09:00:00', '2018-02-05 09:30:00', 'PENDIENTE');
+INSERT INTO `turno` VALUES ('8', '1', 'sasa', 'asasa', '2018-02-05 08:30:00', '2018-02-05 09:00:00', 'PENDIENTE');
+INSERT INTO `turno` VALUES ('10', '3', 'asasa', 'asasasas', '2018-05-03 10:00:00', '2018-05-03 10:30:00', 'PENDIENTE');
+INSERT INTO `turno` VALUES ('11', '1', 'Masas', 'oooooo', '2018-05-03 17:00:00', '2018-05-03 17:30:00', 'PENDIENTE');
+INSERT INTO `turno` VALUES ('12', '4', 'Reserva Web', 'hOLA', '1969-12-31 11:00:00', '1969-12-31 11:30:00', 'PENDIENTE');
+INSERT INTO `turno` VALUES ('13', '4', 'Reserva Web', 'Hla', '2018-05-22 10:00:00', '2018-05-22 10:30:00', 'PENDIENTE');
+INSERT INTO `turno` VALUES ('14', '4', 'Reserva Web', 'sdasdsad', '2018-05-23 09:30:00', '2018-05-23 10:00:00', 'PENDIENTE');
+INSERT INTO `turno` VALUES ('15', '6', 'hola', 'Observacione', '2018-05-24 11:00:00', '2018-05-24 11:30:00', 'PENDIENTE');
+INSERT INTO `turno` VALUES ('16', '3', 'Motivo', 'Pbser', '2018-05-25 15:00:00', '2018-05-25 15:30:00', 'PENDIENTE');
+INSERT INTO `turno` VALUES ('17', '4', 'Motivo', 'sdasdsadsad', '2018-05-26 10:00:00', '2018-05-26 10:30:00', 'PENDIENTE');
+INSERT INTO `turno` VALUES ('18', '9', 'Motivo', 'sadasdsad', '2018-05-25 10:30:00', '2018-05-25 11:00:00', 'CANCELADO');
+INSERT INTO `turno` VALUES ('19', '2', 'hola', 'asasa', '2018-05-25 08:00:00', '2018-05-25 08:30:00', 'CONFIRMADO');
+INSERT INTO `turno` VALUES ('20', '8', 'Motivo', 'asasasa', '2018-05-24 09:00:00', '2018-05-24 09:30:00', 'CONFIRMADO');
+INSERT INTO `turno` VALUES ('21', '4', 'Motivo', 'asasasa', '2018-05-23 15:00:00', '2018-05-23 15:30:00', 'PENDIENTE');
+INSERT INTO `turno` VALUES ('22', '4', 'hola', 'prueba', '2018-05-23 12:00:00', '2018-05-23 12:30:00', 'PENDIENTE');
+INSERT INTO `turno` VALUES ('23', '9', 'hola', 'prueba', '2018-05-23 13:30:00', '2018-05-23 14:00:00', 'PENDIENTE');
+INSERT INTO `turno` VALUES ('24', '4', 'hola', 'asasas', '2018-05-24 13:30:00', '2018-05-24 14:00:00', 'PENDIENTE');
+INSERT INTO `turno` VALUES ('25', '8', 'asa', 'asasas', '2018-05-24 15:00:00', '2018-05-24 15:30:00', 'PENDIENTE');
 
 -- ----------------------------
 -- Table structure for web_blog
@@ -489,10 +521,31 @@ CREATE TABLE `web_blog` (
 -- ----------------------------
 -- Records of web_blog
 -- ----------------------------
-INSERT INTO `web_blog` VALUES ('1', 'Lorem ipsum dolor sit amet', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt ut mi vel convallis. Fusce condimentum neque sit amet quam condimentum, eget vulputate magna tempor. Vivamus pretium metus id orci facilisis interdum. Phasellus laoreet ultrices lorem vel blandit. Etiam iaculis pellentesque fringilla. Donec convallis aliquam dui, et posuere purus viverra ut. Nulla pharetra venenatis dui non maximus.</p>', 'blog1.jpg', 'blog1-thumb.jpg', '#', '2018-05-14', '2018-05-14 11:24:05', '1');
-INSERT INTO `web_blog` VALUES ('2', 'Lorem ipsum dolor sit amet', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt ut mi vel convallis. Fusce condimentum neque sit amet quam condimentum, eget vulputate magna tempor. Vivamus pretium metus id orci facilisis interdum. Phasellus laoreet ultrices lorem vel blandit. Etiam iaculis pellentesque fringilla. Donec convallis aliquam dui, et posuere purus viverra ut. Nulla pharetra venenatis dui non maximus.</p>', 'blog2.jpg', 'blog2-thumb.jpg', '#', '2018-05-15', '2018-05-15 11:24:05', '1');
-INSERT INTO `web_blog` VALUES ('3', 'Lorem ipsum dolor sit amet 2', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt ut mi vel convallis. Fusce condimentum neque sit amet quam condimentum, eget vulputate magna tempor. Vivamus pretium metus id orci facilisis interdum. Phasellus laoreet ultrices lorem vel blandit. Etiam iaculis pellentesque fringilla. Donec convallis aliquam dui, et posuere purus viverra ut. Nulla pharetra venenatis dui non maximus.</p>', 'blog3.jpg', 'blog3-thumb.jpg', '#', '2018-05-24', '2018-05-16 11:24:05', '1');
-INSERT INTO `web_blog` VALUES ('4', 'Lorem ipsum dolor sit amet', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt ut mi vel convallis. Fusce condimentum neque sit amet quam condimentum, eget vulputate magna tempor. Vivamus pretium metus id orci facilisis interdum. Phasellus laoreet ultrices lorem vel blandit. Etiam iaculis pellentesque fringilla. Donec convallis aliquam dui, et posuere purus viverra ut. Nulla pharetra venenatis dui non maximus.</p>', 'blog4.jpg', 'blog4-thumb.jpg', '#', '2018-05-17', '2018-05-16 11:24:05', '1');
+INSERT INTO `web_blog` VALUES ('1', 'Lorem ipsum dolor sit amet', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt ut mi vel convallis. Fusce condimentum neque sit amet quam condimentum, eget vulputate magna tempor. Vivamus pretium metus id orci facilisis interdum. Phasellus laoreet ultrices lorem vel blandit. Etiam iaculis pellentesque fringilla. Donec convallis aliquam dui, et posuere purus viverra ut. Nulla pharetra venenatis dui non maximus.</p>\r\ndos', 'blog1.jpg', 'blog1-thumb.jpg', '#', '2018-05-14', '2018-05-14 11:24:05', '1');
+INSERT INTO `web_blog` VALUES ('2', 'Lorem ipsum dolor sit amet', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt ut mi vel convallis. Fusce condimentum neque sit amet quam condimentum, eget vulputate magna tempor. Vivamus pretium metus id orci facilisis interdum. Phasellus laoreet ultrices lorem vel blandit. Etiam iaculis pellentesque fringilla. Donec convallis aliquam dui, et posuere purus viverra ut. Nulla pharetra venenatis dui non maximus.</p>\r\ntres', 'blog2.jpg', 'blog2-thumb.jpg', '#', '2018-05-15', '2018-05-15 11:24:05', '1');
+INSERT INTO `web_blog` VALUES ('3', 'Lorem ipsum dolor sit amet 2', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt ut mi vel convallis. Fusce condimentum neque sit amet quam condimentum, eget vulputate magna tempor. Vivamus pretium metus id orci facilisis interdum. Phasellus laoreet ultrices lorem vel blandit. Etiam iaculis pellentesque fringilla. Donec convallis aliquam dui, et posuere purus viverra ut. Nulla pharetra venenatis dui non maximus.</p>\r\ncuatro', 'blog3.jpg', 'blog3-thumb.jpg', '#', '2018-05-24', '2018-05-16 11:24:05', '1');
+INSERT INTO `web_blog` VALUES ('4', 'Lorem ipsum dolor sit amet', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt ut mi vel convallis. Fusce condimentum neque sit amet quam condimentum, eget vulputate magna tempor. Vivamus pretium metus id orci facilisis interdum. Phasellus laoreet ultrices lorem vel blandit. Etiam iaculis pellentesque fringilla. Donec convallis aliquam dui, et posuere purus viverra ut. Nulla pharetra venenatis dui non maximus.</p>\r\ncinco', 'blog4.jpg', 'blog4-thumb.jpg', '#', '2018-05-17', '2018-05-16 11:24:05', '1');
+
+-- ----------------------------
+-- Table structure for web_blog_busquedas
+-- ----------------------------
+DROP TABLE IF EXISTS `web_blog_busquedas`;
+CREATE TABLE `web_blog_busquedas` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `busqueda` varchar(145) DEFAULT NULL,
+  `ip` varchar(45) DEFAULT NULL,
+  `fecha` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `cantidad` int(4) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of web_blog_busquedas
+-- ----------------------------
+INSERT INTO `web_blog_busquedas` VALUES ('1', 'uno', '::1', '2018-05-25 20:32:28', '0');
+INSERT INTO `web_blog_busquedas` VALUES ('2', 'dos', '::1', '2018-05-25 20:32:46', '1');
+INSERT INTO `web_blog_busquedas` VALUES ('3', 'loremp', '::1', '2018-05-25 20:32:58', '0');
+INSERT INTO `web_blog_busquedas` VALUES ('4', 'Lorem', '::1', '2018-05-25 20:33:19', '4');
 
 -- ----------------------------
 -- Table structure for web_contacto
@@ -513,8 +566,8 @@ CREATE TABLE `web_contacto` (
 -- ----------------------------
 -- Records of web_contacto
 -- ----------------------------
-INSERT INTO `web_contacto` VALUES ('2', 'rAUL', 'raul.chuky@gmail.com', 'aSUNTO', 'sadasdsa', '2018-05-21 21:00:41', '0', '::1');
-INSERT INTO `web_contacto` VALUES ('3', 'rAUL', 'raul.chuky@gmail.com', 'aSUNTO', 'asasasasas', '2018-05-21 21:03:43', '0', '::1');
+INSERT INTO `web_contacto` VALUES ('2', 'rAUL', 'raul.chuky@gmail.com', 'aSUNTO', 'sadasdsa', '2018-05-25 21:03:58', '1', '::1');
+INSERT INTO `web_contacto` VALUES ('3', 'rAUL', 'raul.chuky@gmail.com', 'aSUNTO', 'asasasasas', '2018-05-25 21:03:55', '1', '::1');
 
 -- ----------------------------
 -- Table structure for web_datos
@@ -692,7 +745,7 @@ CREATE TABLE `web_inicio_video` (
 -- ----------------------------
 -- Records of web_inicio_video
 -- ----------------------------
-INSERT INTO `web_inicio_video` VALUES ('1', 'DESDE LA COMODIDAD DE TU CASA', 'o desde la clinica', '#', 'Tu eliges');
+INSERT INTO `web_inicio_video` VALUES ('1', 'DESDE LA COMODIDAD DE TU CASA', 'o desde la clinica', 'Kb8CW3axqRE', 'Tu eliges');
 
 -- ----------------------------
 -- Table structure for web_medical_icon
@@ -770,6 +823,27 @@ INSERT INTO `web_medical_icon` VALUES ('59', 'medical-icon-i-gift-shop', '1');
 INSERT INTO `web_medical_icon` VALUES ('60', 'medical-icon-i-genetics', '1');
 INSERT INTO `web_medical_icon` VALUES ('61', 'medical-icon-i-first-aid', '1');
 INSERT INTO `web_medical_icon` VALUES ('62', 'medical-icon-i-dermatology', '1');
+
+-- ----------------------------
+-- Table structure for web_metatags
+-- ----------------------------
+DROP TABLE IF EXISTS `web_metatags`;
+CREATE TABLE `web_metatags` (
+  `id` int(255) unsigned NOT NULL AUTO_INCREMENT,
+  `pagina` varchar(45) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `keywords` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of web_metatags
+-- ----------------------------
+INSERT INTO `web_metatags` VALUES ('1', 'inicio', 'Nathaly Perdomo Nutrición - Un mundo en nutrición', 'nutrición, vida sana, alimentación saludable, dieta');
+INSERT INTO `web_metatags` VALUES ('2', 'nosotros', null, null);
+INSERT INTO `web_metatags` VALUES ('3', 'blog', null, null);
+INSERT INTO `web_metatags` VALUES ('4', 'consultorio', 'Descripción del Consultorio', 'consultorio, reserva de turno, nutrición');
+INSERT INTO `web_metatags` VALUES ('5', 'contacto', 'Descripción de la pagina de contacto', 'keywords, contacto');
 
 -- ----------------------------
 -- Table structure for web_nosotros
