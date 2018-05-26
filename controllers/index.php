@@ -7,8 +7,9 @@ class Index extends Controller {
     }
 
     public function index() {
-        $this->view->description = "";
-        $this->view->keywords = "";
+        $metas = $this->helper->cargarMetaTags('inicio');
+        $this->view->description = utf8_encode($metas['description']);
+        $this->view->keywords = utf8_encode($metas['keywords']);
 
         $this->view->index_caracteristicas = $this->helper->index_caracteristicas();
         $this->view->index_blog = $this->helper->index_blog();

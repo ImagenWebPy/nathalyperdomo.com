@@ -534,6 +534,12 @@ class Admin_Model extends Model {
                         . '<td>' . $estado . '</td>'
                         . '<td>' . $btnEditar . '</td>';
                 break;
+            case 'metatags':
+                $btnEditar = '<a class="editDTContenido pointer btn-xs" data-id="' . $id . '" data-url="modalEditarMetaTag"><i class="fa fa-edit"></i> Editar </a>';
+                $data = '<td>' . $id . '</td>'
+                        . '<td>' . utf8_encode($sql[0]['pagina']) . '</td>'
+                        . '<td>' . $btnEditar . '</td>';
+                break;
         }
         return $data;
     }
@@ -1149,6 +1155,56 @@ class Admin_Model extends Model {
         return json_encode($data);
     }
 
+    public function modalEditarMetaTag($datos) {
+        $id = $datos['id'];
+        $sql = $this->db->select("SELECT * FROM web_metatags where id = $id");
+        $modal = '<div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Modificar Datos</h3>
+                    </div>
+                    <div class="row">
+                        <form role="form" class="frmEditarMetaTags" method="POST">
+                            <input type="hidden" name="id" value="' . $id . '">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Pagina</label>
+                                    <input type="text" name="titulo" class="form-control" value="' . utf8_encode($sql[0]['pagina']) . '">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Descripcion</label>
+                                    <textarea style="height:80px;" name="description" class="form-control">' . utf8_encode($sql[0]['description']) . '</textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Keywords y/o frases (palabras separadas por comas)</label>
+                                    <textarea style="height:80px;" name="keywords" class="form-control">' . utf8_encode($sql[0]['keywords']) . '</textarea>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="btn-submit">
+                                <button type="submit" class="btn btn-block btn-primary btn-lg">Editar Contenido</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <script>
+                    $(document).ready(function () {
+                        $(".i-checks").iCheck({
+                            checkboxClass: "icheckbox_square-green",
+                            radioClass: "iradio_square-green",
+                        });
+                    });
+                </script>';
+        $data = array(
+            'titulo' => 'Editar Item Caracteristicas',
+            'content' => $modal
+        );
+        return json_encode($data);
+    }
+
     public function modalEditarFrases($datos) {
         $id = $datos['id'];
         $sql = $this->db->select("SELECT * FROM web_frases where id = $id");
@@ -1441,6 +1497,23 @@ class Admin_Model extends Model {
             'type' => 'success',
             'content' => $this->rowDataTable('caracteristicas', 'web_inicio_caracteristicas', $id),
             'id' => $id
+        );
+        return $data;
+    }
+
+    public function frmEditarMetaTags($datos) {
+        $id = $datos['id'];
+        $update = array(
+            'description' => utf8_decode($datos['description']),
+            'keywords' => utf8_decode($datos['keywords'])
+        );
+        $this->db->update('web_metatags', $update, "id = $id");
+        $sqlPagina = $this->db->select("select pagina from web_metatags where id = $id");
+        $data = array(
+            'type' => 'success',
+            'content' => $this->rowDataTable('metatags', 'web_metatags', $id),
+            'id' => $id,
+            'mensaje' => 'Se ha actualizado correctamente los metatags de la pagina "' . utf8_encode($sqlPagina[0]['pagina']) . '"'
         );
         return $data;
     }
@@ -1973,6 +2046,50 @@ class Admin_Model extends Model {
             $nestedData[] = utf8_encode($row["telefono"]);
             $nestedData[] = utf8_encode($row["celular"]);
             $nestedData[] = $estado;
+            $nestedData[] = $btnEditar;
+            $data[] = $nestedData;
+        }
+
+        $json_data = array(
+            "draw" => intval($datos['draw']), // for every request/draw by clientside , they send a number as a parameter, when they recieve a response/data they first check the draw number, so we are sending same number in draw. 
+            "recordsTotal" => intval($totalData), // total number of records
+            "recordsFiltered" => intval($totalFiltered), // total number of records after searching, if there is no searching then totalFiltered = totalData
+            "data" => $data   // total data array
+        );
+
+        return json_encode($json_data);
+    }
+
+    public function listadoDTMetas($datos) {
+        $columns = array(
+            0 => 'id',
+            1 => 'pagina',
+            2 => 'accion'
+        );
+        #getting total number records without any search
+        $sql = $this->db->select("SELECT COUNT(*) as cantidad FROM web_metatags");
+        $totalFiltered = $sql[0]['cantidad'];
+        $totalData = $sql[0]['cantidad'];
+
+        $query = "SELECT * FROM web_metatags where 1 = 1";
+        $where = "";
+        if (!empty($datos['search']['value'])) {
+            $where .= " AND (pagina LIKE '%" . $requestData['search']['value'] . "%' )";
+            #when there is a search parameter then we have to modify total number filtered rows as per search result.
+            $sql = $this->db->select("SELECT COUNT(*) as cantidad FROM web_metatags where 1 = 1 $where");
+            $totalFiltered = $sql[0]['cantidad'];
+        }
+        $query .= $where;
+        $query .= " ORDER BY " . $columns[$datos['order'][0]['column']] . "   " . $datos['order'][0]['dir'] . "  LIMIT " . $datos['start'] . " ," . $datos['length'] . "   ";
+        $sql = $this->db->select($query);
+        $data = array();
+        foreach ($sql as $row) {  // preparing an array
+            $id = $row["id"];
+            $btnEditar = '<a class="editDTContenido pointer btn-xs" data-id="' . $id . '" data-url="modalEditarMetaTag"><i class="fa fa-edit"></i> Editar </a>';
+            $nestedData = array();
+            $nestedData['DT_RowId'] = 'metatag_' . $id;
+            $nestedData[] = $id;
+            $nestedData[] = utf8_encode($row["pagina"]);
             $nestedData[] = $btnEditar;
             $data[] = $nestedData;
         }

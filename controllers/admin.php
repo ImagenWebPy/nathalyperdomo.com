@@ -32,7 +32,8 @@ class Admin extends Controller {
         $this->view->helper = $this->helper;
         $this->view->title = 'Ciudades';
         $this->view->public_css = array("css/plugins/dataTables/datatables.min.css", "css/plugins/html5fileupload/html5fileupload.css", "css/plugins/iCheck/custom.css");
-        $this->view->public_js = array("js/plugins/dataTables/datatables.min.js", "js/plugins/html5fileupload/html5fileupload.min.js", "js/plugins/iCheck/icheck.min.js");
+        $this->view->publicHeader_js = array("js/plugins/html5fileupload/html5fileupload.min.js");
+        $this->view->public_js = array("js/plugins/dataTables/datatables.min.js", "js/plugins/iCheck/icheck.min.js");
         $this->view->render('admin/header');
         $this->view->render('admin/ciudades/index');
         $this->view->render('admin/footer');
@@ -47,7 +48,8 @@ class Admin extends Controller {
         $this->view->datosInicioImagenParallax = $this->model->datosInicioImagenParallax();
         $this->view->title = 'Inicio';
         $this->view->public_css = array("css/plugins/dataTables/datatables.min.css", "css/plugins/html5fileupload/html5fileupload.css", "css/plugins/iCheck/custom.css", "css/wfmi-style.css", "css/plugins/toastr/toastr.min.css", "css/plugins/summernote/summernote.css");
-        $this->view->public_js = array("js/plugins/dataTables/datatables.min.js", "js/plugins/html5fileupload/html5fileupload.min.js", "js/plugins/iCheck/icheck.min.js", "js/plugins/toastr/toastr.min.js", "js/plugins/summernote/summernote.min.js");
+        $this->view->publicHeader_js = array("js/plugins/html5fileupload/html5fileupload.min.js");
+        $this->view->public_js = array("js/plugins/dataTables/datatables.min.js", "js/plugins/iCheck/icheck.min.js", "js/plugins/toastr/toastr.min.js", "js/plugins/summernote/summernote.min.js");
         $this->view->render('admin/header');
         $this->view->render('admin/contenido/inicio');
         $this->view->render('admin/footer');
@@ -59,7 +61,8 @@ class Admin extends Controller {
         $this->view->helper = $this->helper;
         $this->view->title = 'Blog';
         $this->view->public_css = array("css/plugins/dataTables/datatables.min.css", "css/plugins/html5fileupload/html5fileupload.css", "css/plugins/iCheck/custom.css", "css/wfmi-style.css", "css/plugins/toastr/toastr.min.css", "css/plugins/summernote/summernote.css", "css/plugins/datapicker/datepicker3.css");
-        $this->view->public_js = array("js/plugins/dataTables/datatables.min.js", "js/plugins/html5fileupload/html5fileupload.min.js", "js/plugins/iCheck/icheck.min.js", "js/plugins/toastr/toastr.min.js", "js/plugins/summernote/summernote.min.js", "js/plugins/datapicker/bootstrap-datepicker.js");
+        $this->view->publicHeader_js = array("js/plugins/html5fileupload/html5fileupload.min.js");
+        $this->view->public_js = array("js/plugins/dataTables/datatables.min.js", "js/plugins/iCheck/icheck.min.js", "js/plugins/toastr/toastr.min.js", "js/plugins/summernote/summernote.min.js", "js/plugins/datapicker/bootstrap-datepicker.js");
         $this->view->render('admin/header');
         $this->view->render('admin/blog/index');
         $this->view->render('admin/footer');
@@ -71,10 +74,22 @@ class Admin extends Controller {
         $this->view->helper = $this->helper;
         $this->view->title = 'Pacientes';
         $this->view->public_css = array("css/plugins/dataTables/datatables.min.css", "css/plugins/html5fileupload/html5fileupload.css", "css/plugins/iCheck/custom.css", "css/wfmi-style.css", "css/plugins/toastr/toastr.min.css", "css/plugins/summernote/summernote.css", "css/plugins/datapicker/datepicker3.css");
-        $this->view->publicHeader_js = array("js/ajax-pagination");
-        $this->view->public_js = array("js/plugins/dataTables/datatables.min.js", "js/plugins/html5fileupload/html5fileupload.min.js", "js/plugins/iCheck/icheck.min.js", "js/plugins/toastr/toastr.min.js", "js/plugins/summernote/summernote.min.js", "js/plugins/datapicker/bootstrap-datepicker.js");
+        $this->view->publicHeader_js = array("js/ajax-pagination", "js/plugins/html5fileupload/html5fileupload.min.js");
+        $this->view->public_js = array("js/plugins/dataTables/datatables.min.js", "js/plugins/iCheck/icheck.min.js", "js/plugins/toastr/toastr.min.js", "js/plugins/summernote/summernote.min.js", "js/plugins/datapicker/bootstrap-datepicker.js");
         $this->view->render('admin/header');
         $this->view->render('admin/pacientes/index');
+        $this->view->render('admin/footer');
+        if (!empty($_SESSION['message']))
+            unset($_SESSION['message']);
+    }
+
+    public function metatags() {
+        $this->view->helper = $this->helper;
+        $this->view->title = 'Pacientes';
+        $this->view->public_css = array("css/plugins/dataTables/datatables.min.css", "css/plugins/iCheck/custom.css", "css/wfmi-style.css", "css/plugins/toastr/toastr.min.css");
+        $this->view->public_js = array("js/plugins/dataTables/datatables.min.js", "js/plugins/iCheck/icheck.min.js", "js/plugins/toastr/toastr.min.js");
+        $this->view->render('admin/header');
+        $this->view->render('admin/contenido/metatags');
         $this->view->render('admin/footer');
         if (!empty($_SESSION['message']))
             unset($_SESSION['message']);
@@ -92,7 +107,7 @@ class Admin extends Controller {
         if (!empty($_SESSION['message']))
             unset($_SESSION['message']);
     }
-   
+
     public function busquedas() {
         $this->view->helper = $this->helper;
 
@@ -111,7 +126,8 @@ class Admin extends Controller {
         $this->view->title = 'Nathaly';
         $this->view->datosNathaly = $this->model->datosNathaly();
         $this->view->public_css = array("css/plugins/html5fileupload/html5fileupload.css", "css/plugins/iCheck/custom.css", "css/wfmi-style.css", "css/plugins/toastr/toastr.min.css", "css/plugins/summernote/summernote.css");
-        $this->view->public_js = array("js/plugins/html5fileupload/html5fileupload.min.js", "js/plugins/iCheck/icheck.min.js", "js/plugins/toastr/toastr.min.js", "js/plugins/summernote/summernote.min.js");
+        $this->view->publicHeader_js = array("js/plugins/html5fileupload/html5fileupload.min.js");
+        $this->view->public_js = array("js/plugins/iCheck/icheck.min.js", "js/plugins/toastr/toastr.min.js", "js/plugins/summernote/summernote.min.js");
         $this->view->render('admin/header');
         $this->view->render('admin/nathaly/index');
         $this->view->render('admin/footer');
@@ -543,6 +559,15 @@ class Admin extends Controller {
         $datos = $this->model->modalEditarCaracteristicas($data);
         echo $datos;
     }
+    
+    public function modalEditarMetaTag() {
+        header('Content-type: application/json; charset=utf-8');
+        $data = array(
+            'id' => $this->helper->cleanInput($_POST['id'])
+        );
+        $datos = $this->model->modalEditarMetaTag($data);
+        echo $datos;
+    }
 
     public function modalEditarFrases() {
         header('Content-type: application/json; charset=utf-8');
@@ -573,6 +598,17 @@ class Admin extends Controller {
             'estado' => (!empty($_POST['estado'])) ? $this->helper->cleanInput($_POST['estado']) : 0,
         );
         $data = $this->model->frmEditarCaracteristicas($datos);
+        echo json_encode($data);
+    }
+
+    public function frmEditarMetaTags() {
+        header('Content-type: application/json; charset=utf-8');
+        $datos = array(
+            'id' => $this->helper->cleanInput($_POST['id']),
+            'description' => $this->helper->cleanInput($_POST['description']),
+            'keywords' => $this->helper->cleanInput($_POST['keywords'])
+        );
+        $data = $this->model->frmEditarMetaTags($datos);
         echo json_encode($data);
     }
 
@@ -888,7 +924,7 @@ class Admin extends Controller {
         $data = $this->model->listadoDTContacto($_REQUEST);
         echo $data;
     }
-    
+
     public function listadoDTBusqueda() {
         header('Content-type: application/json; charset=utf-8');
         $data = $this->model->listadoDTBusqueda($_REQUEST);
@@ -898,6 +934,12 @@ class Admin extends Controller {
     public function listadoDTPacientes() {
         header('Content-type: application/json; charset=utf-8');
         $data = $this->model->listadoDTPacientes($_REQUEST);
+        echo $data;
+    }
+
+    public function listadoDTMetas() {
+        header('Content-type: application/json; charset=utf-8');
+        $data = $this->model->listadoDTMetas($_REQUEST);
         echo $data;
     }
 
@@ -930,7 +972,7 @@ class Admin extends Controller {
         #cargamos las librerias extras
         $this->view->helper = new Helper();
         $this->view->public_css = array("css/plugins/dataTables/datatables.min.css", "css/plugins/html5fileupload/html5fileupload.css", "css/plugins/iCheck/custom.css", "css/plugins/summernote/summernote.css", "css/plugins/html5fileupload/html5fileupload.css", "css/plugins/toastr/toastr.min.css", "css/plugins/datapicker/datepicker3.css");
-        $this->view->public_js = array("js/plugins/dataTables/datatables.min.js", "js/plugins/dataTables/dataTables.rowReorder.min.js", "js/plugins/html5fileupload/html5fileupload.min.js", "js/plugins/iCheck/icheck.min.js", "js/plugins/pdfobject/pdfobject.min.js", "js/plugins/html5fileupload/html5fileupload.min.js", "js/plugins/toastr/toastr.min.js", "js/plugins/datapicker/bootstrap-datepicker.js", "js/plugins/input-mask/jquery.inputmask.js", "js/plugins/input-mask/jquery.inputmask.numeric.extensions.js", "js/plugins/datapicker/locales/bootstrap-datepicker.es.min.js");
+        $this->view->public_js = array("js/plugins/dataTables/datatables.min.js", "js/plugins/dataTables/dataTables.rowReorder.min.js", "js/plugins/iCheck/icheck.min.js", "js/plugins/pdfobject/pdfobject.min.js", "js/plugins/toastr/toastr.min.js", "js/plugins/datapicker/bootstrap-datepicker.js", "js/plugins/input-mask/jquery.inputmask.js", "js/plugins/input-mask/jquery.inputmask.numeric.extensions.js", "js/plugins/datapicker/locales/bootstrap-datepicker.es.min.js");
         $this->view->publicHeader_js = array("js/plugins/html5fileupload/html5fileupload.min.js");
         $this->view->render('admin/header');
         $this->view->render('admin/usuarios/index');

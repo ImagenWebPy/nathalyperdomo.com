@@ -14,8 +14,9 @@ class Blog extends Controller {
             $pagina = 1;
         }
         $this->view->listado = $this->model->listado($pagina);
-        $this->view->description = "";
-        $this->view->keywords = "";
+        $metas = $this->helper->cargarMetaTags('blog');
+        $this->view->description = utf8_encode($metas['description']);
+        $this->view->keywords = utf8_encode($metas['keywords']);
         $this->view->title = TITLE . 'Blog';
         $this->view->render('header');
         $this->view->render('blog/index');

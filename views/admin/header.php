@@ -91,6 +91,7 @@ $rol = $_SESSION['usuarioLogueado']['rol'];
                             <li <?= $paginaActual['paginas']['redes']; ?>><a href="<?= URL; ?>admin/redes"><i class="fa fa-share-square-o"></i> <span class="nav-label">Redes</span></a></li>
                             <li <?= $paginaActual['paginas']['logo']; ?>><a href="<?= URL; ?>admin/logo"><i class="fa fa-arrows-alt"></i> <span class="nav-label">Logos</span></a></li>
                             <li <?= $paginaActual['paginas']['direccion']; ?>><a href="<?= URL; ?>admin/direccion"><i class="fa fa-map-marker"></i> <span class="nav-label">Direcciones</span></a></li>
+                            <li <?= $paginaActual['paginas']['metatags']; ?>><a href="<?= URL; ?>admin/metatags"><i class="fa fa-tags"></i> <span class="nav-label">Meta-tags</span></a></li>
                         <?php endif; ?>
                         <?php if ($rol == 'Administrador'): ?>
                             <li <?= $paginaActual['paginas']['usuarios']; ?>>

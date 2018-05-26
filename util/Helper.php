@@ -881,7 +881,7 @@ class Helper {
     }
 
     public function getActivePageAdmin($page) {
-        $dashboard = $inicio = $nathaly = $consultorio = $turnos = $pacientes = $ciudades = $contacto = $blog = $blogListado = $blogBusquedas = $usuarios = $redes = $logo = $direccion = '';
+        $dashboard = $inicio = $nathaly = $consultorio = $turnos = $pacientes = $ciudades = $contacto = $blog = $blogListado = $blogBusquedas = $usuarios = $redes = $logo = $direccion = $metatags = '';
         switch ($page) {
             case'inicio':
                 $inicio = 'class ="active"';
@@ -923,6 +923,9 @@ class Helper {
             case 'direccion':
                 $direccion = 'class="active"';
                 break;
+            case 'metatags':
+                $metatags = 'class="active"';
+                break;
             default :
                 $dashboard = 'class ="active"';
                 break;
@@ -948,6 +951,7 @@ class Helper {
                 'usuarios' => $usuarios,
                 'redes' => $redes,
                 'logo' => $logo,
+                'metatags' => $metatags,
                 'direccion' => $direccion
             )
         );
@@ -956,6 +960,11 @@ class Helper {
 
     public function getLogos() {
         $sql = $this->db->select("select logo, logo_2 from web_datos where id = 1");
+        return $sql[0];
+    }
+
+    public function cargarMetaTags($pagina) {
+        $sql = $this->db->select("SELECT description, keywords FROM `web_metatags` where pagina = '$pagina';");
         return $sql[0];
     }
 

@@ -7,8 +7,9 @@ class Consultorio extends Controller {
     }
 
     public function index() {
-        $this->view->description = "";
-        $this->view->keywords = "";
+        $metas = $this->helper->cargarMetaTags('consultorio');
+        $this->view->description = utf8_encode($metas['description']);
+        $this->view->keywords = utf8_encode($metas['keywords']);
         $this->view->direccion = $this->helper->web_datos();
         $this->view->title = TITLE . 'Consultorio';
         $this->view->public_css = array('plugins/datepicker/css/datepicker3.css');

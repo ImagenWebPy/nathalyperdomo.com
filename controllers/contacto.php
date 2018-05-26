@@ -7,8 +7,9 @@ class Contacto extends Controller {
     }
 
     public function index() {
-        $this->view->description = "";
-        $this->view->keywords = "";
+        $metas = $this->helper->cargarMetaTags('contacto');
+        $this->view->description = utf8_encode($metas['description']);
+        $this->view->keywords = utf8_encode($metas['keywords']);
         $this->view->datosMapa = $this->model->datosMapa();
         $this->view->title = TITLE . 'Consultorio';
         $this->view->external_js = array("https://maps.googleapis.com/maps/api/js?key=AIzaSyBBIgMiEmsiFfpMGWYxPZbUhJdWB-2vk7c&callback=initMap");

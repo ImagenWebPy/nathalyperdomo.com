@@ -7,8 +7,9 @@ class nosotros extends Controller {
     }
 
     public function index() {
-        $this->view->description = "";
-        $this->view->keywords = "";
+        $metas = $this->helper->cargarMetaTags('nosotros');
+        $this->view->description = utf8_encode($metas['description']);
+        $this->view->keywords = utf8_encode($metas['keywords']);
         $this->view->datos_nosotros = $this->model->datos_nosotros();
         $this->view->title = TITLE . 'Nosotros';
         $this->view->render('header');
