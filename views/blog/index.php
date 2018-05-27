@@ -14,7 +14,12 @@
                                     <div class="post-item isotope-item clearfix post-519 post type-post status-publish format-standard has-post-thumbnail hentry category-motion tag-css3 tag-framework tag-wordpress">
                                         <div class="post-photo-wrapper">
                                             <div class="post-photo">
-                                                <img width="366" height="250" src="<?= URL; ?>public/images/blog/<?= utf8_encode($item['imagen_thumb']); ?>" class="scale-with-grid wp-post-image" alt="1"/>
+                                                <?php if (!empty($item['url_youtube'])): ?>
+                                                    <iframe class="scale-with-grid" src="http://www.youtube.com/embed/<?= $item['url_youtube']; ?>?wmode=opaque" allowfullscreen="" style="height: 413.6px;">
+                                                    </iframe>
+                                                <?php else: ?>
+                                                    <img width="366" height="250" src="<?= URL; ?>public/images/blog/<?= utf8_encode($item['imagen_thumb']); ?>" class="scale-with-grid wp-post-image" alt="1"/>
+                                                <?php endif; ?>
                                             </div>
                                         </div>
                                         <div class="post-desc-wrapper">

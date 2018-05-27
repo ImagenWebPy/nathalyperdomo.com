@@ -1,3 +1,4 @@
+<?php $helper = new Helper(); ?>
 <!-- #Content -->
 <div id="Content">
     <div class="content_wrapper clearfix">
@@ -42,10 +43,15 @@
                                 <ul class="portfolio_slider_ul">
                                     <?php foreach ($this->index_blog as $item): ?>
                                         <li>
-                                            <a class="photo-wrapper" href="#"><img width="380" height="380" src="<?= URL; ?>public/images/blog/<?= utf8_encode($item['imagen_thumb']); ?>" class="scale-with-grid wp-post-image" alt="1"/></a>
+                                            <?php if (!empty($item['url_youtube'])): ?>
+                                                <iframe class="scale-with-grid" src="http://www.youtube.com/embed/<?= $item['url_youtube']; ?>?wmode=opaque" allowfullscreen="" style="height: 390px; width: 380px;">
+                                                </iframe>
+                                            <?php else: ?>
+                                                <a class="photo-wrapper" href="#"><img width="380" height="380" src="<?= URL; ?>public/images/blog/<?= utf8_encode($item['imagen_thumb']); ?>" class="scale-with-grid wp-post-image" alt="1"/></a>
+                                            <?php endif; ?>
                                             <div class="hover-box">
                                                 <h5><?= utf8_encode($item['titulo']); ?></h5>
-                                                <a class="hover-button zoom prettyphoto" href="<?= URL; ?>public/images/blog/<?= utf8_encode($item['imagen']); ?>"><i class="icon-search"></i></a><a class="hover-button link" href="#"><i class="icon-link"></i></a>
+                                                <a class="hover-button zoom prettyphoto" href="<?= URL; ?>public/images/blog/<?= utf8_encode($item['imagen']); ?>"><i class="icon-search"></i></a><a class="hover-button link" href="<?= $helper->armaUrlBlog($item['id'], 'web_blog', 'titulo'); ?>"><i class="icon-link"></i></a>
                                             </div>
                                         </li>
                                     <?php endforeach; ?>

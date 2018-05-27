@@ -833,7 +833,7 @@ class Helper {
     }
 
     public function index_blog($limit = 4) {
-        $sql = $this->db->select("select id, titulo, imagen, imagen_thumb, fecha_blog from web_blog where estado = 1 order by fecha_blog DESC limit $limit");
+        $sql = $this->db->select("select id, titulo, imagen, imagen_thumb, fecha_blog, url_youtube from web_blog where estado = 1 order by fecha_blog DESC limit $limit");
         return $sql;
     }
 
