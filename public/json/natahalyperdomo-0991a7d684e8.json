@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "natahalyperdomo",
+  "private_key_id": "0991a7d684e80c4e1242d8804ff0b322dfeb2993",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDZxtMm5jvfw9zs\nqLFqPJ/nbuRwCE/of2dNIJp9WtiG53r7R5fkDu5FKb89w79MVzZkKptCcLKEiVMu\nDxIxEGPkdXktVLQgY/3jagWRR7DKsT8bztWrkjdpi0/ytFF7FlsHaxJ2gTXOztGg\nm3Vdlxre0AV259uwugwtGum6LxDywyPLh28yF3CSNa6nahQ9klBUQiWdLdGjzqn0\n+H2DuyPi3e9q0ui9R0t0l6JGcJR51BnCwenTHVVM45YsPvR2DLMGrzdxdissrHKz\nsIkkF3zFpJCLC8cW8pjd1Q++O2F2ZBYIOjyg/h+cbAKx86vi1lU7l3S46viIxgbD\nuN0UNds/AgMBAAECggEASqUvV/x/llXcwlOaKDdqednVPB9lQGR3BIVB3ujGIgty\n6HFkOzvw6M0D64hOaDzWfGPsPsxBLFOjqrxouF+NVc/8PpDzgsyzSAFdsivYCcnS\nP1ZYf8wI6UjimOa8rQt/HR5SwELOrjnOuZW/l1pFUA0OanDTqRJEPSul5HbggMzH\nPslzid6aN53/BEq34j8pw2ov1+yZXlEs8VLNnZS2iE4WQzttYe2kIY89aQJy7VLP\nL8PRQXd9cjsB8wuMoyvNHNVwpou9/wQ5dAdQ/FWrCM5yxU3SlvuLYwD68+AVy+PV\nZYtegnqAk+xvin/xw0MRcW9HIREOmL8hybzJssWFmQKBgQD4/dLfdgd0sKvk/flW\nNF3lL8vQhgr/UmkpDfFE5Y0jWGYq2fNq1PnM9/QMIhwFmSCC0zMKJmNcDWP8+1C4\nGn6YA/THofVTCACoF38pIgDtu5WAs6EiS8UvE8PsTaNC4ptBeWyS6Kda+/fTEIzP\nJvXq7ZGLNMYeI3UmBMMSv3MnuQKBgQDf6BLz+PZkgfMa1BgMhEis3pehG58A2ZBz\n/ZE1NL5PzTy5F4jpwH7LLP3ypH6K7QMyteGtwvO7G34RupSVwMzbFmRVG/k0mpjb\nXY5RLg2bxOr6/TeIXi6WqtHlNlAzi/QqwrRiq/rD8Co1JaIBgGg6V/PR40chlykc\nOXsB+ncmtwKBgERze2KFjz0sSMV2cPKbCOk1/6E/CIzyughYVejr9qYt6kCDlKDd\nFiOcUxJ22h9L3p04tMJolU48PC3TZXiHiCAAjm3Hf6so+w07EHFdcMXqmQo91+GW\n1QnBNE6ldWmw5J/WYtvsa/3eYV48IYndmyPP1gBgLMsiUlV2X66qxVy5AoGAFWog\nxey9xAcZtSsr0aalPMNdRS9bGb21LyLFTI1q1j8O27UAhzq95bi74QUShT7920/B\n8dh/bxnGCPQLWfdCoIGXvvwZ7YoLrI9aGTGKY6eFwdOOCCDZ29cilAWJziRIif5t\nOjKwnSTPJJ4gzHv3e/0FeMGAABpw+B4XQa0u0CkCgYB64f10OPg0/dZZL8GCsS7z\niBXxn/VzICSJYHMbfs5hsc2jT8YWh0A45pwLP9ODgRfV+Nez0PBwjR2H67GcceIW\nqrXXFB1fl+CLbbk6WAWimqkc+MnY7Ry2CRn4dGEwv/xBQvB5pjiYfJlv+P6uttyC\nhZB9CeE+zrU3RrvFzdAR5A==\n-----END PRIVATE KEY-----\n",
+  "client_email": "analytics@natahalyperdomo.iam.gserviceaccount.com",
+  "client_id": "114147479472730212083",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/analytics%40natahalyperdomo.iam.gserviceaccount.com"
+}

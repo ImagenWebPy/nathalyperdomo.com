@@ -1778,6 +1778,11 @@ class Admin_Model extends Model {
         return $sql[0];
     }
 
+    public function datosEmail() {
+        $sql = $this->db->select('select email from web_datos where id = 1');
+        return $sql[0];
+    }
+
     public function datosInicioNosotros() {
         $sql = $this->db->select('select * from web_inicio_nosotros where id = 1');
         return $sql[0];
@@ -1804,6 +1809,18 @@ class Admin_Model extends Model {
         $data = array(
             'type' => 'success',
             'content' => 'Se han guardado correctamente los cambios para el video del inicio.'
+        );
+        return $data;
+    }
+
+    public function frmEmailSitio($datos) {
+        $update = array(
+            'email' => utf8_decode($datos['email'])
+        );
+        $this->db->update('web_datos', $update, "id = 1");
+        $data = array(
+            'type' => 'success',
+            'content' => 'Se han guardado correctamente los cambios para el Email del sitio.'
         );
         return $data;
     }
@@ -3151,6 +3168,66 @@ class Admin_Model extends Model {
             'content' => 'Se han actualizado correctamente los datos',
             'id' => $id
         );
+        return $data;
+    }
+
+    public function rptVisitasPaginas($datos) {
+        require './util/Analytics.php';
+        $this->analytics = new Analytics();
+        $googleData = $this->analytics->getPageViews($this->analytics->analytics, $this->analytics->profile, $datos['fechaInicio'], $datos['fechaFin'], $datos['mostrar']);
+        $data = '
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Página</th>
+                            <th>Número de Visitas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ';
+        foreach ($googleData as $item) {
+            $data .= '  <tr>
+                            <td>' . $item[0] . '</td>
+                            <td class="text-center">' . number_format($item[1], 0, ',', '.') . '</td>
+                        </tr>';
+        }
+        $data .= '      
+                    </tbody>
+                </table>';
+        return $data;
+    }
+
+    public function rptUsuarios($datos) {
+        require './util/Analytics.php';
+        $this->analytics = new Analytics();
+        $googleData = $this->analytics->getUsuarios($this->analytics->analytics, $this->analytics->profile, $datos['fechaInicio'], $datos['fechaFin']);
+        $data = array(
+            'usuarios' => '<h3>' . number_format($googleData[0][0], 0, ',', '.') . '</h3>',
+            'usuariosNuevos' => '<h3>' . number_format($googleData[0][1], 0, ',', '.') . '</h3>',
+            'sesiones' => '<h3>' . number_format($googleData[0][2], 0, ',', '.') . '</h3>',
+        );
+        return $data;
+    }
+
+    public function rptDispositivos($datos) {
+        require './util/Analytics.php';
+        $this->analytics = new Analytics();
+        $googleData = $this->analytics->getDispositivos($this->analytics->analytics, $this->analytics->profile, $datos['fechaInicio'], $datos['fechaFin']);
+        $data = '<div class="row">
+                    <div class="col-xs-4"><h3><i class="fa fa-desktop" aria-hidden="true"></i> ' . number_format($googleData[0][1], 0, ',', '.') . '</h3></div>
+                    <div class="col-xs-4"><h3><i class="fa fa-mobile" aria-hidden="true"></i> ' . number_format($googleData[1][1], 0, ',', '.') . '</h3></div>
+                    <div class="col-xs-4"><h3><i class="fa fa-tablet" aria-hidden="true"></i> ' . number_format($googleData[2][1], 0, ',', '.') . '</h3></div>
+                </div>';
+        return $data;
+    }
+
+    public function rptPaginasSesion($datos) {
+        require './util/Analytics.php';
+        $this->analytics = new Analytics();
+        $googleData = $this->analytics->getPaginasSesion($this->analytics->analytics, $this->analytics->profile, $datos['fechaInicio'], $datos['fechaFin']);
+        $data = '<div class="row">
+                    <h3>' . number_format($googleData[0][0], 2, ',', '.') . '</h3>
+                </div>';
         return $data;
     }
 

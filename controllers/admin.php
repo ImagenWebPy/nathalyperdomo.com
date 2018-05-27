@@ -10,6 +10,8 @@ class Admin extends Controller {
     public function index() {
 
         $this->view->title = TITLE . 'Inicio';
+        $this->view->public_css = array("css/plugins/daterangepicker/daterangepicker-bs3.css");
+        $this->view->public_js = array("js/plugins/daterangepicker/momen.min.js", "js/plugins/daterangepicker/daterangepicker.js");
         $this->view->render('admin/header');
         $this->view->render('admin/index/index');
         $this->view->render('admin/footer');
@@ -44,6 +46,7 @@ class Admin extends Controller {
     public function inicio() {
         $this->view->helper = $this->helper;
         $this->view->datosVideoInicio = $this->model->datosVideoInicio();
+        $this->view->datosEmail = $this->model->datosEmail();
         $this->view->datosInicioNosotros = $this->model->datosInicioNosotros();
         $this->view->datosInicioImagenParallax = $this->model->datosInicioImagenParallax();
         $this->view->title = 'Inicio';
@@ -225,7 +228,7 @@ class Admin extends Controller {
         $data = $this->model->update_turno($datos);
         echo json_encode($data);
     }
-    
+
     public function cambiarEstadoTurno() {
         header('Content-type: application/json; charset=utf-8');
         $datos = array(
@@ -569,7 +572,7 @@ class Admin extends Controller {
         $datos = $this->model->modalEditarCaracteristicas($data);
         echo $datos;
     }
-    
+
     public function modalEditarMetaTag() {
         header('Content-type: application/json; charset=utf-8');
         $data = array(
@@ -764,6 +767,15 @@ class Admin extends Controller {
             'url_video' => $_POST['url_video'],
         );
         $data = $this->model->frmVideoInicio($datos);
+        echo json_encode($data);
+    }
+
+    public function frmEmailSitio() {
+        header('Content-type: application/json; charset=utf-8');
+        $datos = array(
+            'email' => $this->helper->cleanInput($_POST['email'])
+        );
+        $data = $this->model->frmEmailSitio($datos);
         echo json_encode($data);
     }
 
@@ -1200,6 +1212,47 @@ class Admin extends Controller {
             'nombre' => $this->helper->cleanInput($_POST['nombre'])
         );
         $data = $this->model->frmEditarDirecciones($datos);
+        echo json_encode($data);
+    }
+
+    public function rptVisitasPaginas() {
+        header('Content-type: application/json; charset=utf-8');
+        $datos = array(
+            'fechaInicio' => $this->helper->cleanInput($_POST['fechaInicio']),
+            'fechaFin' => $this->helper->cleanInput($_POST['fechaFin']),
+            'mostrar' => $_POST['mostrar']
+        );
+        $data = $this->model->rptVisitasPaginas($datos);
+        echo json_encode($data);
+    }
+
+    public function rptUsuarios() {
+        header('Content-type: application/json; charset=utf-8');
+        $datos = array(
+            'fechaInicio' => $this->helper->cleanInput($_POST['fechaInicio']),
+            'fechaFin' => $this->helper->cleanInput($_POST['fechaFin'])
+        );
+        $data = $this->model->rptUsuarios($datos);
+        echo json_encode($data);
+    }
+
+    public function rptDispositivos() {
+        header('Content-type: application/json; charset=utf-8');
+        $datos = array(
+            'fechaInicio' => $this->helper->cleanInput($_POST['fechaInicio']),
+            'fechaFin' => $this->helper->cleanInput($_POST['fechaFin'])
+        );
+        $data = $this->model->rptDispositivos($datos);
+        echo json_encode($data);
+    }
+
+    public function rptPaginasSesion() {
+        header('Content-type: application/json; charset=utf-8');
+        $datos = array(
+            'fechaInicio' => $this->helper->cleanInput($_POST['fechaInicio']),
+            'fechaFin' => $this->helper->cleanInput($_POST['fechaFin'])
+        );
+        $data = $this->model->rptPaginasSesion($datos);
         echo json_encode($data);
     }
 

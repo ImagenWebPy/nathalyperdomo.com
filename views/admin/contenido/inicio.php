@@ -174,6 +174,27 @@
             </div>
         </div><!--/COL-LG-12-->
         <div class="col-lg-12">
+            <div class="ibox collapsed">
+                <div class="ibox-title">
+                    <h5>Email del Sitio</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form id="frmEmailSitio" method="POST">
+                        <div class="col-md-12">
+                            <label>Email</label>
+                            <input class="form-control" type="text" name="email" value="<?= utf8_encode($this->datosEmail['email']); ?>" >
+                        </div>
+                        <button type="submit" class="btn btn-block btn-primary btn-lg">Editar Contenido</button>
+                    </form>
+                </div>
+            </div>
+        </div><!--/COL-LG-12-->
+        <div class="col-lg-12">
             <div class="ibox float-e-margins collapsed">
                 <div class="ibox-title">
                     <h5>Nosotros - Inicio</h5>
@@ -509,6 +530,21 @@
                 type: "POST",
                 url: url,
                 data: $("#frmVideoInicio").serialize(), // serializes the form's elements.
+                success: function (data)
+                {
+                    if (data.type == 'success') {
+                        toastr.success(data.content)
+                    }
+                }
+            });
+            e.preventDefault(); // avoid to execute the actual submit of the form.
+        });
+        $(document).on("submit", "#frmEmailSitio", function (e) {
+            var url = "<?= URL ?>admin/frmEmailSitio"; // the script where you handle the form input.
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: $("#frmEmailSitio").serialize(), // serializes the form's elements.
                 success: function (data)
                 {
                     if (data.type == 'success') {

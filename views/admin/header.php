@@ -37,6 +37,7 @@ $rol = $_SESSION['usuarioLogueado']['rol'];
             }
         }
         ?>
+        <script src="<?= URL; ?>public/admin/js/custom.js"></script>
     </head>
     <body>
         <div id="wrapper">
