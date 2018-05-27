@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2018-05-26 16:34:43
+Date: 2018-05-27 19:51:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -521,10 +521,10 @@ CREATE TABLE `web_blog` (
 -- ----------------------------
 -- Records of web_blog
 -- ----------------------------
-INSERT INTO `web_blog` VALUES ('1', 'Lorem ipsum dolor sit amet', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt ut mi vel convallis. Fusce condimentum neque sit amet quam condimentum, eget vulputate magna tempor. Vivamus pretium metus id orci facilisis interdum. Phasellus laoreet ultrices lorem vel blandit. Etiam iaculis pellentesque fringilla. Donec convallis aliquam dui, et posuere purus viverra ut. Nulla pharetra venenatis dui non maximus.</p>\r\ndos', 'blog1.jpg', 'blog1-thumb.jpg', '#', '2018-05-14', '2018-05-14 11:24:05', '1');
-INSERT INTO `web_blog` VALUES ('2', 'Lorem ipsum dolor sit amet', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt ut mi vel convallis. Fusce condimentum neque sit amet quam condimentum, eget vulputate magna tempor. Vivamus pretium metus id orci facilisis interdum. Phasellus laoreet ultrices lorem vel blandit. Etiam iaculis pellentesque fringilla. Donec convallis aliquam dui, et posuere purus viverra ut. Nulla pharetra venenatis dui non maximus.</p>\r\ntres', 'blog2.jpg', 'blog2-thumb.jpg', '#', '2018-05-15', '2018-05-15 11:24:05', '1');
-INSERT INTO `web_blog` VALUES ('3', 'Lorem ipsum dolor sit amet 2', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt ut mi vel convallis. Fusce condimentum neque sit amet quam condimentum, eget vulputate magna tempor. Vivamus pretium metus id orci facilisis interdum. Phasellus laoreet ultrices lorem vel blandit. Etiam iaculis pellentesque fringilla. Donec convallis aliquam dui, et posuere purus viverra ut. Nulla pharetra venenatis dui non maximus.</p>\r\ncuatro', 'blog3.jpg', 'blog3-thumb.jpg', '#', '2018-05-24', '2018-05-16 11:24:05', '1');
-INSERT INTO `web_blog` VALUES ('4', 'Lorem ipsum dolor sit amet', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt ut mi vel convallis. Fusce condimentum neque sit amet quam condimentum, eget vulputate magna tempor. Vivamus pretium metus id orci facilisis interdum. Phasellus laoreet ultrices lorem vel blandit. Etiam iaculis pellentesque fringilla. Donec convallis aliquam dui, et posuere purus viverra ut. Nulla pharetra venenatis dui non maximus.</p>\r\ncinco', 'blog4.jpg', 'blog4-thumb.jpg', '#', '2018-05-17', '2018-05-16 11:24:05', '1');
+INSERT INTO `web_blog` VALUES ('1', 'Lorem ipsum dolor sit amet', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt ut mi vel convallis. Fusce condimentum neque sit amet quam condimentum, eget vulputate magna tempor. Vivamus pretium metus id orci facilisis interdum. Phasellus laoreet ultrices lorem vel blandit. Etiam iaculis pellentesque fringilla. Donec convallis aliquam dui, et posuere purus viverra ut. Nulla pharetra venenatis dui non maximus.</p>\r\ndos', 'blog1.jpg', 'blog1-thumb.jpg', null, '2018-05-14', '2018-05-14 11:24:05', '1');
+INSERT INTO `web_blog` VALUES ('2', 'Lorem ipsum dolor sit amet', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt ut mi vel convallis. Fusce condimentum neque sit amet quam condimentum, eget vulputate magna tempor. Vivamus pretium metus id orci facilisis interdum. Phasellus laoreet ultrices lorem vel blandit. Etiam iaculis pellentesque fringilla. Donec convallis aliquam dui, et posuere purus viverra ut. Nulla pharetra venenatis dui non maximus.</p>\r\ntres', 'blog2.jpg', 'blog2-thumb.jpg', null, '2018-05-15', '2018-05-15 11:24:05', '1');
+INSERT INTO `web_blog` VALUES ('3', 'Lorem ipsum dolor sit amet 2', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt ut mi vel convallis. Fusce condimentum neque sit amet quam condimentum, eget vulputate magna tempor. Vivamus pretium metus id orci facilisis interdum. Phasellus laoreet ultrices lorem vel blandit. Etiam iaculis pellentesque fringilla. Donec convallis aliquam dui, et posuere purus viverra ut. Nulla pharetra venenatis dui non maximus.</p>\r\ncuatro', 'blog3.jpg', 'blog3-thumb.jpg', 'm1jY2VLCRmY', '2018-05-24', '2018-05-16 11:24:05', '1');
+INSERT INTO `web_blog` VALUES ('4', 'Lorem ipsum dolor sit amet', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt ut mi vel convallis. Fusce condimentum neque sit amet quam condimentum, eget vulputate magna tempor. Vivamus pretium metus id orci facilisis interdum. Phasellus laoreet ultrices lorem vel blandit. Etiam iaculis pellentesque fringilla. Donec convallis aliquam dui, et posuere purus viverra ut. Nulla pharetra venenatis dui non maximus.</p>\r\ncinco', 'blog4.jpg', 'blog4-thumb.jpg', null, '2018-05-17', '2018-05-16 11:24:05', '1');
 
 -- ----------------------------
 -- Table structure for web_blog_busquedas
@@ -892,18 +892,19 @@ CREATE TABLE `web_redes` (
   `class` varchar(30) DEFAULT NULL,
   `class_i` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of web_redes
 -- ----------------------------
 INSERT INTO `web_redes` VALUES ('1', 'Facebook', '#', '1', '1', 'facebook', 'icon-facebook');
-INSERT INTO `web_redes` VALUES ('2', 'Google+', '#', '1', '2', 'googleplus', 'icon-gplus');
-INSERT INTO `web_redes` VALUES ('3', 'Twitter', '#', '1', '3', 'twitter', 'icon-twitter');
-INSERT INTO `web_redes` VALUES ('4', 'Vimeo', '#', '1', '4', 'vimeo', 'icon-vimeo');
-INSERT INTO `web_redes` VALUES ('5', 'Youtube', '#', '1', '5', 'youtube', 'icon-play');
-INSERT INTO `web_redes` VALUES ('6', 'Flickr', '#', '1', '6', 'flickr', 'icon-flickr');
-INSERT INTO `web_redes` VALUES ('7', 'Linkedin', '#', '1', '7', 'linked_in', 'icon-linkedin');
-INSERT INTO `web_redes` VALUES ('8', 'Pinterest', '#', '1', '8', 'pinterest', 'icon-pinterest');
-INSERT INTO `web_redes` VALUES ('9', 'Dribble', '#', '1', '9', 'dribbble', 'icon-dribbble');
+INSERT INTO `web_redes` VALUES ('2', 'Google+', '#', '0', '4', 'googleplus', 'icon-gplus');
+INSERT INTO `web_redes` VALUES ('3', 'Twitter', '#', '0', '3', 'twitter', 'icon-twitter');
+INSERT INTO `web_redes` VALUES ('4', 'Vimeo', '#', '0', '5', 'vimeo', 'icon-vimeo');
+INSERT INTO `web_redes` VALUES ('5', 'Youtube', '#', '0', '6', 'youtube', 'icon-play');
+INSERT INTO `web_redes` VALUES ('6', 'Flickr', '#', '0', '7', 'flickr', 'icon-flickr');
+INSERT INTO `web_redes` VALUES ('7', 'Linkedin', '#', '0', '8', 'linked_in', 'icon-linkedin');
+INSERT INTO `web_redes` VALUES ('8', 'Pinterest', '#', '0', '9', 'pinterest', 'icon-pinterest');
+INSERT INTO `web_redes` VALUES ('9', 'Dribble', '#', '0', '10', 'dribbble', 'icon-dribbble');
+INSERT INTO `web_redes` VALUES ('10', 'Instagram', '#', '1', '2', 'instagram', 'icon-instagram');
 SET FOREIGN_KEY_CHECKS=1;
