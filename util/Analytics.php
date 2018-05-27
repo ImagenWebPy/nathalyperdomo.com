@@ -16,6 +16,7 @@ class Analytics {
     public function initializeAnalytics() {
         $client = new Google_Client();
         $client->setApplicationName("nathalyperdomo");
+        //$client->setApplicationName("cadiem");
         $client->setAuthConfig(KEY_FILE_LOCATION);
         $client->setScopes(['https://www.googleapis.com/auth/analytics.readonly']);
         $analytics = new Google_Service_Analytics($client);

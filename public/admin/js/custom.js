@@ -19,7 +19,7 @@ function visitasPaginas(url, fechaInicio, fechaFin, mostrar = 10) {
         dataType: 'json',
         beforeSend: function () {
             // this is where we append a loading image
-            $('#visitasPaginas').html('<img class="img-responsive spinner" src="' + url + 'public/images/cargando.gif" alt="Cargando..." />');
+            $('#visitasPaginas').html('<i class="fa fa-spinner fa-spin" aria-hidden="true" style="font-size: 20px;"></i>');
         },
         success: function (data)
         {
@@ -36,9 +36,9 @@ function usuarios(url, fechaInicio, fechaFin) {
         dataType: 'json',
         beforeSend: function () {
             // this is where we append a loading image
-            $('#usuarios').html('<img class="img-responsive spinner" src="' + url + 'public/images/cargando.gif" alt="Cargando..." />');
-            $('#usuariosNuevos').html('<img class="img-responsive spinner" src="' + url + 'public/images/cargando.gif" alt="Cargando..." />');
-            $('#sesiones').html('<img class="img-responsive spinner" src="' + url + 'public/images/cargando.gif" alt="Cargando..." />');
+            $('#usuarios').html('<i class="fa fa-spinner fa-spin" aria-hidden="true" style="font-size: 20px;"></i>');
+            $('#usuariosNuevos').html('<i class="fa fa-spinner fa-spin" aria-hidden="true" style="font-size: 20px;"></i>');
+            $('#sesiones').html('<i class="fa fa-spinner fa-spin" aria-hidden="true" style="font-size: 20px;"></i>');
         },
         success: function (data)
         {
@@ -59,7 +59,7 @@ function dispositivos(url, fechaInicio, fechaFin) {
         dataType: 'json',
         beforeSend: function () {
             // this is where we append a loading image
-            $('#dispositivos').html('<img class="img-responsive spinner" src="' + url + 'public/images/cargando.gif" alt="Cargando..." />');
+            $('#dispositivos').html('<i class="fa fa-spinner fa-spin" aria-hidden="true" style="font-size: 20px;"></i>');
         },
         success: function (data)
         {
@@ -77,7 +77,7 @@ function paginasSesion(url, fechaInicio, fechaFin) {
         dataType: 'json',
         beforeSend: function () {
             // this is where we append a loading image
-            $('#paginas_sesion').html('<img class="img-responsive spinner" src="' + url + 'public/images/cargando.gif" alt="Cargando..." />');
+            $('#paginas_sesion').html('<i class="fa fa-spinner fa-spin" aria-hidden="true" style="font-size: 20px;"></i>');
         },
         success: function (data)
         {

@@ -3185,10 +3185,16 @@ class Admin_Model extends Model {
                     </thead>
                     <tbody>
                         ';
-        foreach ($googleData as $item) {
-            $data .= '  <tr>
+        if (!empty($googleData)) {
+            foreach ($googleData as $item) {
+                $data .= '  <tr>
                             <td>' . $item[0] . '</td>
                             <td class="text-center">' . number_format($item[1], 0, ',', '.') . '</td>
+                        </tr>';
+            }
+        } else {
+            $data .= '  <tr>
+                            <td colspan="2">No hay datos para mostrar</td>
                         </tr>';
         }
         $data .= '      
