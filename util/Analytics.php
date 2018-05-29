@@ -15,8 +15,7 @@ class Analytics {
 
     public function initializeAnalytics() {
         $client = new Google_Client();
-        $client->setApplicationName("nathalyperdomo");
-        //$client->setApplicationName("cadiem");
+        $client->setApplicationName("cadiem");
         $client->setAuthConfig(KEY_FILE_LOCATION);
         $client->setScopes(['https://www.googleapis.com/auth/analytics.readonly']);
         $analytics = new Google_Service_Analytics($client);
@@ -79,7 +78,7 @@ class Analytics {
                 'ga:' . $profileId, $startDate, $endDate, 'ga:users,ga:newUsers,ga:sessions', $optParams);
         return $data['rows'];
     }
-    
+
     public function getDispositivos($analytics, $profileId, $startDate, $endDate) {
         $optParams = array(
             'dimensions' => 'ga:deviceCategory'
@@ -88,11 +87,20 @@ class Analytics {
                 'ga:' . $profileId, $startDate, $endDate, 'ga:users', $optParams);
         return $data['rows'];
     }
-    
+
     public function getPaginasSesion($analytics, $profileId, $startDate, $endDate) {
         $optParams = array();
         $data = $analytics->data_ga->get(
                 'ga:' . $profileId, $startDate, $endDate, 'ga:pageviewsPerSession', $optParams);
+        return $data['rows'];
+    }
+
+    public function getCantidadVisitasDia($analytics, $profileId, $startDate, $endDate) {
+        $optParams = array(
+            'dimensions' => 'ga:date'
+        );
+        $data = $analytics->data_ga->get(
+                'ga:' . $profileId, $startDate, $endDate, 'ga:users', $optParams);
         return $data['rows'];
     }
 

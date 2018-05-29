@@ -106,7 +106,7 @@ $redes = $helper->web_redes();
 </footer>
 </div>
 <!-- Modal -->
-<div class="modal fade genericModal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade genericModal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">

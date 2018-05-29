@@ -3185,21 +3185,50 @@ class Admin_Model extends Model {
                     </thead>
                     <tbody>
                         ';
-        if (!empty($googleData)) {
-            foreach ($googleData as $item) {
-                $data .= '  <tr>
+        foreach ($googleData as $item) {
+            $data .= '  <tr>
                             <td>' . $item[0] . '</td>
                             <td class="text-center">' . number_format($item[1], 0, ',', '.') . '</td>
-                        </tr>';
-            }
-        } else {
-            $data .= '  <tr>
-                            <td colspan="2">No hay datos para mostrar</td>
                         </tr>';
         }
         $data .= '      
                     </tbody>
                 </table>';
+        return $data;
+    }
+
+    public function rptCantidadVisitasDia($datos) {
+        require './util/Analytics.php';
+        $this->analytics = new Analytics();
+        $googleData = $this->analytics->getCantidadVisitasDia($this->analytics->analytics, $this->analytics->profile, $datos['fechaInicio'], $datos['fechaFin']);
+        $data = '<div id="morris-one-line-chart"></div>
+                <script type="">
+                    $(function() {
+                        var months = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Set", "Oct", "Nov", "Dic"];
+                        Morris.Line({
+                            element: "morris-one-line-chart",
+                                data: [';
+        foreach ($googleData as $item) {
+            $data .= '                  { day: "' . date('Y-m-d H:i:s', strtotime($item[0])) . '", value: ' . $item[1] . ' },';
+        }
+        $data .= '                  ],
+                            xkey: "day",
+                            xlabels: "day",
+                            xLabelFormat: function (x) {
+                                var d = new Date(x.label.slice(0, 10) + "T" + x.label.slice(11, x.label.length));
+                                return d.getDate() + \' \' + months[d.getMonth()];
+                            },
+                            ykeys: ["value"],
+                            labels: ["Cantidad"],
+                            pointSize: 2,
+                            hideHover: "auto",
+                            lineColors: ["rgb(0, 188, 212)"],
+                            xLabelAngle: 50,
+                            behaveLikeLine: true,
+                            parseTime: false
+                        });
+                    });
+                </script>';
         return $data;
     }
 

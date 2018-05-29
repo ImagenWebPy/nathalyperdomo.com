@@ -1226,6 +1226,16 @@ class Admin extends Controller {
         echo json_encode($data);
     }
 
+    public function rptCantidadVisitasDia() {
+        header('Content-type: application/json; charset=utf-8');
+        $datos = array(
+            'fechaInicio' => $this->helper->cleanInput($_POST['fechaInicio']),
+            'fechaFin' => $this->helper->cleanInput($_POST['fechaFin'])
+        );
+        $data = $this->model->rptCantidadVisitasDia($datos);
+        echo json_encode($data);
+    }
+
     public function rptUsuarios() {
         header('Content-type: application/json; charset=utf-8');
         $datos = array(

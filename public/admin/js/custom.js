@@ -9,7 +9,6 @@ function resetLabels(params) {
         $(params[i]).css('display', 'none');
     }
 }
-
 function visitasPaginas(url, fechaInicio, fechaFin, mostrar = 10) {
     $.ajax({
         type: "POST",
@@ -27,6 +26,25 @@ function visitasPaginas(url, fechaInicio, fechaFin, mostrar = 10) {
         }
     });
 }
+
+function cantidadVisitasDia(url, fechaInicio, fechaFin, mostrar = 10) {
+    $.ajax({
+        type: "POST",
+        url: url + 'admin/rptCantidadVisitasDia',
+        async: true,
+        data: {fechaInicio: fechaInicio, fechaFin: fechaFin},
+        dataType: 'json',
+        beforeSend: function () {
+            // this is where we append a loading image
+            $('#cantidadVisitasDia').html('<i class="fa fa-spinner fa-spin" aria-hidden="true" style="font-size: 20px;"></i>');
+        },
+        success: function (data)
+        {
+            $('#cantidadVisitasDia').html(data);
+        }
+    });
+}
+
 function usuarios(url, fechaInicio, fechaFin) {
     $.ajax({
         type: "POST",

@@ -337,7 +337,9 @@
 }
 
 .aboutsections {
-    padding-top:280px; padding-bottom:240px; background-color:; background-image:url(../images/aboutus-header.jpg); 
+    padding-top:280px; 
+    /*padding-bottom:240px; */
+    background-color:; background-image:url(../images/aboutus-header.jpg); 
     background-repeat:no-repeat; background-position:center top; background-attachment:; background-size:; -webkit-background-size:
 }
 

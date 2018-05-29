@@ -18,10 +18,19 @@ $rol = $_SESSION['usuarioLogueado']['rol'];
             <div class="col-lg-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-
                         <h5>Número de visitas a páginas</h5>
                     </div>
-                    <div class="ibox-content" id="visitasPaginas">
+                    <div class="ibox-content altoContenedorReporte" id="visitasPaginas">
+                        <p class="tex-muted">Seleccione un rango de fecha para cargar el reporte</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Cantidad de visitas por día</h5>
+                    </div>
+                    <div class="ibox-content altoContenedorReporte" id="cantidadVisitasDia">
                         <p class="tex-muted">Seleccione un rango de fecha para cargar el reporte</p>
                     </div>
                 </div>
@@ -42,6 +51,36 @@ $rol = $_SESSION['usuarioLogueado']['rol'];
                         <h6>Paginas/Sesión</h6>
                     </div>
                     <div class="ibox-content" id="paginas_sesion">
+                        <p class="tex-muted">Seleccione un rango de fecha para cargar el reporte</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h6>Usuarios</h6>
+                    </div>
+                    <div class="ibox-content" id="usuarios">
+                        <p class="tex-muted">Seleccione un rango de fecha para cargar el reporte</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h6>Usuarios Nuevos</h6>
+                    </div>
+                    <div class="ibox-content" id="usuariosNuevos">
+                        <p class="tex-muted">Seleccione un rango de fecha para cargar el reporte</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h6>Sesiones</h6>
+                    </div>
+                    <div class="ibox-content" id="sesiones">
                         <p class="tex-muted">Seleccione un rango de fecha para cargar el reporte</p>
                     </div>
                 </div>
@@ -107,7 +146,7 @@ $rol = $_SESSION['usuarioLogueado']['rol'];
                     var formatDateEnd = moment(fechaFin).format('DD-MM-YYYY');
                     $('#spanfiltroFechaVisitasPagina').html(formatDateStart + ' - ' + formatDateEnd);
                 }
-                $.when(visitasPaginas("<?= URL; ?>", fechaInicio, fechaFin), dispositivos("<?= URL; ?>", fechaInicio, fechaFin), paginasSesion("<?= URL; ?>", fechaInicio, fechaFin));
+                $.when(visitasPaginas("<?= URL; ?>", fechaInicio, fechaFin), dispositivos("<?= URL; ?>", fechaInicio, fechaFin), paginasSesion("<?= URL; ?>", fechaInicio, fechaFin), usuarios("<?= URL; ?>", fechaInicio, fechaFin), cantidadVisitasDia("<?= URL; ?>", fechaInicio, fechaFin));
             });
         });
     </script>
