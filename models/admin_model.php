@@ -2994,7 +2994,7 @@ class Admin_Model extends Model {
         } else {
             $div .= '<p>&nbsp;</p><div class="alert alert-info alert-dismissable">
                                 <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                                El paciente seleccionado aún no posee ningún registro en su ficha.
+                                El paciente seleccionado aun no posee ningun registro en su ficha.
                             </div>';
         }
         $div .= $this->helper->mostrarPaginador($setLimit, $page, 'ficha_paciente', 'admin/getresult/' . $idPaciente, $condicion, TRUE);
