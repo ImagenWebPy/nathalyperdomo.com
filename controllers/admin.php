@@ -428,7 +428,7 @@ class Admin extends Controller {
                 'mensaje' => 'Se ha agregado correctamente el slider'
             ));
         }
-        header('Location:' . URL . 'admin/slider/');
+        header('Location:' . URL . 'admin/inicio/');
     }
 
     public function frmAgregarBlogPost() {
