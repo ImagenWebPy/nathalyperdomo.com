@@ -504,7 +504,8 @@ class Admin extends Controller {
     public function uploadImgSlider() {
         if (!empty($_POST)) {
             $idPost = $_POST['data']['id'];
-            
+            #verificamos si la imagen es la principal
+            $sql = $this->db->select("select principal from web_inicio_slider where id = $idPost");
             $error = false;
             $absolutedir = dirname(__FILE__);
             $dir = 'public/images/slider/';
