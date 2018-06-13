@@ -4,11 +4,13 @@ class Controller {
 
     public $helper = '';
     public $page = '';
+    public $db = '';
 
     function __construct() {
         $this->view = new View();
         $this->helper = new Helper;
         $this->page = $this->helper->getPage();
+        $this->db = new Database(DB_TYPE, DB_HOST, DB_NAME, DB_USER, DB_PASS);
     }
 
     /**
