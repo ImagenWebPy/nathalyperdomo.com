@@ -1,3 +1,8 @@
+/**
+ * Funcion que pagina los resultado ajax
+ * @param {type} url
+ * @returns {undefined}
+ */
 function getresult(url) {
     $.ajax({
         url: url,
